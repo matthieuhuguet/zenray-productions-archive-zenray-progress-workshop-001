@@ -1,0 +1,55 @@
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import { EventEmitter } from 'node:events'
+import { Surveillance } from './watcher'
+
+class FauxWatcher extends EventEmitter {
+  ferme = false
+  close(): void { this.ferme = true }
+}
+
+afterEach(() => vi.useRealTimers())
+
+describe('surveillance FSEvents', () => {
+  it('se reconnecte quand le dossier absent revient', async () => {
+    vi.useFakeTimers()
+    let essais = 0
+    const messages: string[] = []
+    const creer = (() => {
+      essais++
+      if (essais === 1) throw new Error('volume absent')
+      return new FauxWatcher()
+    }) as unknown as typeof import('node:fs').watch
+    const surveillance = new Surveillance(() => {}, () => 5, () => 1,
+      (_id, message) => messages.push(message), creer)
+
+    surveillance.suivre('photos', '/Volumes/Photos')
+    expect(essais).toBe(1)
+    expect(messages).toEqual(['surveillance interrompue (volume absent) ; nouvelle tentative automatique'])
+
+    await vi.advanceTimersByTimeAsync(1000)
+    expect(essais).toBe(2)
+    expect(messages.at(-1)).toBe('surveillance du dossier rétablie')
+    surveillance.toutOublier()
+  })
+
+  it('remplace un watcher qui émet une erreur sans multiplier les reprises', async () => {
+    vi.useFakeTimers()
+    const watchers: FauxWatcher[] = []
+    const creer = (() => {
+      const watcher = new FauxWatcher()
+      watchers.push(watcher)
+      return watcher
+    }) as unknown as typeof import('node:fs').watch
+    const surveillance = new Surveillance(() => {}, () => 5, () => 1, () => {}, creer)
+
+    surveillance.suivre('downloads', '/Users/test/Downloads')
+    watchers[0].emit('error', new Error('flux perdu'))
+    watchers[0].emit('error', new Error('flux perdu encore'))
+    expect(watchers[0].ferme).toBe(true)
+
+    await vi.advanceTimersByTimeAsync(1000)
+    expect(watchers).toHaveLength(2)
+    surveillance.toutOublier()
+    expect(watchers[1].ferme).toBe(true)
+  })
+})

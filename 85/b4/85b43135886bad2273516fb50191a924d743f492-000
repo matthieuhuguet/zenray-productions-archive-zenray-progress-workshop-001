@@ -1,0 +1,72 @@
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import { Moteur } from './engine'
+import { p as par } from './params'
+import type { WatchedFolder } from './types'
+
+const dossier: WatchedFolder = {
+  id: 'downloads', src: '/tmp/downloads', dest: 'pages/Cloud/Downloads', paused: false,
+  markDeleted: true, excludes: [], lastSyncAt: null, lastError: null, lastResult: null,
+}
+
+function creerMoteur() {
+  return new Moteur(
+    () => ({ nodePath: 'node', ghPath: 'gh', gitPath: 'git', shellPath: '' }),
+    () => 'token', () => '/repo')
+}
+
+describe('ordonnanceur des reprises', () => {
+  afterEach(() => vi.useRealTimers())
+
+  it("respecte réellement le délai annoncé avant de remettre le dossier en file", () => {
+    vi.useFakeTimers()
+    const moteur = creerMoteur()
+    const demarrer = vi.spyOn(moteur as any, 'demarrerSiLibre').mockImplementation(() => {})
+    ;(moteur as any).terminer({ id: dossier.id, dossier }, { erreur: 'réseau indisponible' })
+
+    expect(moteur.idsEnAttente).toEqual([dossier.id])
+    expect((moteur as any).file).toHaveLength(0)
+    vi.advanceTimersByTime(par<number>('familles.reprise.attenteSec') * 1000 - 1)
+    expect((moteur as any).file).toHaveLength(0)
+    vi.advanceTimersByTime(1)
+    expect((moteur as any).file).toHaveLength(1)
+    expect(demarrer).toHaveBeenCalledTimes(1)
+  })
+
+  it('annule aussi une reprise qui attend encore sa minuterie', () => {
+    vi.useFakeTimers()
+    const moteur = creerMoteur()
+    vi.spyOn(moteur as any, 'demarrerSiLibre').mockImplementation(() => {})
+    ;(moteur as any).terminer({ id: dossier.id, dossier }, { erreur: 'réseau indisponible' })
+    moteur.annuler(dossier.id)
+    vi.runAllTimers()
+    expect(moteur.idsEnAttente).toEqual([])
+    expect((moteur as any).file).toHaveLength(0)
+  })
+
+  it('garde la configuration la plus récente dans une file normale', () => {
+    const moteur = creerMoteur()
+    vi.spyOn(moteur as any, 'demarrerSiLibre').mockImplementation(() => {})
+    moteur.enfiler(dossier)
+    moteur.enfiler({ ...dossier, dest: 'pages/Cloud/NouvelleDestination', excludes: ['TEMP'] })
+    expect((moteur as any).file[0].dossier).toMatchObject({
+      dest: 'pages/Cloud/NouvelleDestination', excludes: ['TEMP'],
+    })
+  })
+
+  it('garde aussi la configuration la plus récente pendant une reprise différée', () => {
+    vi.useFakeTimers()
+    const moteur = creerMoteur()
+    vi.spyOn(moteur as any, 'demarrerSiLibre').mockImplementation(() => {})
+    ;(moteur as any).terminer({ id: dossier.id, dossier }, { erreur: 'réseau indisponible' })
+    moteur.enfiler({ ...dossier, dest: 'pages/Cloud/NouvelleDestination' })
+    vi.runOnlyPendingTimers()
+    expect((moteur as any).file[0].dossier.dest).toBe('pages/Cloud/NouvelleDestination')
+  })
+
+  it('mémorise la nouvelle configuration quand le passage courant est sali', () => {
+    const moteur = creerMoteur()
+    ;(moteur as any).travaux.set(dossier.id, { job: { id: dossier.id, dossier }, enfant: {} })
+    moteur.enfiler({ ...dossier, markDeleted: false, excludes: ['DJI'] })
+    expect((moteur as any).salis.get(dossier.id)).toMatchObject({ markDeleted: false, excludes: ['DJI'] })
+  })
+})

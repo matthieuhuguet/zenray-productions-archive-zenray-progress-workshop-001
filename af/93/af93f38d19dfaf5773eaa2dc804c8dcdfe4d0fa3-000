@@ -1,0 +1,20 @@
+import { describe, expect, it } from 'vitest'
+import { validerEvenementMoteur } from './engine-event'
+
+describe('contrat des événements moteur', () => {
+  it('accepte les bilans et événements intermédiaires réellement émis', () => {
+    expect(validerEvenementMoteur({ zr: 1, ev: 'manifests-differes', combien: 2 }).ev).toBe('manifests-differes')
+    expect(validerEvenementMoteur({ zr: 1, ev: 'route', pipeline: 'video', seen: 1, files: 3, size: 4 }).pipeline).toBe('video')
+    expect(validerEvenementMoteur({ zr: 1, ev: 'transfer', rail: 'img', bytes: 10, envoyes: 20 }).envoyes).toBe(20)
+    expect(validerEvenementMoteur({ zr: 1, ev: 'done', chunked: 1, images: 2, videos: 3, media: 4,
+      unchanged: 5, reused: 6, restored: 7, verifyKo: 0, skipped: ['a'] }).ev).toBe('done')
+  })
+
+  it('refuse une forme syntaxiquement valide mais sémantiquement impossible', () => {
+    expect(() => validerEvenementMoteur({ zr: 1 })).toThrow('type d’événement inconnu'.replace('’', "'"))
+    expect(() => validerEvenementMoteur({ zr: 1, ev: 'done', chunked: -1 })).toThrow('done.chunked')
+    expect(() => validerEvenementMoteur({ zr: 1, ev: 'route', pipeline: 'magie', seen: 1, files: 1, size: 1 })).toThrow('route.pipeline inconnu')
+    expect(() => validerEvenementMoteur({ zr: 1, ev: 'route', pipeline: 'hls', seen: 1, files: 1, size: 1 })).toThrow('route.pipeline inconnu')
+    expect(() => validerEvenementMoteur({ zr: 1, ev: 'transfer', rail: 'magie', bytes: 1, envoyes: 1 })).toThrow('transfer.rail inconnu')
+  })
+})

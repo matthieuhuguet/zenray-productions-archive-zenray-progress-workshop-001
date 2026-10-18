@@ -1,0 +1,610 @@
+# ZenRayProgress — Instructions Claude (projet)
+
+## Règles épinglées du projet (12 October 2026)
+
+Les règles courtes du projet ZenRayProgress se chargent ici à chaque session. Une règle nouvelle s'ajoute par `python3 ~/.claude/skills/zenray-feedback/scripts/feedback.py add zenray-progress "<règle>" --kind rule`, jamais à la main. (12 October 2026)
+
+@/Users/zenray/.claude/Memory1/Projects/zenray-progress/Rules.md
+
+<!-- BEGIN:REGLE-ETAT-REPRISE -->
+## PRIORITÉ 0 — ÉTAT DE REPRISE : `state.json`, et `events.jsonl` seulement s'il éclaire (2026-08-04)
+
+Pour toute tâche incomplète, y compris la gestion de cette règle elle-même, crée ou mets à jour
+`state.json` pour indiquer clairement où reprendre, et n'ajoute `events.jsonl` que lorsqu'il devient
+utile de comprendre comment cet état a été atteint.
+<!-- END:REGLE-ETAT-REPRISE -->
+
+Auto-chargé à chaque session dans ce dossier. Complète le CLAUDE.md global de Matthieu.
+
+## NE JAMAIS VÉRIFIER VIA LE BROWSER CLAUDE SUR CE PROJET (règle dure, 2026-07-19)
+
+Matthieu vérifie LUI-MÊME dans son propre navigateur. Utiliser `mcp__Claude_Browser__*` pour ouvrir
+l'app, cliquer, scroller ou faire des captures sur ZenRayProgress **brûle du token pour rien** — ça
+n'apporte aucune preuve qu'il n'a pas déjà en regardant son écran, et ça remplace du temps de CODE par
+du temps de vérification qu'il refait de toute façon. **Après un correctif ici : build + tests
+(`npx vite build`, `npx vitest run`) suffisent comme preuve technique, jamais le navigateur.** Rendre le
+temps gagné au CODE : s'il reste des bugs signalés non corrigés, les corriger d'abord, intégralement,
+avant de considérer la tâche finie — ne jamais s'arrêter pour "aller vérifier" à sa place.
+
+## INCIDENT PAYÉ 2026-07-20 : readJson() EN BOUCLE = QUOTA API GRILLÉ = SITE EN 403 (RÈGLE DURE)
+
+Le 2026-07-20, le site ENTIER est passé en 403 Forbidden (DDoS Mitigation Vercel + quota GitHub REST
+épuisé + IP de Matthieu bloquée ~1h) : QueuePopover.fetchAllPlaylists() appelait `readJson()`
+(lib/saveJson.js) en boucle sur TOUS les .media.json de l'index (17k requêtes /api/page en quelques
+minutes). `readJson()` passe par l'API contents GitHub (sha requis) qui COMPTE dans le quota 5000/h.
+
+**Règle absolue :** toute lecture de manifeste qui ne sera PAS suivie d'une sauvegarde passe par
+`action=read&raw=1` (raw.githubusercontent, HORS quota) — jamais `readJson()`. `readJson()` est
+réservé au read-modify-write (il paie le sha pour ça). Et JAMAIS de scan en boucle de l'index
+(getIndexPaths × fetch par chemin) sans (1) raw=1, (2) cache long (≥5 min), (3) déclenchement lazy
+(jamais au mount). Pour des métadonnées simples (taille, mime, vignette), l'index auto-généré les
+porte déjà : getNodeSize/getNodeMime/getNodeThumb — ZÉRO requête.
+
+**CETTE RÈGLE EXISTAIT DÉJÀ QUAND LE QUOTA EST TOMBÉ À ZÉRO, DEUX FOIS, LE 2026-08-31.** Elle était
+écrite ici, en tête, et quatre parcours la violaient depuis des mois : DownloadsView, VideoPlayer2,
+bulkZip et folderVisibility lisaient un manifeste par fichier via l'API contents. Ce qui manquait
+n'était donc pas la règle, c'était ce qui la fait respecter.
+
+Deux pièces le font désormais, et il faut passer par elles plutôt que d'écrire l'URL à la main :
+
+- `src/lib/urlLecture.js` — `urlLectureAffichage()` (hors quota, pas de sha) contre
+  `urlLectureEdition()` (API contents, AVEC le sha). Les deux noms rendent le choix conscient à la
+  lecture, parce que le piège est muet : une lecture d'affichage ne rend pas de sha, et s'en servir
+  avant une sauvegarde ne produit pas une erreur, mais un conflit d'écriture plus tard.
+- `src/lib/quotaLectures.test.js` — lit le code des parcours dont le volume croit avec le nombre de
+  fichiers, et rougit si l'un reprend une lecture coûteuse. C'est le seul endroit qui empêche la
+  règle de se rendormir.
+
+**ET UN ÉCHEC SERVEUR NE RESSEMBLE PLUS À UN SUCCÈS.** `apiPost` levait zéro erreur sur un 500, un
+quota épuisé ou un conflit de sha : il rendait le JSON d'erreur, que personne ne lisait. La corbeille
+copiait puis supprimait, si bien que restaurer une page pendant un quota épuisé la détruisait sans un
+message. `apiPost` lève désormais une `ErreurApi` portant l'action et le statut ; un appelant qui veut
+ignorer un échec doit le dire par un `.catch()` explicite. Ne jamais revenir à un `apiPost` muet.
+
+## POLITIQUE DE DÉCOUPAGE MÉDIA FINALE (décision Matthieu 2026-07-21, NE PLUS JAMAIS Y TOUCHER)
+
+**SOURCE DE VÉRITÉ UNIQUE : `src/config/chunkPolicy.js`.** Depuis le refactor du 2026-07-21, les nombres
+(19 / 95 / 20 / 3 Mo) et la fonction de décision `storageChunkFor(size, {perChunkEncrypted})` ne sont définis
+QU'À CET ENDROIT. Tout chemin d'upload/lecture (navigateur `universalCapture.js`/`chunked.js` + pipelines Node
+`img-pipeline`/`media-ingest`/`video-fmp4`/`video-dash-lib`/`video-raw-lib`/`upload-audio-list-git`/`archive-folder`)
+IMPORTE d'ici. **NE JAMAIS redéfinir un `19 * 1024 * 1024` / `95 * 1024 * 1024` / `3145728` en dur ailleurs** :
+c'est la duplication (7+ copies) qui a causé toutes les erreurs de découpage passées. Un littéral de taille
+média hors `chunkPolicy.js` = un bug à corriger (importer la constante).
+
+Pour TOUT média chiffré uploadé (UI du site ET pipelines Node du skill) :
+- **fichier ≤ 95 Mo** → chunks de stockage de **19 MiB** (dernier plus petit), servis par **jsDelivr**
+  (pastille VERTE). Ex. 50 Mo = 19 + 19 + 12. Le moins de chunks possible sous la limite ~20 Mo du CDN.
+- **fichier > 95 Mo** → chunks de stockage de **95 Mo**, servis par **raw.githubusercontent** (pastille
+  BLEUE — jsDelivr refuse ces tailles ; la lecture saute le CDN quand `chunkSize > 20 Mo`).
+- **JAMAIS de chunks de stockage de 3 Mo** : le 3 Mo est UNIQUEMENT la contrainte de TRANSPORT vers
+  /api/upload-shard (plafond body Vercel ~4,5 Mo en base64) — putBlobLarge découpe au transport puis
+  fait réassembler côté serveur en UN blob par chunk de stockage. Confusion transport/stockage déjà
+  payée (2026-07-20 : "31,5 Mo = 11 morceaux de 3 Mo", corrigée et dépréciée en commentaire dans
+  `src/capture/universalCapture.js`).
+- Le manifeste privé (zenray-data) porte le `chunkSize` RÉEL + `ivs[]` (AES-GCM, clair = cible − 16
+  octets de tag) ; la lecture est schéma-aware (`src/media/chunked.js` fetchPartDecrypted : jsDelivr →
+  repli raw, TOUJOURS via buildJsDelivrUrl/buildRawUrl qui préfixent l'OWNER — les manifestes stockent
+  le repo SANS owner, une URL construite à la main est un bug garanti, payé le 2026-07-21).
+- Téléchargement/preview : JAMAIS via /api/stream (réponse Vercel plafonnée ~4,5 Mo → fichiers
+  tronqués à 4,2 Mo, payé le 2026-07-21) — toujours downloadChunkedToDisk/loadChunked (CDN + déchiffrement client).
+
+## AUCUNE COULEUR D'INTERFACE HORS DE `src/config/colors.js` (2026-07-31)
+
+Même doctrine que `chunkPolicy.js` ci-dessus, pour la même raison et après le même genre d'incident.
+**Une couleur écrite en dur ailleurs est un bug à corriger, pas un raccourci.**
+
+Les sept teintes vivaient ligne 652 de `src/App.jsx`, noyées dans cinq mille lignes : personne n'allait
+les y chercher, donc chaque composant réécrivait les siennes. Le jour où la pastille de provenance a
+changé de couleur, `MediaViewer.jsx` et `ImageNodeViewer.jsx` sont restés à l'ancien jaune `#f5b21a`
+qu'ils portaient en dur, sans qu'aucun test ne bronche. Une couleur fausse ne casse rien, elle est
+juste un peu à côté pour toujours.
+
+Le fichier porte aussi la **géométrie de la pastille**, mesurée sur deux références macOS, et surtout
+la provenance de chaque valeur : ce qui a été mesuré, ce que Matthieu a donné, ce que j'avais supposé
+à tort. Quand Matthieu dit « prends une couleur », elle se prend là et nulle part ailleurs.
+
+**Corollaire de méthode, valable au-delà des couleurs :** une valeur relevée dans une capture d'écran
+n'est PAS la valeur d'origine. Une capture porte le rendu de l'écran qui l'a produite, profil
+colorimétrique et compression compris ; l'écart mesuré ce jour-là atteignait `#86d884` relevé contre
+`#70f165` réel. Échantillonner reste juste quand il n'y a que l'image ; dès que Matthieu donne la
+valeur, c'est elle qui fait autorité.
+
+## LEÇONS UI — NE PLUS JAMAIS REFAIRE (2026-07-22, retours répétés Matthieu)
+
+1. **« Imbriquer deux éléments »** = une **ligne flex de deux frères** (ex. search bar `flex:1` + gear), JAMAIS
+   un `<button>` dans un `<button>` (interdit HTML) ni un élément coincé dans l'en-tête toggle. Lire l'intention.
+2. **JAMAIS de scrollbar sur le drawer sidebar** : sa hauteur est **dynamique = contenu** (les sections se
+   replient pour gérer la place). Piège : `overflow-y:auto` force `overflow-x:auto` (spec CSS) → DEUX scrollbars.
+   Seul l'overlay MOBILE (plein écran) garde un scroll.
+3. **Flicker/clignotement au clic ou survol** : NE PAS diagnostiquer « onError d'image » sans vérifier qu'il y a
+   une `<img>`. Causes réelles récurrentes ici : (a) **composant défini EN LIGNE** dans le parent (nouvelle
+   référence à chaque render → React remonte tout le sous-arbre ; le parent re-render souvent, ex. `setLTime` du
+   player ~4×/s) → extraire en fonction de rendu pure `{render(x)}` ou composant module-level ; (b) règle
+   `:hover` sur un TOGGLE. **Signaler l'état actif par un toggle** (`.is-on` / fond cercle contrasté `--g9-fg`/
+   `--g9-bg`), **pas** par du hover.
+4. **Perf d'une liste géante** (200k+) : ne JAMAIS re-normaliser (NFD normalize) ni reconstruire un Set de N
+   éléments PAR frappe → **pré-calculer une seule fois** (mémoïsé sur la réf du tableau). Éviter le « chargement
+   progressif » comme réponse par défaut. À terme (1M+) : Web Worker.
+
+## `no-store` INTERDIT LE 304, ET CETTE LIGNE A COÛTÉ 32 Go (2026-07-30)
+
+Mesuré : `/api/page?action=tree` pèse **3,02 Mo**, et le client le redemandait **toutes les 25
+secondes**, y compris quand l'onglet était en arrière-plan. Soit 435 Mo par heure de session, soit
+les **32,53 Go de « Fast Origin Transfer »** qui ont dépassé de 3,25 fois le plan Vercel et bloqué
+tout déploiement pendant quatre jours.
+
+**Les deux `no-store` étaient la cause, et la nuance est celle qu'on ne voit pas :**
+
+| Directive | Ce qu'elle dit au navigateur | Conséquence |
+|---|---|---|
+| `no-store` | n'en garde AUCUNE trace | il ne peut pas envoyer `If-None-Match`, donc **le 304 est structurellement impossible** |
+| `no-cache` | garde-le, mais demande-moi avant de t'en servir | il revalide, et reçoit 304 sans corps quand rien n'a bougé |
+
+Le nom trompe : `no-cache` ne désactive pas le cache, il le rend obligatoirement revalidé. C'est
+presque toujours ce qu'on veut pour une donnée fraîche mais volumineuse.
+
+**Résultat mesuré après correction : 3 165 910 octets → 300 octets par appel**, soit un facteur
+10 553. Le compteur touché était celui de l'ORIGINE et non du CDN, parce qu'une réponse de fonction
+en `no-store` ne peut jamais être servie depuis le cache : chaque appel traverse l'origine
+intégralement.
+
+**Trois règles qui en découlent, valables partout dans ce dépôt :**
+
+1. **Toute réponse d'API supérieure à ~100 Ko porte un `ETag`** et se sert en `no-cache`, jamais en
+   `no-store`. `no-store` se réserve aux réponses qui contiennent un secret ou qui changent à
+   chaque appel par nature.
+2. **Aucun sondage périodique ne tourne quand l'onglet est caché.** `document.visibilityState` et
+   l'événement `visibilitychange` suffisent. Un onglet oublié en arrière-plan est le cas le plus
+   long, donc le plus coûteux, et c'est celui où personne ne regarde le résultat.
+3. **Avant d'accuser l'hébergeur, lire quel compteur a sauté.** Ici, un seul l'était : les autres
+   (transfert CDN, invocations, CPU) étaient tous largement dans les clous. Un compteur unique en
+   rouge désigne une ligne de code, pas un plan tarifaire.
+
+## LE SITE TOURNE SUR CLOUDFLARE, ET UN PUSH NE PUBLIE RIEN (2026-07-31)
+
+Remplace la section « la bascule est prête, elle n'est pas faite » du 2026-07-30, devenue fausse le
+lendemain : la migration a été exécutée. Production sur **https://zenray-progress.pages.dev**,
+ancien build Vercel conservé et servi sur **https://zenray-progress.vercel.app**, aucun DNS touché.
+Plan **gratuit**. Le récit de la migration et sa procédure vivent dans
+`docs/HEBERGEMENT-audit-cloudflare.md` ; ici ne restent que les lois d'exploitation.
+
+### Publier : `git push` n'est PAS un déploiement
+
+Le projet Pages a été créé en **upload direct** (`Git Provider: No`), donc GitHub n'est qu'une
+archive du code et **aucun push ne met quoi que ce soit en ligne**. Publier demande une commande
+explicite, depuis la racine du dépôt :
+
+```
+npx wrangler pages deploy
+```
+
+C'est un choix, pas un oubli, et il faut le défendre avant de le changer : connecter le dépôt à
+Cloudflare publierait à chaque commit, or Matthieu en fait parfois vingt dans une soirée et le plan
+gratuit n'accorde que **500 constructions par mois**. Séparer « enregistrer » de « publier » coûte
+une commande et protège le quota. `.github/workflows/deploiement.yml` offre la même chose par
+bouton, avec choix de cible.
+
+#### Déployer soi-même, sans redemander (consigne de Matthieu, 2026-08-07)
+
+**Dès que Matthieu mentionne le déploiement, la commande se lance, elle ne se propose pas.** « Tu as
+déployé sur le Wrangler ? » n'est pas une question à laquelle on répond par oui ou par non : c'est
+l'ordre de déployer. Lui rendre la main pour qu'il retape « go » lui coûte un aller-retour entier
+pour rien, et c'est exactement ce qui a été payé ce soir-là.
+
+La séquence complète, à dérouler seul, dans cet ordre :
+
+```
+npx vite build && npx wrangler pages deploy && git push
+```
+
+Trois précisions apprises le même soir, qui évitent de croire à un échec :
+
+- **Le déploiement ne dépend PAS de GitHub.** L'upload va droit à l'API Cloudflare. Un `git push`
+  qui échoue (github.com bloqué par le filtrage réseau du Mac, `curl` rend `000`) n'empêche donc
+  jamais de publier — on déploie d'abord, on pousse quand le réseau revient.
+- **Le bac à sable n'a pas le réseau.** Les commandes de déploiement se lancent avec
+  `dangerouslyDisableSandbox`, sinon elles échouent sur une fausse erreur de connexion.
+- **Vérifier la prod, jamais s'arrêter à l'URL de prévisualisation** que `wrangler` affiche
+  (`https://<hash>.zenray-progress.pages.dev`). Le contrôle qui prouve quelque chose compare
+  l'empreinte du paquet local à celle réellement servie par le domaine :
+
+```
+diff <(grep -o 'assets/index-[A-Za-z0-9_-]*\.js' dist/index.html | head -1) <(curl -s https://zenray-progress.pages.dev | grep -o 'assets/index-[A-Za-z0-9_-]*\.js' | head -1)
+```
+
+### Le code à six chiffres EST `ZENRAY_API_SECRET`
+
+Il n'existe pas de « code du drive » distinct du secret serveur. `PinGate` range ce que Matthieu
+tape, `src/lib/apiAuth.js` l'injecte en en-tête `x-zr-auth`, et `authOk` le compare à
+`ZENRAY_API_SECRET`. Une seule valeur ouvre donc à la fois l'API et la clé de déchiffrement.
+**Corollaire qui a coûté une heure le 2026-07-31 :** la valeur de `.env.local` est celle du poste de
+développement, pas celle de la production, et rien dans le fichier ne le signale. Poser un secret
+depuis `.env.local` sans le confronter au comportement réel du site produit un site qui fonctionne
+parfaitement en refusant un code juste, symptôme dont rien n'indique la cause.
+
+### Poser un secret : `bulk`, jamais l'invite interactive
+
+```
+npx wrangler pages secret bulk <fichier.json> --project-name zenray-progress
+```
+
+`wrangler pages secret put` alimenté par un tuyau a déclaré « Success » **en enregistrant autre
+chose que la valeur envoyée**, ce qu'a révélé une comparaison d'empreintes SHA-256. Un outil qui
+déclare avoir réussi n'a pas prouvé qu'il a fait ce qu'on croyait lui demander. Deux conséquences :
+n'employer que `bulk`, et vérifier un secret par son effet, jamais par le message de l'outil.
+`scripts/secrets-vercel-vers-cloudflare.mjs` fait les deux.
+
+**Un secret met une vingtaine de secondes à se propager après le déploiement.** Un contrôle immédiat
+rend un faux négatif et invite à réparer une chose intacte.
+
+### Où lire le quota, et ce qu'il compte vraiment
+
+Tableau de bord Cloudflare, **Workers & Pages**, panneau « Usage » à droite : requêtes du jour sur
+100 000, temps de processeur du mois, et « Workers build mins ». Le lien « View limits » déplie le
+détail.
+
+**Nuance qui change le compte, et qui reste à confirmer.** Les 500 constructions mensuelles décrites
+par la documentation concernent les builds déclenchés par un dépôt Git : « Each time you push new code
+to your Git repository, Pages will build and deploy your site ». Or ce projet est en upload direct,
+sans connexion Git, et la construction se fait sur le Mac : Cloudflare ne compile rien. Le compteur
+« Workers build mins » affichait d'ailleurs **0** après six déploiements le 2026-07-31. Tout indique
+donc qu'un `wrangler pages deploy` ne consomme AUCUNE des 500, contrairement à ce que j'ai annoncé
+plusieurs fois ce jour-là en comptant « 2 sur 500 ». La documentation ne le dit pas explicitement pour
+l'upload direct, donc c'est une déduction appuyée sur un compteur, pas une certitude documentée.
+
+**Pour trancher, et c'est une mesure d'une minute.** Relever « Workers build mins » AVANT un
+déploiement, lancer `npx wrangler pages deploy`, relever de nouveau. S'il n'a pas bougé, la déduction
+tient. S'il monte, elle tombe et il faut recompter. Point de départ posé le **2026-07-31 à 20:35 :
+7 déploiements sur le projet, dont 6 le jour même, compteur à 0 minute.** Toute mesure ultérieure se
+compare à celui-là.
+
+Reste une seconde inconnue, distincte : j'ignore si Cloudflare borne les envois DIRECTS eux-mêmes, par
+heure ou par jour. Sa page de limites n'en dit rien et aucune borne ne s'est manifestée sur les sept
+déploiements du 2026-07-31. Ne pas conclure qu'elle n'existe pas, seulement qu'elle n'a pas été
+rencontrée.
+
+### Vérifier sans compte ni déploiement
+
+```
+npx wrangler pages functions build --outdir=/tmp/zr-fn
+```
+
+Cette commande assemble les quarante-quatre handlers pour Workers sans rien publier, et elle a
+attrapé les deux pannes totales du premier déploiement : un import Node sans préfixe `node:`, et
+`fileURLToPath(import.meta.url)` évalué au niveau module, qui jette dans un Worker et emporte alors
+l'application entière. Les deux sont désormais gardées par `tests/hebergement.test.js`. La lancer
+avant tout déploiement coûte dix secondes.
+
+### Ce que Cloudflare ne change pas
+
+Les médias ne sont jamais passés par l'hébergeur et n'y passent toujours pas : la politique de
+découpage ci-dessus (jsDelivr, raw.githubusercontent) est intacte, et la migration n'y touche en
+rien. Seule exception, les manifestes `vis:'private'`, dont les octets traversent la fonction parce
+qu'un dépôt privé n'est servi par aucun CDN — c'est le sens de la pastille jaune, qui désigne un
+**chemin** et non un hébergeur.
+
+## LE DÉPLOIEMENT NE PART PAS : DEUX CAUSES INDÉPENDANTES, À DISTINGUER (2026-07-30)
+
+Constaté ce soir : vingt-trois commits poussés sur GitHub, et **aucun déploiement depuis quatre
+jours**. Deux blocages superposés, qu'il faut diagnostiquer dans cet ordre parce que le premier
+masque le second.
+
+**Cause 1, le webhook GitHub a disparu.** `gh api repos/matthieuhuguet/ZenRayProgress/hooks` rend
+une liste VIDE. Vercel déclare pourtant l'intégration de son côté (`link.type = github`, branche de
+production `main`, projet non en pause), si bien que tout paraît normal quand on regarde Vercel
+seul. Sans webhook, GitHub ne prévient personne : le push arrive, et rien ne se passe. Vérifier les
+deux côtés, jamais un seul.
+
+**Cause 2, le quota de l'équipe est épuisé.** Un déploiement manuel rend
+`Your Team exceeded our fair use limits and has been blocked`. C'est le vrai mur : même webhook
+restauré, rien ne partirait. **Un seul essai, puis on s'arrête** — reboucler ne débloque rien et
+consomme le quota d'API.
+
+**Le bon comportement, et il est déjà en place :** le site continue de servir le dernier build
+`READY` et répond 200. Une production figée sur une version ancienne vaut infiniment mieux qu'une
+production éteinte, donc on ne touche pas au déploiement en cours pour tenter d'en forcer un neuf.
+
+**Ce qui appartient à Matthieu** et qu'aucune commande ne remplace : lever la limite d'usage (offre
+payante, ou demande au support), et reconnecter le webhook depuis l'interface. Les deux demandent
+une session authentifiée dans un navigateur.
+
+**Conséquence de méthode, celle qui a coûté ce soir :** signaler la pile de commits non poussés dès
+le TROISIÈME, pas au vingt-troisième. Une pile qui grossit en silence donne l'illusion que le
+travail est en ligne alors qu'il dort en local.
+
+## TOUT MÉDIA SE RECONNAÎT À SON CHEMIN, JAMAIS À SON CONTENU (loi d'architecture, 2026-07-30)
+
+La convention `media.feature.json` est **déjà en place et complète**. Dix suffixes sont reconnus sur
+le chemin seul, sans jamais ouvrir un fichier :
+
+```
+.plan.json   .img.json   .ref.json   .db.json   .file.json
+.media.json  .props.json .blocknote.json .comments.json .zrtrash.json
+```
+
+Filtrer une feature coûte donc `p.endsWith('.plan.json')`, c'est-à-dire rien. **Il n'y a aucun index
+à créer, aucun manifeste à maintenir, aucun renommage à faire.** Tout nouveau type de média suit la
+même règle : un suffixe, et le chemin suffit à le classer.
+
+**Le corollaire, et c'est lui qui compte.** Puisqu'un filtre sur le chemin est gratuit, un index
+parallèle n'apporte jamais de vitesse : il n'apporte qu'une SECONDE VÉRITÉ, qui dérive dès que son
+cycle de reconstruction cesse de coïncider avec celui du contenu. C'est exactement le bug du
+2026-07-20, où la vue Plan affichait « aucun plan » alors que le plan existait sur GitHub, parce
+que l'index précalculé était en retard d'un rebuild.
+
+**La distinction à tenir**, parce que tout n'est pas une seconde vérité :
+
+| Forme | Est-ce une seconde vérité ? |
+|---|---|
+| Index reconstruit par un job séparé | **Oui.** Deux cycles, donc dérive certaine à terme. |
+| Manifeste écrit dans le MÊME commit que le contenu | Non, ils ne peuvent pas se désynchroniser puisqu'ils apparaissent ensemble. |
+| Requête étroite sur une branche de l'arbre (API contents) | Non. C'est le même objet git, demandé plus étroitement. |
+| Valeur gardée en mémoire vive au lieu d'être jetée | Non. Rien n'est copié, donc rien ne peut diverger. |
+| Copie sur disque (localStorage) revalidée derrière | Intermédiaire assumé : elle peut mentir une fraction de seconde. |
+
+Quand une vue est lente, la cause n'est donc presque jamais le filtre. C'est ce qu'on **attend avant
+de filtrer**. Mesurer les sources une par une avant de toucher à quoi que ce soit.
+
+## LIRE EN PREMIER : docs/INDEX-ERREURS-FEATURES.md (2026-07-05, NON NÉGOCIABLE)
+
+Avant TOUT code ici, lire `docs/INDEX-ERREURS-FEATURES.md` : registre indexé des erreurs passées
+(cause racine → règle permanente), conventions dures (nommage `zenrayshards-<type>-<hex12>`, jamais
+recréer un ancien nom de repo, hvc1 obligatoire sur remux HEVC, repo neuf par lot / zéro check
+distant), philosophie du projet (demander avant de coder, vérifier empiriquement, pas de pivot
+silencieux) et pointeurs de features. PROGRESS.md reste l'historique complet ; l'INDEX est le
+condensé actionnable qui évite de répéter une erreur déjà payée.
+
+## ROUTEUR LANGAGE NATUREL → FEATURE (lire EN PREMIER, ne jamais réinventer la roue)
+
+Quelle que soit la formulation de Matthieu, identifier la feature EXISTANTE ci-dessous et la réutiliser. Chaque ligne = intentions (synonymes) → action/fichiers. Les détails complets sont dans les sections dédiées plus bas.
+
+| Si Matthieu dit (n'importe quel synonyme) | Feature existante | Action / fichiers clés |
+|---|---|---|
+| « archive / sauvegarde / save / clone / backup / décharge ce dossier », « mets ce dossier sur le cloud/drive/GitHub » | **Archive d'un dossier** (chunks 19 Mo hashés, repo public, manifeste privé, re-téléchargeable bit à bit) | `GITHUB_TOKEN=$(gh auth token) node Scripts/archive-folder.mjs <dossier> [dest]` · voir « FEATURE ARCHIVE » |
+| « motion design », « motion », « reproduis cette pub », « itère ce motion », « montage 9:16 » | **ZenRay Motion Design** (12 October 2026) : onglet `motion`, service local 3102, publieur `scripts/Motion/` | `src/motion/`, `src/lib/motionBridge.js`, `scripts/Motion/PublishMotions.mjs` ; index : `docs/INDEX-ERREURS-FEATURES.md`, section du 12 October 2026 |
+| « range / réorganise / renomme / déplace cette archive », « trie l'archive comme sur mon Mac », « mets l'archive sous tel dossier » (SANS re-upload) | **Ranger/renommer une archive** (déplace les manifestes .file.json en miroir d'une arbo locale ; binaires inchangés) | `GITHUB_TOKEN=$(gh auth token) node Scripts/archive-organize.mjs <dossierMacModele> <ancienDirSite> <nouveauDirSite> [--reindex]` · skill `archive-organize` |
+| Archive **DJI** (rushs drone) | **Convention DJI** : date OBLIGATOIRE dans le nom (refus sinon) ; rangé sous `pages/Build/DJI/<dossier daté>` ; segments `Photos/Videos/BestOf` = miroir du dossier Mac (organiser AVANT d'archiver) | `archive-folder.mjs` (auto si parent = DJI) |
+| « je veux consulter / prévisualiser / lire mon fichier d'archive », « espace pour voir », « quicklook » | **Aperçu QuickLook** (reconstitution chunks à la volée, ↑/↓ navigue) | `src/components/DownloadsView.jsx` + `FileNodeViewer.jsx` |
+| « importe / dépose / colle / drag&drop une image/vidéo/audio/note », « cloud direct » | **Capture universelle** (image→.img.json, vidéo→HLS fMP4 .media.json, md→page), chiffré public + jsDelivr | `src/capture/universalCapture.js` · voir « Capture universelle » |
+| « dépose / drag&drop un PDF », « document », « preview PDF espace » | **PDF** : drag-drop → chunks chiffrés sur **`zenray-pdf-public-NN`** (kind `pdf`, 5 Go/repo, anonymisé), `.media.json`, `/api/stream` déchiffre, preview QuickLook espace (iframe), indexé. PAS Vercel | `src/capture/universalCapture.js` (route pdf→kind `pdf`), `QuickLookOverlay.jsx`, `shardNaming.js` (client+serveur) |
+| « la recherche est lente / scale / 1M entrées / quota API », « réindexe », « pourquoi pas trouvable » | **Index recherche shardé chiffré CDN + auto-index** (0 API, delta public) | `Scripts/build-search-index.mjs`, `src/search/searchIndexClient.js`, `server/page.js` (`index-add`→`appendPublicDelta`) · voir « Index de recherche » |
+| « ce fichier nouvellement ajouté/déplacé n'est pas cherchable » | **Auto-indexation universelle** (drop/archive/HLS/déplacement → delta) | `server/page.js` actions `index-add`/`move`/`move-tree` → `appendPublicDelta` (add + `rm`) |
+| « couper / coller / déplacer un élément », « ⌘X ⌘V », « déplace ce dossier/cette image/vidéo ailleurs » | **Couper-coller universel** (tous types + dossiers, réindexé via delta) | `src/App.jsx` `markClip`/`pasteClip`/`movePage` → serveur `move`/`move-tree` |
+| « lien vers le repo GitHub du drive », « ouvrir le repo » | **Lien GitHub par repo** sur la page Drive | `src/components/DriveDashboard.jsx` (`renderRepo`) |
+| « pourquoi jsDelivr / GitHub raw / chiffré / SHA épinglé » | **Modèle public + chiffré + CDN** (clé maître AES-GCM) | `src/media/crypto.js`, `server/media-key.js`, clé `.zenray-media-key`==`ZENRAY_MEDIA_KEY` |
+| « transforme cette note en article / affiche / vidéo », « change le style », « thème », « gabarit », « ZenRayMedia », « studio média » | **ZenRayMedia** (vue `media`) — Brief × Thème × Format, catalogue extensible à 1024 gabarits HTML | `src/zenraymedia/` · ajouter un thème = déposer `T-FF-S-V--slug.html` dans `src/zenraymedia/themes/` (voir son README) · conception : **`docs/zenraymedia/README.md`** (index) → `VISION.md` (pourquoi) + `KANBAN.md` (où en est chaque carte) |
+| « sync mes conversations / sessions Claude dans les dossiers » | **conversations-backup** (LaunchAgent 60 s) | repo `claude-sync` (hors ce repo) · voir `~/.claude/CLAUDE.md` |
+| « sport », « mes exos », « consigne ma séance », « j'ai fait X séries de Y », « séance passée », « objectif visuel » | **Sport** (vue `sport`, 16 October 2026) : base d'exercices en tuiles, une carte Plan par jour (`sport-<date>`), bloc Sport dans la note du jour | `src/sport/`, `src/config/sport.js`, `docs/SPORT.md` |
+| « publish / qu'est-ce que je publie aujourd'hui », « ajoute sport/japonais/X fois par semaine dans le plan », « tâche de publication/streak » | **ZenRay Plan Publish** — injecte directement une tâche rose (`publish:true`) ou une série (`streakId` partagé) dans le `.plan.json` actif, via `fetch` read-sha-write depuis le serveur local (jamais l'API prod, secret différent) | skill `zenray-plan-publish` (hors ce repo, `~/.codex/skills/`) · plan connu au 2026-08-07 : `pages/Calendar-76ct/Matthieu2026-l8at.plan.json` · contexte P0 Production Permanente dans `~/.claude/CLAUDE.md` |
+
+**Règle de réponse stable :** pour une même intention, répondre/agir TOUJOURS de la même façon en pointant la feature ci-dessus. Si une feature manque vraiment, la créer PUIS l'ajouter à ce routeur. Tenir ce tableau à jour à chaque nouvelle feature.
+
+## ZENRAYMEDIA — LA VISION A CHANGÉ, LIRE `docs/zenraymedia/README.md` AVANT TOUTE DÉCISION (2026-08-05)
+
+ZenRayMedia n'est plus seulement un éditeur : Matthieu la dicte désormais comme une **galerie de
+publication orientée composants HTML**, où un calque s'ouvre en sous-composant modifiable à la
+manière de l'éditeur Slate d'Unreal Engine. Le produit vise le **80/20 de six logiciels** —
+Photoshop, PowerPoint, Slate/UMG, Miro, Figma, Illustrator — jamais leur surface complète, un
+logiciel à la fois, sur liste dictée par Matthieu. Usage réel aujourd'hui : publier sur Instagram et
+LinkedIn ; ce qui sert cet usage passe devant ce qui servira un plan architectural un jour.
+
+**Ne jamais reformuler cette vision ici ni ailleurs.** Le verbatim complet, les six logiciels et
+leur état, et ce qui est explicitement reporté (générateur de textures type Substance, galerie
+ZenRay 3D Models) vivent dans `docs/zenraymedia/VISION.md`, seule source de vérité. L'avancement
+carte par carte vit dans `docs/zenraymedia/KANBAN.md`. `docs/zenraymedia/README.md` indexe les deux
+et distingue ce qui est vivant de ce qui est archive figée — le lire en premier avant tout autre
+fichier du dossier.
+
+## FEATURE ARCHIVE / SAUVEGARDE D'UN DOSSIER (workflow à NE JAMAIS oublier, 2026-06-11)
+
+**Déclencheurs en langage naturel — TOUS équivalents, même action :** « archive ce dossier », « sauvegarde / save / clone / backup ce dossier », « décharge / mets sur le cloud / mets sur le drive ce dossier », « stocke ce dossier sur GitHub ». Peu importe le mot : si Matthieu désigne un **dossier local** à mettre sur le cloud, c'est CETTE feature. Ne jamais hésiter ni réinventer.
+
+**Action unique :** `GITHUB_TOKEN=$(gh auth token) node Scripts/archive-folder.mjs <dossier> [destCreate]`
+- défaut destCreate : `pages/Archives/<NomDuDossier>`. Flags : `--dry` (inventaire), `--reindex`.
+
+**Ce qui se passe (garanti) :** shard GitHub **public** **`zenray-productions-archive-<NomDuDossier>`** (suffixe `-NN` SEULEMENT si >5 Go). Modèle de sécurité (refacto 2026-06-11) : **TOUS** les fichiers sont découpés en **chunks 19 Mo binaires nommés par hash** (`aa/bb/<fid>-NNN`, aucun nom ni extension d'origine) → un visiteur GitHub ne voit que des morceaux anonymes, **rien d'exploitable** (même obfuscation que les segments fMP4, pas du chiffrement). Les vrais noms + l'arborescence + le mapping chunks→fichier vivent dans le manifeste **PRIVÉ** `.file.json` (zenray-data, `v:2`, `mode:'chunked'`, sha256 du fichier entier) → recomposition **bit à bit** côté app. Un **README public neutre** (lié au projet + au commit de clonage, sans nom de fichier) est poussé à la racine du repo. Push par lots 150 Mo HTTP/1.1 ; **vérif 200 sur tous les chunks** ; le dossier apparaît **dans Create + la vue Downloads + la page Drive** ; re-téléchargeable à 100 % (fichier par fichier ou « tout télécharger ») ; **purge locale jamais auto**. À VENIR (non prioritaire) : visionnage des fichiers directement sur le site (réassemblage à la volée).
+
+**Fichiers clés :** `Scripts/archive-folder.mjs` (moteur, ~80 % réutilisé du bulk vidéo) · `src/components/FileNodeViewer.jsx` (ouverture d'un `.file.json` : aperçu + download recomposeur) · `src/components/DownloadsView.jsx` (vue Downloads UX Google Drive, sidebar interne Create) · type `.file.json` reconnu dans `src/create/node.js`, `server/page.js` (children/tree/index), `Scripts/build-search-index.mjs` · `server/shard-naming.js` (`archiveRe`, kind `archive`). Manifestes dans `zenray-data:pages/Archives/...`.
+
+**INVARIANT DUR — shard ≤ 5 Go, rollover MID-FILE (2026-06-12, NE JAMAIS REFAIRE L'ERREUR) :** un shard d'archive ne dépasse JAMAIS 5 Go. Le rollover (`flushShard` + nouveau shard) se déclenche dès que `shardBytes >= SHARD_CAP` (4,5 Go) **y compris au milieu d'un fichier**, pas seulement entre deux fichiers. Bug initial (archive DJI) : le contrôle de rollover était APRÈS chaque fichier → un seul MP4 de 16 Go gonflait un shard à 16 Go (shards -02/-04/-05/-06/-07 à 14-17 Go). Conséquence du fix : un gros fichier est réparti sur plusieurs shards → **manifeste v4 `parts[]`** = `[{repo, commit, chunks[]}]`, le fichier = concaténation des chunks de toutes les parts dans l'ordre. Rétro-compat : pas de `parts` → mono-shard `repo/commit/chunks` (v2/v3). Lecteurs `FileNodeViewer.jsx` + `DownloadsView.jsx` (helper `chunkRefs`) gèrent les deux. Cache manifeste bumpé `zrfm3:`→`zrfm4:`. `multiShard` actif dès qu'une archive OU un fichier seul > 5 Go.
+
+**Versionning (2026-06-12) :** ré-archiver le MÊME dossier ne duplique pas et **garde l'historique**. RÈGLE CRITIQUE : `openShard()` ne fait `push -f` (init) QUE si le repo est neuf ; si le repo existe avec des commits, il **clone** (`--filter=blob:none --no-checkout` + `git read-tree HEAD`) pour préserver tout l'historique et n'uploader que les nouveaux chunks — JAMAIS de force-push sur un repo d'archive existant (ça effacerait les versions). Par fichier : on lit le manifeste existant, on compare le `sha256` ; inchangé -> rien (ni re-chunk ni réécriture) ; modifié/nouveau -> chunks poussés + **nouvelle entrée dans `.file.json` `versions[]` (append-only)**. Le top-level du manifeste = dernière version (rétro-compat v2). UI : `FileNodeViewer` affiche un **sélecteur de versions** (daté + taille) ; choisir une version antérieure reconstruit/télécharge CETTE version depuis son commit. Purge disque locale : toujours manuelle (jamais auto).
+
+**Aperçu QuickLook (2026-06-11) :** dans la vue Downloads, sélection au clic / flèches ↑↓ et **Espace = aperçu** (Échap/Espace ferme). L'aperçu reconstitue le fichier à la volée (`assembleBlobUrl` : raw direct ou fetch des chunks → Blob) et l'affiche selon le mime (image/vidéo/audio/pdf/texte). Cap mémoire 500 Mo (au-delà : télécharger). **Automatique** pour toute archive présente ou future (manifestes uniformes `chunks[]`+`mime`), rien à recâbler. Téléchargement ET aperçu tirent les chunks de **GitHub raw** (`raw.githubusercontent.com`), pas jsDelivr. **Overlay rendu via `createPortal(document.body)`** : une carte parent avec `backdrop-filter` piège sinon le `position:fixed` à l'intérieur d'elle (l'aperçu n'apparaissait qu'au centre du scroll) — règle générale : toute surface flottante `position:fixed` posée sous une carte à `backdrop-filter`/`transform` doit passer par un portal vers `document.body`.
+
+**Réponse type à donner à Matthieu :** confirmer l'action, lancer la commande (en arrière-plan si gros), reporter done/vérif, et rappeler que la purge locale est à sa main après contrôle dans Create/Downloads.
+
+## Page Drive — lien GitHub par repo (auto, 2026-06-11)
+
+Chaque ligne de la page Drive (`DriveDashboard.jsx` → `renderRepo`) porte une icône `arrow.up.right` qui ouvre `https://github.com/<OWNER>/<repo>` dans un onglet. Couvre **100 % des shards** (lignes simples + shards dépliés d'une famille) **automatiquement** : tout nouveau repo hérite du lien, rien à faire. L'en-tête a aussi un lien « tous mes repos » → `https://github.com/<OWNER>?tab=repositories`.
+
+## Index de recherche — shardé, chiffré, servi par CDN (refacto 2026-06-11)
+
+But : 0 quota API GitHub pour la recherche + scalable à 1M+ entrées + privacy gardée.
+
+- **Repo public `zenray-index-public`** : `head.json` (clair, dossiers HACHÉS, liste les shards) + `s/<h>-<part>.json` = shards AES-GCM (clé maître média, même que les binaires). 1 shard par dossier racine, re-tranché à 20 000 nœuds si trop gros (limite 50 Mo/fichier jsDelivr). `delta.json` = ajouts récents chiffrés.
+- **Lecture (`src/search/searchIndexClient.js`)** : `head.json` + shards + `delta.json` via **raw.githubusercontent@main** (cache ~5 min, **hors quota REST**), déchiffrés avec la clé maître (`getMediaKey`, fonction Vercel = 0 quota GitHub). Fallback `/api/page?action=index` (ancien index privé) si le CDN est indispo.
+- **Auto-indexation universelle (`server/page.js` action `index-add` -> `appendPublicDelta`)** : tout nouveau nœud (drop/Ctrl-V, archive clonée via `--reindex`, vidéo HLS, tout type) est appendé au **delta public chiffré** (petit, rapide) au lieu de réécrire le gros index privé. Cherchable immédiatement, coût O(delta) pas O(total).
+- **Build (`Scripts/build-search-index.mjs --apply`)** : régénère les shards chiffrés + `head.json`, REMET le `delta.json` à zéro (tout replié dans les shards), pousse aussi l'ancien index privé (fallback).
+- **Indicateur Create** : le pied affiche « index CDN · N nœuds · date » (plus le quota API REST, devenu inutile pour la recherche).
+- **Clé** : `.zenray-media-key` local == `ZENRAY_MEDIA_KEY` prod (vérifié en déchiffrant une vignette existante). Ne jamais committer la clé.
+
+## Upload en masse vers GitHub : GIT PUSH, jamais l'API blob-par-blob (RÈGLE, 2026-06-11)
+
+Pour pousser BEAUCOUP de fichiers (régénération de 16k vignettes, migration, archive…), **toujours `git push`, jamais l'API REST fichier par fichier**. L'API (`git/blobs`, `contents PUT`) est plafonnée à **5000 requêtes/h** → 16k fichiers = mur + throttle de plusieurs heures. `git push` passe par le **protocole Git, hors de ce quota** → un seul push par repo (≈10 pushes pour 16k fichiers).
+
+Pour n'uploader QUE les nouveaux fichiers sans télécharger les Go existants :
+```
+git clone --filter=blob:none --no-checkout --depth=1 <url> dir   # 0 blob téléchargé (refs/trees seulement)
+git -C dir read-tree HEAD                                        # index = arbre complet par sha (rien matérialisé)
+# écrire les nouveaux fichiers à leur chemin, puis :
+git -C dir add -f <nouveaux>  &&  git -C dir commit -m ...  &&  git -C dir push origin HEAD:main
+```
+`read-tree HEAD` est la clé : le commit préserve tout l'existant (par sha, non re-uploadé) et n'envoie que les nouveaux blobs. Réf : `Scripts/regen-thumbnails.mjs` (push webps), `Scripts/build-search-index.mjs`, `Scripts/archive-folder.mjs`. Pour LIRE un fichier précis : raw / jsDelivr / sparse-checkout (jamais cloner tout le repo). Voir la note mémoire « Récupérer des fichiers précis d'un repo GitHub ».
+
+Réserver l'API REST aux écritures à FAIBLE volume (≤quelques centaines) : maj de manifestes par lots inline-tree (`base_tree` + N entrées en 1 commit = 3 appels/lot), pas 1 appel/fichier.
+
+## RÈGLE N°1 ABSOLUE — ROADMAP IN-APP À JOUR EN PREMIER
+
+Avant toute autre action de dev, à CHAQUE session et à CHAQUE carte terminée :
+
+1. Mettre à jour la **Roadmap visible DANS l'app** = le fichier live `build/tasks.json` du repo `zenray-content` (c'est lui que l'onglet Roadmap affiche, il écrase le SEED du code).
+2. Garder le `SEED` de `src/components/BuildBoard.jsx` synchronisé (pour les installations fraîches).
+3. Garder `PLAN.md` (tableau "CHANTIER ACTUEL", cartes C0→C99) synchronisé.
+
+Matthieu ne lit pas PLAN.md. Il regarde l'onglet **Roadmap** dans l'app. Si la Roadmap in-app n'est pas à jour, il ne voit pas les features → reproche récurrent. Cette règle prime sur la concision.
+
+**Comment pousser la Roadmap live (gh CLI authentifié) :**
+```bash
+SHA=$(gh api repos/matthieuhuguet/zenray-content/contents/build/tasks.json --jq '.sha')
+B64=$(base64 -i tasks.json)   # tasks.json = { items:[{id,title,status,section}], updatedAt }
+gh api -X PUT repos/matthieuhuguet/zenray-content/contents/build/tasks.json \
+  -f message="Roadmap MAJ" -f content="$B64" -f sha="$SHA"
+```
+Statuts : `todo` / `doing` / `done`. Sections actuelles : Socle · Notion-like · UI & vues (chantier actuel) · Données & import · Idées à venir / bloqué.
+
+## Contrainte UI — fidélité Notion 1:1 (non négociable)
+
+L'UI front-end doit être **1:1 avec les screenshots envoyés par Matthieu** (Notion + Mac OS Finder). Tant que ce n'est pas atteint, le travail UI continue. Inspiration : tuiles minimalistes, switcher de vue (List / Gallery / Page) partout, media img/vidéo embed.
+
+Backbone de vues partagé : `ViewSwitch` + `DataView` dans `App.jsx`. TOUTES les vues (Dashboard, Create, Archive, Documents, Freelance, Gallery, Projects) doivent passer dessus → un seul code.
+
+## Fonts (règle 80/15/5, jamais Inter)
+
+Anthropic **Serif 80%** (contenu, titres, corps) · **Sans 15%** (chrome UI : nav, boutons, menus) · **Mono 5%** (chiffres, maths, code uniquement). JAMAIS Inter ni police par défaut.
+
+**Taille plancher 12px, hors mobile (règle, 2026-07-20) :** interface pensée pour un affichage 4K — tout texte **inférieur à 12px devient difficile à lire et non professionnel**. `12px` est la taille de référence desktop pour le texte fonctionnel (labels, titres de tuile/tâche, items de sidebar, champs) ; ne pas descendre en dessous sauf contrainte mobile explicite (les breakpoints mobile déjà en place, ex. `@680px` dans `PlanBoard.css`, gardent leurs tailles réduites propres — cette règle 12px ne s'y applique pas). Avant de baisser une taille sous 12px sur desktop pour "faire tenir" un contenu, revoir l'espace/le layout plutôt que la lisibilité.
+
+**Surfaces "toolbar" à contraste renforcé, tokens partagés (2026-07-20) :** la barre Create Path (fil d'Ariane), la searchbar Create et la searchbar de la sidebar gauche partagent le même verre `--g9-toolbar-glass-a/-b` (définis dans `src/fonts.css` `:root` + `.zr-dark`, dérivés de `--g9-glass-a/-b` teintés gris-noir via `color-mix`). Un seul endroit à retoucher (le % de mix) pour ajuster couleur/opacité/contraste des 3 surfaces à la fois — ne jamais dupliquer une valeur de contraste en dur sur l'une des trois sans la reporter aux deux autres.
+
+## Graisse — JAMAIS de gras (règle UI, 2026-06-11)
+
+**Aucun texte en gras nulle part dans l'app.** Poids autorisés : **regular (400)** par défaut, **medium (500)** au maximum pour une légère emphase (valeurs chiffrées, libellé actif). Jamais 600/700/800. S'applique à tout : titres, boutons, labels, chiffres, en-têtes de carte. Validé par Matthieu : « jamais de gras, toujours regular ou medium sans max ».
+
+## Liquid glass tinted (langage visuel des surfaces flottantes)
+
+Réf : `Memory/Design/Liquid-Glass-Tinted.png`. Une surface flottante (dropdown, modale, carte d'indicateurs) = verre **clair translucide** qui laisse passer le fond (base `t.glass.bgStrong` + `t.glass.filterThick` = blur 44px saturate 210%), **lavis de teinte primaire subtil** par-dessus (pas un aplat bleu), **bord blanc 1,5 px inset** (réf cartes Shelf : `inset 1.5px 1.5px 1px rgba(255,255,255,.58)`) + liseré primaire fin, gros arrondis (16-26). Jamais un pavé de couleur plate.
+
+## Discipline de chaque carte
+
+build-verify (`npm run build`) → commit → push → `vercel deploy --prod --yes` → MAJ Roadmap in-app + PLAN.md + PROGRESS.md. Jamais casser une vue existante. Sobre en tokens. Ne jamais perdre le contenu Build/Media (drive `zenray-content`).
+
+## RÈGLE P0 — AUCUNE FUITE DE NOMS MÉDIA DANS GIT PUBLIC
+
+Incident 2026-06-01 : un pipeline vidéo avait correctement hashé les fichiers/segments, mais les messages de commit GitHub publics révélaient le nom humain du média. C'est une fuite de métadonnées. À ne plus jamais reproduire.
+
+Pour tous les repos publics ou semi-publics (`zenray-vid-NN`, anciens/futurs repos CDN, jsDelivr, GitHub Pages, PR publiques, logs copiés dans un ticket public), les surfaces suivantes sont considérées PUBLIQUES et doivent rester anonymes :
+
+- noms de fichiers et dossiers ;
+- messages de commit ;
+- noms de branches et tags ;
+- titres de PR/releases ;
+- description/About/README du repo ;
+- manifests publics, logs publics, sortie console copiée dans Git ;
+- commentaires GitHub visibles publiquement.
+
+Interdit absolu : écrire le titre original, nom d'oeuvre, épisode, artiste, client, projet privé, chemin Finder parlant, ou tout nom humain permettant d'identifier le média. Le fait que le binaire soit chiffré ne protège PAS les métadonnées Git.
+
+Format obligatoire pour les commits vidéo publics :
+
+```text
+hls encrypted segment batch <sha8>
+video cdn shard update <yyyy-mm-dd-hhmm>
+cdn encrypted media update <sha8>
+```
+
+Format interdit :
+
+```text
+hls encrypted segments: <titre humain>
+upload <nom original du fichier>
+segments for <oeuvre/client/projet>
+```
+
+Avant tout `git push` vers un repo public vidéo :
+
+1. Inspecter `git log --oneline -20` et refuser le push si un nom humain apparait.
+2. Inspecter `git status --short` et les chemins staged.
+3. Si un commit public contient déjà une fuite, STOP : ne pas empiler de nouveaux commits par-dessus. Prévenir Matthieu et proposer une réécriture d'historique + purge/cache CDN si nécessaire.
+4. Les scripts doivent générer eux-mêmes des messages neutres. Ne jamais interpoler `file.name`, `title`, `base`, `media.title`, `probe.title`, `dest`, ou `originalName` dans un message Git public.
+
+Cette règle prime sur la lisibilité des commits. Le debug humain vit dans le manifest privé (`zenray-data`) ou dans PROGRESS.md local/privé, jamais dans le repo CDN public.
+
+## Stack
+
+Vite + React 19, Vercel, /api serverless (GITHUB_TOKEN classic sans expiration). BlockNote (éditeur), TanStack Table + dnd-kit (DB), Masonic (galerie). Drive = repo privé `zenray-content`. Détails verrouillés dans `docs/ARCHITECTURE.md`, roadmap dans `PLAN.md`.
+
+## Capture universelle & média cloudé immédiat (principe de design, non négociable)
+
+But : Matthieu dépose un média (Finder Mac → drag-drop, ou Ctrl-C/Ctrl-V) **n'importe où dans Create** et c'est **cloudé instantanément**, sans étape manuelle. Fonctions **auto-pilotées et ultra-résilientes**.
+
+- **Tous types** : image, vidéo, markdown/texte (et à terme audio/pdf). Le type détermine le nœud créé :
+  - image → nœud `.img.json` (binaire AVIF sur shard privé + vignette WebP dérivée) ;
+  - vidéo → nœud `.media.json` chunké (mp4 H.264 faststart, pistes audio + sous-titres VTT, champ `probe`) ;
+  - markdown/texte → page `.md`.
+- **Anonymisation obligatoire** : les binaires sur les shards ont des noms hashés (SHA-1), jamais le nom d'origine. Le vrai nom vit dans le manifeste, pas dans le chemin du fichier.
+- **Anonymisation Git obligatoire** : les commits, branches, README, descriptions GitHub et logs publics font partie du modèle de menace. Ils doivent utiliser des libellés neutres et hashés, jamais le titre original du média.
+- **Stockage = shards GitHub PRIVÉS `zenray-media-NN`** (lecture via `/api/shard` au token). Le binaire DOIT être sur un repo pour être lisible.
+- **Rollover automatique de shard** (le seul vrai point dur) : quand le shard actif approche ~4,5 Go (plafond pratique 5 Go), l'app **crée automatiquement le shard suivant** `zenray-media-(N+1)`, **patiente jusqu'à ce qu'il soit prêt** (création + init), puis y bascule l'upload. Transparent pour Matthieu, jamais d'erreur de limite atteinte.
+- **Règle de résolution vignette/aperçu** : grille du Finder = petite vignette WebP 384px (~6 Ko, 60× plus légère) ; **Espace (QuickLook) / ouverture = image PLEINE résolution** (AVIF original 1920/3840). Sans vignette, charger des milliers d'images pleine taille fait ramer → la vignette est obligatoire (modèle Eagle).
+- **Choix du canal d'upload selon le volume** : dépôt manuel ponctuel (1-N fichiers) = API OK (pas de risque de ban). Import en MASSE (milliers) = **toujours `git push`** (le protocole git ne touche pas les limites API REST primaire/secondaire ; l'API les épuise et risque le ban). Apprentissage empirique 2026-05/06.
+- **Résilience** : barre de progression sur tout upload ; reprise possible (tracking) ; un échec unitaire ne casse pas le lot ; déplacement d'un média = ses chunks/binaires suivent.
+
+## Écarté mais PAS oublié
+
+- **Ask Claude (IA) = priorité 999** : nécessite clé API Anthropic. Reste dans la Roadmap (section bloqué).
+- **Auto-publication réseaux** : nécessite OAuth des comptes IG/LinkedIn/YouTube.
+
+## 2 October 2026 : TOUTE PHOTO UPLOADÉE RANGE EN `Années/Mois/` (règle de Matthieu)
+
+- 2 October 2026 : chaque photo (ou vidéo de téléphone) uploadée dans `pages/Photos/<appareil>/` se range dans `<AAAA>/<MM> <Month>/<fichier>`, par exemple `pages/Photos/Iphone-9qpx/2026/09/IMG_7632.JPG`. Année sur quatre chiffres, MOIS EN TOUTES LETTRES, nom anglais complet précédé de son numéro pour garder le tri du temps : `01 January`, `02 February`, `03 March`, `04 April`, `05 May`, `06 June`, `07 July`, `08 August`, `09 September`, `10 October`, `11 November`, `12 December`. (2 October 2026)
+- 2 October 2026 : la date vient de l'EXIF (`DateTimeOriginal`, sinon `CreateDate` pour une vidéo, sinon la date de modification du fichier en dernier recours, signalée dans le compte rendu). Jamais devinée depuis le nom. (2 October 2026)
+- 2 October 2026 : un lot d'au moins 100 fichiers passe par le protocole Git bulk du skill `zenray-upload`, jamais par une boucle REST. (2 October 2026)
+- 2 October 2026 : correction de Matthieu, le mois en chiffres seuls (`2026/09`) est refusé : mois en toutes lettres obligatoire. (2 October 2026)
+
+## 2 October 2026 : photos des invités d'un lien partagé, et upload trié par fichier
+
+- 2 October 2026 : tout lien de galerie partagée accepte des photos d'invités sans compte (route publique `POST /api/guest-upload`, `server/guestUploadCore.js`, client `src/guest/`). Règles : GitHub seul (aucun R2, aucune carte), aucune copie locale, rangement `<Prénom saisi>/…` dans le dossier source, jamais d'écrasement ni de suppression, 1024 photos par jour et par lien, 95 Mo par photo, aucune limite pour Matthieu. Détail et pièges : `docs/INDEX-ERREURS-FEATURES.md`, section du 2 October 2026. (2 October 2026)
+- 2 October 2026 : l'invité ne doit JAMAIS voir une erreur : reprises, lots coupés, parts divisées, pause hors-ligne. Ne pas ajouter de message d'échec bloquant côté client. Les appels GitHub passent par GraphQL (seau séparé) pour ne pas consommer les 5000 requêtes REST par heure de Matthieu. (2 October 2026)
+- 2 October 2026 : pour ranger en envoyant (un dossier et un titre par fichier), utiliser `scripts/upload-mapped-git.mjs <plan.json>` (100 % Git, `--plan` d'abord), jamais une boucle de runners. Détail dans le skill `zenray-upload`. (2 October 2026)
+
+- 2 October 2026 : une galerie partagée demande la vignette légère `thumbS` (520 px de large, `kind=thumb-s`), jamais la vignette standard de 300 Ko par case ; tout nouvel envoi (script du propriétaire ou invité) la produit, `scripts/backfill-grid-thumbs-git.mjs` rattrape l'existant. Une erreur de lecture passagère ne doit jamais s'afficher comme « Content not found » : seul un 404 prouve l'absence. Détail et mesures : `docs/INDEX-ERREURS-FEATURES.md`, section du 2 October 2026. (2 October 2026)
+
+## INCIDENT PAYÉ 12 October 2026 : MINIATURES DE FILMS NOIRES, UN POSTER DE FILM EST UNE URL JSDELIVR PUBLIQUE (RÈGLE DURE)
+
+- Symptôme (12 October 2026) : Create > Movies_Series affichait environ 190 tuiles noires avec l'icône d'image cassée.
+- Cause (12 October 2026) : `poster` passait par `/api/raw-proxy` (shard privé) ; `server/raw-proxy.js` exige `ZENRAY_RAW_TOKEN`, qui n'existe pas dans les secrets de production (503 partout). Détail et code : `docs/INDEX-ERREURS-FEATURES.md`, section du 12 October 2026.
+- Règle (12 October 2026) : tout poster de film vit dans le shard PUBLIC de ses segments et se sert par jsDelivr pinné sur un commit. L'empaqueteur le génère, le pousse et le VÉRIFIE avant d'écrire le manifeste ; un poster non vérifié n'entre jamais dans un `.media.json`.
+- Règle (12 October 2026) : une URL d'image mise en cache dans `localStorage` porte une clé VERSIONNÉE ; changer la forme d'une URL de poster impose de bumper la clé (`zrposter2:`, `zrfthumb2:`, `zrvcard6:`), sinon l'ancienne URL morte survit à la réparation.
+- Contrôle (12 October 2026) : `node scripts/CheckFilmPosters.mjs --manifests <clone zenray-data>` doit être vert avant d'annoncer qu'un lot de films est publié ; `--offline` ne teste que la forme des URL.
+- Interdit (12 October 2026) : dépendre d'un secret serveur sans le trouver dans `npx wrangler pages secret list --project-name zenray-progress` ; vérifier une miniature par le navigateur Claude (règle du 19 July 2026) : le vérificateur ci-dessus est la preuve.
+
+## RÈGLE DURE 12 October 2026 : TOUT UPLOAD COMMENCE PAR UNE PHASE DE RENOMMAGE PROPRE, VALIDÉE PAR MATTHIEU
+
+- Consigne (12 October 2026) : le nom local est le nom cloud, et il est propre (`Under The Open Sky.mkv`, `Akane Banashi S01E12.mkv`). Un fichier renommé pour le cloud est renommé aussi en local.
+- Ordre (12 October 2026) : `MediaRename.mjs plan` sur le dossier source, tableau Avant/Après présenté à Matthieu avec les sous-dossiers proposés (`Titre/Saison NN/`), attente de sa validation, `apply --approved`, upload, puis index mapping (`BuildFilmsIndexMapping.py`) et `check --upload-plan`.
+- Interdit (12 October 2026) : appliquer un renommage sans validation, renommer un fichier seulement dans le cloud, lancer un nouveau lot sans `ZR_REQUIRE_CLEAN_NAMES=1`. Détail : `docs/INDEX-ERREURS-FEATURES.md`, section du 12 October 2026 (renommage).
+
+## RÈGLES DURES 12 October 2026 : PISTES AUDIO NOMMÉES PAR LANGUE, SOUS-TITRES SANS RÉ-UPLOAD
+
+- Pistes audio (12 October 2026) : le nom d'une piste est sa langue (`日本語`, `Français`), jamais `audio_1` ni le titre technique de la source ; le menu Audio du lecteur est toujours visible. Détail : `docs/INDEX-ERREURS-FEATURES.md`, section du 12 October 2026 (noms des pistes audio).
+- Sous-titres manquants sur un film déjà déchargé (12 October 2026) : `scripts/AppendSubtitlesFromCloud.mjs` (restauration depuis le reçu cloud vérifié, extraction, ajout au manifeste, suppression de la copie), jamais un ré-upload du film.
+- Reçus de récupération (12 October 2026) : ils portent `manifestRecoverySha256` ; ne jamais remettre la comparaison du manifeste entier, qui interdit d'ajouter un poster, un nom audio, un sous-titre ou de renommer un film.
+
+## RÈGLE DURE 12 October 2026 : UN SEUL ÉCRIVAIN GIT À LA FOIS SUR zenray-data PENDANT UN LOT
+
+- Règle (12 October 2026) : avant toute écriture en masse dans zenray-data hors du worker (renommage, posters, noms audio, sous-titres), poser `PAUSE`, attendre l'arrêt des sous-processus, écrire, vérifier `0 0` entre `ManifestClone` et `origin/main`, retirer `PAUSE`. Symptôme d'un manquement : `already a rebase-merge directory` et des films abandonnés en série. Détail : `docs/INDEX-ERREURS-FEATURES.md`, section du 12 October 2026 (rebase suspendu).
+
+## RÈGLE DURE 12 October 2026 : TOUTE ÉCRITURE DANS LE CLONE DES MANIFESTES PREND LE VERROU, ET LE COMPTEUR N'EST ÉCRIT QU'AU COMMIT
+
+- Règle (12 October 2026) : tout script qui écrit, commite ou rebase dans `ManifestClone` tient ses opérations Git dans `withCloneLock(clone, label, fn)` (`scripts/lib/clone-lock.mjs`) ; le worker Python utilise `clone_lock()` (même protocole). Aucune écriture hors verrou, aucun `pull --rebase` hors verrou.
+- Règle (12 October 2026) : un fichier généré du clone (le compteur `pages/.zr-vid-drive.json`) n'est écrit que dans la section de commit, jamais pendant une poussée longue : sinon le clone est « sale » et refuse les autres écrivains.
+- Règle (12 October 2026) : redémarrer le worker par `RestartFilmWorker.sh` (processus enfants, ffmpeg, verrou et rebase compris), jamais par un `pkill` du seul Python.
+
+## Films : catégories, mode et questions (14 October 2026, décision de Matthieu)
+
+- Tout film ou épisode vit dans `pages/Anime_Movies_Series_Documentaries/{Anime,Movies,Series,Documentaries}`. Le dossier est décidé par le CODE, avant l'envoi, depuis `scripts/Films/WorkCategories.json` (lu par le worker Python, `scripts/lib/film-categories.mjs` et tous les scripts Films). Une œuvre n'a qu'un seul dossier. (14 October 2026)
+- Le mode est UN SEUL des deux : `stream` (défaut, une copie CMAF streamée, plus d'archive chiffrée) ou `archive` (explicite). Jamais archive + streaming par défaut. `scripts/Films/ProcessFilmsSequentially.py` : champ `mode` du plan, défaut `defaultMode` de la table. (14 October 2026)
+- Un fichier que la table ne connaît pas (une capture d'écran Houdini, une vidéo perso) n'est JAMAIS deviné : le worker ne l'envoie pas et écrit `NeedsCategory.json` avec la question ; il faut demander à Matthieu le dossier ET streaming ou archive, puis ajouter l'œuvre à la table. En cas de doute, poser la question. (14 October 2026)
+- Re-téléchargement d'un film streamé : la vidéo, chaque audio (nom de langue) et les sous-titres, en fichiers séparés (`src/lib/streamFiles.js`, bouton Télécharger de `VideoPlayer2.jsx`, CLI `scripts/DownloadStream.mjs`). (14 October 2026)
+- Preuve avant de décharger une source : `scripts/VerifyStreamingCloud.mjs` (recu `streaming-v1`) puis `UnloadVideoCloud.mjs`. (14 October 2026)

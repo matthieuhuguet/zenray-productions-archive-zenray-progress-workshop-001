@@ -1,0 +1,4 @@
+const a=`<!--zrm {"name":"cover frame","group":"Pochettes","props":[{"key":"radius","type":"number"},{"key":"shadow","type":"number"},{"key":"badge","type":"text"},{"key":"ratio","type":"choice"},{"key":"16","type":"9"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-x="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="15-cover-frame"><span class="sp-num">{{radius}}</span><span class="sp-num">{{shadow}}</span><span class="sp-badge">{{badge}}</span><span class="sp-ratio">{{ratio}}</span><span class="sp-16">{{16}}</span></div>
+`;export{a as default};

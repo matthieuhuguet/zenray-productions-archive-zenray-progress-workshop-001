@@ -1,0 +1,4 @@
+const a=`<!--zrm {"name":"queue panel","group":"Panneau","props":[{"key":"nowtitle","type":"text"},{"key":"nowartist","type":"text"},{"key":"next","type":"text"},{"key":"heading","type":"text"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-x="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="39-queue-panel"><span class="sp-nowtitle">{{nowtitle}}</span><span class="sp-nowartist">{{nowartist}}</span><span class="sp-next">{{next}}</span><span class="sp-heading">{{heading}}</span></div>
+`;export{a as default};

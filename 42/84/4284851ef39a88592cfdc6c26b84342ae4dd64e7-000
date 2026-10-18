@@ -1,0 +1,60 @@
+const e=`<!--zrm { "name": "Jeu d'icônes", "group": "Global", "reference": "FIGARO__01__HOME_TOP", "order": 0, "inPage": true } -->
+<style>
+/* PLANCHE D'ICÔNES EN SVG — principe posé par Matthieu le 2026-07-25.
+
+   Ce que ça remplace, et pourquoi c'est mieux.
+   Les icônes des thèmes précédents étaient approximées en CSS : trois traits en \`box-shadow\`
+   pour un menu, un \`clip-path\` en polygone pour un losange, un \`border-radius\` pour une loupe.
+   Ces bricolages ont trois défauts, et le troisième est le vrai :
+     1. ils sont approximatifs — un chevron en bordures n'a jamais le bon angle ;
+     2. ils ne se redimensionnent pas proprement — une épaisseur en pixels ne suit pas le corps ;
+     3. ils ne sont PAS RELEVABLES. On ne peut pas mesurer un \`box-shadow\` sur une capture. Un
+        tracé SVG, lui, se décalque : on lit la forme dans l'image et on la transcrit.
+   C'est le même principe que pour la police et la couleur — ce qui peut être relevé se relève.
+   Le surcroît de code est le prix de la précision, et c'est un bon prix.
+
+   Zéro réseau : les tracés sont inline, aucune requête, l'export PNG reste propre.
+   \`currentColor\` partout : une icône hérite de la couleur de son contexte, jamais l'inverse. */
+.zrm-icons{ position:absolute; width:0; height:0; overflow:hidden; }
+.zrm-i{ display:inline-block; width:1em; height:1em; vertical-align:-.125em;
+  fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+/* Épaisseur en unités du viewBox, donc proportionnelle : l'icône garde son poids optique à
+   toutes les tailles, ce qu'une bordure en pixels ne fait jamais. */
+.zrm-i[data-w="thin"]{ stroke-width:1.1; }
+.zrm-i[data-w="bold"]{ stroke-width:2.2; }
+.zrm-i[data-fill]{ fill:currentColor; stroke:none; }
+</style>
+<svg class="zrm-icons" aria-hidden="true" focusable="false"><defs>
+  <symbol id="zi-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+  <symbol id="zi-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.4 15.4 21 21"/></symbol>
+  <symbol id="zi-close" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></symbol>
+  <symbol id="zi-chevron-down" viewBox="0 0 24 24"><path d="m5 9 7 7 7-7"/></symbol>
+  <symbol id="zi-chevron-right" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+  <symbol id="zi-arrow-right" viewBox="0 0 24 24"><path d="M3 12h17M14 6l6 6-6 6"/></symbol>
+  <symbol id="zi-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6.6V12l3.6 2.2"/></symbol>
+  <symbol id="zi-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 8.4 16 12l-6 3.6z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="zi-camera" viewBox="0 0 24 24"><path d="M3 8.5h4l1.6-2.2h6.8L17 8.5h4v11H3z"/><circle cx="12" cy="13.6" r="3.6"/></symbol>
+  <symbol id="zi-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1.4"/><path d="m3.6 6.4 8.4 6.4 8.4-6.4"/></symbol>
+  <symbol id="zi-bookmark" viewBox="0 0 24 24"><path d="M6.5 3.5h11v17l-5.5-4-5.5 4z"/></symbol>
+  <symbol id="zi-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="1.6"/><path d="M8.2 10.5V7.8a3.8 3.8 0 0 1 7.6 0v2.7"/></symbol>
+  <!-- Le point « en direct » : plein, sans contour. Une pastille se dessine, elle ne se borde pas. -->
+  <symbol id="zi-live" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="zi-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z"/></symbol>
+</defs></svg>
+<p style="font-family:var(--f-meta);font-size:.8em;color:var(--zrm-navy);display:flex;gap:.9em;flex-wrap:wrap;align-items:center">
+  <svg class="zrm-i"><use href="#zi-menu"/></svg>
+  <svg class="zrm-i"><use href="#zi-search"/></svg>
+  <svg class="zrm-i"><use href="#zi-close"/></svg>
+  <svg class="zrm-i"><use href="#zi-chevron-down"/></svg>
+  <svg class="zrm-i"><use href="#zi-chevron-right"/></svg>
+  <svg class="zrm-i"><use href="#zi-arrow-right"/></svg>
+  <svg class="zrm-i"><use href="#zi-clock"/></svg>
+  <svg class="zrm-i"><use href="#zi-play"/></svg>
+  <svg class="zrm-i"><use href="#zi-camera"/></svg>
+  <svg class="zrm-i"><use href="#zi-mail"/></svg>
+  <svg class="zrm-i"><use href="#zi-bookmark"/></svg>
+  <svg class="zrm-i"><use href="#zi-lock"/></svg>
+  <svg class="zrm-i" style="color:var(--zrm-red)"><use href="#zi-live"/></svg>
+  <svg class="zrm-i"><use href="#zi-globe"/></svg>
+</p>
+`;export{e as default};

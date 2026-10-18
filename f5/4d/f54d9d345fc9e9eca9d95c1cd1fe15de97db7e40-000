@@ -1,0 +1,36 @@
+import { afterEach, describe, expect, it } from 'vitest'
+import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
+import os from 'node:os'
+import path from 'node:path'
+import { publishRestoreWithoutOverwrite, restorationCandidate } from './safe-restore.mjs'
+
+let root = ''
+afterEach(async () => { if (root) await rm(root, { recursive: true, force: true }); root = '' })
+
+describe('publication sûre d’une restauration', () => {
+  // 3 October 2026, 09:34 CEST: an exact managed identity never becomes an automatically renamed sibling.
+  it('rejects an exact destination collision while preserving both files', async () => {
+    root = await mkdtemp(path.join(os.tmpdir(), 'zrc-exact-restore-'))
+    const target = path.join(root, 'Asset.hda'), temporary = path.join(root, '.Asset.part')
+    await writeFile(target, 'working edit'); await writeFile(temporary, 'archived definition')
+    await expect(publishRestoreWithoutOverwrite(temporary, target, { onConflict: 'reject' })).rejects.toMatchObject({ code: 'EEXIST' })
+    expect(await readFile(target, 'utf8')).toBe('working edit')
+    expect(await readFile(temporary, 'utf8')).toBe('archived definition')
+    await expect(readFile(path.join(root, 'Asset (2).hda'))).rejects.toMatchObject({ code: 'ENOENT' })
+  })
+  it('nomme les occurrences sans perdre le nom ni l’extension', () => {
+    expect(restorationCandidate('/tmp/archive.tar.gz', 2)).toBe('/tmp/archive.tar (2).gz')
+  })
+
+  it('préserve un fichier existant et publie sous le premier nom libre', async () => {
+    root = await mkdtemp(path.join(os.tmpdir(), 'zrc-restore-'))
+    const cible = path.join(root, 'photo.jpg')
+    const temporaire = path.join(root, '.photo.part')
+    await writeFile(cible, 'ancien')
+    await writeFile(temporaire, 'nouveau')
+    const publie = await publishRestoreWithoutOverwrite(temporaire, cible)
+    expect(publie).toEqual({ path: path.join(root, 'photo (2).jpg'), temporaryRemoved: true })
+    expect(await readFile(cible, 'utf8')).toBe('ancien')
+    expect(await readFile(publie.path, 'utf8')).toBe('nouveau')
+  })
+})

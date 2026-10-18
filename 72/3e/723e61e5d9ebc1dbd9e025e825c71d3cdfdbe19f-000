@@ -1,0 +1,4 @@
+const a=`<!--zrm {"name":"nowplaying card","group":"Panneau","props":[{"key":"title","type":"text"},{"key":"artist","type":"text"},{"key":"covera","type":"color"},{"key":"coverb","type":"color"},{"key":"liked","type":"bool"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-liked="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="36-nowplaying-card"><span class="sp-title">{{title}}</span><span class="sp-artist">{{artist}}</span><i class="sp-swatch" style="background:{{covera}}"></i><i class="sp-swatch" style="background:{{coverb}}"></i><i class="sp-flag" data-liked="{{liked}}"></i></div>
+`;export{a as default};

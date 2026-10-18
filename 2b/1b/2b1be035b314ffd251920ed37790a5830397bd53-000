@@ -1,0 +1,18 @@
+const e=`<!--zrm { "name": "Titre", "group": "Éditorial", "reference": "SUN__02__HOME_MID", "order": 11, "inPage": false } -->
+<style>
+/* RELEVÉ sur SUN__02__HOME_MID.
+   Rajdhani 700, mesurée à 31 px d'encre pour un corps de 12 : rapport 2,6, le plus élevé des
+   cinq quotidiens. Interlettrage NÉGATIF et interlignage très serré (1,02) : le tabloïd
+   compacte ses titres jusqu'à en faire un bloc, c'est le bloc qui crie, pas la lettre. */
+.zrm-headline{ margin:0; font-family:var(--f-display); font-weight:700;
+  line-height:1.02; letter-spacing:-.018em; color:var(--zrm-ink); text-transform:none; }
+.zrm-headline[data-size="xl"]{ font-size:var(--s-title); }
+.zrm-headline[data-size="l"]{ font-size:1.86em; }
+.zrm-headline[data-size="m"]{ font-size:1.3em; }
+.zrm-headline[data-size="s"]{ font-size:1.05em; line-height:1.16; }
+/* Le titre en réserve sur aplat rouge : c'est la signature de la une du Sun. */
+.zrm-headline[data-invert]{ background:var(--zrm-red); color:#fff; padding:.06em .22em;
+  box-decoration-break:clone; -webkit-box-decoration-break:clone; }
+</style>
+<h3 class="zrm-headline" data-size="l">Deux « ogres » de feu dévorent tout sur leur passage</h3>
+`;export{e as default};

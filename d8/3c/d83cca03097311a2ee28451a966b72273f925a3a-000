@@ -1,0 +1,93 @@
+// DÉCHARGER UN FICHIER DU MAC UNE FOIS QU'IL EST SUR LE DRIVE (clic droit dans le Finder).
+//
+// LA RÈGLE, ET ELLE NE SE NÉGOCIE PAS : on ne libère de la place que sur PREUVE. Pour chaque fichier, on
+// recalcule son empreinte sha256 localement, on va lire son manifeste sur le drive, et on ne touche au fichier
+// que si les deux empreintes coïncident au caractère près. Un manifeste absent, une empreinte différente, un
+// réseau muet : on ne supprime rien et on le dit. Le pire scénario d'un outil comme celui-ci serait de libérer
+// de la place en s'appuyant sur une croyance.
+//
+// ET MÊME LÀ, ON N'EFFACE PAS : le fichier part à la CORBEILLE. Elle est faite pour ça, elle laisse un dernier
+// recours, et vider la corbeille reste un geste de Matthieu, jamais du programme.
+//
+// Usage : node offload.mjs <fichier|dossier> [...]      (appelé par l'action rapide du Finder)
+import { createHash } from 'node:crypto'
+import { createReadStream } from 'node:fs'
+import { readFile, readdir, stat } from 'node:fs/promises'
+import { execFile } from 'node:child_process'
+import { homedir } from 'node:os'
+import path from 'node:path'
+
+const CONFIG = path.join(homedir(), 'Library', 'Application Support', 'ZenRayCloud', 'config.json')
+// ON LIT LE MANIFESTE DIRECTEMENT DANS zenray-data, PAR `gh`. Passer par l'API du site exigerait le secret à six
+// chiffres, donc une copie de plus d'un secret à protéger, alors que `gh` est déjà authentifié sur cette machine
+// et sert de porte d'entrée à tout le reste. Cela rend aussi le déchargement indépendant de l'état du site.
+const DEPOT = 'matthieuhuguet/zenray-data'
+
+const exec = (cmd, args) => new Promise((res) => execFile(cmd, args, { encoding: 'utf8', maxBuffer: 1 << 24 }, (e, o) => res(e ? '' : o)))
+const sha256 = (p) => new Promise((res, rej) => {
+  const h = createHash('sha256'); const f = createReadStream(p, { highWaterMark: 4 << 20 })
+  f.on('data', (c) => h.update(c)); f.on('end', () => res(h.digest('hex'))); f.on('error', rej)
+})
+
+async function notifier(titre, texte) {
+  const echapper = (s) => String(s).replace(/["\\]/g, '\\$&')
+  await exec('/usr/bin/osascript', ['-e', `display notification "${echapper(texte)}" with title "${echapper(titre)}"`])
+}
+
+/** Descend récursivement : un clic droit sur un dossier décharge tout ce qu'il contient, fichier par fichier. */
+async function lister(cible) {
+  const s = await stat(cible)
+  if (s.isFile()) return [cible]
+  if (!s.isDirectory()) return []
+  const out = []
+  for (const e of await readdir(cible, { withFileTypes: true })) {
+    if (e.name === '.DS_Store' || e.name.startsWith('._')) continue
+    out.push(...await lister(path.join(cible, e.name)))
+  }
+  return out
+}
+
+async function main() {
+  const cibles = process.argv.slice(2).filter(Boolean)
+  if (!cibles.length) return
+
+  let config
+  try { config = JSON.parse(await readFile(CONFIG, 'utf8')) } catch {
+    return notifier('ZenRayCloud', "configuration introuvable — l'app n'a jamais été lancée ?")
+  }
+  const gh = (await exec('/bin/zsh', ['-ilc', 'command -v gh'])).trim() || '/opt/homebrew/bin/gh'
+
+  const fichiers = (await Promise.all(cibles.map(lister))).flat()
+  const dechargeables = []
+  const refuses = []
+
+  for (const abs of fichiers) {
+    const dossier = (config.folders || []).find((f) => abs === f.src || abs.startsWith(f.src + '/'))
+    if (!dossier) { refuses.push([abs, 'hors des dossiers surveillés']); continue }
+    const rel = abs.slice(dossier.src.length + 1)
+    const chemin = `${dossier.dest}/${rel}.file.json`
+    let manifeste = null
+    try {
+      const brut = await exec(gh, ['api', `repos/${DEPOT}/contents/${chemin}`, '--jq', '.content'])
+      if (brut.trim()) manifeste = JSON.parse(Buffer.from(brut.replace(/\s/g, ''), 'base64').toString('utf8'))
+    } catch { /* manifeste absent ou réseau muet : on refusera, c'est le comportement voulu */ }
+    if (!manifeste) { refuses.push([abs, 'pas encore sur le drive']); continue }
+    if (manifeste.deleted) { refuses.push([abs, 'marqué supprimé sur le drive']); continue }
+    const local = await sha256(abs).catch(() => null)
+    if (!local || local !== manifeste.sha256) { refuses.push([abs, 'empreinte différente de celle du drive']); continue }
+    dechargeables.push(abs)
+  }
+
+  if (dechargeables.length) {
+    // Corbeille par le Finder : c'est lui qui garde le chemin d'origine, donc « Remettre » fonctionne.
+    const liste = dechargeables.map((p) => `POSIX file "${p.replace(/"/g, '\\"')}"`).join(', ')
+    await exec('/usr/bin/osascript', ['-e', `tell application "Finder" to delete { ${liste} }`])
+  }
+
+  const titre = 'ZenRayCloud'
+  if (dechargeables.length && !refuses.length) await notifier(titre, `${dechargeables.length} fichier(s) mis à la corbeille, déjà sauvegardés.`)
+  else if (dechargeables.length) await notifier(titre, `${dechargeables.length} déchargé(s), ${refuses.length} conservé(s) : ${refuses[0][1]}.`)
+  else await notifier(titre, `Rien déchargé. ${refuses.length ? refuses[0][1] : 'aucun fichier'}.`)
+}
+
+main().catch((e) => notifier('ZenRayCloud', 'échec : ' + (e.message || e)))

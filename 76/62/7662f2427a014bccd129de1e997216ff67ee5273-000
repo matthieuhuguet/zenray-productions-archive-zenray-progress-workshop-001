@@ -1,0 +1,37 @@
+// PONT DE SÉCURITÉ — le rendu n'a JAMAIS accès à Node. Il ne voit que ces quelques fonctions nommées, qui
+// sont la totalité de ce que l'interface peut demander au système. `contextIsolation` reste actif.
+import { contextBridge, ipcRenderer } from 'electron'
+import type { AppState, WatchedFolder } from './types'
+
+const api = {
+  get: (): Promise<AppState> => ipcRenderer.invoke('zrc:get'),
+  onJetons: (cb: (j: Record<string, string>) => void) => {
+    const h = (_ev: unknown, j: Record<string, string>) => cb(j)
+    ipcRenderer.on('zrc:jetons', h)
+    return () => { ipcRenderer.removeListener('zrc:jetons', h) }
+  },
+  onState: (cb: (e: AppState) => void) => {
+    const h = (_ev: unknown, e: AppState) => cb(e)
+    ipcRenderer.on('zrc:state', h)
+    return () => { ipcRenderer.removeListener('zrc:state', h) }
+  },
+  addFolder: (): Promise<AppState> => ipcRenderer.invoke('zrc:add'),
+  removeFolder: (id: string): Promise<AppState> => ipcRenderer.invoke('zrc:remove', id),
+  updateFolder: (id: string, p: Partial<WatchedFolder>): Promise<AppState> => ipcRenderer.invoke('zrc:update', id, p),
+  sync: (id: string): Promise<AppState> => ipcRenderer.invoke('zrc:sync', id),
+  restaurer: (id: string, rel: string, version: number | null = null): Promise<{ ok: boolean; message: string }> =>
+    ipcRenderer.invoke('zrc:restaurer', id, rel, version),
+  geler: (id: string, geler: boolean): Promise<AppState> => ipcRenderer.invoke('zrc:geler', id, geler),
+  etatDrive: (id: string): Promise<{ ok: boolean; message: string }> => ipcRenderer.invoke('zrc:etatDrive', id),
+  cancel: (id: string): Promise<AppState> => ipcRenderer.invoke('zrc:cancel', id),
+  syncAll: (): Promise<AppState> => ipcRenderer.invoke('zrc:syncAll'),
+  setPrefs: (p: Record<string, unknown>): Promise<AppState> => ipcRenderer.invoke('zrc:prefs', p),
+  revealLog: (id: string) => ipcRenderer.invoke('zrc:reveal', id),
+  openAtelier: (chemin: string) => ipcRenderer.invoke('zrc:openAtelier', chemin),
+  openSrc: (id: string) => ipcRenderer.invoke('zrc:openSrc', id),
+  openDrive: (id: string) => ipcRenderer.invoke('zrc:openDrive', id),
+  retryToken: (): Promise<AppState> => ipcRenderer.invoke('zrc:retryToken'),
+}
+
+contextBridge.exposeInMainWorld('zrc', api)
+export type ZrcApi = typeof api

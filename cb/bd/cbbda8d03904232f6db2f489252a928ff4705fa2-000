@@ -1,0 +1,8 @@
+import type { AppState } from '../electron/types'
+
+/** Les mises à jour de progression ne transportent pas le catalogue de plusieurs mégaoctets. Le rendu garde
+ *  le dernier catalogue reçu jusqu'à ce qu'une fin de passage en fournisse un nouveau. */
+export function fusionnerEtat(precedent: AppState | null, suivant: AppState): AppState {
+  if (!precedent || Object.keys(suivant.fiches).length) return suivant
+  return { ...suivant, fiches: precedent.fiches }
+}

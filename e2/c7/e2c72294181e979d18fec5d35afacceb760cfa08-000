@@ -1,0 +1,32 @@
+const e=`<!--zrm { "name": "Bandeau d'état", "group": "Global", "reference": "DS1__IIG__04", "order": 15 } -->
+<style>
+/* BANDEAU D'ÉTAT — sept écrans sur cinquante. Il occupe toute la largeur du bas et mêle deux
+   langages : des JAUGES (continu) et des COMPTEURS (discret). Les mélanger est ce qui fait
+   « tableau de bord » plutôt que « barre de progression ».
+   La jauge n'est pas un rectangle plein : elle est fendue en segments fins, et la fente vaut
+   1 px pour 6 px de segment. Sans les fentes, la barre paraît liquide ; avec, elle paraît
+   instrumentée. Les valeurs viennent du texte réel — nombre de mots, minutes de lecture. */
+.zrm-status{ display:flex; align-items:center; gap:calc(var(--u)*1.4);
+  padding:calc(var(--u)*.7) calc(var(--u)*1.4); background:var(--zrm-veil-up); }
+.zrm-gauge{ display:flex; flex-direction:column; gap:.3em; min-width:9em; }
+.zrm-gauge-label{ font-family:var(--f-mono); font-size:.54em; letter-spacing:var(--tr-label);
+  text-transform:uppercase; color:var(--zrm-ink-faint); }
+.zrm-gauge-track{ position:relative; height:.5em; background:rgba(4,12,20,.6); overflow:hidden; }
+.zrm-gauge-fill{ position:absolute; inset:0 auto 0 0; background:var(--zrm-cyan);
+  box-shadow:0 0 .7em rgba(127,212,255,.6);
+  -webkit-mask-image:repeating-linear-gradient(90deg,#000 0 6px,transparent 6px 7px);
+  mask-image:repeating-linear-gradient(90deg,#000 0 6px,transparent 6px 7px); }
+.zrm-gauge-fill.is-warn{ background:var(--zrm-amber); box-shadow:0 0 .7em rgba(232,163,61,.6); }
+.zrm-count{ display:flex; align-items:baseline; gap:.35em; font-family:var(--f-mono);
+  font-size:.78em; color:var(--zrm-ink); }
+.zrm-count small{ font-size:.62em; color:var(--zrm-ink-faint); letter-spacing:var(--tr-label); }
+</style>
+<div class="zrm-status">
+  <div class="zrm-gauge"><span class="zrm-gauge-label">Lecture</span>
+    <div class="zrm-gauge-track"><div class="zrm-gauge-fill" style="right:22%"></div></div></div>
+  <div class="zrm-gauge"><span class="zrm-gauge-label">Charge</span>
+    <div class="zrm-gauge-track"><div class="zrm-gauge-fill is-warn" style="right:48%"></div></div></div>
+  <span class="zrm-count">{{words}}<small>mots</small></span>
+  <span class="zrm-count">{{readingMinutes}}<small>min</small></span>
+</div>
+`;export{e as default};

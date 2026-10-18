@@ -1,0 +1,16 @@
+const e=`<!--zrm { "name": "Titre", "group": "Éditorial", "reference": "LM__ARTICLE__TOP__DESKTOP__11", "order": 11, "inPage": false } -->
+<style>
+/* RELEVÉ sur LM__ARTICLE__TOP__DESKTOP__11.
+   Libre Baskerville 700, mesurée à 39 px de hauteur d'encre pour un corps de 18 : rapport 2,15.
+   Sa chasse est LARGE — environ 8 % de plus qu'une serif courante à corps égal — donc le titre
+   occupe plus de lignes que chez les autres quotidiens, et c'est voulu : c'est ce qui donne au
+   Monde son allure posée. */
+.zrm-headline{ margin:0; font-family:var(--f-display); font-weight:700;
+  line-height:1.2; letter-spacing:-.014em; color:var(--zrm-ink); }
+.zrm-headline[data-size="xl"]{ font-size:var(--s-title); }
+.zrm-headline[data-size="l"]{ font-size:1.5em; }
+.zrm-headline[data-size="m"]{ font-size:1.14em; }
+.zrm-headline[data-size="s"]{ font-size:1em; line-height:1.32; }
+</style>
+<h3 class="zrm-headline" data-size="l">Deux « ogres » de feu dévorent tout sur leur passage</h3>
+`;export{e as default};

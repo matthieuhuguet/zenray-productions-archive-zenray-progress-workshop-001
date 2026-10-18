@@ -1,0 +1,64 @@
+const e=`<!--zrm { "name": "Écran de bilan", "group": "Récit", "reference": "DS1__IIG__18", "order": 16 } -->
+<style>
+/* ÉCRAN DE BILAN — la récompense. Deux mécanismes le distinguent d'un tableau ordinaire :
+   1. les lignes dont l'objectif est ATTEINT passent en JAUNE, pas en vert. Le jaune est la
+      couleur de la réussite dans ce jeu ; le vert appartient aux graphes de progression.
+   2. la note globale n'est pas un chiffre mais une BARRE qui se termine par un médaillon gravé.
+      La barre est la progression, le médaillon est le verdict — deux choses, deux formes. */
+.zrm-results{ padding:calc(var(--u)*1.2) calc(var(--u)*1.4); font-family:var(--f-meta); font-size:.78em; }
+.zrm-res-order{ display:flex; align-items:center; gap:.6em; margin-bottom:.8em; color:var(--zrm-ink); }
+.zrm-res-order .zrm-g{ width:1.4em; height:1.4em; color:var(--zrm-ink); }
+.zrm-res-order b{ margin-left:auto; font-family:var(--f-mono); font-weight:400; color:var(--zrm-ink-dim); }
+.zrm-res-head{ display:flex; font-size:.72em; letter-spacing:var(--tr-label);
+  text-transform:uppercase; color:var(--zrm-ink-faint); border-bottom:1px solid rgba(255,255,255,.14);
+  padding-bottom:.2em; margin-bottom:.3em; }
+.zrm-res-head span:first-child{ flex:1 1 auto; }
+.zrm-res-line{ display:flex; align-items:center; gap:.6em; padding:.24em .4em;
+  color:var(--zrm-ink-dim); }
+.zrm-res-line span:first-child{ flex:1 1 auto; }
+.zrm-res-line u{ text-decoration:none; font-family:var(--f-mono); flex:0 0 2.6em; text-align:right; }
+.zrm-res-line b{ flex:0 0 3.4em; text-align:right; font-family:var(--f-mono); font-weight:400;
+  background:rgba(43,105,156,.7); color:#fff; padding:.05em .4em; }
+/* L'objectif atteint : encadré JAUNE, pas vert. */
+.zrm-res-line[data-hit]{ color:var(--zrm-ink); box-shadow:inset 0 0 0 1px rgba(214,190,60,.85); }
+.zrm-res-section{ margin-top:.7em; color:var(--zrm-cyan); font-size:.88em;
+  border-bottom:1px solid rgba(127,212,255,.3); padding-bottom:.15em; }
+.zrm-res-rating{ display:flex; align-items:center; gap:1em; margin-top:1.4em; }
+.zrm-res-bar{ position:relative; flex:1 1 auto; height:1.5em;
+  background:linear-gradient(90deg, rgba(180,160,40,.15), rgba(214,190,60,.85));
+  clip-path:polygon(0 0, 100% 0, calc(100% - .75em) 50%, 100% 100%, 0 100%); }
+.zrm-res-bar span{ position:absolute; left:.6em; top:50%; transform:translateY(-50%);
+  font-size:.8em; color:var(--zrm-ink); }
+/* Le médaillon : deux cercles concentriques et une lettre gravée. */
+.zrm-medal{ position:relative; flex:0 0 4.2em; height:4.2em; display:grid; place-items:center;
+  color:#e7cf5a; }
+.zrm-medal svg{ position:absolute; inset:0; width:100%; height:100%; }
+.zrm-medal b{ position:relative; font-family:var(--f-display); font-weight:300; font-size:1.9em;
+  color:#f2e08a; text-shadow:0 0 .5em rgba(231,207,90,.7); }
+.zrm-res-gains{ display:flex; gap:1.4em; margin-top:1em; font-family:var(--f-mono); }
+.zrm-res-gains div{ color:var(--zrm-ink); }
+.zrm-res-gains small{ display:block; font-family:var(--f-meta); font-size:.7em;
+  letter-spacing:var(--tr-label); text-transform:uppercase; color:var(--zrm-ink-faint); }
+</style>
+<div class="zrm-results">
+  <div class="zrm-res-order"><svg class="zrm-g"><use href="#g-waypoint"/></svg>
+    [Order No. 1] Smart Drug Delivery<b>#1/1</b></div>
+  <div class="zrm-res-head"><span>Details</span><span>Likes</span></div>
+  <div class="zrm-res-line"><span>Delivery Completed!</span><u></u><b>28</b></div>
+  <div class="zrm-res-line" data-hit><span>Quantity: 1 or More</span><u>4</u><b>120</b></div>
+  <div class="zrm-res-line"><span>Average Cargo Damage</span><u>0%</u><b>36</b></div>
+  <p class="zrm-res-section">Additional Likes</p>
+  <div class="zrm-res-line"><span>Distance Traveled</span><u>1183.9 m</u></div>
+  <div class="zrm-res-rating">
+    <div class="zrm-res-bar"><span>Overall Rating</span></div>
+    <div class="zrm-medal">
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+        <circle cx="24" cy="24" r="21"/><circle cx="24" cy="24" r="17.5" stroke-width=".8"/>
+      </svg><b>S</b>
+    </div>
+  </div>
+  <div class="zrm-res-gains">
+    <div>+185<small>Earned</small></div><div>0185<small>Likes</small></div>
+  </div>
+</div>
+`;export{e as default};

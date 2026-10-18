@@ -1,0 +1,41 @@
+const e=`<!--zrm { "name": "Marqueurs de monde", "group": "Scène", "reference": "DS1__IIG__08, DS2__GUID__21, __23, __24", "order": 18 } -->
+<style>
+/* MARQUEURS DE MONDE — relevés sur sept captures. Ce sont les seuls éléments d'interface qui
+   vivent DANS la scène et non par-dessus : ils ont une position en trois dimensions, ils se
+   rapprochent, ils se cachent derrière le relief.
+   Trois formes, et la différence est fonctionnelle :
+     HEXAGONE À QUEUE   un objet interactif précis. La queue DÉSIGNE, comme un trait de rappel.
+     LOSANGE À LETTRE   un point de passage. La lettre l'identifie dans une série.
+     BOUSSOLE           une direction et une distance, ancrée au bord de l'écran, pas au monde.
+   Tous portent une ombre portée forte : sur un ciel clair, un trait cyan sans ombre disparaît. */
+.zrm-markers{ position:relative; display:flex; align-items:center; gap:calc(var(--u)*2.4);
+  padding:calc(var(--u)*1.6) calc(var(--u)*1.4); font-family:var(--f-meta); }
+
+.zrm-hex{ position:relative; padding-bottom:2.2em; }
+.zrm-hex-body{ display:inline-flex; align-items:center; padding:.35em 1.4em;
+  border:1px solid rgba(190,230,255,.85); color:var(--zrm-ink); font-size:.72em;
+  letter-spacing:var(--tr-label); text-transform:uppercase;
+  clip-path:polygon(1.1em 0, calc(100% - 1.1em) 0, 100% 50%, calc(100% - 1.1em) 100%, 1.1em 100%, 0 50%);
+  background:rgba(20,60,90,.4);
+  filter:drop-shadow(0 0 .5em rgba(90,190,255,.55)); }
+/* La QUEUE : un trait vertical qui descend vers l'objet, avec un petit chevron au bout. */
+.zrm-hex::after{ content:''; position:absolute; left:50%; bottom:0; width:1px; height:2em;
+  background:linear-gradient(180deg, rgba(190,230,255,.9), rgba(190,230,255,.15));
+  box-shadow:0 0 .4em rgba(90,190,255,.6); }
+
+.zrm-diamond{ position:relative; width:2.2em; height:2.2em; display:grid; place-items:center;
+  border:1px solid rgba(190,230,255,.8); transform:rotate(45deg);
+  filter:drop-shadow(0 0 .4em rgba(90,190,255,.6)); }
+.zrm-diamond b{ transform:rotate(-45deg); font-size:.7em; color:var(--zrm-ink); }
+
+.zrm-compass{ display:flex; align-items:center; gap:.5em; color:var(--zrm-ink); }
+.zrm-compass .zrm-g{ width:2em; height:2em; color:var(--zrm-cyan);
+  filter:drop-shadow(0 0 .4em rgba(127,212,255,.7)); }
+.zrm-compass b{ font-family:var(--f-mono); font-size:.8em; font-weight:400; }
+</style>
+<div class="zrm-markers">
+  <div class="zrm-hex"><span class="zrm-hex-body">Access Terminal</span></div>
+  <div class="zrm-diamond"><b>C</b></div>
+  <div class="zrm-compass"><svg class="zrm-g"><use href="#g-scan"/></svg><b>505 m</b></div>
+</div>
+`;export{e as default};

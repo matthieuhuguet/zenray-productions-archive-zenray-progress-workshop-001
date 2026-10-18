@@ -1,0 +1,15 @@
+import { describe, expect, it } from 'vitest'
+import { TamponLignes } from './line-buffer'
+
+describe('tampon de lignes moteur', () => {
+  it('reconstruit les fragments et garde la dernière ligne sans retour', () => {
+    const lignes: string[] = []
+    const tampon = new TamponLignes((ligne) => lignes.push(ligne))
+    tampon.ajouter('{"zr":1,"ev":"pro')
+    tampon.ajouter('gress"}\ntexte\r\n{"zr":1,"ev":"done"}')
+    expect(lignes).toEqual(['{"zr":1,"ev":"progress"}', 'texte'])
+    tampon.terminer()
+    tampon.terminer()
+    expect(lignes).toEqual(['{"zr":1,"ev":"progress"}', 'texte', '{"zr":1,"ev":"done"}'])
+  })
+})

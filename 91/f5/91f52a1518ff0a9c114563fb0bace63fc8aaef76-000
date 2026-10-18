@@ -1,0 +1,20 @@
+import { describe, expect, it } from 'vitest'
+import { compareManifestInventory, manifestPathFromCard } from './drive-state.mjs'
+
+describe('comparaison du catalogue avec le drive', () => {
+  it('garde le repli historique des anciennes fiches chunkées', () => {
+    expect(manifestPathFromCard({ rel: 'archive.zip' })).toBe('archive.zip.file.json')
+  })
+
+  it('compare les chemins exacts des trois familles de manifestes', () => {
+    const cards = [
+      { rel: 'archive.zip', manifeste: 'archive.zip.file.json' },
+      { rel: 'photo.jpg', manifeste: 'photo.jpg.img.json' },
+      { rel: 'musique.wav', manifeste: 'musique.wav.x7k2.media.json' },
+    ]
+    const remote = new Set(['archive.zip.file.json', 'musique.wav.x7k2.media.json', 'nouveau.mp4.media.json'])
+    expect(compareManifestInventory(cards, remote)).toMatchObject({
+      missing: ['photo.jpg'], remoteOnly: ['nouveau.mp4.media.json'],
+    })
+  })
+})

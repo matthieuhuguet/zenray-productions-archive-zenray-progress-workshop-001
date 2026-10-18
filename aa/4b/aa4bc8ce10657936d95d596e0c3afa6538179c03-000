@@ -1,0 +1,20 @@
+import { describe, expect, it } from 'vitest'
+import { fusionnerEtat } from './state-update'
+import type { AppState } from '../electron/types'
+
+const etat = (fiches: AppState['fiches'], currentId: string | null): AppState => ({
+  prefs: {} as AppState['prefs'], folders: [], runtime: {}, queue: [], currentId,
+  tokenOk: true, tokenError: null, fiches,
+})
+
+describe('mise à jour légère de l’interface', () => {
+  it('garde le catalogue pendant la progression puis accepte sa nouvelle version', () => {
+    const initial = etat({ downloads: [{ rel: 'a', taille: 1 } as any] }, null)
+    const progression = fusionnerEtat(initial, etat({}, 'downloads'))
+    expect(progression.currentId).toBe('downloads')
+    expect(progression.fiches).toBe(initial.fiches)
+
+    const final = etat({ downloads: [{ rel: 'b', taille: 2 } as any] }, null)
+    expect(fusionnerEtat(progression, final).fiches).toBe(final.fiches)
+  })
+})

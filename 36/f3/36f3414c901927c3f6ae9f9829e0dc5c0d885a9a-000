@@ -1,0 +1,4 @@
+const e=`<!--zrm {"name":"artist header","group":"En-tête","props":[{"key":"name","type":"text"},{"key":"listeners","type":"text"},{"key":"verified","type":"bool"},{"key":"topcolor","type":"color"},{"key":"bottomcolor","type":"color"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-verified="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="18-artist-header"><span class="sp-name">{{name}}</span><span class="sp-listeners">{{listeners}}</span><i class="sp-flag" data-verified="{{verified}}"></i><i class="sp-swatch" style="background:{{topcolor}}"></i><i class="sp-swatch" style="background:{{bottomcolor}}"></i></div>
+`;export{e as default};

@@ -1,0 +1,11 @@
+const e=`<!--zrm { "name": "Encart infolettre", "group": "Modules", "reference": "LIBE__03__HOME_FOOTER", "order": 24, "inPage": false } -->
+<style>
+.zrm-news{ background:var(--zrm-night); color:#fff; padding:calc(var(--u)*1.1) calc(var(--u)*1.2); }
+.zrm-news b{ display:block; font-family:var(--f-display); font-weight:400; font-size:1.4em;
+  letter-spacing:-.004em; margin-bottom:.35em; }
+.zrm-news p{ margin:0 0 calc(var(--u)*.7); font-family:var(--f-body); font-size:.95em; opacity:.85; }
+.zrm-news span{ background:var(--zrm-yellow); color:var(--zrm-night); padding:.5em 1.2em;
+  font-family:var(--f-meta); font-size:.68em; font-weight:600; }
+</style>
+<section class="zrm-news"><b>Nos infolettres</b><p>Chaque matin, l’essentiel de l’actualité.</p><span>S’inscrire</span></section>
+`;export{e as default};

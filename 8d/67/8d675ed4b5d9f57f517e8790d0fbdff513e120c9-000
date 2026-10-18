@@ -1,0 +1,4 @@
+const s=`<!--zrm {"name":"player progress","group":"Lecteur","props":[{"key":"elapsed","type":"text"},{"key":"duration","type":"text"},{"key":"progress","type":"number"},{"key":"accent","type":"color"},{"key":"thickness","type":"number"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-x="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="45-player-progress"><span class="sp-elapsed">{{elapsed}}</span><span class="sp-duration">{{duration}}</span><span class="sp-num">{{progress}}</span><i class="sp-swatch" style="background:{{accent}}"></i><span class="sp-num">{{thickness}}</span></div>
+`;export{s as default};

@@ -1,0 +1,57 @@
+const e=`<!--zrm { "name": "Écrans d'ouverture", "group": "Écran", "reference": "DS1__IIG__03, __16, __21, __22, __23", "order": 28 } -->
+<style>
+/* QUATRE ÉCRANS D'OUVERTURE. Ils partagent une grammaire que rien d'autre dans le jeu n'utilise :
+   le titre du jeu reste PRÉSENT, en filigrane, derrière le contenu. Le menu ne remplace pas la
+   scène, il s'y superpose. Un écran d'options qui masque le titre casserait la promesse.
+   La VAGUE lumineuse horizontale marque l'entrée active — pas un fond, pas un cadre : une onde
+   qui traverse la liste. Elle revient sur l'écran-titre et sur l'écran de difficulté. */
+.zrm-open{ position:relative; display:flex; flex-direction:column; gap:calc(var(--u)*1.6);
+  padding:calc(var(--u)*1.6) calc(var(--u)*1.4); overflow:hidden;
+  font-family:var(--f-meta); font-size:.78em; }
+.zrm-watermark{ position:absolute; inset:0; display:grid; place-items:center; pointer-events:none;
+  font-family:var(--f-display); font-weight:200; font-size:3.4em; line-height:1.4;
+  letter-spacing:var(--tr-title); text-transform:uppercase; color:rgba(255,255,255,.055);
+  text-align:center; }
+.zrm-open > *{ position:relative; }
+.zrm-open-title{ text-align:center; font-family:var(--f-display); font-weight:200;
+  font-size:2em; letter-spacing:var(--tr-title); text-transform:uppercase; color:var(--zrm-ink);
+  margin-right:calc(var(--tr-title) * -1); }
+.zrm-open-menu{ position:relative; list-style:none; margin:0; padding:0; text-align:center; }
+.zrm-open-menu li{ font-weight:300; line-height:2.2; color:var(--zrm-ink-faint); }
+.zrm-open-menu li[data-on]{ color:var(--zrm-ink); }
+/* LA VAGUE. Un dégradé horizontal très étalé, plus une ligne fine au centre : c'est le
+   redoublement qui fait l'onde. Une seule couche ferait un simple surlignage. */
+.zrm-wave{ position:absolute; left:-20%; right:-20%; height:3.4em; transform:translateY(-50%);
+  background:
+    linear-gradient(90deg, rgba(90,180,255,0), rgba(120,205,255,.30) 45%, rgba(90,180,255,0)),
+    linear-gradient(180deg, transparent 48%, rgba(180,225,255,.75) 50%, transparent 52%);
+  filter:blur(.5px); pointer-events:none; }
+.zrm-pause{ text-align:center; }
+.zrm-pause p{ font-family:var(--f-display); font-weight:200; font-size:1.5em;
+  letter-spacing:var(--tr-title); text-transform:uppercase; color:var(--zrm-ink); margin:0 0 .8em; }
+.zrm-diff-head{ text-align:center; }
+.zrm-diff-head h3{ margin:0 0 .5em; font-weight:400; color:var(--zrm-ink); }
+.zrm-diff-head p{ margin:0; color:var(--zrm-ink-dim); line-height:1.6; }
+.zrm-diff-head hr{ border:0; height:1px; margin:.6em auto;
+  background:linear-gradient(90deg, transparent, rgba(200,224,246,.4), transparent); }
+.zrm-studio{ text-align:center; color:var(--zrm-ink-dim); letter-spacing:var(--tr-label);
+  text-transform:uppercase; font-size:.7em; }
+.zrm-legal{ text-align:center; font-size:.62em; color:var(--zrm-ink-faint); line-height:1.5; }
+</style>
+<section class="zrm-open">
+  <div class="zrm-watermark">Death<br>Stranding</div>
+  <p class="zrm-open-title">Death Stranding</p>
+  <div class="zrm-diff-head"><hr><h3>Select Game Difficulty</h3>
+    <p>Choose the difficulty level at which the game will be played.<br>This can be changed at any time via the Options Menu.</p><hr></div>
+  <ul class="zrm-open-menu">
+    <li>Very Easy</li><li>Easy</li>
+    <li data-on><span class="zrm-wave"></span>Normal</li>
+    <li>Hard</li><li>Very Hard</li>
+  </ul>
+  <p class="zrm-diff-head" style="color:var(--zrm-ink-dim)">Recommended for those who have some familiarity with action games.</p>
+  <div class="zrm-pause"><p>Pause</p>
+    <span style="display:inline-flex"><button style="padding:.4em 1.6em;background:rgba(43,105,156,.85);color:#fff;border:1px solid rgba(140,195,240,.5);font:inherit">Continue</button><button style="padding:.4em 1.6em;background:transparent;color:var(--zrm-ink-dim);border:1px solid rgba(255,255,255,.18);font:inherit">Skip</button></span></div>
+  <p class="zrm-studio">Kojima Productions</p>
+  <p class="zrm-legal">Game Version 1.02<br>©2019-2020 Sony Interactive Entertainment Inc. Created and developed by KOJIMA PRODUCTIONS.</p>
+</section>
+`;export{e as default};

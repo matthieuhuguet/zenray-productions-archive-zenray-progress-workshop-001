@@ -1,0 +1,17 @@
+import type { ChildProcess } from 'node:child_process'
+
+type Tuer = (pid: number, signal: NodeJS.Signals) => true
+
+/** Signale tout le groupe créé par `detached:true` sur macOS. Le repli garde le comportement Node normal si
+ *  le groupe n'existe pas encore, notamment pendant un échec immédiat de spawn. */
+export function signalerArbre(
+  enfant: ChildProcess,
+  signal: NodeJS.Signals,
+  plateforme = process.platform,
+  tuer: Tuer = process.kill,
+): boolean {
+  if (plateforme !== 'win32' && enfant.pid) {
+    try { tuer(-enfant.pid, signal); return true } catch {}
+  }
+  try { return enfant.kill(signal) } catch { return false }
+}

@@ -1,0 +1,38 @@
+const e=`<!--zr-theme {
+  "description": "Client de streaming musical : colonne de bibliotheque, en-tete d'album a degrade, liste de pistes et barre de lecture. 48 composants editables, poses un par un.",
+  "formats": [
+    "F-web-article",
+    "F-still-1080-square",
+    "F-still-1080x1350",
+    "F-still-1080x1920",
+    "F-video-1920x1080"
+  ],
+  "beatCount": {
+    "min": 3,
+    "max": 8
+  },
+  "fonts": [
+    "AnthropicSans"
+  ]
+}-->
+<style>
+  /* Unites RELATIVES uniquement : la densite des formats bornes passe par la taille de police
+     racine, une valeur en pixels durs ne suivrait pas sur un A4 a 3,125. */
+  .sp-shell{background:var(--sp-bg,#121212);color:var(--sp-ink,#fff);min-height:100%;padding:1.4em;
+    display:flex;flex-direction:column;gap:.9em;font-size:1em}
+  .sp-hero{border-radius:var(--sp-radius,.5em);padding:1.6em 1.2em;
+    background:linear-gradient(160deg,var(--sp-accent,#1ed760),transparent 78%)}
+  .sp-hero h1{margin:0;font-size:2.6em;font-weight:500;line-height:1.05}
+  .sp-hero p{margin:.5em 0 0;color:var(--sp-muted,#b3b3b3);font-size:.9em}
+  .sp-track{display:flex;align-items:baseline;gap:.7em;padding:.45em 0;
+    border-bottom:1px solid rgba(255,255,255,.07)}
+  .sp-track b{font-weight:400}
+  .sp-track span{color:var(--sp-muted,#b3b3b3);font-size:.85em}
+  .sp-track em{margin-left:auto;font-style:normal;font-variant-numeric:tabular-nums;
+    color:var(--sp-muted,#b3b3b3);font-size:.85em}
+</style>
+<div class="sp-shell">
+  <header class="sp-hero"><h1>{{title}}</h1><p>{{audience}}</p></header>
+  {{#beats}}<div class="sp-track"><b>{{text}}</b><span>{{role}}</span><em>{{index}}</em></div>{{/beats}}
+</div>
+`;export{e as default};

@@ -1,0 +1,35 @@
+const a=`<!--zrm { "name": "Blocs de l'article", "group": "Blocs", "reference": "LIBE__06__POLITIQUE", "order": 21 } -->
+<style>
+.zrm-beat{ margin:0 0 calc(var(--u)*1.35); }
+.zrm-beat:last-of-type{ margin-bottom:0; }
+.zrm-beat-label{ display:block; margin:0 0 .2em; color:var(--zrm-red); font-family:var(--f-display);
+  font-weight:400; font-size:.78em; line-height:1.15; }
+.zrm-beat-text{ margin:0; white-space:pre-wrap; }
+/* hook : manchette, aucun libelle — une accroche se reconnait a sa place. */
+.zrm-beat[data-role="hook"] .zrm-beat-label{ display:none; }
+.zrm-beat[data-role="hook"] .zrm-beat-text{ font-family:var(--f-display); font-weight:400;
+  font-size:1.62em; line-height:1.1; letter-spacing:-.003em; }
+.zrm-beat[data-role="context"] .zrm-beat-text{ font-size:1.03em; color:#2b2724; }
+.zrm-beat[data-role="proof"] .zrm-beat-text{ font-size:1em; }
+.zrm-beat[data-role="demo"]{ background:var(--zrm-band); padding:calc(var(--u)*.9) calc(var(--u)*1); }
+.zrm-beat[data-role="turn"]{ border-left:3px solid var(--zrm-red); padding-left:calc(var(--u)*.8); }
+.zrm-beat[data-role="turn"] .zrm-beat-text{ font-style:italic; }
+.zrm-beat[data-role="payoff"] .zrm-beat-text{ font-family:var(--f-display); font-weight:400;
+  font-size:1.2em; line-height:1.18; }
+.zrm-beat[data-role="cta"]{ background:var(--zrm-red); color:#fff; padding:calc(var(--u)*.9) calc(var(--u)*1); }
+.zrm-beat[data-role="cta"] .zrm-beat-label{ color:#fff; }
+.zrm-beat[data-role="cta"] .zrm-beat-text{ font-family:var(--f-display); font-weight:400;
+  font-size:1.1em; line-height:1.2; }
+.zrm-media{ display:flex; gap:calc(var(--u)*.6); flex-wrap:wrap; margin-top:calc(var(--u)*.7); }
+.zrm-media img{ max-width:100%; display:block; }
+</style>
+    {{#beats}}
+    <section class="zrm-beat" data-role="{{role}}" data-index="{{number}}">
+      <span class="zrm-beat-label">{{roleLabel}}</span>
+      <p class="zrm-beat-text">{{text}}</p>
+    </section>
+    {{/beats}}
+    {{^beats}}
+    <section class="zrm-beat" data-role="proof"><p class="zrm-beat-text">Aucun bloc.</p></section>
+    {{/beats}}
+`;export{a as default};

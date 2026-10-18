@@ -1,0 +1,12 @@
+const e=`<!--zrm { "name": "Surtitre de rubrique", "group": "Éditorial", "reference": "FT__01__HOME_TOP", "order": 10, "inPage": false } -->
+<style>
+/* RELEVÉ sur FT__01__HOME_TOP (« Waymo LLC » au-dessus du titre).
+   Le surtitre du FT nomme une ENTREPRISE, pas une rubrique : c'est un journal économique, son
+   classement se fait par acteur. Rouge sombre, linéale, petite capitale. */
+.zrm-kicker{ margin:0 0 .5em; color:var(--zrm-red); font-family:var(--f-meta);
+  font-weight:700; font-size:.7em; line-height:1.2;
+  letter-spacing:.08em; text-transform:uppercase; }
+.zrm-kicker[data-tone="deep"]{ color:var(--zrm-blue); }
+</style>
+<p class="zrm-kicker">Reportage</p>
+`;export{e as default};

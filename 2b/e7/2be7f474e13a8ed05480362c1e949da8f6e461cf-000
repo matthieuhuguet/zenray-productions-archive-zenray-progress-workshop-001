@@ -1,0 +1,15 @@
+const e=`<!-- HÉRITÉ de T-01-1-2--une-de-rupture. Structure seulement : les mesures (échelle, filets, couleurs, graisses) sont celles de l'autre média et sont FAUSSES ici tant qu'elles n'ont pas été relevées sur les captures de T-01-1-1--une-nationale-du-matin. -->
+<!--zrm { "name": "Drawer — sujets du moment", "group": "Navigation", "reference": "LIBE__04__MENU_OPEN", "order": 7, "inPage": false } -->
+<style>
+.zrm-topics-head{ font-family:var(--f-meta); font-size:.72em; font-weight:700;
+  padding:calc(var(--u)*.9) calc(var(--u)*1) calc(var(--u)*.5); }
+.zrm-chips{ display:flex; flex-direction:column; align-items:flex-start; gap:calc(var(--u)*.35);
+  padding:0 calc(var(--u)*1) calc(var(--u)*.9); }
+.zrm-chip{ background:var(--zrm-chip); border-radius:.3em; padding:.42em .85em;
+  font-family:var(--f-meta); font-size:.68em; font-weight:600; }
+</style>
+<div>
+  <p class="zrm-topics-head">Les sujets du moment</p>
+  <div class="zrm-chips"><span class="zrm-chip">Tour de France 2026</span><span class="zrm-chip">Présidentielle 2027</span><span class="zrm-chip">Conflit au Moyen-Orient</span><span class="zrm-chip">Guerre en Ukraine</span></div>
+</div>
+`;export{e as default};

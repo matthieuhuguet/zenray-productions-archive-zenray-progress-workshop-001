@@ -1,0 +1,12 @@
+# Transposition de la section `rewrites` de vercel.json (2026-07-30).
+# Le code 200 signifie REECRITURE et non redirection : l'URL vue par le visiteur ne change pas.
+
+# /watch, /view et /folder ne sont PLUS ici : une reecriture `_redirects` de Cloudflare Pages ne
+# sert que des fichiers statiques et ne declenche jamais une Function, si bien que ces trois lignes
+# ne faisaient rien -- et c'est pire qu'une absence, elles donnaient a lire une regle qui semblait
+# couvrir le cas. Elles vivent maintenant dans functions/{watch,view,folder}.js.
+
+# Repli d'application a page unique, EN DERNIER : toute route inconnue rend index.html, qui laisse
+# le routeur du navigateur decider. Les chemins /api/* n'arrivent jamais ici, `_routes.json` les
+# ayant deja envoyes a la fonction.
+/*  /index.html  200

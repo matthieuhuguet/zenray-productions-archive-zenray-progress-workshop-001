@@ -1,0 +1,21 @@
+const e=`<!--zrm { "name": "Notifications", "group": "Scène", "reference": "DS2__GUID__21", "order": 24 } -->
+<style>
+/* PILE DE NOTIFICATIONS — relevée sur DS2__GUID__21. Elles s'empilent VERS LE HAUT et perdent
+   en opacité à mesure qu'elles vieillissent : la plus récente est pleine, la précédente à 62 %,
+   l'avant-dernière à 34 %. Une pile à opacité constante donne une liste ; cette dégressivité
+   donne le temps qui passe.
+   Chaque ligne porte une puce carrée, jamais ronde : le rond est réservé aux boutons de manette. */
+.zrm-notes{ display:flex; flex-direction:column-reverse; gap:.35em;
+  padding:calc(var(--u)*.8) calc(var(--u)*1.4); max-width:40ch; }
+.zrm-note{ display:flex; align-items:baseline; gap:.6em;
+  font-family:var(--f-meta); font-weight:300; font-size:.76em; color:var(--zrm-ink);
+  text-shadow:0 0 .6em rgba(4,12,20,.95); }
+.zrm-note:nth-child(2){ color:var(--zrm-ink-dim); }
+.zrm-note:nth-child(n+3){ color:var(--zrm-ink-faint); }
+.zrm-note::before{ content:''; flex:0 0 auto; width:.34em; height:.34em;
+  background:var(--zrm-cyan); box-shadow:0 0 .5em rgba(127,212,255,.7); }
+</style>
+<div class="zrm-notes">
+  {{#beats}}<p class="zrm-note">{{text}}</p>{{/beats}}
+</div>
+`;export{e as default};

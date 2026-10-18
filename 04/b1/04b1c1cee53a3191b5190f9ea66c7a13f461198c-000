@@ -1,0 +1,16 @@
+const e=`<!--zrm { "name": "Module de promotion", "group": "Modules", "reference": "LIBE__04__MENU_OPEN", "order": 17, "inPage": false } -->
+<style>
+/* Encart evenementiel : fond olive, titre en display geant, bouton noir plein. */
+.zrm-promo{ display:grid; grid-template-columns:minmax(0,.42fr) minmax(0,1fr);
+  gap:calc(var(--u)*1); background:var(--zrm-olive); padding:calc(var(--u)*1.1); align-items:center; }
+.zrm-promo-mark{ font-family:var(--f-display); font-weight:400; font-size:2.6em; line-height:.92;
+  color:#8d7a1c; letter-spacing:-.005em; }
+.zrm-promo-body{ font-family:var(--f-body); font-size:1.02em; line-height:1.35; }
+.zrm-promo-cta{ display:inline-block; margin-top:calc(var(--u)*.7); background:var(--zrm-night);
+  color:#fff; padding:.55em 1.4em; font-family:var(--f-meta); font-size:.7em; font-weight:600; }
+</style>
+<section class="zrm-promo">
+  <div class="zrm-promo-mark">Guide des festivals</div>
+  <div class="zrm-promo-body">Musique, théâtre, art, photo, cinéma, danse… Retrouvez notre sélection d’événements et festivals.<span class="zrm-promo-cta">Voir notre sélection</span></div>
+</section>
+`;export{e as default};

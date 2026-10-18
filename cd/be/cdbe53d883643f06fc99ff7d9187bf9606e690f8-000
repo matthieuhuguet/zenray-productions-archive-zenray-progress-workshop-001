@@ -1,0 +1,37 @@
+const e=`<!--zrm { "name": "Liste de réglages", "group": "Panneau", "reference": "DS2__GUID__02, __03", "order": 17 } -->
+<style>
+/* LISTE DE RÉGLAGES — trois formes de valeur, jamais mélangées :
+     CHEVRONS  quand les choix sont énumérés (Normal / Inversé)
+     CURSEUR   quand la valeur est continue, avec le chiffre à droite
+     BASCULE   quand c'est oui/non, affiché en toutes lettres (On / Off), jamais un interrupteur
+   Une ligne DÉSACTIVÉE garde sa valeur mais perd son chevron : elle montre son état sans
+   laisser croire qu'on peut le changer. Un simple gris aurait suffi à l'oeil ; retirer
+   l'affordance est ce qui rend l'interface honnête. */
+.zrm-settings{ font-family:var(--f-meta); font-size:.76em; }
+.zrm-set-group{ padding:.22em .7em; background:rgba(43,105,156,.72); color:var(--zrm-ink); }
+.zrm-set{ display:flex; align-items:center; gap:.6em; padding:.3em .7em;
+  color:var(--zrm-ink-dim); border-bottom:1px solid rgba(255,255,255,.05); }
+.zrm-set > span{ flex:1 1 auto; }
+.zrm-set[data-on]{ background:rgba(43,105,156,.5); color:var(--zrm-ink); }
+.zrm-set[data-off]{ color:var(--zrm-ink-faint); }
+.zrm-set-val{ font-family:var(--f-meta); color:var(--zrm-ink); }
+.zrm-set[data-off] .zrm-set-val{ color:var(--zrm-ink-faint); }
+.zrm-set-chev{ width:.9em; height:.9em; color:var(--zrm-ink-dim); }
+.zrm-set[data-off] .zrm-set-chev{ visibility:hidden; }
+.zrm-slider{ position:relative; flex:0 0 9em; height:3px; background:rgba(255,255,255,.18); }
+.zrm-slider i{ position:absolute; top:50%; width:.55em; height:1.1em; transform:translate(-50%,-50%);
+  background:var(--zrm-ink); }
+.zrm-slider-val{ flex:0 0 2.4em; text-align:right; font-family:var(--f-mono); color:var(--zrm-ink); }
+</style>
+<div class="zrm-settings">
+  <div class="zrm-set-group">Controller</div>
+  <div class="zrm-set" data-on><span>[Normal] Vertical Controls</span>
+    <span class="zrm-set-val">Normal</span><svg class="zrm-set-chev"><use href="#g-chevron-r"/></svg></div>
+  <div class="zrm-set"><span>[Normal] Vertical Speed</span>
+    <span class="zrm-slider"><i style="left:50%"></i></span><span class="zrm-slider-val">50</span></div>
+  <div class="zrm-set"><span>[Normal] Auto-Centre</span>
+    <span class="zrm-set-val">Off</span><svg class="zrm-set-chev"><use href="#g-chevron-r"/></svg></div>
+  <div class="zrm-set" data-off><span>[Normal] Auto-Centre Speed</span>
+    <span class="zrm-slider"><i style="left:32%"></i></span><span class="zrm-slider-val">5</span></div>
+</div>
+`;export{e as default};

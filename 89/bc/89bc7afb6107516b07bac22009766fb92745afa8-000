@@ -1,0 +1,4 @@
+const a=`<!--zrm {"name":"header meta","group":"En-tête","props":[{"key":"owner","type":"text"},{"key":"year","type":"text"},{"key":"count","type":"text"},{"key":"duration","type":"text"},{"key":"showavatar","type":"bool"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-showavatar="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="20-header-meta"><span class="sp-owner">{{owner}}</span><span class="sp-year">{{year}}</span><span class="sp-count">{{count}}</span><span class="sp-duration">{{duration}}</span><i class="sp-flag" data-showavatar="{{showavatar}}"></i></div>
+`;export{a as default};

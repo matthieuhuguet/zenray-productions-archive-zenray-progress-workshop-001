@@ -1,0 +1,422 @@
+import{b9 as y,_,aI as C}from"./index-CCpzDksV.js";function q(e){if(!e)return 0;const t=e.trim().replace(",","."),n=t.split(":");if(n.length===3){const r=parseFloat(n[0])||0,a=parseFloat(n[1])||0,s=parseFloat(n[2])||0;return r*3600+a*60+s}if(n.length===2){const r=parseFloat(n[0])||0,a=parseFloat(n[1])||0;return r*60+a}return parseFloat(t)||0}function B(e){return e?e.replace(/<[^>]+>/g,"").replace(/\{[^}]+\}/g,"").replace(/\r\n/g,`
+`).replace(/\r/g,`
+`).replace(/\\N/g,`
+`).replace(/\\n/g," ").replace(/\\h/g," ").replace(/[ \t]*\n[ \t]*/g,`
+`).trim():""}function L(e){if(!e||typeof e!="string")return[];const n=e.replace(/\r\n/g,`
+`).replace(/\r/g,`
+`).trim().split(/\n\s*\n/),r=[];for(const a of n){const s=a.trim().split(`
+`);if(s.length<2)continue;let u=0;!s[0].includes("-->")&&s.length>1&&s[1].includes("-->")&&(u=1);const o=s[u];if(!o||!o.includes("-->"))continue;const[l,i]=o.split("-->").map(c=>c.trim().split(" ")[0]),m=q(l),b=q(i),g=s.slice(u+1).join(`
+`),f=B(g);b>m&&f&&r.push({id:r.length+1,start:m,end:b,text:f})}return r.sort((a,s)=>a.start-s.start)}function T(e){if(!e||typeof e!="string")return[];const t=e.replace(/^WEBVTT[^\n]*\n+/i,"").replace(/\r\n/g,`
+`).replace(/\r/g,`
+`).trim();return L(t)}function V(e){if(!e||typeof e!="string")return[];const t=e.split(/\r?\n/),n=[];for(const r of t){if(!r.startsWith("Dialogue:"))continue;const a=r.slice(9).split(",");if(a.length<10)continue;const s=q(a[1]),u=q(a[2]),o=B(a.slice(9).join(","));u>s&&o&&n.push({id:n.length+1,start:s,end:u,text:o})}return n.sort((r,a)=>r.start-a.start)}function F(e,t){if(!e||typeof e!="string")return[];const n=e.trim();return t==="ass"||t==="ssa"||n.startsWith("[Script Info]")||n.includes("[Events]")?V(n):t==="vtt"||n.startsWith("WEBVTT")?T(n):L(n)}function P(e,t){if(!Array.isArray(e)||e.length===0||t==null||t<0)return null;for(let n=0;n<e.length;n++){const r=e[n];if(r.start<=t&&t<=r.end)return r;if(r.start>t+1)break}return null}const Y=`1
+00:00:00,300 --> 00:00:02,799
+[Musique rythmée et bruits de pas rapides dans Paris] [00:00]
+
+2
+00:00:03,299 --> 00:00:05,799
+- Valentin ! Attends-moi ! Regarde-moi ! [00:03]
+
+3
+00:00:06,299 --> 00:00:08,800
+Une association pour les cas d autisme complexe refusés partout. [00:06]
+
+4
+00:00:09,300 --> 00:00:11,800
+- Bruno, on a une urgence à l hôpital de jour. [00:09]
+
+5
+00:00:12,300 --> 00:00:14,800
+Aucune structure ne veut l accueillir, c est toi ou l isolement. [00:12]
+
+6
+00:00:15,300 --> 00:00:17,800
+- On va trouver une solution, comme d habitude. [00:15]
+
+7
+00:00:18,300 --> 00:00:20,800
+Hors Normes (2019) · Olivier Nakache & Éric Toledano [00:18]
+
+8
+00:00:21,300 --> 00:00:23,800
+- Joseph, respire calmement, regarde la route devant toi. [00:21]
+
+9
+00:00:24,300 --> 00:00:26,800
+Ce travail demande de la patience, de l écoute et du calme. [00:24]
+
+10
+00:00:27,300 --> 00:00:29,800
+[Échanges vifs entre les éducateurs et les jeunes référents] [00:27]
+
+11
+00:00:30,300 --> 00:00:32,799
+- Malik, tu as les plannings pour la tournée de l après-midi ? [00:30]
+
+12
+00:00:33,299 --> 00:00:35,799
+- Oui, on passe récupérer Dylan à quatorze heures. [00:33]
+
+13
+00:00:36,299 --> 00:00:38,799
+- Bonjour madame, on vient pour la visite hebdomadaire. [00:36]
+
+14
+00:00:39,299 --> 00:00:41,799
+- Merci pour tout ce que vous faites avec lui chaque jour. [00:39]
+
+15
+00:00:42,299 --> 00:00:44,799
+- Joseph, montre-moi comment tu appuies sur le bouton d arrêt. [00:42]
+
+16
+00:00:45,299 --> 00:00:47,799
+- Pas maintenant Joseph, attends qu on approche de la station. [00:45]
+
+17
+00:00:48,299 --> 00:00:50,799
+[Sonnerie du métro parisien et fermeture des portes] [00:48]
+
+18
+00:00:51,299 --> 00:00:53,799
+- C est bien Valentin, tu vois quand tu veux te concentrer. [00:51]
+
+19
+00:00:54,299 --> 00:00:56,799
+- On est en retard pour le rendez-vous avec l inspection. [00:54]
+
+20
+00:00:57,299 --> 00:00:59,799
+- Les inspecteurs de l IGAS sont déjà arrivés dans la salle. [00:57]
+
+21
+00:01:00,299 --> 00:01:02,799
+- Ils vérifient tous les dossiers et les diplômes du personnel. [01:00]
+
+22
+00:01:03,299 --> 00:01:05,799
+- Notre diplôme, c est qu on ne laisse personne sur le carreau. [01:03]
+
+23
+00:01:06,299 --> 00:01:08,799
+- C est exactement ce que je vais leur expliquer tout à l heure. [01:06]
+
+24
+00:01:09,299 --> 00:01:11,799
+- Regarde, il sourit ! C est la première fois de la semaine. [01:09]
+
+25
+00:01:12,299 --> 00:01:14,799
+- On ne lâche rien, on continue pas à pas chaque jour. [01:12]
+
+26
+00:01:15,299 --> 00:01:17,799
+- Qui prend le relais pour l atelier équitation demain matin ? [01:15]
+
+27
+00:01:18,299 --> 00:01:20,799
+- C est Dylan avec Malik, ils sont déjà prêts pour le départ. [01:18]
+
+28
+00:01:21,299 --> 00:01:23,799
+[Musique douce au piano et bruits de circulation urbaine] [01:21]
+
+29
+00:01:24,299 --> 00:01:26,799
+- Tu as vu ses progrès depuis six mois ? C est incroyable. [01:24]
+
+30
+00:01:27,299 --> 00:01:29,799
+- Oui, il commence à exprimer ce qu il ressent avec des mots. [01:27]
+
+31
+00:01:30,299 --> 00:01:32,799
+- Attention en traversant, donne-moi la main s il te plaît. [01:30]
+
+32
+00:01:33,299 --> 00:01:35,799
+- Voilà, c est parfait, on avance ensemble à ton rythme. [01:33]
+
+33
+00:01:36,299 --> 00:01:38,799
+- Bruno, ton téléphone sonne encore depuis dix minutes. [01:36]
+
+34
+00:01:39,299 --> 00:01:41,799
+- C est la mère de Valentin, elle veut prendre des nouvelles. [01:39]
+
+35
+00:01:42,299 --> 00:01:44,799
+- Rassure-la, dis-lui que tout s est très bien passé aujourd hui. [01:42]
+
+36
+00:01:45,299 --> 00:01:47,799
+[Musique rythmée et bruits de pas rapides dans Paris] [01:45]
+
+37
+00:01:48,299 --> 00:01:50,799
+- Valentin ! Attends-moi ! Regarde-moi ! [01:48]
+
+38
+00:01:51,299 --> 00:01:53,799
+Une association pour les cas d autisme complexe refusés partout. [01:51]
+
+39
+00:01:54,299 --> 00:01:56,799
+- Bruno, on a une urgence à l hôpital de jour. [01:54]
+
+40
+00:01:57,299 --> 00:01:59,799
+Aucune structure ne veut l accueillir, c est toi ou l isolement. [01:57]
+
+41
+00:02:00,299 --> 00:02:02,799
+- On va trouver une solution, comme d habitude. [02:00]
+
+42
+00:02:03,299 --> 00:02:05,799
+Hors Normes (2019) · Olivier Nakache & Éric Toledano [02:03]
+
+43
+00:02:06,299 --> 00:02:08,800
+- Joseph, respire calmement, regarde la route devant toi. [02:06]
+
+44
+00:02:09,300 --> 00:02:11,800
+Ce travail demande de la patience, de l écoute et du calme. [02:09]
+
+45
+00:02:12,300 --> 00:02:14,800
+[Échanges vifs entre les éducateurs et les jeunes référents] [02:12]
+
+46
+00:02:15,300 --> 00:02:17,800
+- Malik, tu as les plannings pour la tournée de l après-midi ? [02:15]
+
+47
+00:02:18,300 --> 00:02:20,800
+- Oui, on passe récupérer Dylan à quatorze heures. [02:18]
+
+48
+00:02:21,300 --> 00:02:23,800
+- Bonjour madame, on vient pour la visite hebdomadaire. [02:21]
+
+49
+00:02:24,300 --> 00:02:26,800
+- Merci pour tout ce que vous faites avec lui chaque jour. [02:24]
+
+50
+00:02:27,300 --> 00:02:29,800
+- Joseph, montre-moi comment tu appuies sur le bouton d arrêt. [02:27]
+
+51
+00:02:30,300 --> 00:02:32,800
+- Pas maintenant Joseph, attends qu on approche de la station. [02:30]
+
+52
+00:02:33,300 --> 00:02:35,800
+[Sonnerie du métro parisien et fermeture des portes] [02:33]
+
+53
+00:02:36,300 --> 00:02:38,800
+- C est bien Valentin, tu vois quand tu veux te concentrer. [02:36]
+
+54
+00:02:39,300 --> 00:02:41,800
+- On est en retard pour le rendez-vous avec l inspection. [02:39]
+
+55
+00:02:42,300 --> 00:02:44,800
+- Les inspecteurs de l IGAS sont déjà arrivés dans la salle. [02:42]
+
+56
+00:02:45,300 --> 00:02:47,800
+- Ils vérifient tous les dossiers et les diplômes du personnel. [02:45]
+
+57
+00:02:48,300 --> 00:02:50,800
+- Notre diplôme, c est qu on ne laisse personne sur le carreau. [02:48]
+
+58
+00:02:51,300 --> 00:02:53,800
+- C est exactement ce que je vais leur expliquer tout à l heure. [02:51]
+
+59
+00:02:54,300 --> 00:02:56,800
+- Regarde, il sourit ! C est la première fois de la semaine. [02:54]
+
+60
+00:02:57,300 --> 00:02:59,800
+- On ne lâche rien, on continue pas à pas chaque jour. [02:57]
+
+61
+00:03:00,300 --> 00:03:02,800
+- Qui prend le relais pour l atelier équitation demain matin ? [03:00]
+
+62
+00:03:03,300 --> 00:03:05,800
+- C est Dylan avec Malik, ils sont déjà prêts pour le départ. [03:03]
+
+63
+00:03:06,300 --> 00:03:08,800
+[Musique douce au piano et bruits de circulation urbaine] [03:06]
+
+64
+00:03:09,300 --> 00:03:11,800
+- Tu as vu ses progrès depuis six mois ? C est incroyable. [03:09]
+
+65
+00:03:12,300 --> 00:03:14,800
+- Oui, il commence à exprimer ce qu il ressent avec des mots. [03:12]
+
+66
+00:03:15,300 --> 00:03:17,800
+- Attention en traversant, donne-moi la main s il te plaît. [03:15]
+
+67
+00:03:18,300 --> 00:03:20,800
+- Voilà, c est parfait, on avance ensemble à ton rythme. [03:18]
+
+68
+00:03:21,300 --> 00:03:23,800
+- Bruno, ton téléphone sonne encore depuis dix minutes. [03:21]
+
+69
+00:03:24,300 --> 00:03:26,800
+- C est la mère de Valentin, elle veut prendre des nouvelles. [03:24]
+
+70
+00:03:27,300 --> 00:03:29,800
+- Rassure-la, dis-lui que tout s est très bien passé aujourd hui. [03:27]
+
+71
+00:03:30,300 --> 00:03:32,800
+[Musique rythmée et bruits de pas rapides dans Paris] [03:30]
+
+72
+00:03:33,300 --> 00:03:35,800
+- Valentin ! Attends-moi ! Regarde-moi ! [03:33]
+
+73
+00:03:36,300 --> 00:03:38,800
+Une association pour les cas d autisme complexe refusés partout. [03:36]
+
+74
+00:03:39,300 --> 00:03:41,800
+- Bruno, on a une urgence à l hôpital de jour. [03:39]
+
+75
+00:03:42,300 --> 00:03:44,800
+Aucune structure ne veut l accueillir, c est toi ou l isolement. [03:42]
+
+76
+00:03:45,300 --> 00:03:47,800
+- On va trouver une solution, comme d habitude. [03:45]
+
+77
+00:03:48,300 --> 00:03:50,800
+Hors Normes (2019) · Olivier Nakache & Éric Toledano [03:48]
+
+78
+00:03:51,300 --> 00:03:53,800
+- Joseph, respire calmement, regarde la route devant toi. [03:51]
+
+79
+00:03:54,300 --> 00:03:56,800
+Ce travail demande de la patience, de l écoute et du calme. [03:54]
+
+80
+00:03:57,300 --> 00:03:59,800
+[Échanges vifs entre les éducateurs et les jeunes référents] [03:57]
+
+81
+00:04:00,300 --> 00:04:02,800
+- Malik, tu as les plannings pour la tournée de l après-midi ? [04:00]
+
+82
+00:04:03,300 --> 00:04:05,800
+- Oui, on passe récupérer Dylan à quatorze heures. [04:03]
+
+83
+00:04:06,300 --> 00:04:08,800
+- Bonjour madame, on vient pour la visite hebdomadaire. [04:06]
+
+84
+00:04:09,300 --> 00:04:11,800
+- Merci pour tout ce que vous faites avec lui chaque jour. [04:09]
+
+85
+00:04:12,300 --> 00:04:14,800
+- Joseph, montre-moi comment tu appuies sur le bouton d arrêt. [04:12]
+
+86
+00:04:15,300 --> 00:04:17,800
+- Pas maintenant Joseph, attends qu on approche de la station. [04:15]
+
+87
+00:04:18,300 --> 00:04:20,800
+[Sonnerie du métro parisien et fermeture des portes] [04:18]
+
+88
+00:04:21,300 --> 00:04:23,800
+- C est bien Valentin, tu vois quand tu veux te concentrer. [04:21]
+
+89
+00:04:24,300 --> 00:04:26,800
+- On est en retard pour le rendez-vous avec l inspection. [04:24]
+
+90
+00:04:27,300 --> 00:04:29,800
+- Les inspecteurs de l IGAS sont déjà arrivés dans la salle. [04:27]
+
+91
+00:04:30,300 --> 00:04:32,800
+- Ils vérifient tous les dossiers et les diplômes du personnel. [04:30]
+
+92
+00:04:33,300 --> 00:04:35,800
+- Notre diplôme, c est qu on ne laisse personne sur le carreau. [04:33]
+
+93
+00:04:36,300 --> 00:04:38,800
+- C est exactement ce que je vais leur expliquer tout à l heure. [04:36]
+
+94
+00:04:39,300 --> 00:04:41,800
+- Regarde, il sourit ! C est la première fois de la semaine. [04:39]
+
+95
+00:04:42,300 --> 00:04:44,800
+- On ne lâche rien, on continue pas à pas chaque jour. [04:42]
+
+96
+00:04:45,300 --> 00:04:47,800
+- Qui prend le relais pour l atelier équitation demain matin ? [04:45]
+
+97
+00:04:48,300 --> 00:04:50,800
+- C est Dylan avec Malik, ils sont déjà prêts pour le départ. [04:48]
+
+98
+00:04:51,300 --> 00:04:53,800
+[Musique douce au piano et bruits de circulation urbaine] [04:51]
+
+99
+00:04:54,300 --> 00:04:56,800
+- Tu as vu ses progrès depuis six mois ? C est incroyable. [04:54]
+
+100
+00:04:57,300 --> 00:04:59,800
+- Oui, il commence à exprimer ce qu il ressent avec des mots. [04:57]
+
+101
+00:05:00,300 --> 00:05:02,800
+- Attention en traversant, donne-moi la main s il te plaît. [05:00]
+
+102
+00:05:03,300 --> 00:05:05,800
+- Voilà, c est parfait, on avance ensemble à ton rythme. [05:03]
+
+103
+00:05:06,300 --> 00:05:08,800
+- Bruno, ton téléphone sonne encore depuis dix minutes. [05:06]
+`,U="gzip+base64";async function D(e){if(!e)throw new Error("subtitle spec without data");if(typeof e=="string")return e;if(typeof e.text=="string")return e.text;if(typeof e.content=="string")return e.content;if(typeof e.src=="string"||typeof e.url=="string"){const i=await fetch(e.src||e.url);if(!i.ok)throw new Error(`failed to fetch subtitles: ${i.status}`);return await i.text()}if(typeof e.data!="string")throw new Error("subtitle spec without data");if(!e.encoding)return e.data;if(e.encoding!==U)throw new Error(`unknown subtitle encoding: ${e.encoding}`);const t=atob(e.data),n=new Uint8Array(t.length);for(let i=0;i<t.length;i++)n[i]=t.charCodeAt(i);const a=new ReadableStream({start(i){i.enqueue(n),i.close()}}).pipeThrough(new DecompressionStream("gzip")).getReader(),s=[];let u=0;for(;;){const{done:i,value:m}=await a.read();if(i)break;s.push(m),u+=m.length}const o=new Uint8Array(u);let l=0;for(const i of s)o.set(i,l),l+=i.length;return new TextDecoder("utf-8").decode(o)}const d={min:25,max:150,step:5,presets:[100,75,50],fallback:75},M={sans:"var(--zr-police-sans)",serif:"var(--zr-police-serif)"},S={size:"zr-subtitle-size-pct",background:"zr-subtitle-bg",font:"zr-subtitle-font",legacySize:"zr-subtitle-size"},J={sm:75,md:100,lg:150};function O(e){const t=Number(e);if(!Number.isFinite(t))return d.fallback;const n=Math.round(t/d.step)*d.step;return Math.min(d.max,Math.max(d.min,n))}function Q(){const e=[];for(let t=d.min;t<=d.max;t+=d.step)e.push(t);return e}const A=e=>String(Math.round(e*100)/100),w=(e,t,n,r)=>`clamp(${A(e*r)}px, ${A(t*r)}cqi, ${A(n*r)}px)`;function W(e){const t=O(e)/100;return{percent:O(e),fontSize:w(14,1.8,40,t),padding:`${w(4,.5,12,t)} ${w(10,1.2,24,t)}`,borderRadius:w(6,.6,14,t),lineHeight:1.35}}function K(e){const t=o=>{try{return e?.getItem(o)??null}catch{return null}},n=t(S.size),r=t(S.legacySize),a=n!=null?O(n):J[r]??d.fallback,s=t(S.font)==="serif"?"serif":"sans",u=t(S.background)!=="0";return{sizePct:a,font:s,background:u}}function X(e,t,n){try{e?.setItem(t,String(n))}catch{}}const $={"liberation sans":"/jassub/default.woff2","inter variable":"/fonts/InterVariable.woff2",inter:"/fonts/InterVariable.woff2"},G={sm:100,md:150,lg:150};function Z({videoRef:e,track:t,controlsVisible:n=!1,size:r="sm",sizePct:a,background:s=!0,font:u="sans",useAssRenderer:o=!1}){const l=y.useRef(null),[i,m]=y.useState(null),[b,g]=y.useState("");if(y.useEffect(()=>{const c=e.current;let h=!1,x=null;if(l.current){try{l.current.destroy()}catch{}l.current=null}m(null),g("");const N=()=>{if(h=!0,typeof x=="function"&&(x(),x=null),l.current){try{l.current.destroy()}catch{}l.current=null}};return!c||!t||(async()=>{try{const v=await D(t);if(h)return;const j=(t.format||"").toLowerCase(),I=j==="ass"||j==="ssa";let R=!1;if(I&&o)try{const{default:z}=await _(async()=>{const{default:p}=await import("./jassub-C5dM8Q3Z.js");return{default:p}},[]);if(h)return;l.current=new z({video:c,subContent:v,workerUrl:"/jassub/jassub-worker.js",wasmUrl:"/jassub/jassub-worker.wasm",fonts:["/jassub/default.woff2"],availableFonts:$}),R=!0}catch{}if(!R&&!h){const z=F(v,j);if(h)return;const p=()=>{if(h||!c)return;const E=P(z,c.currentTime);m(k=>k?.id===E?.id&&k?.text===E?.text?k:E)};c.addEventListener("timeupdate",p),c.addEventListener("seeking",p),c.addEventListener("seeked",p),p(),x=()=>{c.removeEventListener("timeupdate",p),c.removeEventListener("seeking",p),c.removeEventListener("seeked",p)}}}catch(v){h||g(`Sous-titres indisponibles${v?.message?` · ${v.message}`:""}`)}})(),N},[t,e,o]),b)return C.jsx("div",{role:"status",style:{position:"absolute",left:12,bottom:n?68:28,zIndex:35,maxWidth:"calc(100% - 24px)",padding:"6px 10px",borderRadius:999,background:"rgba(20,20,22,.72)",color:"#ffffff",fontFamily:"var(--zr-police-sans)",fontSize:"var(--zr-ui-xs)",pointerEvents:"none"},children:b});if(!i||!i.text)return null;const f=W(Number.isFinite(Number(a))?a:G[r]??d.fallback);return C.jsx("div",{className:"zr-subtitle-layer",style:{position:"absolute",left:"50%",transform:"translateX(-50%)",bottom:n?72:28,transition:"bottom 0.22s cubic-bezier(0.16, 1, 0.3, 1)",zIndex:25,width:"auto",maxWidth:"min(92%, 1400px)",boxSizing:"border-box",textAlign:"center",pointerEvents:"none",userSelect:"none"},children:C.jsx("span",{className:"zr-subtitle-pill",style:{display:"inline-block",boxSizing:"border-box",padding:f.padding,borderRadius:f.borderRadius||8,backgroundColor:s?"rgba(10, 10, 12, 0.82)":"transparent",color:"#ffffff",fontFamily:M[u]||M.sans,fontSize:f.fontSize,fontWeight:500,lineHeight:f.lineHeight,whiteSpace:"pre-wrap",wordBreak:"break-word",overflowWrap:"break-word",textWrap:"balance",maxWidth:"100%",boxShadow:s?"0 2px 8px rgba(0, 0, 0, 0.45)":"none",textShadow:s?"none":"0 0 3px #000, 0 0 6px #000, 0 1px 2px #000, 1px 0 2px #000"},children:i.text})})}export{Y as H,S,d as a,Z as b,O as c,Q as p,K as r,X as w};

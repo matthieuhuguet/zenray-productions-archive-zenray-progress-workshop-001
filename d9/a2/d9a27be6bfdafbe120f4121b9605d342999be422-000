@@ -1,0 +1,20 @@
+/** Reconstruit des lignes depuis des fragments de flux et rend aussi la dernière ligne sans `\n`. */
+export class TamponLignes {
+  private reste = ''
+
+  constructor(private recevoir: (ligne: string) => void) {}
+
+  ajouter(fragment: string): void {
+    this.reste += fragment
+    const lignes = this.reste.split('\n')
+    this.reste = lignes.pop() || ''
+    for (const ligne of lignes) this.recevoir(ligne.endsWith('\r') ? ligne.slice(0, -1) : ligne)
+  }
+
+  terminer(): void {
+    if (!this.reste) return
+    const ligne = this.reste.endsWith('\r') ? this.reste.slice(0, -1) : this.reste
+    this.reste = ''
+    this.recevoir(ligne)
+  }
+}

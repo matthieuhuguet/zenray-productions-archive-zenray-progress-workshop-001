@@ -1,0 +1,16 @@
+const e=`<!--zrm { "name": "Titre", "group": "Éditorial", "reference": "FT__01__HOME_TOP", "order": 11, "inPage": false } -->
+<style>
+/* RELEVÉ sur FT__01__HOME_TOP.
+   Playfair Display 400, mesurée à 62 px de hauteur d'encre. GRAISSE 400, jamais 700 : Playfair
+   porte son autorité dans le contraste entre pleins et déliés, et un 700 épaissit les déliés
+   jusqu'à l'effacer. C'est le raisonnement inverse d'Anton — là on refusait le gras parce que
+   la police est déjà noire, ici on le refuse parce qu'il détruit ce qui fait sa force. */
+.zrm-headline{ margin:0; font-family:var(--f-display); font-weight:400;
+  line-height:1.14; letter-spacing:-.008em; color:var(--zrm-ink); }
+.zrm-headline[data-size="xl"]{ font-size:var(--s-title); }
+.zrm-headline[data-size="l"]{ font-size:1.55em; }
+.zrm-headline[data-size="m"]{ font-size:1.16em; }
+.zrm-headline[data-size="s"]{ font-size:1em; line-height:1.3; }
+</style>
+<h3 class="zrm-headline" data-size="l">Deux « ogres » de feu dévorent tout sur leur passage</h3>
+`;export{e as default};

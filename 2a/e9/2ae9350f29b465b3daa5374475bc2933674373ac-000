@@ -1,0 +1,12 @@
+export function manifestPathFromCard(card) {
+  return card.manifeste || `${card.rel}.file.json`
+}
+
+export function compareManifestInventory(cards, remotePaths) {
+  const indexed = new Map(cards.map((card) => [manifestPathFromCard(card), card]))
+  const missing = []
+  const remoteOnly = []
+  for (const [manifestPath, card] of indexed) if (!remotePaths.has(manifestPath)) missing.push(card.rel)
+  for (const manifestPath of remotePaths) if (!indexed.has(manifestPath)) remoteOnly.push(manifestPath)
+  return { indexed, missing, remoteOnly }
+}

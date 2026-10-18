@@ -1,0 +1,20 @@
+const e=`<!--zrm { "name": "Bouton de confirmation", "group": "Global", "reference": "DS1__IIG__04", "order": 19 } -->
+<style>
+/* BOUTON DE CONFIRMATION — relevé sur DS1__IIG__04 et DS1__IIG__11.
+   Ce n'est PAS un bouton au sens du web : pas de fond plein, pas de coin arrondi. C'est une
+   bande à coins coupés, portant à gauche le glyphe de la touche et au centre le verbe. Le glyphe
+   n'est pas décoratif — il est la moitié de l'information, puisqu'il dit AVEC QUOI on confirme.
+   Biseau de 9 px : au-delà l'objet devient une flèche, en deçà il redevient un rectangle. */
+.zrm-confirm{ display:inline-flex; align-items:center; gap:.9em;
+  padding:.55em 2.4em .55em 1em; background:var(--zrm-glass);
+  clip-path:polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px);
+  font-family:var(--f-display); font-weight:300; font-size:.9em; letter-spacing:.06em;
+  color:var(--zrm-ink); }
+.zrm-confirm .zrm-g{ width:1.25em; height:1.25em; color:var(--zrm-cyan);
+  filter:drop-shadow(0 0 3px rgba(127,212,255,.7)); }
+.zrm-confirm::after{ content:''; position:absolute; }
+</style>
+<button class="zrm-confirm" type="button">
+  <svg class="zrm-g"><use href="#g-cross"/></svg>{{intent}}
+</button>
+`;export{e as default};

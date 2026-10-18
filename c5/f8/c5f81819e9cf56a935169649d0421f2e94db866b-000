@@ -1,0 +1,32 @@
+const e=`<!--zrm { "name": "Surcouche modale", "group": "Global", "reference": "DS2__GUID__17", "order": 25 } -->
+<style>
+/* SURCOUCHE MODALE — relevée sur DS2__GUID__17. Elle ne noircit pas l'écran : elle le VOILE en
+   bleu très sombre et le laisse lisible. Une modale opaque coupe la scène ; celle-ci la met à
+   distance, ce qui est le ton du jeu — on n'y quitte jamais le monde.
+   Deux boutons seulement, alignés à droite, le second en retrait : l'annulation ne doit jamais
+   peser autant que la confirmation. */
+.zrm-overlay{ position:relative; padding:calc(var(--u)*1.4) calc(var(--u)*1.8);
+  background:linear-gradient(180deg, rgba(6,14,24,.82), rgba(6,14,24,.92));
+  backdrop-filter:blur(3px);
+  clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px); }
+.zrm-overlay::before{ content:''; position:absolute; inset:0 0 auto; height:1px;
+  background:linear-gradient(90deg, rgba(127,212,255,.9), rgba(127,212,255,0) 60%); }
+.zrm-overlay h3{ margin:0 0 .5em; font-family:var(--f-display); font-weight:300; font-size:1.1em;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--zrm-ink); }
+.zrm-overlay p{ margin:0 0 1.2em; max-width:46ch; font-family:var(--f-body); font-weight:300;
+  font-size:.86em; line-height:1.5; color:var(--zrm-ink-dim); }
+.zrm-overlay-acts{ display:flex; justify-content:flex-end; gap:1.4em;
+  font-family:var(--f-meta); font-size:.74em; }
+.zrm-overlay-acts span{ display:flex; align-items:center; gap:.4em; color:var(--zrm-ink); }
+.zrm-overlay-acts span+span{ color:var(--zrm-ink-faint); }
+.zrm-overlay-acts .zrm-g{ width:1.1em; height:1.1em; color:var(--zrm-cyan); }
+</style>
+<div class="zrm-overlay">
+  <h3>{{title}}</h3>
+  <p>{{message}}</p>
+  <div class="zrm-overlay-acts">
+    <span><svg class="zrm-g"><use href="#g-cross"/></svg>{{intent}}</span>
+    <span><svg class="zrm-g"><use href="#g-circle"/></svg>Annuler</span>
+  </div>
+</div>
+`;export{e as default};

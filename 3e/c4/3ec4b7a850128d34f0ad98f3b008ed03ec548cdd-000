@@ -1,0 +1,20 @@
+const e=`<!-- HÉRITÉ de T-01-1-2--une-de-rupture. Structure seulement : les mesures (échelle, filets, couleurs, graisses) sont celles de l'autre média et sont FAUSSES ici tant qu'elles n'ont pas été relevées sur les captures de T-01-1-4--quotidien-economique-saumon. -->
+<!--zrm { "name": "Drawer — liste des rubriques", "group": "Navigation", "reference": "LIBE__04__MENU_OPEN", "order": 8, "inPage": false } -->
+<style>
+/* Liste a chevrons : sans 15 px, interligne genereux, filet fin entre chaque entree. */
+.zrm-sections{ font-family:var(--f-meta); font-size:.78em; font-weight:600; }
+.zrm-section-row{ display:flex; align-items:center; justify-content:space-between;
+  padding:calc(var(--u)*.7) calc(var(--u)*1); border-bottom:1px solid var(--zrm-rule); }
+.zrm-section-row i{ width:.55em; height:.55em; border-right:1.5px solid var(--zrm-meta);
+  border-bottom:1.5px solid var(--zrm-meta); transform:rotate(45deg); display:block; }
+.zrm-section-row[data-state="expanded"] i{ transform:rotate(-135deg); }
+</style>
+<nav class="zrm-sections">
+  <div class="zrm-section-row">Accueil</div>
+  <div class="zrm-section-row">Politique<i></i></div>
+  <div class="zrm-section-row">International<i></i></div>
+  <div class="zrm-section-row" data-state="expanded">Culture<i></i></div>
+  <div class="zrm-section-row">Environnement<i></i></div>
+  <div class="zrm-section-row">Économie<i></i></div>
+</nav>
+`;export{e as default};

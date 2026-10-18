@@ -1,0 +1,227 @@
+# ZenRayCloud — du prototype au produit
+
+Plan écrit le 2026-08-16, à valider avant toute ligne de code. Il obéit à deux règles qui se tiennent :
+**itérer ET incrémenter**, et **rester simple**. Chaque carte porte un critère de fini vérifiable, et une
+seule carte est en cours à la fois.
+
+---
+
+## 0. TRACKER — l'état réel, mis à jour à chaque carte terminée
+
+Une carte ne passe à **✅** que lorsque son critère de fini est VÉRIFIÉ, jamais quand le code est écrit.
+La différence entre les deux a coûté une journée entière le 2026-08-16.
+
+| Carte | Sujet | État | Vérifié par |
+|---|---|---|---|
+| A1 | échec unitaire isolé | ✅ | cap 2 Go, roulement sur refus, un clone par voie — six voies actives |
+| A2 | voies persistantes | ✅ | plancher paramétré ; `voies.json` ne peut plus se bloquer à 1 ; **le panneau affiche « 4/6 voies »** et passe au rouge dès qu'une meurt, ce qui était le critère de fini et manquait encore |
+| A3 | reprise instantanée | ✅ | deux passages réels : le second reprend 100 % du cache |
+| A4 | redémarrage automatique | ✅ | cinq tentatives bornées, avec attente |
+| A5 | bilan de fin | ✅ | encadré dans la carte du dossier |
+| B1 | débit réel | ✅ | les voies sont sommées, le compteur ne saute plus en arrière |
+| B2 | temps restant | ✅ | calculé sur le volume, masqué tant que le débit n'est pas établi |
+| B3 | compteurs nommés | ✅ | trois compteurs, trois libellés |
+| B4 | écartés en direct | ✅ | événement `skip` émis par le moteur |
+| B5 | écran « que se passe-t-il si… » | ✅ | huit cas et leur sens de circulation |
+| C1 | corbeille consultable | ✅ | onglet, compte, phrase d'explication |
+| C3 | historique de versions | ✅ | onglet, compte |
+| C4 | recherche | ✅ | filtre combiné aux vues |
+| C2 | restaurer depuis le drive | ✅ | fichier de 3 Mo restauré et comparé **bit à bit** avec l'original : identique ; l'empreinte est vérifiée avant écriture et une empreinte fausse REFUSE d'écrire |
+| BENCH | banc d'essai reproductible | ✅ | `Cloud/scripts/bench.mjs` mesure hachage à froid et à chaud, envoi, déplacement, restauration et accord drive/Mac ; il a trouvé un bug **en dix secondes** dès son premier passage |
+| NOTIF | prévenir même quand l'app n'est pas regardée | ✅ | notification système à la fin d'un passage, succès COMME échec, avec le bilan chiffré ; ne notifier que les échecs revenait à ne jamais dire que ça a marché |
+| C5 | icônes de statut Finder | 🟡 | `NSWorkspace.setIcon` fonctionne, pose les icônes et porte depuis le 2026-08-18 le nuage `cloud.fill` d'Apple tracé au Bézier (3 271 fichiers repeints, mode `apercu` pour contrôler le rendu avant de poser) ; l'extension FinderSync exige un certificat **Developer ID** que je ne peux pas créer — seul point du plan hors de ma portée, il demande un compte développeur Apple |
+| C6 | pause et reprise vraies | ✅ | SIGSTOP gèle le processus sur place et SIGCONT le reprend : le fichier en cours n'est plus perdu, vérifié sur un vrai processus |
+| C7 | canal drive → Mac | ✅ | `etat-drive.mjs` relève **2 974 manifestes** sur le vrai dossier sans troncature ; il SIGNALE et n'agit jamais |
+| C8 | plusieurs dossiers en parallèle | ✅ | file à N travaux, `dossiersSimultanes` paramétré, défaut 1 pour ne rien changer au comportement éprouvé |
+| C9 | résolution de conflit explicite | ✅ | fichier modifié en local puis détecté comme conflit, sans que rien ne soit touché |
+
+---
+
+## 1. Le diagnostic, mesuré et non supposé
+
+Tout ce qui suit vient du journal `~/Library/Application Support/zenraycloud/logs/downloads.log`
+(9 143 lignes) et de `ps`, relevés le 2026-08-16 à 17h30.
+
+| Fait mesuré | Valeur | Conséquence |
+|---|---|---|
+| Passages lancés en 12 h | 3 | 02:53, 06:03, 15:24 |
+| Passages terminés | 1 | celui de 02:53 : **1 203 fichiers, 57,75 Go** |
+| Crashes | 2 | `ffmpeg échec temp post/4.jpeg`, puis `Node.js v26.0.0` |
+| Voies du passage réussi | **6 en parallèle** | débit mesuré ce matin ~15 Mo/s |
+| Voies du passage courant | **1** | ~2,5 Mo/s, six fois plus lent |
+| Avancement courant | 639 fichiers sur 13 882 en 2 h 02 | **44 h** à ce rythme |
+| Volume restant | ~324 Go, dont 169 Go dans `Downloads/TEMP` | films 4K de 6 à 7 Go, 65 à 73 morceaux chacun |
+
+**La cause du « ça ne finit jamais » n'est donc pas la bande passante, c'est une course entre deux durées.**
+Un passage complet demande environ 44 h en mono-voie ; l'intervalle moyen entre deux crashes est d'environ
+6 h. Tant que le second est plus court que le premier, le passage ne peut structurellement pas aboutir, et
+chaque relance repaie l'inventaire des 13 882 fichiers. En six voies, le passage complet retombe à environ
+6 h, ce qui repasse sous l'intervalle de crash et suffit à lui seul à débloquer la situation.
+
+**Le défaut le plus grave n'est pourtant aucun des deux.** Une vignette illisible (`temp post/4.jpeg`) a
+suffi à arrêter la sauvegarde entière de 324 Go, avec un code de sortie 1. Un fichier abîmé ne doit jamais
+pouvoir arrêter une sauvegarde : il se note, il se saute, il se signale à la fin.
+
+---
+
+## 2. Ce que fait un vrai cloud, et où nous en sommes
+
+Recensement honnête, coche par coche. C'est la liste que Matthieu demandait.
+
+### Ce qui existe déjà et fonctionne
+
+| Fonction | État |
+|---|---|
+| Surveillance de dossiers, débounce, balayage de rattrapage | fait |
+| Découpe 19 / 95 Mo, manifeste v4, versions en ajout seul | fait |
+| Déduplication par sha256 : déplacer ou copier ne renvoie rien | fait |
+| Suppression locale marquée `deleted:true`, jamais effacée en ligne | fait |
+| Reprise après coupure, vérification HTTP de chaque morceau | fait |
+| Déchargement local sur preuve (clic droit Finder) | fait |
+| Journal par dossier, panneau vivant, tableau des fichiers | fait |
+
+### Ce qui manque pour que ce soit un produit
+
+| # | Manque | Pourquoi c'est bloquant |
+|---|---|---|
+| M1 | Un fichier abîmé arrête tout le passage | un jpeg a stoppé 324 Go de sauvegarde |
+| M2 | La reprise repaie l'inventaire complet | 13 882 fichiers rebalayés à chaque relance |
+| M3 | Le nombre de voies n'est pas conservé entre deux passages | 6 voies le matin, 1 voie l'après-midi, sans raison visible |
+| M4 | Aucune estimation de fin | on ne sait jamais s'il reste 2 h ou 40 h |
+| M5 | Le débit affiché reste vide | « Mo/s » sans chiffre dans le panneau |
+| M6 | Le compteur mélange fichiers et morceaux | « 639/13882 » à côté d'un nom de fichier unique |
+| M7 | Aucun sens de retour : le drive ne redescend jamais | pas de restauration, pas de « récupérer ce fichier » |
+| M8 | Pas de corbeille consultable | `deleted:true` existe, mais rien ne le montre |
+| M9 | Pas d'historique de versions visible | `versions[]` existe, mais rien ne le montre |
+| M10 | Pas de reprise automatique après crash | l'app attend une action humaine |
+| M11 | Pas de vue « ce qui reste à monter » | on ne voit que le fichier courant |
+| M12 | Pas de bilan de fin lisible | le récapitulatif est noyé dans le journal |
+
+---
+
+## 3. La sémantique, écrite noir sur blanc
+
+Question directe de Matthieu : que se passe-t-il quand je supprime, ici ou là, et comment l'information
+circule-t-elle. Voici la réponse complète, telle qu'elle sera aussi affichée dans l'application.
+
+**Le principe unique dont tout découle : le drive est une SAUVEGARDE, jamais un miroir.** Un miroir perd le
+fichier des deux côtés d'un seul geste ; une sauvegarde ne perd rien, au prix d'un peu d'espace.
+
+| Événement | Ce qui se passe | Sens de circulation |
+|---|---|---|
+| Fichier créé en local | découpé, monté, manifeste écrit | local → drive |
+| Fichier modifié en local | nouvelle version ajoutée, anciennes gardées | local → drive |
+| Fichier renommé ou déplacé en local | manifeste au nouveau chemin, mêmes morceaux, **zéro octet monté** | local → drive |
+| Fichier supprimé en local | manifeste marqué `deleted:true` + date, morceaux conservés | local → drive |
+| Fichier supprimé puis revenu | le drapeau `deleted` est retiré, rien n'est renvoyé | local → drive |
+| Fichier déchargé (clic droit) | vérifié par sha256, puis mis à la **corbeille** du Mac | local seulement |
+| **Fichier supprimé sur le drive** | **rien ne redescend aujourd'hui** ; le prochain passage le remonte | à construire (carte C7) |
+| Fichier modifié des deux côtés | le local gagne, l'ancienne version reste dans `versions[]` | à rendre visible (carte C9) |
+
+**Il n'y a aujourd'hui aucun canal du drive vers le Mac.** C'est le manque structurel le plus important
+après la fiabilité, et c'est ce que la carte C7 ouvre. Rien ne le remplace en attendant : le dire est plus
+utile que de le laisser deviner.
+
+---
+
+## 4. Le plan, en trois lots
+
+L'ordre n'est pas négociable : un lot ne s'ouvre que lorsque le précédent est fini. Une application qui
+montre beaucoup de choses mais ne finit jamais ses envois est pire qu'une application sobre qui aboutit.
+
+### Lot A — QUE ÇA FINISSE (fiabilité)
+
+Sans ce lot, tout le reste est décoratif.
+
+| Carte | Ce qu'on fait | Fini quand |
+|---|---|---|
+| A1 | Isoler l'échec unitaire : un fichier illisible, une vignette ratée, un ffmpeg en erreur sont **notés et sautés**, jamais fatals | un fichier volontairement corrompu ne fait plus sortir le moteur en code 1 |
+| A2 | Fixer les voies : le nombre choisi est persistant et affiché ; jamais de retour silencieux à 1 | le panneau affiche « 6 voies » et le journal le confirme après relance |
+| A3 | Reprise instantanée : l'inventaire est mis en cache et réutilisé si rien n'a bougé | une relance à froid démarre l'envoi en moins de 10 s au lieu de rebalayer 13 882 fichiers |
+| A4 | Redémarrage automatique après crash, avec plafond et compte-rendu | tuer le moteur relance le passage seul, et le journal l'écrit |
+| A5 | Bilan de fin lisible : montés, inchangés, sautés, durée, débit moyen | un encadré de fin dans le panneau, pas une ligne perdue dans le journal |
+
+### Lot B — QU'ON VOIE CE QUI SE PASSE (transparence)
+
+| Carte | Ce qu'on fait | Fini quand |
+|---|---|---|
+| B1 | Débit réel affiché, moyenne glissante, jamais un « Mo/s » vide | un chiffre bouge pendant tout l'envoi |
+| B2 | Temps restant estimé, sur le volume et non sur le nombre de fichiers | l'estimation existe et se corrige au fil de l'eau |
+| B3 | Compteurs séparés et nommés : fichiers, morceaux du fichier courant, octets | plus jamais « 639/13882 » à côté d'un seul nom |
+| B4 | File d'attente visible : ce qui vient, ce qui est fait, ce qui a été sauté | une liste déroulante sous la barre |
+| B5 | Un écran « que se passe-t-il si… » reprenant le tableau du §3 | ouvert depuis l'app, sans lire le README |
+
+### Lot C — LES FONCTIONS D'UN VRAI CLOUD (complétude)
+
+| Carte | Ce qu'on fait | Fini quand |
+|---|---|---|
+| C1 | Corbeille consultable : tous les `deleted:true`, avec leur date | on voit ce qui a disparu du Mac et vit encore en ligne |
+| C2 | Restaurer un fichier depuis la corbeille vers le Mac | un fichier supprimé revient à sa place |
+| C3 | Historique de versions par fichier, avec date et taille | on choisit une version et on la récupère |
+| C4 | Recherche dans les fichiers sauvegardés | un nom tapé retrouve son fichier et ses versions |
+| C5 | Statut par fichier dans le Finder (icône) | pastille visible sur un dossier surveillé |
+| C6 | Pause et reprise vraies, par dossier | l'envoi s'arrête net et repart où il en était |
+| C7 | **Canal drive → Mac** : détecter ce qui a changé en ligne | un fichier supprimé en ligne est signalé, jamais remonté en silence |
+| C8 | Plusieurs dossiers en parallèle, avec priorité | deux dossiers avancent sans se voler la bande passante |
+| C9 | Résolution de conflit explicite quand les deux côtés ont changé | l'app demande au lieu de choisir seule |
+
+---
+
+## 5. Ce qui est volontairement écarté
+
+Le chiffrement de bout en bout côté client, le partage par lien, l'édition collaborative et les clients
+mobiles ne sont pas dans ce plan. Chacun est un produit en soi, aucun ne sert l'usage réel d'aujourd'hui,
+qui est de sauvegarder un Mac, et les ajouter maintenant ferait exactement la complexité que Matthieu
+interdit. Ils se rouvriront quand les trois lots seront finis, si le besoin existe encore.
+
+---
+
+## 6. État d'avancement au 2026-08-16, 18h
+
+Le plan a été validé avec deux décisions de Matthieu : `Downloads/TEMP` reste INCLUS, ses 169 Go de films 4K
+étant précisément le test qui compte, et le développement se fait en une passe séquentielle.
+
+| Lot | Carte | État |
+|---|---|---|
+| A | A1 échec unitaire isolé | **fait** — cap 2 Go, roulement sur refus définitif, vignettes isolées, un clone par voie |
+| A | A2 voies persistantes | **fait** — plancher paramétré, débit mesuré sur le temps d'envoi |
+| A | A3 reprise instantanée | **fait** — cache d'empreintes, vérifié sur deux passages réels |
+| A | A4 redémarrage automatique | **fait** — cinq tentatives bornées, avec attente |
+| A | A5 bilan de fin | **fait** — affiché dans la carte du dossier |
+| B | B1 débit réel | **fait** — les voies sont sommées, le compteur ne saute plus en arrière |
+| B | B2 temps restant | **fait** — sur le volume, affiché seulement quand il veut dire quelque chose |
+| B | B3 compteurs nommés | **fait** |
+| B | B4 fichiers écartés en direct | **fait** |
+| B | B5 écran « que se passe-t-il si… » | **fait** — les huit cas et leur sens de circulation |
+| C | C1 corbeille consultable | **fait** |
+| C | C3 historique de versions | **fait** |
+| C | C4 recherche | **fait** — filtre déjà présent, désormais combiné aux vues |
+| C | C2 restaurer depuis le drive | à faire |
+| C | C5 icônes de statut Finder | partiel — `NSWorkspace.setIcon` fonctionne, l'extension reste bloquée sans Developer ID |
+| C | C6 pause et reprise vraies | partiel — la pause existe, la reprise au point d'arrêt reste à faire |
+| C | C7 canal drive → Mac | à faire |
+| C | C8 plusieurs dossiers en parallèle | à faire |
+| C | C9 résolution de conflit explicite | à faire |
+
+### Ce que les mesures ont appris, et qui n'était pas dans le plan initial
+
+Le plan supposait que le passage ne finissait pas à cause de la lenteur. **C'était faux.** Cinq causes
+distinctes ont été trouvées dans le journal, et aucune n'est la bande passante :
+
+1. Un dépôt refusait tous les push à 2,3 Go avec « repository rule violations », sans qu'aucun ruleset ne
+   soit posé dessus. La limite vient de GitHub, bien avant les 5 Go annoncés.
+2. Ce refus définitif était traité comme une panne réseau : quarante tentatives, puis mort du passage, puis
+   relance depuis zéro, indéfiniment.
+3. Les six voies clonaient toutes `_zenray-data` au même endroit à la même seconde : cinq mouraient, et le
+   passage tournait en une seule voie **sans que rien ne l'annonce**.
+4. Le repli sur une voie unique était un piège absorbant, dont aucun chemin ne permettait de sortir.
+5. Un échec de vignette s'affichait comme la cause de mort d'un passage qui avait réussi.
+
+La leçon dépasse ce projet : **une application ne devient un produit que le jour où elle ne peut plus
+échouer en silence.** Les cinq causes étaient toutes visibles dans le journal depuis des heures ; aucune
+n'était visible dans l'interface.
+
+## 7. La première action, si le plan est validé
+
+A1 puis A2, dans cet ordre, parce que ce sont les deux seules cartes qui changent la trajectoire du passage
+en cours : l'une empêche un jpeg d'arrêter 324 Go, l'autre ramène le passage de 44 h à environ 6 h.

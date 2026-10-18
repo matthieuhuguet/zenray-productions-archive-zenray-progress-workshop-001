@@ -1,0 +1,54 @@
+import { describe, expect, it } from 'vitest'
+import { agregerEvenement, creerAgregation, erreurResultatSync, reportResultatSync, toutesLesVoiesTerminees } from './lane-events'
+
+describe('agrégation des voies', () => {
+  it('additionne inventaire, progression et octets sans perdre le fichier courant', () => {
+    const etat = creerAgregation(2)
+    agregerEvenement(etat, 0, { ev: 'inventory', files: 3, bytes: 30 })
+    expect(agregerEvenement(etat, 1, { ev: 'inventory', files: 5, bytes: 70 })).toMatchObject({ files: 8, bytes: 100 })
+    agregerEvenement(etat, 0, { ev: 'progress', seen: 2, total: 3, rel: 'a', lus: 20 })
+    expect(agregerEvenement(etat, 1, { ev: 'progress', seen: 4, total: 5, rel: 'b', lus: 60 }))
+      .toMatchObject({ seen: 6, total: 8, rel: 'b', lus: 80 })
+    agregerEvenement(etat, 0, { ev: 'chunk', seen: 3, files: 3, envoyes: 20, rel: 'a' })
+    expect(agregerEvenement(etat, 1, { ev: 'chunk', seen: 4, files: 5, envoyes: 50, rel: 'b' }))
+      .toMatchObject({ seen: 7, files: 8, envoyes: 70, rel: 'b' })
+    agregerEvenement(etat, 0, { ev: 'transfer', envoyes: 30, bytes: 30, rail: 'img' })
+    expect(agregerEvenement(etat, 1, { ev: 'transfer', envoyes: 80, bytes: 80, rail: 'video' }))
+      .toMatchObject({ envoyes: 110, bytes: 80, rail: 'video' })
+    agregerEvenement(etat, 0, { ev: 'route', seen: 3, files: 3, pipeline: 'img' })
+    expect(agregerEvenement(etat, 1, { ev: 'route', seen: 4, files: 5, pipeline: 'media' }))
+      .toMatchObject({ seen: 7, files: 8, pipeline: 'media' })
+  })
+
+  it('additionne les suppressions, publications et vérifications', () => {
+    const etat = creerAgregation(2)
+    agregerEvenement(etat, 0, { ev: 'deleted', count: 2 })
+    expect(agregerEvenement(etat, 1, { ev: 'deleted', count: 3 }).count).toBe(5)
+    agregerEvenement(etat, 0, { ev: 'manifests', done: 4, total: 7 })
+    expect(agregerEvenement(etat, 1, { ev: 'manifests', done: 5, total: 8 })).toMatchObject({ done: 9, total: 15 })
+    agregerEvenement(etat, 0, { ev: 'verify', total: 6, ko: 1 })
+    expect(agregerEvenement(etat, 1, { ev: 'verify', total: 9, ko: 2 })).toMatchObject({ total: 15, ko: 3 })
+  })
+
+  it('construit un seul bilan à partir de tous les résultats', () => {
+    const etat = creerAgregation(2)
+    expect(toutesLesVoiesTerminees(etat)).toBe(false)
+    agregerEvenement(etat, 0, { ev: 'done', chunked: 2, images: 1, unchanged: 4, reused: 1, skipped: ['a'] })
+    expect(toutesLesVoiesTerminees(etat)).toBe(false)
+    expect(agregerEvenement(etat, 1, { ev: 'done', chunked: 3, videos: 2, unchanged: 5, restored: 1, verifyKo: 2, skipped: ['b'] }))
+      .toMatchObject({ chunked: 5, images: 1, videos: 2, unchanged: 9, reused: 1, restored: 1, verifyKo: 2, skipped: ['a', 'b'] })
+    expect(toutesLesVoiesTerminees(etat)).toBe(true)
+  })
+
+  it('réserve le succès aux passages complets et vérifiés', () => {
+    const sain = { chunked: 0, images: 0, videos: 0, media: 0, unchanged: 8, deleted: 0,
+      reused: 0, restored: 0, skipped: [], verifyKo: 0 }
+    expect(erreurResultatSync(sain)).toBeNull()
+    expect(erreurResultatSync({ ...sain, verifyKo: 2 })).toMatch(/2 morceau/)
+    // Un fichier écarté ne condamne plus le passage : il est repris ensuite, la source n'a jamais bougé.
+    expect(erreurResultatSync({ ...sain, skipped: ['a', 'b'] })).toBeNull()
+    expect(reportResultatSync({ ...sain, skipped: ['a', 'b'] })).toMatch(/2 fichier\(s\) reporté/)
+    expect(reportResultatSync(sain)).toBeNull()
+    expect(erreurResultatSync(null)).toMatch(/absent/)
+  })
+})

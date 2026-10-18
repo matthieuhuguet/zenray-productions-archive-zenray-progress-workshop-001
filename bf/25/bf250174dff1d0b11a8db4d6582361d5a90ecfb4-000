@@ -1,0 +1,29 @@
+const r=`<!--zrm { "name": "Coin d'ATH", "group": "Scène", "reference": "DS2__GUID__23", "order": 5 } -->
+<style>
+/* COIN D'ATH — la grappe en bas à gauche, relevée sur DS2__GUID__23 et DS2__GUID__21.
+   Quatre marques disposées en CROIX, pas en carré : elles répondent aux quatre directions du pad,
+   et un carré perdrait cette lecture. Le tracé est dessiné UNE fois et tourné par <use> — quatre
+   chemins écrits à la main divergent toujours, et la divergence se voit au premier coup d'oeil.
+   Le viewBox parle en pixels de la source : 100 x 100 pour une grappe mesurée à 190 px de côté. */
+.zrm-hud{ display:inline-block; width:clamp(90px,14cqw,190px); color:var(--zrm-cyan); }
+.zrm-hud svg{ display:block; width:100%; height:auto; overflow:visible; }
+.zrm-hud .zrm-hud-ring{ fill:none; stroke:currentColor; stroke-width:1.6; opacity:.55; }
+.zrm-hud .zrm-hud-tick{ fill:none; stroke:currentColor; stroke-width:2.4; stroke-linecap:round;
+  filter:drop-shadow(0 0 3px rgba(127,212,255,.8)); }
+.zrm-hud .zrm-hud-core{ fill:rgba(13,71,111,.75); stroke:currentColor; stroke-width:1.2; }
+.zrm-hud .zrm-hud-bar{ fill:none; stroke:currentColor; stroke-width:3; stroke-linecap:round;
+  opacity:.9; filter:drop-shadow(0 0 3px rgba(127,212,255,.7)); }
+</style>
+<div class="zrm-hud">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <defs><path id="zrm-hud-t" d="M50 14 L50 26"/></defs>
+    <circle class="zrm-hud-ring" cx="50" cy="50" r="30"/>
+    <circle class="zrm-hud-core" cx="50" cy="50" r="9"/>
+    <use class="zrm-hud-tick" href="#zrm-hud-t"/>
+    <use class="zrm-hud-tick" href="#zrm-hud-t" transform="rotate(90 50 50)"/>
+    <use class="zrm-hud-tick" href="#zrm-hud-t" transform="rotate(180 50 50)"/>
+    <use class="zrm-hud-tick" href="#zrm-hud-t" transform="rotate(270 50 50)"/>
+    <path class="zrm-hud-bar" d="M22 92 H70"/>
+  </svg>
+</div>
+`;export{r as default};

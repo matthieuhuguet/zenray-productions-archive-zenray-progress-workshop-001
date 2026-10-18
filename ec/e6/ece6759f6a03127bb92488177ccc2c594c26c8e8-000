@@ -1,0 +1,54 @@
+const e=`<!--zrm { "name": "Listes de commandes", "group": "Panneau", "reference": "DS2__GUID__09, __10, __13, DS1__IIG__12, __19, __24", "order": 33 } -->
+<style>
+/* SIX LISTES, et ce qui les distingue est le rôle de la COLONNE DE GAUCHE :
+   COMMANDES     une case à cocher — on en prend plusieurs.
+   MENU RICHE    une icône + une description sous le libellé — on en choisit une.
+   LIVRAISON     une pastille ronde d'état + une barre + un bouton d'action par ligne.
+   JOUEURS       une pastille de profil, valeur alignée à droite.
+   MENU VERTICAL rien à gauche : l'entrée active porte un fond ET un sous-titre.
+   TRI           une seule ligne, avec chevrons : ce n'est pas une liste mais son réglage. */
+.zrm-lists{ display:flex; flex-direction:column; gap:calc(var(--u)*1.2);
+  padding:calc(var(--u)*1.1) calc(var(--u)*1.4); font-family:var(--f-meta); font-size:.76em; }
+.zrm-l{ display:flex; align-items:center; gap:.6em; padding:.3em .6em; color:var(--zrm-ink-dim);
+  border-bottom:1px solid rgba(255,255,255,.06); }
+.zrm-l > span:first-of-type{ flex:1 1 auto; }
+.zrm-l[data-on]{ background:rgba(43,105,156,.55); color:var(--zrm-ink); }
+.zrm-check{ width:1em; height:1em; border:1px solid rgba(255,255,255,.4); display:grid; place-items:center; }
+.zrm-check .zrm-g{ width:.8em; height:.8em; color:var(--zrm-cyan); }
+.zrm-l-rich{ display:flex; align-items:flex-start; gap:.6em; padding:.4em .6em; }
+.zrm-l-rich .zrm-g{ width:1.2em; height:1.2em; color:var(--zrm-cyan); margin-top:.1em; }
+.zrm-l-rich div{ flex:1 1 auto; }
+.zrm-l-rich b{ display:block; font-weight:400; color:var(--zrm-ink); }
+.zrm-l-rich small{ display:block; font-size:.85em; color:var(--zrm-ink-faint); }
+.zrm-l-rich[data-on]{ background:rgba(200,225,250,.9); color:#0b1a26; }
+.zrm-l-rich[data-on] b,.zrm-l-rich[data-on] small{ color:#0b1a26; }
+.zrm-dot{ width:1.3em; height:1.3em; border-radius:50%; border:1px solid rgba(140,195,240,.7);
+  display:grid; place-items:center; color:var(--zrm-cyan); }
+.zrm-dot .zrm-g{ width:.8em; height:.8em; }
+.zrm-returnable{ padding:.12em .7em; background:rgba(43,105,156,.85); color:#fff; font-size:.85em; }
+.zrm-l-sub{ padding:.35em .6em; color:var(--zrm-ink-faint); }
+.zrm-l-sub[data-on]{ background:rgba(43,105,156,.85); color:#fff; }
+.zrm-l-sub b{ display:block; font-weight:400; }
+.zrm-l-sub small{ display:block; font-size:.85em; opacity:.85; }
+.zrm-sort{ display:flex; align-items:center; gap:.5em; color:var(--zrm-ink-dim); }
+.zrm-sort .zrm-g{ width:1em; height:1em; }
+</style>
+<div class="zrm-lists">
+  <div><div class="zrm-l" data-on><span class="zrm-check"><svg class="zrm-g"><use href="#g-check"/></svg></span>
+      <span>003 Deliver One or More Remote Medical Units to Villa Libre</span><b>40.0</b></div>
+    <div class="zrm-l"><span class="zrm-check"></span><span>004 Deliver Resins to C1</span><b>12.0</b></div></div>
+  <div><div class="zrm-l-rich" data-on><svg class="zrm-g"><use href="#g-cargo"/></svg>
+      <div><b>Fabrication and Management</b><small>Fabricate necessary equipment and manage stocks of materials.</small></div>
+      <svg class="zrm-g"><use href="#g-chevron-r"/></svg></div>
+    <div class="zrm-l-rich"><svg class="zrm-g"><use href="#g-lock"/></svg><div><b>Facility Storage</b></div></div></div>
+  <div><div class="zrm-l"><span class="zrm-dot"><svg class="zrm-g"><use href="#g-check"/></svg></span>
+      <span>Return Staff Card</span><u style="width:6em;height:3px;background:rgba(255,255,255,.14)"></u>
+      <span class="zrm-returnable">Returnable</span></div></div>
+  <div><div class="zrm-l"><span class="zrm-dot"></span><span>CPY</span><b>3 087</b></div></div>
+  <div><div class="zrm-l-sub" data-on><b>Take on Orders</b><small>Take on delivery requests.</small></div>
+    <div class="zrm-l-sub"><b>Make Delivery</b></div>
+    <div class="zrm-l-sub"><b>Private Locker</b></div></div>
+  <div class="zrm-sort"><svg class="zrm-g"><use href="#g-chevron-l"/></svg>
+    List Order: Sorted by Classification<svg class="zrm-g"><use href="#g-chevron-r"/></svg></div>
+</div>
+`;export{e as default};

@@ -1,0 +1,27 @@
+# Transposition de la section `headers` de vercel.json (2026-07-30).
+# Cloudflare Pages lit ce fichier ; Vercel lit vercel.json. Les deux doivent rester EGAUX, et
+# `hebergement.test.js` echoue s'ils divergent : deux politiques de securite qui s'ecartent en
+# silence, c'est une faille qui n'apparait que sur l'hebergeur qu'on ne regarde pas ce jour-la.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Content-Security-Policy-Report-Only: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://cdn.jsdelivr.net https://sdk.scdn.co https://www.youtube.com https://s.ytimg.com; worker-src 'self' blob: https://cdn.jsdelivr.net; frame-src 'self' http://127.0.0.1:3104 https://open.spotify.com https://www.youtube.com https://www.youtube-nocookie.com https://www.google.com; connect-src 'self' blob: data: http://127.0.0.1:47831 http://127.0.0.1:3102 http://127.0.0.1:3104 https://api.spotify.com https://accounts.spotify.com https://api.github.com https://raw.githubusercontent.com https://cdn.jsdelivr.net https://thesvg.org https://www.youtube.com https://*.googleapis.com https://*.google.com; img-src 'self' blob: data: https: http://127.0.0.1:3102; media-src 'self' blob: data: https: http://127.0.0.1:3102; style-src 'self' 'unsafe-inline'; font-src 'self' data:;
+
+# index.html JAMAIS en cache : c'est lui qui porte les URL hashees des assets. Servi depuis un
+# cache, il reference des fichiers qui n'existent plus et l'application s'ouvre sur une page
+# blanche. Incident du 2026-06-01, voir la memoire `no_blank_screen_after_rebuild`.
+/
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/index.html
+  Cache-Control: no-cache, no-store, must-revalidate
+
+# Les assets portent un hash dans leur nom : ils sont immuables, donc cachables un an.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/zr-stream-sw.js
+  Cache-Control: no-cache, no-store, must-revalidate

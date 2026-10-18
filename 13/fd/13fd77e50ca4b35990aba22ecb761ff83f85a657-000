@@ -1,0 +1,26 @@
+import type { Prefs, WatchedFolder } from './types'
+
+export interface ConfigValidee { prefs: Prefs; folders: WatchedFolder[] }
+
+/** Valide seulement ce qui protège l'identité d'une sauvegarde. Les autres champs restent extensibles afin
+ *  qu'une nouvelle version puisse ajouter une préférence sans rendre les anciens fichiers incompatibles. */
+export function validerConfig(brut: unknown, defauts: Prefs): ConfigValidee {
+  if (!brut || typeof brut !== 'object' || Array.isArray(brut)) throw new Error('la racine doit être un objet')
+  const entree = brut as Record<string, unknown>
+  if (entree.prefs != null && (typeof entree.prefs !== 'object' || Array.isArray(entree.prefs))) {
+    throw new Error('prefs doit être un objet')
+  }
+  if (entree.folders != null && !Array.isArray(entree.folders)) throw new Error('folders doit être un tableau')
+  const folders = (entree.folders || []) as unknown[]
+  for (const [index, folder] of folders.entries()) {
+    if (!folder || typeof folder !== 'object' || Array.isArray(folder)) throw new Error(`folders[${index}] doit être un objet`)
+    const f = folder as Record<string, unknown>
+    for (const cle of ['id', 'src', 'dest']) {
+      if (typeof f[cle] !== 'string' || !f[cle]) throw new Error(`folders[${index}].${cle} manque`)
+    }
+  }
+  return {
+    prefs: { ...defauts, ...((entree.prefs || {}) as Partial<Prefs>) },
+    folders: folders as WatchedFolder[],
+  }
+}

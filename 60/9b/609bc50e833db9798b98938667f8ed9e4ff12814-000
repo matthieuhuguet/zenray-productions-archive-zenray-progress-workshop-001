@@ -1,0 +1,21 @@
+import { describe, expect, it, vi } from 'vitest'
+import { signalerArbre } from './process-tree'
+import type { ChildProcess } from 'node:child_process'
+
+describe('arrêt des voies', () => {
+  it('signale le groupe complet sur macOS', () => {
+    const tuer = vi.fn(() => true as const)
+    const enfant = { pid: 42, kill: vi.fn() } as unknown as ChildProcess
+    expect(signalerArbre(enfant, 'SIGTERM', 'darwin', tuer)).toBe(true)
+    expect(tuer).toHaveBeenCalledWith(-42, 'SIGTERM')
+    expect(enfant.kill).not.toHaveBeenCalled()
+  })
+
+  it('retombe sur le processus si le groupe n’existe pas', () => {
+    const tuer = vi.fn(() => { throw new Error('groupe absent') })
+    const kill = vi.fn(() => true)
+    const enfant = { pid: 42, kill } as unknown as ChildProcess
+    expect(signalerArbre(enfant, 'SIGKILL', 'darwin', tuer)).toBe(true)
+    expect(kill).toHaveBeenCalledWith('SIGKILL')
+  })
+})

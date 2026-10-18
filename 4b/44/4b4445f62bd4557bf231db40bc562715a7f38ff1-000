@@ -1,0 +1,12 @@
+const e=`<!-- HÉRITÉ de T-01-1-2--une-de-rupture. Structure seulement : les mesures (échelle, filets, couleurs, graisses) sont celles de l'autre média et sont FAUSSES ici tant qu'elles n'ont pas été relevées sur les captures de T-01-1-4--quotidien-economique-saumon. -->
+<!--zrm { "name": "Drawer — bandeau d'abonnement", "group": "Navigation", "reference": "LIBE__04__MENU_OPEN", "order": 6, "inPage": false } -->
+<style>
+/* Le seul aplat jaune du systeme : il ne sert qu'a l'abonnement, jamais a autre chose. */
+.zrm-subscribe{ display:flex; align-items:center; justify-content:space-between; gap:calc(var(--u)*.8);
+  background:var(--zrm-yellow); padding:calc(var(--u)*.7) calc(var(--u)*1); }
+.zrm-subscribe b{ font-family:var(--f-display); font-weight:400; font-size:1.15em; letter-spacing:-.003em; }
+.zrm-subscribe span{ background:var(--zrm-night); color:#fff; border-radius:.25em;
+  padding:.45em 1em; font-family:var(--f-meta); font-size:.68em; font-weight:600; }
+</style>
+<div class="zrm-subscribe"><b>1 mois pour 1 €</b><span>S’abonner</span></div>
+`;export{e as default};

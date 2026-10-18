@@ -1,0 +1,4 @@
+const s=`<!--zrm {"name":"episode row","group":"Liste","props":[{"key":"title","type":"text"},{"key":"show","type":"text"},{"key":"date","type":"text"},{"key":"duration","type":"text"},{"key":"summary","type":"text"},{"key":"progress","type":"number"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-x="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="34-episode-row"><span class="sp-title">{{title}}</span><span class="sp-show">{{show}}</span><span class="sp-date">{{date}}</span><span class="sp-duration">{{duration}}</span><span class="sp-summary">{{summary}}</span><span class="sp-num">{{progress}}</span></div>
+`;export{s as default};

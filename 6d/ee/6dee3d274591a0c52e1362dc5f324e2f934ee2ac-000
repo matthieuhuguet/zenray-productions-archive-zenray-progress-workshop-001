@@ -1,0 +1,27 @@
+const e=`<!-- HÉRITÉ de T-01-1-2--une-de-rupture. Structure seulement : les mesures (échelle, filets, couleurs, graisses) sont celles de l'autre média et sont FAUSSES ici tant qu'elles n'ont pas été relevées sur les captures de T-01-1-1--une-nationale-du-matin. -->
+<!--zrm { "name": "Masthead", "group": "Global", "reference": "LIBE__01__HOME_TOP", "order": 1 } -->
+<style>
+.zrm-masthead{ display:flex; align-items:center; gap:calc(var(--u)*1.2); background:var(--zrm-paper);
+  padding:calc(var(--u)*.75) calc(var(--u)*1.4); border-bottom:1px solid var(--zrm-rule); }
+.zrm-menu{ display:inline-flex; align-items:center; gap:.5em; background:var(--zrm-chip);
+  border-radius:.35em; padding:.42em .8em; color:var(--zrm-ink);
+  font-family:var(--f-meta); font-size:.72em; font-weight:500; }
+.zrm-menu i{ display:block; width:1.05em; height:1px; background:currentColor;
+  box-shadow:0 .3em 0 currentColor, 0 -.3em 0 currentColor; }
+/* Losange DESSINE EN CSS : une image distante souillerait le canevas et ferait echouer l'export PNG. */
+.zrm-logo{ position:relative; display:inline-flex; align-items:center; justify-content:center;
+  background:var(--zrm-red); color:#fff; padding:.2em 1.5em; }
+.zrm-logo::before,.zrm-logo::after{ content:''; position:absolute; top:0; bottom:0; width:1.1em; background:var(--zrm-red); }
+.zrm-logo::before{ left:-.55em; clip-path:polygon(100% 0,100% 100%,0 50%); }
+.zrm-logo::after{ right:-.55em; clip-path:polygon(0 0,0 100%,100% 50%); }
+.zrm-logo span{ position:relative; z-index:1; font-family:var(--f-display); font-weight:400;
+  font-size:1.15em; letter-spacing:-.005em; font-style:italic; }
+.zrm-spacer{ flex:1 1 auto; }
+</style>
+<header class="zrm-masthead">
+  <span class="zrm-menu"><i></i>Menu</span>
+  <span class="zrm-logo"><span>{{themeName}}</span></span>
+  <span class="zrm-spacer"></span>
+  <span class="zrm-searchbar">Recherche</span>
+</header>
+`;export{e as default};

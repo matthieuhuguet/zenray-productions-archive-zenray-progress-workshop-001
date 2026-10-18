@@ -1,0 +1,9 @@
+const e=`<!-- HÉRITÉ de T-01-1-2--une-de-rupture. Structure seulement : les mesures (échelle, filets, couleurs, graisses) sont celles de l'autre média et sont FAUSSES ici tant qu'elles n'ont pas été relevées sur les captures de T-01-1-5--tabloid-daccroche. -->
+<!--zrm { "name": "Champ de recherche", "group": "Global", "reference": "LIBE__05__SEARCH_OPEN", "order": 2, "inPage": false } -->
+<style>
+.zrm-searchbar{ background:var(--zrm-chip); border-radius:.35em; padding:.42em 1.2em;
+  font-family:var(--f-meta); font-size:.68em; color:var(--zrm-meta); }
+.zrm-searchbar[data-state="focus"]{ outline:2px solid var(--zrm-blue); outline-offset:2px; }
+</style>
+<span class="zrm-searchbar">Recherche</span>
+`;export{e as default};

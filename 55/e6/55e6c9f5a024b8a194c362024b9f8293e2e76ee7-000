@@ -1,0 +1,4 @@
+const a=`<!--zrm {"name":"card grid","group":"Liste","props":[{"key":"heading","type":"text"},{"key":"cards","type":"text"},{"key":"columns","type":"number"},{"key":"showplay","type":"bool"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-showplay="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="33-card-grid"><span class="sp-heading">{{heading}}</span><span class="sp-cards">{{cards}}</span><span class="sp-num">{{columns}}</span><i class="sp-flag" data-showplay="{{showplay}}"></i></div>
+`;export{a as default};

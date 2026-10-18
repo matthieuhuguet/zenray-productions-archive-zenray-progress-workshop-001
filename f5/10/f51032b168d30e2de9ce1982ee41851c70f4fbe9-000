@@ -1,0 +1,295 @@
+const e=`<!--zrm { "name": "Roue de dialogue", "group": "Scène", "reference": "DS2__GUID__05", "order": 4 } -->
+<style>
+/* ROUE DE DIALOGUE — VERSION 2, décalquée au zoom sur DS2__GUID__05.
+   La version 1 était grossière et Matthieu a eu raison de le dire : quatre rectangles plats, un
+   anneau SVG qui s'étirait sur tout le conteneur au lieu de la pastille (d'où l'arc bleu géant
+   en travers de l'écran), aucune texture, aucun halo. Ce qui suit est relevé au pixel.
+
+   CE QUE MONTRE LA CAPTURE, ÉLÉMENT PAR ÉLÉMENT
+   1. La barre n'est pas un aplat : c'est un dégradé VERTICAL, plus clair en haut, sur lequel
+      court une trame régulière très fine. Sans la trame, la barre paraît plate et morte ; c'est
+      elle qui donne l'impression d'un affichage projeté.
+   2. Le bord SUPÉRIEUR porte un liseré plus clair, sur un seul côté. Un liseré sur les quatre
+      côtés ferait bouton.
+   3. Les coins sont COUPÉS en biseau (10 px), pas arrondis. Un \`border-radius\` donne un objet
+      doux ; le biseau donne un objet technique. C'est la différence de ton entre une interface
+      d'application et une interface de jeu.
+   4. Les crochets d'angle sont BLANCS, fins, et se tiennent À L'EXTÉRIEUR du biseau : ils
+      accompagnent la forme sans la fermer. Ce n'est pas une bordure, ce sont quatre marques.
+   5. L'anneau central porte HUIT encoches radiales tournées vers l'extérieur — pas quatre. Elles
+      marquent les huit directions du stick, pas les quatre du pad.
+   6. Le halo est toujours PLUS CLAIR que ce qui l'émet. Une lueur plus sombre que sa source se
+      lit comme une ombre, et l'effet s'inverse.
+
+   Aucun de ces six points ne coûte cher. Les manquer tous coûte la ressemblance entière. */
+
+/* ---- ÉCHELLE : UNITÉS DE CONTENEUR, PAS DES \`em\` -------------------------------------------
+   ITÉRATION 2, et c'est la correction qui compte. Les \`em\` héritent de \`--u\`, qui suit la
+   largeur de la FENÊTRE — le composant rendait donc une roue 2,4 fois trop petite quel que soit
+   le cadre qu'on lui donnait. Toutes les mesures sont désormais exprimées en \`cqw\`, pourcentage
+   de la largeur de la roue elle-même, exactement comme elles ont été relevées.
+
+   RELEVÉ sur DS2__GUID__05 (1920x1080), bords trouvés au prélèvement colonne par colonne :
+     barre haute      x 642..1274, y 642..691   ->  632 x 49 px
+     roue entière     x 250..1672               ->  1422 px de large
+   D'où : largeur de barre 632/1422 = 44,4 cqw ; hauteur 49/1422 = 3,45 cqw ; corps du texte
+   mesuré à ~22 px = 1,55 cqw. Ces trois nombres viennent de l'image, aucun n'est choisi. */
+.zrm-wheel{ position:relative; container-type:inline-size;
+  display:grid; align-items:center; justify-items:center;
+  /* ITÉRATION 3 : les barres haute et basse occupaient la colonne CENTRALE, dont la largeur est
+     calculée sur son contenu le plus large. Une barre de 44 cqw y imposait donc une colonne de
+     44 cqw, ne laissant que 26 cqw à chaque colonne latérale — et les barres gauche et droite
+     débordaient du cadre. En les faisant traverser les trois colonnes, la colonne du milieu
+     retrouve la largeur de la seule pastille. */
+  grid-template-areas:"up up up" "left pad right" "down down down";
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+  /* ITÉRATION 4, écarts verticaux relevés sur la source :
+       barre haute    y 642..691
+       rangée milieu  y 737..787
+       barre basse    y 833..882
+     Soit 46 px entre deux rangées = 3,2 cqw, et 12 px au-dessus de la première = 0,8 cqw.
+     J'avais 2,2 cqw de gouttière et 2,4 cqw de marge haute : la roue était trop aérée ET
+     décalée vers le bas, ce que seule la superposition montrait. */
+  /* ITÉRATION 10 : gouttière horizontale supprimée. L'anneau doit TOUCHER les barres — c'est
+     ce contact qui fait lire un ensemble connecté plutôt que trois objets posés côte à côte.
+     45,2 x 2 + 9,6 = 100 : la colonne centrale occupe exactement ce qui reste. */
+  /* ITÉRATION 11 : la gouttière revient. La mesure dit que l'anneau NE TOUCHE PAS les barres —
+     il reste 21 px, soit 1,48 cqw. Colonne centrale 9,6 cqw pour un anneau de 6,68 : le compte
+     y est exactement. */
+  gap:3.2cqw 0; padding:.8cqw 0; }
+
+/* ---- LA CAPSULE ---------------------------------------------------------------------------- */
+.zrm-opt{ position:relative; display:flex; align-items:center; justify-content:center;
+  width:44.4cqw; padding:.81cqw 2cqw;
+  font-family:var(--f-meta); font-weight:300; font-size:1.55cqw; line-height:1.2;
+  color:#fff; text-align:center; }
+/* Les barres gauche et droite mesurent 643 px dans la source, soit 45,2 cqw : elles sont
+   très légèrement plus larges que la haute, et cet écart de 11 px est visible en superposition. */
+.zrm-opt[data-pos="left"],.zrm-opt[data-pos="right"]{ width:45.2cqw; }
+
+/* Le fond, en trois couches dans un seul \`background\` :
+     1. la trame       — points espacés de 3 px, à peine visibles, qui donnent le grain ;
+     2. le liseré haut — une bande de 1 px plus claire, sur le bord supérieur seulement ;
+     3. le dégradé     — bleu clair en haut vers le bleu mesuré (#2b699c) en bas.
+   Trois éléments empilés seraient plus lisibles en code et bien plus lourds à rendre. */
+.zrm-opt::before{ content:''; position:absolute; inset:0; z-index:0;
+  background:
+    /* QUADRILLAGE, relevé à x12 sur un carré de 60x40 px. Ce ne sont pas des points : ce sont
+       des lignes fines dans LES DEUX sens, au pas de 2 px, à peine plus claires que le fond.
+       Le contraste est de l'ordre de trois unités — assez pour que l'oeil sente un grain, pas
+       assez pour qu'il voie un motif. C'est cette finesse-là qui rend l'effet précieux, et une
+       trame de points l'aurait rendu sale. */
+    repeating-linear-gradient(0deg, rgba(255,255,255,.055) 0 1px, transparent 1px 2px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.055) 0 1px, transparent 1px 2px),
+    linear-gradient(180deg, rgba(255,255,255,.26) 0 1px, transparent 1px),
+    linear-gradient(180deg, rgba(48,101,151,.94), rgba(44,107,160,.94) 45%, rgba(42,102,152,.94));
+  /* ITÉRATION 6 : AUCUN biseau, AUCUN arrondi. Les coins sont carrés, nets.
+     J'avais lu un biseau là où il n'y en a pas — d'abord 10 px, puis 7, puis 0,56 cqw, en
+     réduisant à chaque passe sans jamais poser la question « et s'il n'y en avait pas ? ».
+     Ajuster une valeur fausse est plus confortable que reconnaître qu'elle ne devrait pas
+     exister ; c'est exactement ce que la comparaison sert à empêcher. */
+  box-shadow:0 0 1.4cqw rgba(60,130,190,.3); }
+/* LE GLOW DERRIÈRE LA BARRE. La capture montre une lueur large et douce qui déborde nettement
+   du rectangle — un \`box-shadow\` seul ne la produit pas, il reste trop près du bord. On ajoute
+   une couche en dégradé radial, débordante, sous la barre. Elle explique pourquoi la barre
+   « tient » sur une scène claire sans être opaque. */
+.zrm-opt::after{ content:''; position:absolute; inset:-40% -6%; z-index:-1; pointer-events:none;
+  background:radial-gradient(ellipse at center, rgba(90,170,235,.30), rgba(90,170,235,0) 72%); }
+.zrm-opt[data-on]::after{ background:radial-gradient(ellipse at center, rgba(130,200,255,.42), rgba(130,200,255,0) 74%); }
+
+.zrm-opt > span{ position:relative; z-index:2; text-shadow:0 .04cqw .3cqw rgba(6,20,34,.85); }
+
+/* ---- LES BOUTS DE BARRE — ITÉRATION 13, RELEVÉS PIXEL PAR PIXEL ---------------------------
+   Crops 630,632,56,72 et 1232,632,56,72, agrandis x14. Le bout n'est pas une marque, c'est un
+   ASSEMBLAGE DE TROIS PIÈCES, et chacune est ailleurs sur les deux bouts.
+
+   BOUT GAUCHE, en pixels source (barre : x 642..1274, y 642..691) :
+     petit bloc    x 638..642, y 643..645   4 x 2 px, à cheval sur le coin HAUT
+     trait vertical x 641..643, y 683..691   2 x 8 px, sur le BAS de l'arête gauche
+     languette     x 645..659, y 691..696   14 x 5 px, PENDANT sous l'arête basse,
+                                            côté droit rentrant de 3 px (trapèze)
+
+   BOUT DROIT :
+     languette     x 1261..1275, y 637..642  au-DESSUS de l'arête haute
+     trait vertical x 1277..1279, y 645..653  sur le HAUT de l'arête droite
+     petit bloc    x 1278..1282, y 691..693   à cheval sur le coin BAS
+
+   Le bout droit est donc la ROTATION À 180° du bout gauche, pas son miroir. Un miroir
+   gauche-droite aurait laissé la languette en bas des deux côtés ; la rotation la fait passer
+   en haut. C'est l'alternance que Matthieu décrivait, et c'est aussi pourquoi on ne dessine
+   qu'UN bout : l'autre est le même SVG tourné, donc les deux ne peuvent pas diverger.
+
+   En SVG et non en CSS : ces formes sont un trapèze et deux rectangles à des positions précises,
+   et le SVG les décrit en unités de pixels source — 1 unité = 1 px de la capture. Le facteur de
+   conversion est unique (1422 px = 100 cqw, donc 1 px = 0,0703 cqw) et n'apparaît qu'ici. */
+.zrm-edge{ position:absolute; z-index:2; pointer-events:none; overflow:visible;
+  /* Boîte de 26 x 61 unités = 26 x 61 px source. */
+  width:1.83cqw; height:4.29cqw;
+  /* La boîte déborde de 6 px en haut et sur le côté, pour loger les pièces qui sortent. */
+  top:-.42cqw; }
+.zrm-edge-l{ left:-.42cqw; }
+/* Le bout droit : même dessin, tourné d'un demi-tour. Écrire un second tracé à la main aurait
+   introduit l'occasion de le faire diverger du premier au premier ajustement. */
+.zrm-edge-r{ right:-.42cqw; transform:rotate(180deg); }
+.zrm-edge > *{ fill:rgba(238,246,255,.95); }
+.zrm-edge .zrm-edge-dim{ fill:rgba(196,220,242,.62); }
+
+.zrm-opt[data-pos="up"]{ grid-area:up; }
+.zrm-opt[data-pos="down"]{ grid-area:down; }
+.zrm-opt[data-pos="left"]{ grid-area:left; justify-self:end; }
+.zrm-opt[data-pos="right"]{ grid-area:right; justify-self:start; }
+
+/* L'option active monte en CLARTÉ, elle ne change pas de teinte : dans cette interface, l'état
+   se lit à la luminosité. Changer la couleur introduirait un code que le jeu n'utilise pas. */
+.zrm-opt[data-on]::before{
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.075) 0 1px, transparent 1px 2px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.075) 0 1px, transparent 1px 2px),
+    linear-gradient(180deg, rgba(255,255,255,.42) 0 1px, transparent 1px),
+    linear-gradient(180deg, rgba(66,126,182,.95), rgba(60,131,190,.95) 45%, rgba(56,122,176,.95));
+  box-shadow:0 0 2.2cqw rgba(110,180,240,.42); }
+
+/* ---- LA PASTILLE DIRECTIONNELLE ------------------------------------------------------------ */
+/* La faute de la version 1 était ici : l'anneau était en \`position:absolute; inset:0\` dans un
+   parent qui n'était pas la pastille, donc il s'étirait sur toute la roue et traçait un arc en
+   travers de l'écran. Un SVG carré, dimensionné par sa propre boîte, ne peut plus déborder. */
+/* ITÉRATION 5 : la pastille faisait 5,2 cqw (76 px) alors que la source la montre à ~62 px.
+   Elle est plus haute que les barres, c'est donc ELLE qui fixe la hauteur de la rangée du
+   milieu — et un excès de 14 px ici décalait toute la barre du bas d'autant. Une erreur sur un
+   élément se propage à ceux qui n'ont rien à voir avec lui : c'est le genre de chose que la
+   superposition attrape et qu'une relecture du code ne peut pas voir. */
+/* La cellule est LARGE (9,6 cqw) mais aussi BASSE qu'une barre (3,45 cqw) : si elle avait la
+   hauteur de l'anneau, elle écarterait les rangées du haut et du bas de six cqw. Dans la source
+   l'anneau déborde verticalement dans les gouttières — il ne les crée pas. Le SVG est donc posé
+   en absolu, centré, et déborde de sa cellule. */
+.zrm-wheel-pad{ grid-area:pad; position:relative; width:9.6cqw; height:3.45cqw;
+  display:grid; place-items:center; }
+/* \`overflow:visible\` est indispensable : les fils sortent volontairement du viewBox pour aller
+   chercher les barres. Sans lui ils sont coupés net au bord du carré, ce qui donne exactement
+   l'impression de croisillons décoratifs que je décrivais à tort. */
+.zrm-wheel-pad > svg:first-of-type{ position:absolute; left:50%; top:50%;
+  width:10cqw; height:10cqw; transform:translate(-50%,-50%); overflow:visible; }
+/* ITÉRATION 10 : traits épaissis. Un \`vector-effect:non-scaling-stroke\` bloquait le trait à
+   1 px quelle que soit la taille — donc plus l'anneau grandissait, plus il paraissait fin. Le
+   trait doit grandir AVEC la forme : on le laisse en unités de viewBox. */
+.zrm-pad-ring{ fill:none; stroke:rgba(214,232,248,.82); stroke-width:1; }
+.zrm-pad-caps{ fill:none; stroke:rgba(240,248,255,.96); stroke-width:4.4;
+  stroke-linecap:round; }
+.zrm-pad-ticks{ fill:none; stroke:rgba(214,232,248,.9); stroke-width:1;
+  stroke-linecap:round; }
+.zrm-pad-spokes{ fill:none; stroke:rgba(200,224,246,.55); stroke-width:1;
+  stroke-linecap:round; }
+/* ITÉRATION 12 — L'AFFINEMENT. Trois épaisseurs divisées par deux, et rien d'autre.
+   Le troisième cas impose de scinder chaque liaison : un seul \`path\` ne peut pas porter deux
+   épaisseurs, or l'amorce accrochée à l'anneau est FINE tandis que la diagonale qui rejoint la
+   barre reste pleine. Deux tracés par liaison, donc, et le point de raccord est commun aux deux
+   pour qu'aucun écart ne se voie à la jointure.
+   Ce dégradé d'épaisseur est ce qui donne la finesse : un trait d'épaisseur constante, si fin
+   soit-il, reste un trait ; un trait qui s'affine vers son point d'attache devient un fil. */
+.zrm-pad-wire{ fill:none; stroke:rgba(216,236,254,.78); stroke-width:2;
+  stroke-linecap:round; stroke-linejoin:round; }
+.zrm-pad-stub{ fill:none; stroke:rgba(216,236,254,.78); stroke-width:1;
+  stroke-linecap:round; }
+.zrm-pad-solder{ fill:rgba(232,244,255,.9); stroke:none; }
+/* La croix est BLANCHE, pas cyan. Je l'avais mise à la couleur d'accent par réflexe — c'est
+   l'interface qui est cyan, le glyphe de manette non. Sur la capture il est franchement blanc,
+   et c'est le HALO derrière lui qui est bleu. Confondre la couleur d'un objet avec celle de sa
+   lueur est une erreur qui se répète : la lueur est toujours d'une autre couleur que sa source. */
+.zrm-pad-glyph{ position:relative; z-index:1; width:2.8cqw; height:2.8cqw; color:#ffffff;
+  filter:drop-shadow(0 0 .5cqw rgba(127,212,255,.95)) drop-shadow(0 0 1.2cqw rgba(60,170,255,.6)); }
+/* Le halo derrière la pastille : un dégradé radial, pas une ombre portée. Une ombre portée
+   s'arrête net à son rayon, un dégradé s'éteint — et c'est l'extinction qui fait la lueur. */
+.zrm-wheel-pad::before{ content:''; position:absolute; left:50%; top:50%;
+  width:11cqw; height:11cqw; transform:translate(-50%,-50%); border-radius:50%;
+  background:radial-gradient(circle, rgba(90,190,255,.34), rgba(90,190,255,0) 68%); }
+</style>
+
+<div class="zrm-wheel">
+  <div class="zrm-opt" data-pos="up" data-on>
+    <svg class="zrm-edge zrm-edge-l" viewBox="-6 -6 26 61"><use href="#g-bar-end"/></svg>
+    <svg class="zrm-edge zrm-edge-r" viewBox="-6 -6 26 61"><use href="#g-bar-end"/></svg>
+    <span>Why me?</span>
+  </div>
+
+  <div class="zrm-opt" data-pos="left">
+    <svg class="zrm-edge zrm-edge-l" viewBox="-6 -6 26 61"><use href="#g-bar-end"/></svg>
+    <svg class="zrm-edge zrm-edge-r" viewBox="-6 -6 26 61"><use href="#g-bar-end"/></svg>
+    <span>What's the state of the environment there?</span>
+  </div>
+
+  <div class="zrm-wheel-pad">
+    <!-- RÉTICULE, relevé sur un agrandissement x6 du crop 895,700,130,130.
+         Ma version précédente était un cercle nu avec huit encoches : la capture montre un
+         assemblage à quatre couches, et c'est l'empilement qui produit l'effet « machine ».
+           1. un cercle FIN, continu, qui donne la forme ;
+           2. quatre ARCS ÉPAIS aux points cardinaux, posés par-dessus — ils se lisent comme des
+              renforts, et ce sont eux qui font la différence avec un simple rond ;
+           3. quatre CROISILLONS aux diagonales, traversant l'anneau de part en part ;
+           4. quatre RAYONS sortants aux cardinaux, qui rattachent le réticule aux barres.
+         Les arcs sont obtenus par \`stroke-dasharray\` sur un second cercle plutôt que par quatre
+         chemins : quatre arcs écrits à la main divergeraient dès qu'on change le rayon. -->
+    <!-- RAYON MESURÉ, PAS ESTIMÉ (itération 11).
+         Méthode : balayage de luminance sur une ligne et une colonne passant par le centre, et
+         relevé des PICS. Un trait fin sur une photo ne se repère pas à l'oeil, il se repère à sa
+         valeur. Résultats concordants sur les deux axes :
+           ligne y=762   pics à x=912 et x=1007   ->  diamètre 95 px, centre x 959,5
+           colonne x=960 pics à y=712 et y=807    ->  diamètre 95 px, centre y 759,5
+         Donc rayon = 47,5 px dans une roue de 1422 px : 3,34 cqw de rayon, 6,68 de diamètre.
+         J'avais mis 3,94 — 18 % de trop, ce que Matthieu a vu immédiatement.
+
+         ET L'ANNEAU NE TOUCHE PAS LES BARRES. Barre gauche finit à x=893, barre droite commence
+         à x=1030, anneau de 912 à 1007 : il reste 21 px de chaque côté. Ce sont les LIAISONS qui
+         franchissent cet écart — d'où l'impression d'un ensemble connecté sans contact réel.
+         J'avais suivi l'impression plutôt que la mesure, et collé l'anneau aux barres.
+
+         Le SVG fait 10 cqw, l'anneau 66,8 % de sa boîte : le reste est la marge dont les
+         liaisons ont besoin pour sortir. -->
+    <svg viewBox="0 0 100 100" aria-hidden="true">
+      <circle class="zrm-pad-ring" cx="50" cy="50" r="33.4"/>
+      <!-- Périmètre = 2*pi*33,4 = 209,9. Arc de 26 degrés = 15,2 ; intervalle = 209,9/4 - 15,2 = 37,3. -->
+      <circle class="zrm-pad-caps" cx="50" cy="50" r="33.4"
+              stroke-dasharray="15.2 37.3" stroke-dashoffset="-44.9"/>
+      <!-- Les quatre encoches diagonales, celles qui TRAVERSENT l'anneau et sont symétriques.
+           Les traits internes semi-opaques que j'avais ajoutés en plus n'existent pas sur la
+           capture : je les avais inventés en croyant enrichir le dessin, et ils lui donnaient
+           l'aspect d'un cadran d'horloge. Ajouter du détail qui n'est pas dans la source est le
+           même défaut qu'en omettre — dans les deux cas on ne reproduit pas ce qu'on regarde. -->
+      <path class="zrm-pad-ticks" d="
+        M69.6 30.4 77.5 22.5 M30.4 69.6 22.5 77.5 M30.4 30.4 22.5 22.5 M69.6 69.6 77.5 77.5"/>
+      <!-- LES LIAISONS, mesurées elles aussi. Écart anneau -> barre = 21 px = 14,8 unités ici.
+           Premier segment perpendiculaire : 10 px = 7 unités, soit la moitié. Diagonale à 45° :
+           11 px sur chaque axe = 7,7 unités, qui couvre le reste et rejoint l'arête de la barre.
+           Deux segments, et les quatre se déduisent par rotation de 180 degrés. -->
+      <!-- Les amorces, accrochées à l'anneau : moitié moins épaisses. -->
+      <path class="zrm-pad-stub" d="
+        M50 16.6 V9.6
+        M83.4 50 H90.4
+        M50 83.4 V90.4
+        M16.6 50 H9.6"/>
+      <!-- Les diagonales, qui rejoignent les barres : épaisseur pleine, inchangée. -->
+      <path class="zrm-pad-wire" d="
+        M50 9.6 L57.7 1.9
+        M90.4 50 L98.1 42.3
+        M50 90.4 L42.3 98.1
+        M9.6 50 L1.9 57.7"/>
+      <g class="zrm-pad-solder">
+        <circle cx="50" cy="16.6" r="1.6"/><circle cx="83.4" cy="50" r="1.6"/>
+        <circle cx="50" cy="83.4" r="1.6"/><circle cx="16.6" cy="50" r="1.6"/>
+      </g>
+    </svg>
+    <svg class="zrm-pad-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><use href="#g-dpad"/></svg>
+  </div>
+
+  <div class="zrm-opt" data-pos="right">
+    <svg class="zrm-edge zrm-edge-l" viewBox="-6 -6 26 61"><use href="#g-bar-end"/></svg>
+    <svg class="zrm-edge zrm-edge-r" viewBox="-6 -6 26 61"><use href="#g-bar-end"/></svg>
+    <span>Are there BTs out there?</span>
+  </div>
+
+  <div class="zrm-opt" data-pos="down">
+    <svg class="zrm-edge zrm-edge-l" viewBox="-6 -6 26 61"><use href="#g-bar-end"/></svg>
+    <svg class="zrm-edge zrm-edge-r" viewBox="-6 -6 26 61"><use href="#g-bar-end"/></svg>
+    <span>I'll do it.</span>
+  </div>
+</div>
+`;export{e as default};

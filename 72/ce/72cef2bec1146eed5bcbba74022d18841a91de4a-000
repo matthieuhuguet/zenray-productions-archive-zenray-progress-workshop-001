@@ -1,0 +1,65 @@
+const a=`<!--zrm { "name": "Grilles et matériaux", "group": "Panneau", "reference": "DS2__GUID__10, __13, __16, __17, DS1__IIG__11", "order": 30 } -->
+<style>
+/* GRILLES ET RESSOURCES. Trois formes, une seule règle : un emplacement VIDE est toujours
+   dessiné, jamais omis. Le joueur doit voir combien il pourrait en avoir, pas seulement combien
+   il en a — c'est la différence entre un inventaire et une liste.
+   PASTILLE DE MATÉRIAU : icône, valeur, /plafond. L'active porte un cadre plus clair.
+   BLOC DE COÛT : Required au-dessus, Available dessous. Un coût qu'on ne peut pas payer passe
+   en ROUGE — la seule couleur d'alerte du thème, réservée à ce cas et aux dégâts. */
+.zrm-grids{ display:flex; flex-direction:column; gap:calc(var(--u)*1.2);
+  padding:calc(var(--u)*1.1) calc(var(--u)*1.4); font-family:var(--f-meta); font-size:.74em; }
+.zrm-mats{ display:flex; gap:.5em; }
+.zrm-mat{ width:4.4em; padding:.35em .2em; text-align:center; color:var(--zrm-ink-dim);
+  background:rgba(43,105,156,.28); border:1px solid rgba(140,195,240,.2); }
+.zrm-mat[data-on]{ background:rgba(43,105,156,.6); border-color:rgba(190,225,255,.7); color:var(--zrm-ink); }
+.zrm-mat small{ display:block; font-size:.78em; letter-spacing:.03em; }
+.zrm-mat .zrm-g{ width:1.2em; height:1.2em; margin:.15em 0; color:var(--zrm-cyan); }
+.zrm-mat b{ display:block; font-family:var(--f-mono); font-weight:400; color:var(--zrm-ink); }
+.zrm-mat u{ display:block; text-decoration:none; font-family:var(--f-mono); font-size:.8em;
+  color:var(--zrm-ink-faint); }
+.zrm-cargogrid{ display:grid; grid-template-columns:repeat(3, 6.4em); gap:.6em; }
+.zrm-cargocell{ padding:.4em; text-align:center; color:var(--zrm-ink-dim);
+  border:1px solid rgba(255,255,255,.1); }
+.zrm-cargocell i{ display:block; height:3.2em; background:rgba(43,105,156,.25);
+  display:grid; place-items:center; color:var(--zrm-cyan); }
+.zrm-cargocell i .zrm-g{ width:1.4em; height:1.4em; }
+.zrm-cargocell small{ display:block; margin-top:.3em; font-size:.82em; }
+.zrm-cargocell[data-locked]{ color:var(--zrm-ink-faint); }
+.zrm-cargocell[data-locked] i{ background:rgba(255,255,255,.04); color:var(--zrm-ink-faint); }
+.zrm-cost{ display:inline-flex; align-items:center; gap:.8em; }
+.zrm-cost div{ text-align:right; color:var(--zrm-ink-dim); }
+.zrm-cost div small{ display:block; font-size:.85em; }
+.zrm-cost b{ display:block; font-family:var(--f-mono); color:var(--zrm-ink); }
+.zrm-cost b[data-lack]{ color:var(--zrm-red); }
+.zrm-craft{ display:flex; gap:calc(var(--u)*1.2); }
+.zrm-craft-item{ width:7em; text-align:center; color:var(--zrm-ink-dim); }
+.zrm-craft-item i{ display:block; height:3em; background:rgba(43,105,156,.3);
+  display:grid; place-items:center; color:var(--zrm-cyan); }
+.zrm-craft-item b{ display:block; margin-top:.3em; font-weight:400; color:var(--zrm-ink); }
+.zrm-badge-new{ display:inline-flex; align-items:center; gap:.25em; padding:.05em .4em;
+  background:rgba(232,242,252,.9); color:#0b1a26; font-size:.78em; }
+.zrm-badge-new .zrm-g{ width:.85em; height:.85em; }
+</style>
+<div class="zrm-grids">
+  <div class="zrm-mats">
+    <span class="zrm-mat"><small>Chiral</small><svg class="zrm-g"><use href="#g-scan"/></svg><b>0</b><u>/ 110</u></span>
+    <span class="zrm-mat" data-on><small>Resins</small><svg class="zrm-g"><use href="#g-cargo"/></svg><b>40</b><u>/ 180</u></span>
+    <span class="zrm-mat"><small>Metals</small><svg class="zrm-g"><use href="#g-lock"/></svg><b>0</b><u>/ 300</u></span>
+    <span class="zrm-mat"><small>Ceramics</small><svg class="zrm-g"><use href="#g-cargo"/></svg><b>0</b><u>/ 150</u></span>
+  </div>
+  <div class="zrm-cargogrid">
+    <span class="zrm-cargocell"><i><svg class="zrm-g"><use href="#g-cargo"/></svg></i><small>Chiral Network Gateway</small></span>
+    <span class="zrm-cargocell"><i><svg class="zrm-g"><use href="#g-chapter"/></svg></i><small>Staff Card</small></span>
+    <span class="zrm-cargocell" data-locked><i><svg class="zrm-g"><use href="#g-lock"/></svg></i><small>—</small></span>
+  </div>
+  <div class="zrm-cost"><div><small>Required</small><b data-lack>−66</b></div>
+    <div><small>Available</small><b>552</b></div>
+    <div><small>Required</small><b data-lack>−120</b></div>
+    <div><small>Available</small><b>1020</b></div></div>
+  <div class="zrm-craft">
+    <div class="zrm-craft-item"><i><svg class="zrm-g"><use href="#g-cargo"/></svg></i><b>Ladder</b><small>×2 · 20</small></div>
+    <div class="zrm-craft-item"><i><svg class="zrm-g"><use href="#g-waypoint"/></svg></i><b>Climbing Anchor</b><small>×2 · 16</small></div>
+    <div class="zrm-craft-item"><span class="zrm-badge-new"><svg class="zrm-g"><use href="#g-check"/></svg>New</span></div>
+  </div>
+</div>
+`;export{a as default};

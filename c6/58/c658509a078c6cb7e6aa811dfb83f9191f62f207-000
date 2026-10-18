@@ -1,0 +1,4 @@
+const t=`<!--zrm {"name":"track row compact","group":"Liste","props":[{"key":"title","type":"text"},{"key":"artist","type":"text"},{"key":"duration","type":"text"},{"key":"liked","type":"bool"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-liked="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="28-track-row-compact"><span class="sp-title">{{title}}</span><span class="sp-artist">{{artist}}</span><span class="sp-duration">{{duration}}</span><i class="sp-flag" data-liked="{{liked}}"></i></div>
+`;export{t as default};

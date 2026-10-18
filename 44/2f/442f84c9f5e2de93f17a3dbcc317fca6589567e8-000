@@ -1,0 +1,67 @@
+const e=`<!--zrm { "name": "Effets", "group": "Global", "reference": "DS1__IIG__07, __15, __17, __21, __23, DS2__GUID__22", "order": 32 } -->
+<style>
+/* HUIT EFFETS — tous statiques, tous reproductibles. Ce que je ne reproduis PAS est dit
+   explicitement plus bas : les animations. Les nommer sans les faire vaut mieux que faire comme
+   si elles n'existaient pas.
+   Le principe commun : un effet de ce jeu est toujours un DÉGRADÉ, jamais un aplat ni une
+   bordure. C'est ce qui lui permet de cohabiter avec une image sans la trancher. */
+.zrm-fx{ display:grid; grid-template-columns:repeat(auto-fill, minmax(13em,1fr));
+  gap:calc(var(--u)*1); padding:calc(var(--u)*1.1) calc(var(--u)*1.4);
+  font-family:var(--f-meta); font-size:.7em; }
+.zrm-fx figure{ margin:0; }
+.zrm-fx figcaption{ margin-top:.4em; color:var(--zrm-ink-faint);
+  letter-spacing:var(--tr-label); text-transform:uppercase; font-size:.82em; }
+.zrm-fx-box{ position:relative; height:6em; overflow:hidden;
+  background:linear-gradient(140deg,#1e3242,#0d1a24); }
+/* HALO — un dégradé radial, jamais une ombre portée : une ombre s'arrête net à son rayon,
+   un dégradé s'éteint, et c'est l'extinction qui fait la lueur. */
+.fx-halo{ background:radial-gradient(circle at 50% 50%, rgba(127,212,255,.55), rgba(127,212,255,0) 62%),
+  linear-gradient(140deg,#1e3242,#0d1a24); }
+/* VOILE BAS — le dégradé montant sur lequel se pose tout texte de bas d'écran. */
+.fx-veil::after{ content:''; position:absolute; inset:0; background:var(--zrm-veil-up); }
+/* FILET LUMINEUX — dégradé horizontal qui s'éteint aux deux bouts, jamais un trait plein. */
+.fx-rule::after{ content:''; position:absolute; left:0; right:0; top:50%; height:1px;
+  background:linear-gradient(90deg, rgba(127,212,255,0), rgba(127,212,255,.9) 50%, rgba(127,212,255,0));
+  box-shadow:0 0 .8em rgba(127,212,255,.6); }
+/* VAGUE — deux couches : un halo large et une ligne fine au centre. Une seule ferait surlignage. */
+.fx-wave::after{ content:''; position:absolute; left:-10%; right:-10%; top:50%; height:2.6em;
+  transform:translateY(-50%);
+  background:linear-gradient(90deg, rgba(90,180,255,0), rgba(120,205,255,.32) 45%, rgba(90,180,255,0)),
+    linear-gradient(180deg, transparent 48%, rgba(180,225,255,.8) 50%, transparent 52%); }
+/* BANDES CINÉMA — le passage en 2.35:1 pendant les cinématiques. */
+.fx-bars::before,.fx-bars::after{ content:''; position:absolute; left:0; right:0; height:1.2em; background:#000; }
+.fx-bars::before{ top:0 } .fx-bars::after{ bottom:0 }
+/* FOND ANIMÉ — les voiles verticaux de l'écran de saisie. Rendus STATIQUES ici : leur
+   ondulation est une animation, et je ne la reproduis pas (voir la note en bas). */
+.fx-veils{ background:repeating-linear-gradient(96deg, rgba(127,212,255,.16) 0 2px, transparent 2px 26px),
+  repeating-linear-gradient(84deg, rgba(127,212,255,.1) 0 1px, transparent 1px 38px),
+  linear-gradient(140deg,#0c1a26,#060d14); }
+/* FILIGRANE — le titre du jeu derrière un menu, à 5 % d'opacité. */
+.fx-water{ display:grid; place-items:center; }
+.fx-water span{ font-family:var(--f-display); font-weight:200; font-size:1.5em;
+  letter-spacing:var(--tr-title); text-transform:uppercase; color:rgba(255,255,255,.06); }
+/* LOGO DE SCÈNE — un cercle tracé en lignes fines DANS la scène, avec un texte en arc. */
+.fx-logo{ display:grid; place-items:center; color:rgba(140,205,255,.75); }
+.fx-logo svg{ width:4.4em; height:4.4em; filter:drop-shadow(0 0 .5em rgba(90,180,255,.6)); }
+.zrm-fx-note{ grid-column:1/-1; margin:.6em 0 0; color:var(--zrm-ink-dim); line-height:1.6;
+  font-size:1.05em; }
+</style>
+<div class="zrm-fx">
+  <figure><div class="zrm-fx-box fx-halo"></div><figcaption>Halo cyan</figcaption></figure>
+  <figure><div class="zrm-fx-box fx-veil"></div><figcaption>Voile bas</figcaption></figure>
+  <figure><div class="zrm-fx-box fx-rule"></div><figcaption>Filet lumineux</figcaption></figure>
+  <figure><div class="zrm-fx-box fx-wave"></div><figcaption>Vague de menu</figcaption></figure>
+  <figure><div class="zrm-fx-box fx-bars"></div><figcaption>Bandes cinéma</figcaption></figure>
+  <figure><div class="zrm-fx-box fx-veils"></div><figcaption>Fond de saisie</figcaption></figure>
+  <figure><div class="zrm-fx-box fx-water"><span>Death Stranding</span></div><figcaption>Titre en filigrane</figcaption></figure>
+  <figure><div class="zrm-fx-box fx-logo">
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width=".8">
+      <circle cx="24" cy="24" r="20"/><circle cx="24" cy="24" r="16.5" stroke-width=".5"/>
+      <path d="M24 4v6M24 38v6M4 24h6M38 24h6"/></svg></div><figcaption>Logo de scène</figcaption></figure>
+  <p class="zrm-fx-note"><strong>Ce que je ne reproduis pas :</strong> l'ondulation des voiles de
+  fond, le balayage de la vague, la pulsation des halos et la reconstruction progressive du
+  portrait en facettes. Ce sont des ANIMATIONS. Elles sont recensées dans l'inventaire au type
+  <code>motion</code> et laissées vides : les nommer sans les faire est plus honnête que de
+  livrer une version figée en laissant croire qu'elle est complète.</p>
+</div>
+`;export{e as default};

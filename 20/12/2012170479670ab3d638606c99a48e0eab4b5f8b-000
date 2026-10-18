@@ -1,0 +1,74 @@
+// PERSISTANCE DE LA CONFIGURATION — un seul fichier JSON dans le dossier applicatif de l'utilisateur.
+//
+// Aucun secret n'est écrit ici, et c'est délibéré : le jeton GitHub reste chez `gh`, qui le garde dans le
+// trousseau macOS. L'app le demande à chaque lancement plutôt que d'en faire une copie de plus à protéger.
+import { app } from 'electron'
+import { mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs'
+import path from 'node:path'
+import type { Prefs, WatchedFolder } from './types'
+import { defautsDossier } from './params'
+import { validerConfig } from './config-schema'
+
+export interface Config { prefs: Prefs; folders: WatchedFolder[] }
+
+const DEFAUTS: Prefs = {
+  repoRoot: '',
+  debounceSec: defautsDossier().silenceAvantEnvoiSec,
+  fullScanHours: defautsDossier().balayageRattrapageHeures,
+  launchAtLogin: false,
+  nodePath: '',
+  ghPath: '',
+  gitPath: '',
+  shellPath: '',
+}
+
+let fichier = ''
+let cache: Config = { prefs: { ...DEFAUTS }, folders: [] }
+
+export function initStore(): Config {
+  const dossier = app.getPath('userData')
+  mkdirSync(dossier, { recursive: true })
+  fichier = path.join(dossier, 'config.json')
+  let texte = ''
+  try { texte = readFileSync(fichier, 'utf8') }
+  catch (error: any) {
+    if (error?.code === 'ENOENT') { cache = { prefs: { ...DEFAUTS }, folders: [] }; return cache }
+    throw new Error(`lecture de config.json impossible : ${error?.message || error}`)
+  }
+  try { cache = validerConfig(JSON.parse(texte), DEFAUTS) }
+  catch (error: any) { throw new Error(`config.json illisible : ${error?.message || error}`) }
+  return cache
+}
+
+export function lireConfig(): Config { return cache }
+
+/** Écriture ATOMIQUE : un fichier temporaire renommé par-dessus. Une coupure au mauvais moment ne peut pas
+ *  laisser un config.json à moitié écrit, qui ferait perdre la liste des dossiers surveillés. */
+export function ecrireConfig(suivant: Config): void {
+  if (!fichier) { cache = suivant; return }
+  const tmp = fichier + '.tmp'
+  writeFileSync(tmp, JSON.stringify(suivant, null, 2))
+  renameSync(tmp, fichier)
+  cache = suivant
+}
+
+export function majPrefs(partiel: Partial<Prefs>): Config {
+  const suivant: Config = { ...cache, prefs: { ...cache.prefs, ...partiel } }
+  ecrireConfig(suivant)
+  return suivant
+}
+
+export function majDossier(id: string, partiel: Partial<WatchedFolder>): Config {
+  const suivant: Config = { ...cache, folders: cache.folders.map((f) => (f.id === id ? { ...f, ...partiel } : f)) }
+  ecrireConfig(suivant)
+  return suivant
+}
+
+/** Dossier applicatif : c'est là que l'extension Finder va chercher les index d'état. */
+export function cheminEtat(): string { return app.getPath('userData') }
+
+export function cheminLogs(): string {
+  const d = path.join(app.getPath('userData'), 'logs')
+  mkdirSync(d, { recursive: true })
+  return d
+}

@@ -1,0 +1,17 @@
+const e=`<!--zrm { "name": "Surtitre de rubrique", "group": "Éditorial", "reference": "FIGARO__01__HOME_TOP", "order": 10, "inPage": false } -->
+<style>
+/* RELEVÉ sur FIGARO__01__HOME_TOP (bandeau de rubriques) et __17__ARTICLE_TOP (fil d'Ariane).
+   Différence de FONCTION avec T-01-1-2, et non de simple couleur : chez Libération le surtitre
+   est une alarme rouge en serif, aussi haut que le titre, qui participe au cri. Ici c'est une
+   ÉTIQUETTE de classement — linéale, capitales, petite, bleu marine. Elle range l'article, elle
+   ne l'annonce pas. Lui donner la serif du titre la ferait rivaliser avec lui.
+   Mesure : 0,72 fois le corps, interlettrage +0,09em, hauteur d'encre 12 px sur un corps de 17. */
+.zrm-kicker{ margin:0 0 .5em; color:var(--zrm-navy); font-family:var(--f-meta);
+  font-weight:700; font-size:.72em; line-height:1.2;
+  letter-spacing:.09em; text-transform:uppercase; }
+/* Le rouge reste disponible, mais réservé au direct — cohérent avec le titre [data-live]. */
+.zrm-kicker[data-tone="live"]{ color:var(--zrm-red); }
+.zrm-kicker[data-tone="deep"]{ color:var(--zrm-night); }
+</style>
+<p class="zrm-kicker">Reportage</p>
+`;export{e as default};

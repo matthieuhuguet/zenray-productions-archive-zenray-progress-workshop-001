@@ -1,0 +1,22 @@
+const e=`<!--zrm { "name": "Menu principal", "group": "Ouverture", "reference": "DS2__GUID__01", "order": 2 } -->
+<style>
+/* MENU PRINCIPAL — relevé sur DS2__GUID__01. Trois traits le caractérisent, et aucun n'est
+   décoratif : (1) l'alignement à DROITE, qui laisse l'image respirer à gauche ; (2) la barre
+   lumineuse au-dessus du premier item, qui ouvre la liste au lieu de la souligner ; (3) la
+   première entrée pleinement claire, les suivantes en retrait — une hiérarchie par l'opacité
+   et non par la taille.
+   Les entrées viennent des beats : le menu d'un article, ce sont ses sections. */
+.zrm-menu{ display:flex; flex-direction:column; align-items:flex-end; gap:.55em;
+  padding:calc(var(--u)*1.4) calc(var(--u)*2); }
+.zrm-menu::before{ content:''; width:min(420px,60%); height:1px; margin-bottom:.9em;
+  background:linear-gradient(90deg, rgba(127,212,255,0), rgba(127,212,255,.8));
+  box-shadow:0 0 .8em rgba(127,212,255,.5); }
+.zrm-menu-item{ font-family:var(--f-display); font-weight:300; font-size:1.05em;
+  letter-spacing:var(--tr-menu); color:var(--zrm-ink-dim);
+  text-shadow:0 0 .7em rgba(4,12,20,.9); }
+.zrm-menu-item:first-of-type{ color:var(--zrm-ink); }
+</style>
+<nav class="zrm-menu">
+  {{#beats}}<span class="zrm-menu-item">{{roleLabel}}</span>{{/beats}}
+</nav>
+`;export{e as default};

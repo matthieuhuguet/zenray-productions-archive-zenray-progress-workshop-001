@@ -1,0 +1,32 @@
+const e=`<!--zrm { "name": "Cadre d'écran", "group": "Global", "reference": "DS1__IIG__04, __11, __14, __24", "order": 10 } -->
+<style>
+/* CADRE D'ÉCRAN — relevé sur quatre captures, le composant le plus FRÉQUENT de l'inventaire
+   après le pied légal. Et le plus facile à oublier, parce qu'il n'appartient à aucun panneau.
+
+   Ce ne sont pas des bordures : ce sont des tirets et des crochets très fins, posés aux quatre
+   coins et le long des bords de l'ÉCRAN entier. Ils ne délimitent rien — aucun contenu ne s'y
+   arrête. Ils disent « ceci est un affichage », et c'est tout. Retirez-les et l'interface
+   devient une page ; ajoutez-les à une page web et elle devient un affichage.
+
+   Un cadre fermé ferait fenêtre. Ici il est OUVERT partout : chaque marque est isolée. */
+.zrm-frame{ position:absolute; inset:0; pointer-events:none; z-index:8; }
+.zrm-frame svg{ position:absolute; inset:0; width:100%; height:100%; }
+.zrm-frame path{ fill:none; stroke:rgba(200,222,244,.5); stroke-width:1;
+  vector-effect:non-scaling-stroke; }
+/* Ici \`non-scaling-stroke\` est LÉGITIME, et c'est la seule exception du thème : le cadre est
+   tracé sur un viewBox étiré à la taille de l'écran, donc sans lui le trait serait déformé en
+   largeur et pas en hauteur. La règle « jamais de non-scaling-stroke » vise les formes qu'on
+   redimensionne proportionnellement, pas celles qu'on étire. */
+.zrm-frame .zrm-frame-dim{ stroke:rgba(200,222,244,.26); }
+</style>
+<div class="zrm-frame">
+  <svg viewBox="0 0 1000 600" preserveAspectRatio="none">
+    <!-- Crochets d'angle, ouverts. -->
+    <path d="M8 30V8h26M966 8h26v22M992 570v22h-26M34 592H8v-22"/>
+    <!-- Tirets de bord : trois par côté, irréguliers, jamais centrés. L'irrégularité est
+         relevée, pas inventée : un rythme régulier ferait décoration. -->
+    <path class="zrm-frame-dim" d="M8 168h18M8 300h10M8 452h18M992 140h-18M992 300h-10M992 480h-18
+      M240 8h22M520 8h12M760 8h22M240 592h22M520 592h12M760 592h22"/>
+  </svg>
+</div>
+`;export{e as default};

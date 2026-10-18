@@ -1,0 +1,48 @@
+const e=`<!--zrm { "name": "Grappe d'ATH", "group": "Scène", "reference": "DS2__GUID__20, __21, __22, __23", "order": 31 } -->
+<style>
+/* GRAPPE D'ATH — le coin bas-gauche, présent sur quatre captures de jeu.
+   Les outils sont disposés EN CROIX autour d'un centre VIDE : le centre n'est pas un bouton,
+   c'est l'endroit d'où partent les quatre directions du pad. Une grille carrée aurait perdu
+   cette correspondance avec la manette, qui est tout l'intérêt du motif.
+   Sous la grappe : la barre d'endurance, très fine, précédée d'un glyphe de botte.
+   À droite, deux mesures de scène : la vie d'un ennemi (segmentée, rouge et cyan) et une barre
+   de progression de scan. Aucune ne porte de libellé — dans une scène, un libellé se lit comme
+   une interruption. */
+.zrm-hudc{ display:flex; align-items:flex-end; gap:calc(var(--u)*2.4);
+  padding:calc(var(--u)*1.4) calc(var(--u)*1.4); font-family:var(--f-meta); font-size:.74em; }
+.zrm-cluster{ position:relative; width:7em; height:7em; color:var(--zrm-cyan); }
+.zrm-cluster span{ position:absolute; display:grid; place-items:center;
+  filter:drop-shadow(0 0 .35em rgba(127,212,255,.6)); }
+.zrm-cluster span .zrm-g{ width:1.5em; height:1.5em; }
+.zrm-cluster span:nth-child(1){ left:50%; top:0; transform:translateX(-50%); }
+.zrm-cluster span:nth-child(2){ right:0; top:50%; transform:translateY(-50%); }
+.zrm-cluster span:nth-child(3){ left:50%; bottom:0; transform:translateX(-50%); }
+.zrm-cluster span:nth-child(4){ left:0; top:50%; transform:translateY(-50%); }
+.zrm-stamina{ display:flex; align-items:center; gap:.4em; margin-top:.6em; color:var(--zrm-ink-dim); }
+.zrm-stamina .zrm-g{ width:1em; height:1em; }
+.zrm-stamina u{ text-decoration:none; width:7em; height:3px; background:rgba(255,255,255,.14); }
+.zrm-stamina u i{ display:block; height:100%; background:var(--zrm-cyan);
+  box-shadow:0 0 .4em rgba(127,212,255,.7); }
+.zrm-enemyhp{ display:flex; gap:1px; }
+.zrm-enemyhp i{ width:1.1em; height:.4em; background:rgba(255,255,255,.14); }
+.zrm-enemyhp i[data-hp]{ background:#d9483c; }
+.zrm-enemyhp i[data-shield]{ background:var(--zrm-cyan); }
+.zrm-scanbar{ width:6em; height:3px; background:rgba(255,255,255,.14); }
+.zrm-scanbar i{ display:block; height:100%; background:var(--zrm-cyan); }
+</style>
+<div class="zrm-hudc">
+  <div>
+    <div class="zrm-cluster">
+      <span><svg class="zrm-g"><use href="#g-cargo"/></svg></span>
+      <span><svg class="zrm-g"><use href="#g-play"/></svg></span>
+      <span><svg class="zrm-g"><use href="#g-signal"/></svg></span>
+      <span><svg class="zrm-g"><use href="#g-scan"/></svg></span>
+    </div>
+    <div class="zrm-stamina"><svg class="zrm-g"><use href="#g-timer"/></svg><u><i style="width:72%"></i></u></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:.7em">
+    <span class="zrm-enemyhp"><i data-hp></i><i data-hp></i><i data-hp></i><i data-shield></i><i data-shield></i><i></i></span>
+    <span class="zrm-scanbar"><i style="width:44%"></i></span>
+  </div>
+</div>
+`;export{e as default};

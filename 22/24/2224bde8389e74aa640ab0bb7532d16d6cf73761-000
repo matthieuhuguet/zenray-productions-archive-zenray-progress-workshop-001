@@ -1,0 +1,10 @@
+const e=`<!-- HÉRITÉ de T-01-1-2--une-de-rupture. Structure seulement : les mesures (échelle, filets, couleurs, graisses) sont celles de l'autre média et sont FAUSSES ici tant qu'elles n'ont pas été relevées sur les captures de T-01-1-1--une-nationale-du-matin. -->
+<!--zrm { "name": "À lire aussi", "group": "Article", "reference": "LIBE__13__MODES_DE_VIE", "order": 23, "inPage": false } -->
+<style>
+.zrm-also{ margin:calc(var(--u)*1.4) 0; padding:calc(var(--u)*.8) calc(var(--u)*.9);
+  background:var(--zrm-band); }
+.zrm-also b{ display:block; font-family:var(--f-display); font-weight:400; font-size:.8em;
+  color:var(--zrm-red); margin-bottom:.3em; }
+</style>
+<aside class="zrm-also"><b>À lire aussi</b><h3 class="zrm-headline" data-size="s">Une saison de feux hors normes : les conditions extrêmes de 2026</h3></aside>
+`;export{e as default};

@@ -1,0 +1,4 @@
+const a=`<!--zrm {"name":"sidebar shell","group":"Bibliothèque","props":[{"key":"heading","type":"text"},{"key":"width","type":"number"},{"key":"collapsed","type":"bool"},{"key":"bg","type":"color"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-collapsed="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="05-sidebar-shell"><span class="sp-heading">{{heading}}</span><span class="sp-num">{{width}}</span><i class="sp-flag" data-collapsed="{{collapsed}}"></i><i class="sp-swatch" style="background:{{bg}}"></i></div>
+`;export{a as default};

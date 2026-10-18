@@ -1,0 +1,22 @@
+const e=`<!--zrm { "name": "Barre d'actions", "group": "Global", "reference": "DS2__GUID__08", "order": 9 } -->
+<style>
+/* BARRE D'ACTIONS — deuxième pièce la plus fréquente : onze écrans sur cinquante. Elle dit ce que
+   font les boutons ICI, et change à chaque écran ; c'est la seule pièce d'interface qu'aucun média
+   imprimé n'a jamais eue.
+   Alignée à DROITE, séparée par des espaces et jamais par des filets : un filet vertical entre
+   deux invites ferait barre d'outils, c'est-à-dire logiciel de bureau — le contraire du ton.
+   Les libellés suivent l'INTENTION du brief : « vendre » ne propose pas les mêmes gestes
+   qu'« enseigner ». C'est ce qui rend la pièce posable dans les 1024 thèmes plutôt que figée. */
+.zrm-actions{ display:flex; justify-content:flex-end; align-items:center; gap:1.5em;
+  padding:calc(var(--u)*.75) calc(var(--u)*1.4); background:var(--zrm-veil-up); }
+.zrm-action{ display:flex; align-items:center; gap:.42em; font-family:var(--f-meta);
+  font-weight:400; font-size:.66em; letter-spacing:.04em; color:var(--zrm-ink-dim); }
+.zrm-action .zrm-g{ width:1.15em; height:1.15em; color:var(--zrm-ink); }
+</style>
+<div class="zrm-actions">
+  <span class="zrm-action"><svg class="zrm-g"><use href="#g-cross"/></svg>{{intent}}</span>
+  <span class="zrm-action"><svg class="zrm-g"><use href="#g-circle"/></svg>Retour</span>
+  <span class="zrm-action"><svg class="zrm-g"><use href="#g-triangle"/></svg>Détails</span>
+  <span class="zrm-action"><svg class="zrm-g" style="width:1.4em"><use href="#g-r1"/></svg>{{formatLabel}}</span>
+</div>
+`;export{e as default};

@@ -1,0 +1,25 @@
+const e=`<!--zrm { "name": "Blocs de récit", "group": "Récit", "reference": "DS2__GUID__07", "order": 8 } -->
+<style>
+/* LE RÉCIT — la pièce qui porte le texte de l'article. Chaque beat devient un bloc, et le RÔLE
+   du beat (accroche, preuve, chute) s'affiche en surtitre : dans une interface de jeu, un texte
+   n'arrive jamais nu, il est toujours étiqueté par ce qu'il fait.
+   Le fond n'est pas un aplat mais un voile : sur une image, un aplat opaque tue la profondeur. */
+.zrm-beats{ display:flex; flex-direction:column; gap:calc(var(--u)*.9);
+  padding:calc(var(--u)*1.2) calc(var(--u)*1.6); }
+.zrm-beat{ position:relative; padding:calc(var(--u)*.7) calc(var(--u)*1) calc(var(--u)*.8);
+  background:var(--zrm-glass); backdrop-filter:blur(2px);
+  clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px); }
+.zrm-beat::before{ content:''; position:absolute; inset:0 0 auto; height:1px;
+  background:linear-gradient(90deg, rgba(127,212,255,.85), rgba(127,212,255,0) 70%); }
+.zrm-beat-role{ display:block; margin:0 0 .35em; font-family:var(--f-mono);
+  font-size:.6em; letter-spacing:var(--tr-label); text-transform:uppercase;
+  color:var(--zrm-cyan); }
+.zrm-beat p{ margin:0; font-family:var(--f-body); font-weight:300; font-size:.95em;
+  line-height:1.5; color:var(--zrm-ink); text-shadow:0 0 .5em rgba(4,12,20,.9); }
+</style>
+<div class="zrm-beats">
+  {{#beats}}
+  <article class="zrm-beat"><span class="zrm-beat-role">{{roleLabel}}</span><p>{{{html}}}</p></article>
+  {{/beats}}
+</div>
+`;export{e as default};

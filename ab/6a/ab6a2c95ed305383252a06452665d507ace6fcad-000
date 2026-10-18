@@ -1,0 +1,4 @@
+const a=`<!--zrm {"name":"library row","group":"Bibliothèque","props":[{"key":"title","type":"text"},{"key":"kind","type":"text"},{"key":"owner","type":"text"},{"key":"pinned","type":"bool"},{"key":"playing","type":"bool"},{"key":"covera","type":"color"},{"key":"coverb","type":"color"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-pinned="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="08-library-row"><span class="sp-title">{{title}}</span><span class="sp-kind">{{kind}}</span><span class="sp-owner">{{owner}}</span><i class="sp-flag" data-pinned="{{pinned}}"></i><i class="sp-flag" data-playing="{{playing}}"></i><i class="sp-swatch" style="background:{{covera}}"></i><i class="sp-swatch" style="background:{{coverb}}"></i></div>
+`;export{a as default};

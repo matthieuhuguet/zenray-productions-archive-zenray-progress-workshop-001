@@ -1,0 +1,47 @@
+// RÉSOLUTION DE L'ENVIRONNEMENT — le piège n°1 d'une app macOS lancée par le Finder.
+//
+// Une application ouverte depuis le Finder n'hérite PAS du PATH du terminal : elle reçoit un PATH minimal
+// (/usr/bin:/bin:/usr/sbin:/sbin). Or le moteur a besoin de `node` (Homebrew, nvm ou fnm), de `gh` (Homebrew) et
+// de `git`. Sans cette résolution, l'app marche parfaitement quand on la lance depuis un terminal et échoue
+// silencieusement quand on double-clique dessus, ce qui est le pire des deux mondes.
+//
+// LA MÉTHODE : demander une seule fois à un shell de LOGIN INTERACTIF (`zsh -ilc`) où sont les binaires et quel
+// est son PATH, puis mémoriser. C'est le seul moyen fiable de voir ce que voit Matthieu dans son terminal, car
+// c'est ce shell-là qui lit .zprofile et .zshrc, donc les init de Homebrew, nvm et fnm.
+import { execFile } from 'node:child_process'
+import { existsSync } from 'node:fs'
+
+const CHEMINS_DE_SECOURS: Record<string, string[]> = {
+  node: ['/opt/homebrew/bin/node', '/usr/local/bin/node'],
+  gh: ['/opt/homebrew/bin/gh', '/usr/local/bin/gh'],
+  git: ['/usr/bin/git', '/opt/homebrew/bin/git'],
+}
+
+function shellLogin(commande: string, timeoutMs = 8000): Promise<string> {
+  return new Promise((resolve) => {
+    execFile('/bin/zsh', ['-ilc', commande], { timeout: timeoutMs, encoding: 'utf8' }, (_err, stdout) => {
+      resolve((stdout || '').trim())
+    })
+  })
+}
+
+export interface Binaires { nodePath: string; ghPath: string; gitPath: string; shellPath: string }
+
+export async function resoudreBinaires(): Promise<Binaires> {
+  const shellPath = (await shellLogin('printf %s "$PATH"')) || process.env.PATH || ''
+  const trouve = async (nom: string) => {
+    const viaShell = (await shellLogin(`command -v ${nom}`)).split('\n')[0].trim()
+    if (viaShell && existsSync(viaShell)) return viaShell
+    for (const p of CHEMINS_DE_SECOURS[nom] || []) if (existsSync(p)) return p
+    return ''
+  }
+  const [nodePath, ghPath, gitPath] = await Promise.all([trouve('node'), trouve('gh'), trouve('git')])
+  return { nodePath, ghPath, gitPath, shellPath }
+}
+
+/** Environnement passé au moteur : le PATH du terminal plus le jeton, jamais le PATH appauvri du Finder. */
+export function envMoteur(bin: Binaires, token: string): NodeJS.ProcessEnv {
+  const chemins = [bin.shellPath, process.env.PATH || '', '/usr/bin:/bin:/usr/sbin:/sbin']
+    .filter(Boolean).join(':')
+  return { ...process.env, PATH: chemins, GITHUB_TOKEN: token, GIT_TERMINAL_PROMPT: '0' }
+}

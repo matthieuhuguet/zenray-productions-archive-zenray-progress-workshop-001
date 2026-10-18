@@ -1,0 +1,167 @@
+// Routeur catch-all unique pour /api/* : SEULE fonction serverless de /api (passe SOUS la limite Vercel Hobby = 12).
+// Les handlers réels vivent dans ../server/ (HORS de /api/, donc NON déployés comme fonctions par Vercel).
+// Le client appelle /api/<name> ; Vercel route ici ; on délègue. local-server.mjs route AUSSI via ce fichier.
+// Comportement 100% identique : on relaie req/res au handler ciblé.
+import attachmentDownloadHandler from '../server/attachment-download.js'
+import pageHandler from '../server/page.js'
+import japaneseHandler from '../server/japanese.js'
+import shelfPublicHandler from '../server/shelf-public.js'
+import imgHandler from '../server/img.js'
+import mediaHandler from '../server/media.js'
+import streamHandler from '../server/stream.js'
+import shardHandler from '../server/shard.js'
+import reposHandler from '../server/repos.js'
+import uploadShardHandler from '../server/upload-shard.js'
+import publishHandler from '../server/publish.js'
+import stateHandler from '../server/state.js'
+import unfurlHandler from '../server/unfurl.js'
+import uploadHandler from '../server/upload.js'
+import hlsHandler from '../server/hls.js'
+import hlsKeyHandler from '../server/hls-key.js'
+import hlsDownloadInfoHandler from '../server/hls-download-info.js'
+import hlsCliHandler from '../server/hls-cli.js'
+import hlsDownloadScriptHandler from '../server/hls-download-script.js'
+import uploadCmdHandler from '../server/upload-cmd.js'
+import uploadVidHandler from '../server/upload-vid.js'
+import cmdlogHandler from '../server/cmdlog-api.js'
+import mediaKeyHandler from '../server/media-key.js'
+import rawTokenHandler from '../server/raw-token.js'
+import rawProxyHandler from '../server/raw-proxy.js'
+import shelfImgHandler from '../server/shelf-img.js'
+import shelfPosterHandler from '../server/shelf-poster.js'
+import shelfSearchHandler from '../server/shelf-search.js'
+import spotifySearchHandler from '../server/spotify-search.js'
+import youtubeSearchHandler from '../server/youtube-search.js'
+import youtubeSearchV3Handler from '../server/youtube-search-v3.js'
+import docHandler from '../server/doc.js'
+import treeHandler from '../server/tree.js'
+import videoCommentHandler from '../server/video-comment.js'
+import sharedMediaHandler from '../server/shared-media.js'
+import shareOgHandler from '../server/share-og.js'
+import shareCoverHandler from '../server/share-cover.js'
+import guestUploadHandler from '../server/guest-upload.js'
+import shareCoverTileHandler from '../server/share-cover-tile.js'
+import journalHandler from '../server/journal.js'
+import shareTokenHandler, { authorizeShareAccess, inferShareKind, isShareTarget } from '../server/share-token.js'
+import { authorizeShareReach } from '../server/shareReach.js'
+import { timingSafeEqual } from 'node:crypto'
+
+// GATE APPLICATIF (sécurité, audit famille A). Quand ZENRAY_API_SECRET est défini (prod), chaque appel /api/*
+// SENSIBLE doit porter le header `x-zr-auth: <secret>` (sinon 401). Ça remplace la dépendance au seul toggle
+// Vercel : la clé maître (media-key), les écritures (page/upload-*/publish/state) et la gestion de repos sont
+// fermées par défaut. EXEMPTÉS : les endpoints servis comme src DOM (<img>/<video>/hls.js) qui NE PEUVENT PAS
+// porter de header custom — leur contenu est chiffré sur CDN public ou derrière la protection de déploiement.
+// Si ZENRAY_API_SECRET est ABSENT (dev local, serveur loopback) -> gate DÉSACTIVÉ, rien ne change.
+const API_SECRET = process.env.ZENRAY_API_SECRET || ''
+// raw-proxy est EXEMPTÉ du gate (servi comme src DOM <img>, ne peut pas porter x-zr-auth) : il ne sert que
+// des binaires pinnés par commit du compte owner (posters), pas de secret. raw-token, lui, RESTE gated
+// (même surface que media-key : servi au client authentifié uniquement quand le gate est actif).
+// Une balise DOM ne peut pas envoyer x-zr-auth, mais elle ne demande jamais une écriture.
+// Les routes publiques sont donc explicitement limitées à GET/HEAD. En particulier, `media`
+// n'est jamais ici : ses trois actions écrivent des blobs ou un manifeste GitHub.
+const PUBLIC_READ_ROUTES = new Set(['img', 'stream', 'shard', 'hls', 'hls-key', 'hls-download-info', 'hls-cli', 'hls-download-script', 'shared-media', 'attachment-download', 'share-og', 'share-cover', 'share-cover-tile', 'raw-proxy', 'shelf-public', 'shelf-poster', 'spotify-search', 'youtube-search', 'youtube-search-v3', 'unfurl'])
+export const isPublicReadRoute = (req, name) => ['GET', 'HEAD'].includes(String(req.method || 'GET').toUpperCase()) && PUBLIC_READ_ROUTES.has(name)
+
+export async function authOk(req, name) {
+  if (!API_SECRET) return true
+  if (isPublicReadRoute(req, name)) return true
+  // Guests add photos with the SHARE TOKEN as their only credential, checked on every request inside the handler.
+  if (name === 'guest-upload' && (req.method || 'GET').toUpperCase() === 'POST') return true
+  // La résolution d'un jeton de partage est publique. Son émission et sa révocation restent protégées par
+  // x-zr-auth, comme toutes les écritures de l'app.
+  if (name === 'share-token' && (req.method || 'GET').toUpperCase() === 'GET') return true
+  // COMMENTAIRES VIDÉO : lecture ET écriture publiques (un visiteur d'un lien /watch commente sans le code
+  // du drive). Le contenu écrit est borné à { videoPath, name, text } sous pages/_comments/, rien de sensible.
+  if (name === 'video-comment') return true
+  const h = (req.headers && req.headers['x-zr-auth']) || (req.query && req.query.auth) || ''
+  if (typeof h === 'string' && h.length === API_SECRET.length) {
+    try { if (timingSafeEqual(Buffer.from(h), Buffer.from(API_SECRET))) return true } catch {}
+  }
+
+  // PARTAGE PUBLIC : une lecture page/tree anonyme doit désormais prouver qu'un partage a réellement été émis.
+  // Les anciens liens base64 restent acceptés uniquement quand leur cible correspond exactement au path demandé.
+  const method = (req.method || 'GET').toUpperCase()
+  if (name === 'page' && method === 'GET') {
+    const q = req.query || {}
+    const action = (q.action || '').toString()
+    const path = (q.path || '').toString()
+    const dir = (q.dir || '').toString()
+    const requested = action === 'read' && isShareTarget(inferShareKind(path), path) ? path
+      : action === 'tree' && isShareTarget('folder', dir) ? dir
+        // A placement must be inside the signed folder before page.js resolves it.
+        // page.js then re-checks the canonical target with this same token.
+        : action === 'resolve-link' && isShareTarget(inferShareKind(path), path) ? path
+        : ''
+    // A canonical LEAF manifest outside the root is reachable when a link placed inside the root points at it.
+    if (requested) return (await authorizeShareAccess((q.share || '').toString(), requested)) || (action === 'read' && await authorizeShareReach((q.share || '').toString(), requested, { via: (q.via || '').toString() }))
+  }
+  return false
+}
+
+const routes = {
+  japanese: japaneseHandler,
+  page: pageHandler,
+  // Façade publique en lecture seule de l'étagère (2026-08-27) : liste blanche de quatre fichiers,
+  // aucun chemin paramétrable, jamais d'écriture. Détail et raisons dans server/shelf-public.js.
+  'shelf-public': shelfPublicHandler,
+  img: imgHandler,
+  media: mediaHandler,
+  stream: streamHandler,
+  shard: shardHandler,
+  repos: reposHandler,
+  'upload-shard': uploadShardHandler,
+  publish: publishHandler,
+  state: stateHandler,
+  unfurl: unfurlHandler,
+  upload: uploadHandler,
+  hls: hlsHandler,
+  'hls-key': hlsKeyHandler,
+  'hls-download-info': hlsDownloadInfoHandler,
+  'hls-cli': hlsCliHandler,
+  'hls-download-script': hlsDownloadScriptHandler,
+  'upload-cmd': uploadCmdHandler,
+  'upload-vid': uploadVidHandler,
+  cmdlog: cmdlogHandler,
+  'media-key': mediaKeyHandler,
+  'raw-token': rawTokenHandler, // token de LECTURE des repos privés zenrayshards-* (SW vidéo + download) — gated comme media-key
+  'raw-proxy': rawProxyHandler, // <img> des posters privés (une balise img ne peut pas porter de header) — servi comme src DOM
+  'shelf-poster': shelfPosterHandler, // poster Shelf : octets d'origine, lus une fois sur raw puis servis par le cache d'edge (15 October 2026)
+  'shelf-img': shelfImgHandler,   // télécharge une image et la stocke en repo public (jsDelivr)
+  'shelf-search': shelfSearchHandler, // recherche de posters via API média (RAWG/TMDB/AniList)
+  'spotify-search': spotifySearchHandler, // recherche catalogue Spotify (Client Credentials, app-only) pour ZenRay Audio
+  'youtube-search': youtubeSearchHandler, // recherche YouTube sans clé Google Cloud (endpoint innertube public)
+  'youtube-search-v3': youtubeSearchV3Handler, // recherche YouTube API officielle Data v3 (feature sidebar -> Create, clé requise)
+  doc: docHandler,                // lecture live read-only d'un .md (repo Memory/.claude) — Documents
+  tree: treeHandler,              // liste les .md d'un repo perso — mode « parcourir tout »
+  'video-comment': videoCommentHandler, // commentaires publics sous une vidéo (lecteur + page /watch)
+  'shared-media': sharedMediaHandler,
+  'attachment-download': attachmentDownloadHandler,
+  'guest-upload': guestUploadHandler,   // people holding a share link add photos (public route, gated by the signed token inside)
+  'share-cover-tile': shareCoverTileHandler, // one decoded tile of the preview (own invocation = own CPU budget)
+  'share-cover': shareCoverHandler,  // mosaïque d'aperçu d'un dossier partagé, composée par le navigateur
+  'share-og': shareOgHandler,           // sert dist/index.html avec les balises Open Graph du média partagé (WhatsApp/Notion/iMessage)
+  'share-token': shareTokenHandler,     // émet/résout/révoque les jetons opaques de partage v1
+  journal: journalHandler,              // journal de travail pour la vue Progress, épinglé au commit (relais local)
+}
+
+// Vercel n'applique `export const config` que sur le fichier de fonction réellement déployé
+// (= ce routeur). media.js et upload-shard.js déclaraient un bodyParser à 8mb ; on relève donc
+// la limite ici à 8mb pour TOUT le routeur, sinon les uploads chunkés (parts 3 Mo) seraient
+// rejetés en 413. ATTENTION : la plateforme impose malgré tout un plafond effectif proche de 4,5 Mo ;
+// universalCapture conserve donc des parts de 3 Mo. Ne jamais relever CHUNK_SIZE en se fiant au « 8mb ».
+// Les autres routes ne sont pas impactées par une limite déclarative plus haute.
+export const config = { api: { bodyParser: { sizeLimit: '8mb' } } }
+
+export default async function handler(req, res) {
+  // Le segment dynamique est nommé `route` (fichier [...route].js) et NON `path`, pour ne PAS écraser
+  // le paramètre de requête ?path= utilisé par les handlers (img/shard/hls/stream/page read).
+  // Vercel expose le segment catch-all sous la clé "...route" (avec les 3 points), PAS "route".
+  // local-server.mjs, lui, injecte req.query.route. On lit donc les deux pour marcher des deux côtés.
+  let parts = req.query.route ?? req.query['...route']
+  if (typeof parts === 'string') parts = parts.split('/')
+  const name = Array.isArray(parts) ? parts[0] : parts
+  const target = name && routes[name]
+  if (!target) return res.status(404).json({ error: 'not-found', route: name || null })
+  if (!(await authOk(req, name))) return res.status(401).json({ error: 'unauthorized' })
+  return target(req, res)
+}

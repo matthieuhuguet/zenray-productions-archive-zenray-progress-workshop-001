@@ -1,0 +1,9 @@
+const e=`<!--zrm { "name": "Surtitre de rubrique", "group": "Éditorial", "reference": "LIBE__01__HOME_TOP", "order": 10, "inPage": false } -->
+<style>
+/* Le surtitre rouge est LA constante du systeme : il precede chaque titre, partout. */
+.zrm-kicker{ margin:0 0 .18em; color:var(--zrm-red); font-family:var(--f-display);
+  font-weight:400; font-size:1.02em; line-height:1.1; }
+.zrm-kicker[data-tone="deep"]{ color:var(--zrm-red-deep); }
+</style>
+<p class="zrm-kicker">Reportage</p>
+`;export{e as default};

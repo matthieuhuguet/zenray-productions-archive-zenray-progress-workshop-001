@@ -1,0 +1,16 @@
+const e=`<!-- HÉRITÉ de T-01-1-2--une-de-rupture. Structure seulement : les mesures (échelle, filets, couleurs, graisses) sont celles de l'autre média et sont FAUSSES ici tant qu'elles n'ont pas été relevées sur les captures de T-01-1-3--quotidien-de-reference-sobre. -->
+<!--zrm { "name": "Figure et légende", "group": "Article", "reference": "LIBE__01__HOME_TOP", "order": 20, "inPage": false } -->
+<style>
+/* Legende en serif sous l'image, pas en sans : la photo appartient au recit. */
+.zrm-figure{ margin:0 0 calc(var(--u)*1.2); }
+.zrm-figure-media{ background:var(--zrm-band); aspect-ratio:16/9; }
+.zrm-figure figcaption{ font-family:var(--f-body); font-size:.9em; line-height:1.45;
+  margin-top:calc(var(--u)*.5); }
+.zrm-figure cite{ display:block; font-family:var(--f-meta); font-size:.62em;
+  color:var(--zrm-meta); font-style:normal; margin-top:.3em; }
+</style>
+<figure class="zrm-figure">
+  <div class="zrm-figure-media"></div>
+  <figcaption>Déclenchés mercredi et jeudi, les incendies ravagent toujours cette partie du Sud-Ouest.<cite>Photo d’illustration</cite></figcaption>
+</figure>
+`;export{e as default};

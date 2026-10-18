@@ -1,0 +1,4 @@
+const a=`<!--zrm {"name":"account menu","group":"Chrome","props":[{"key":"name","type":"text"},{"key":"items","type":"text"},{"key":"plan","type":"text"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-x="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="04-account-menu"><span class="sp-name">{{name}}</span><span class="sp-items">{{items}}</span><span class="sp-plan">{{plan}}</span></div>
+`;export{a as default};

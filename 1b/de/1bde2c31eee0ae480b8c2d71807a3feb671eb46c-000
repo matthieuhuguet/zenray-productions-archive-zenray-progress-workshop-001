@@ -1,0 +1,17 @@
+const a=`<!-- HÉRITÉ de T-01-1-2--une-de-rupture. Structure seulement : les mesures (échelle, filets, couleurs, graisses) sont celles de l'autre média et sont FAUSSES ici tant qu'elles n'ont pas été relevées sur les captures de T-01-1-5--tabloid-daccroche. -->
+<!--zrm { "name": "Navigation principale", "group": "Global", "reference": "LIBE__01__HOME_TOP", "order": 3 } -->
+<style>
+/* Rubriques : sans 15 px sur capture, premiere entree en bleu #1e73d2. */
+.zrm-nav{ background:var(--zrm-paper); border-bottom:1px solid var(--zrm-rule);
+  padding:0 calc(var(--u)*1.4) calc(var(--u)*.55); display:flex; gap:calc(var(--u)*.9);
+  flex-wrap:wrap; font-family:var(--f-meta); font-size:.68em; font-weight:500; }
+.zrm-nav b{ color:var(--zrm-blue); font-weight:600; }
+.zrm-nav span[data-state="active"]{ box-shadow:inset 0 -3px 0 var(--zrm-red); }
+</style>
+<nav class="zrm-nav">
+  <b>Séries d’été</b><span data-state="active">Politique</span><span>International</span>
+  <span>Idées et Débats</span><span>Culture</span><span>CheckNews</span><span>Société</span>
+  <span>Enquêtes</span><span>Environnement</span><span>Économie</span><span>Modes de vie</span>
+  <span>Témoignages</span><span>Portraits</span>
+</nav>
+`;export{a as default};

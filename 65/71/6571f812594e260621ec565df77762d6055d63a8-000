@@ -1,0 +1,4 @@
+const a=`<!--zrm {"name":"playlist header","group":"En-tête","props":[{"key":"title","type":"text"},{"key":"description","type":"text"},{"key":"owner","type":"text"},{"key":"saves","type":"text"},{"key":"collaborative","type":"bool"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-collaborative="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="19-playlist-header"><span class="sp-title">{{title}}</span><span class="sp-description">{{description}}</span><span class="sp-owner">{{owner}}</span><span class="sp-saves">{{saves}}</span><i class="sp-flag" data-collaborative="{{collaborative}}"></i></div>
+`;export{a as default};

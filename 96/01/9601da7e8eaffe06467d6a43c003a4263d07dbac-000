@@ -1,0 +1,13 @@
+const e=`<!--zrm { "name": "Surtitre de rubrique", "group": "Éditorial", "reference": "SUN__02__HOME_MID", "order": 10, "inPage": false } -->
+<style>
+/* RELEVÉ sur SUN__02__HOME_MID (« WEIGHT A MINUTE » collé au titre).
+   Le surtitre du tabloïd est un CRI, pas une étiquette : même police et même corps que le
+   titre, rouge, capitales, et il se lit DANS la phrase du titre au lieu de la surplomber.
+   C'est l'inverse exact du Figaro et du Monde, et c'est ce qui sépare le genre. */
+.zrm-kicker{ margin:0 0 .1em; color:var(--zrm-red); font-family:var(--f-display);
+  font-weight:700; font-size:1em; line-height:1.02;
+  letter-spacing:-.01em; text-transform:uppercase; display:inline; }
+.zrm-kicker[data-tone="deep"]{ color:var(--zrm-night); }
+</style>
+<p class="zrm-kicker">Reportage</p>
+`;export{e as default};

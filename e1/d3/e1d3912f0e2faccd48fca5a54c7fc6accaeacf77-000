@@ -1,0 +1,42 @@
+const EVENEMENTS = new Set([
+  'inventory', 'progress', 'deleted', 'manifests-differes', 'manifests', 'menage', 'rollover',
+  'shard', 'skip', 'route', 'chunk', 'transfer', 'instable', 'verify', 'done',
+])
+// 'text' manquait, et le moteur en emet : le journal repetait « route.pipeline inconnu : text » a chaque
+// fichier texte, donc l'evenement etait JETE et la progression de ces fichiers n'apparaissait jamais.
+// Une liste blanche qui ignore un rail reellement emis ne protege rien, elle aveugle.
+const RAILS_MOTEUR = new Set(['chunk', 'img', 'video', 'media', 'text'])
+
+const NOMBRES_REQUIS: Record<string, string[]> = {
+  inventory: ['files', 'bytes'],
+  progress: ['seen', 'total'],
+  deleted: ['count'],
+  'manifests-differes': ['combien'],
+  manifests: ['done', 'total'],
+  route: ['seen', 'files', 'size'],
+  chunk: ['seen', 'files', 'done', 'total', 'envoyes'],
+  transfer: ['envoyes', 'bytes'],
+  verify: ['total', 'ko'],
+  done: ['chunked', 'images', 'videos', 'media', 'unchanged', 'reused', 'restored', 'verifyKo'],
+}
+
+export function validerEvenementMoteur(valeur: unknown): Record<string, any> {
+  if (!valeur || typeof valeur !== 'object' || Array.isArray(valeur)) throw new Error('événement non objet')
+  const ev = valeur as Record<string, any>
+  if (ev.zr !== 1) throw new Error('marqueur zr absent')
+  if (typeof ev.ev !== 'string' || !EVENEMENTS.has(ev.ev)) throw new Error(`type d'événement inconnu : ${String(ev.ev)}`)
+  for (const cle of NOMBRES_REQUIS[ev.ev] || []) {
+    if (!Number.isFinite(ev[cle]) || ev[cle] < 0) throw new Error(`${ev.ev}.${cle} doit être un nombre positif ou nul`)
+  }
+  if (ev.ev === 'done' && (!Array.isArray(ev.skipped) || ev.skipped.some((x: unknown) => typeof x !== 'string'))) {
+    throw new Error('done.skipped doit être un tableau de chemins')
+  }
+  if (ev.ev === 'route' && !RAILS_MOTEUR.has(String(ev.pipeline))) {
+    throw new Error(`route.pipeline inconnu : ${String(ev.pipeline)}`)
+  }
+  if (ev.ev === 'transfer' && !RAILS_MOTEUR.has(String(ev.rail))) {
+    throw new Error(`transfer.rail inconnu : ${String(ev.rail)}`)
+  }
+  if (['skip', 'instable'].includes(ev.ev) && typeof ev.rel !== 'string') throw new Error(`${ev.ev}.rel manque`)
+  return ev
+}

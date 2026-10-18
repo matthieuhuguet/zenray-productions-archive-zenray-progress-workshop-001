@@ -1,0 +1,189 @@
+#!/usr/bin/env node
+// RESTAURER UN FICHIER DEPUIS LE DRIVE — carte C2 du plan ZenRayCloud.
+//
+// C'est le premier canal qui va du drive VERS le Mac. Jusqu'ici tout ne circulait que dans un sens :
+// on sauvegardait, on ne récupérait jamais, et une sauvegarde dont on n'a jamais vérifié qu'elle se
+// restaure n'est pas une sauvegarde, c'est une croyance.
+//
+// LA RÉSOLUTION DES MORCEAUX N'EST PAS RÉÉCRITE ICI. `src/lib/archiveChunks.js` la porte déjà, et son
+// en-tête raconte pourquoi : elle avait été copiée-collée dans trois composants, qui avaient divergé au
+// point que l'un ignorait `parts[]` et cassait sur les gros fichiers multi-dépôts. Une seule source.
+//
+// LA VÉRIFICATION EST LE CŒUR, pas un supplément. Le fichier reconstitué est haché et comparé à
+// l'empreinte du manifeste. Sans ce contrôle, une restauration silencieusement fausse est pire que pas
+// de restauration du tout : on croirait avoir récupéré ses données.
+//
+// Usage :
+//   node Cloud/scripts/restaurer.mjs <destCreate> <cheminRelatif> <dossierDeSortie> [--version=N]
+// Exemple :
+//   node Cloud/scripts/restaurer.mjs pages/Cloud/Downloads "TEMP/film.mkv" ~/Restaure
+
+import { createHash } from 'node:crypto'
+import { createWriteStream, readFileSync } from 'node:fs'
+import { mkdir, rm } from 'node:fs/promises'
+import path from 'node:path'
+import { spawnSync } from 'node:child_process'
+import { fileURLToPath } from 'node:url'
+import { chunkRefs, effectiveManifest, manifestByFingerprint, refUrl } from '../../src/lib/archiveChunks.js'
+import { loadMasterKey } from '../../scripts/lib/img-pipeline.mjs'
+import { closeWritable, publishRestoreWithoutOverwrite, writeBuffer } from './lib/safe-restore.mjs'
+import { readTransferBody } from './lib/readTransferBody.mjs'
+import { buildStreamRestorePlan, decryptGcmPart, githubRawApiUrl, restoreManifestCandidates, WholeGcmDecoder } from './lib/stream-restore.mjs'
+
+const OWNER = 'matthieuhuguet'
+const DATA = 'zenray-data'
+const TOKEN = process.env.GITHUB_TOKEN || (spawnSync('gh', ['auth', 'token'], { encoding: 'utf8', timeout: 15000 }).stdout || '').trim()
+const RESEAU = {
+  tentatives: Number(process.env.ZRC_RESTORE_ATTEMPTS) || 3,
+  delaiMs: Number(process.env.ZRC_RESTORE_TIMEOUT_MS) || 300000,
+  reculMs: Number(process.env.ZRC_RESTORE_BACKOFF_MS) || 800,
+}
+
+const [dest, rel, sortie] = process.argv.slice(2).filter((a) => !a.startsWith('--'))
+const versionArg = (process.argv.find((a) => a.startsWith('--version=')) || '').slice(10)
+// 2 October 2026, 15:05 CEST: an expected hash prevents restoring a newer version silently.
+const fingerprintArg = (process.argv.find((a) => a.startsWith('--sha256=')) || '').slice(9)
+const manifestArg = (process.argv.find((a) => a.startsWith('--manifest=')) || '').slice(11)
+if (!dest || !rel || !sortie) {
+  console.error('usage: restaurer.mjs <destCreate> <cheminRelatif> <dossierDeSortie> [--version=N]')
+  process.exit(1)
+}
+if (!TOKEN) { console.error('jeton GitHub introuvable (gh auth login)'); process.exit(1) }
+
+const entete = { Authorization: `Bearer ${TOKEN}`, 'User-Agent': 'ZenRayCloud' }
+const enteteBrut = { ...entete, Accept: 'application/vnd.github.raw' }
+const attendre = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
+// 9 October 2026, 00:36 CEST: optional byte callbacks expose real cloud download progress to Assets.
+async function lireReponse(url, libelle, convertir, headers = {}, sansRetente = [], onBytes = null) {
+  let derniere = null
+  let essais = 0
+  for (let tentative = 1; tentative <= RESEAU.tentatives; tentative++) {
+    essais = tentative
+    try {
+      const r = await fetch(url, { headers, signal: AbortSignal.timeout(RESEAU.delaiMs) })
+      if (!r.ok) {
+        const error = new Error(`${libelle} indisponible (${r.status})`)
+        error.status = r.status
+        throw error
+      }
+      return await convertir(r, onBytes)
+    } catch (error) {
+      derniere = error
+      if (sansRetente.includes(error.status)) break
+      if (tentative < RESEAU.tentatives) await attendre(RESEAU.reculMs * tentative)
+    }
+  }
+  throw new Error(`${libelle} après ${essais} tentative(s) : ${derniere?.message || derniere}`)
+}
+
+/** Le manifeste se lit par l'API, JAMAIS par `raw.githubusercontent`, dont le cache de cinq minutes
+ *  ferait restaurer une version périmée sans le dire. La règle est déjà écrite dans le CLAUDE.md du
+ *  projet ; elle vaut ici plus qu'ailleurs, puisqu'on reconstruit un fichier à partir de ce qu'on lit. */
+async function lireManifeste() {
+  const candidats = restoreManifestCandidates(rel, manifestArg)
+  let dernier404 = null
+  for (const candidat of candidats) {
+    const p = `${dest}/${candidat}`
+    const url = `https://api.github.com/repos/${OWNER}/${DATA}/contents/${p.split('/').map(encodeURIComponent).join('/')}`
+    try {
+      return await lireReponse(url, `manifeste ${p}`, async (r) => JSON.parse(await r.text()), enteteBrut, [404])
+    } catch (error) {
+      if (!String(error.message || error).includes('(404)')) throw error
+      dernier404 = error
+    }
+  }
+  throw new Error(`aucun manifeste file, img ou media pour ${rel} : ${dernier404?.message || 'introuvable'}`)
+}
+
+async function lireReference(reference, numero, total, onBytes) {
+  if (reference.isPrivate) {
+    return lireReponse(githubRawApiUrl(reference), `morceau ${numero}/${total}`,
+      async (r, reportBytes) => readTransferBody(r, reportBytes), enteteBrut, [], onBytes)
+  }
+  try {
+    return await lireReponse(reference.url, `morceau ${numero}/${total}`,
+      async (r, reportBytes) => readTransferBody(r, reportBytes), {}, [], onBytes)
+  } catch {
+    return lireReponse(githubRawApiUrl(reference), `morceau ${numero}/${total}`,
+      async (r, reportBytes) => readTransferBody(r, reportBytes), enteteBrut, [], onBytes)
+  }
+}
+
+async function principal() {
+  const brut = await lireManifeste()
+  if (brut.deleted) {
+    console.log(`ⓘ ce fichier est marqué supprimé le ${brut.deletedAt || '?'} — ses morceaux sont pourtant toujours`
+      + ' en ligne, c\'est précisément pourquoi une sauvegarde n\'efface jamais rien. Restauration possible.')
+  }
+  const m = fingerprintArg ? manifestByFingerprint(brut, fingerprintArg) : effectiveManifest(brut, versionArg === '' ? null : Number(versionArg))
+  const planStream = buildStreamRestorePlan(m, OWNER)
+  const refs = planStream ? planStream.refs : chunkRefs(m)
+  if (!refs.length) throw new Error('ce manifeste ne décrit aucun morceau pris en charge')
+  const attendu = planStream?.sha256 || m.sha256
+  if (!attendu) throw new Error('empreinte source absente : restauration refusée sans preuve d’intégrité')
+
+  const taille = planStream?.size ?? m.size
+  console.log(`restauration de « ${rel} » — ${refs.length} morceau(x), ${(taille / 1e9).toFixed(2)} Go`)
+  const h = createHash('sha256')
+  let receivedBytes = 0
+  let reportedBytes = 0
+  let lastReportedAt = 0
+  // 9 October 2026, 00:36 CEST: report sampled network bytes, not estimated file completion.
+  const reportReceived = (count) => {
+    receivedBytes += count
+    const now = Date.now()
+    if (now - lastReportedAt < 250) return
+    console.log(JSON.stringify({ zr: 1, ev: 'download', recus: receivedBytes }))
+    reportedBytes = receivedBytes
+    lastReportedAt = now
+  }
+  const cibleDemandee = path.join(sortie.replace(/^~/, process.env.HOME || '~'), rel)
+  await mkdir(path.dirname(cibleDemandee), { recursive: true })
+  const temporaire = path.join(path.dirname(cibleDemandee), `.${path.basename(cibleDemandee)}.zrc-part-${process.pid}-${Date.now()}`)
+  const flux = createWriteStream(temporaire, { flags: 'wx' })
+  let cible = ''
+  try {
+    let decoder = null
+    let key = null
+    if (planStream) {
+      const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..')
+      key = loadMasterKey(repoRoot, { readFileSync })
+      if (!key) throw new Error('clé maître média introuvable')
+      if (planStream.mode === 'whole-gcm') decoder = new WholeGcmDecoder(key, planStream.iv)
+    }
+    for (let i = 0; i < refs.length; i++) {
+      const chiffre = planStream
+        ? await lireReference(refs[i], i + 1, refs.length, reportReceived)
+        : await lireReponse(refUrl(refs[i]), `morceau ${i + 1}/${refs.length}`,
+          async (r, onBytes) => readTransferBody(r, onBytes), {}, [], reportReceived)
+      const clair = !planStream ? chiffre
+        : planStream.mode === 'part-gcm' ? decryptGcmPart(chiffre, refs[i].iv, key)
+          : decoder.push(chiffre)
+      if (clair.length) { h.update(clair); await writeBuffer(flux, clair) }
+      if ((i + 1) % 10 === 0 || i + 1 === refs.length) console.log(`  ${i + 1}/${refs.length}`)
+    }
+    if (receivedBytes > reportedBytes) console.log(JSON.stringify({ zr: 1, ev: 'download', recus: receivedBytes }))
+    if (decoder) {
+      const dernier = decoder.finish()
+      if (dernier.length) { h.update(dernier); await writeBuffer(flux, dernier) }
+    }
+    await closeWritable(flux)
+    const sha = h.digest('hex')
+    // LE CONTRÔLE QUI DÉCIDE. Le temporaire ne devient visible sous son vrai nom qu'après cette égalité.
+    if (sha !== attendu) {
+      throw new Error(`EMPREINTE FAUSSE — attendu ${attendu.slice(0, 12)}…, obtenu ${sha.slice(0, 12)}… ; rien n'est publié`)
+    }
+    const publication = await publishRestoreWithoutOverwrite(temporaire, cibleDemandee)
+    cible = publication.path
+    if (!publication.temporaryRemoved) console.error(`⚠ temporaire à retirer manuellement : ${temporaire}`)
+    console.log(`✓ restauré et vérifié : ${cible}`)
+    console.log(JSON.stringify({ zr: 1, ev: 'restaure', rel, cible, octets: taille, sha }))
+  } catch (error) {
+    flux.destroy()
+    await rm(temporaire, { force: true })
+    throw error
+  }
+}
+
+principal().catch((e) => { console.error('✗ ' + e.message); process.exit(1) })

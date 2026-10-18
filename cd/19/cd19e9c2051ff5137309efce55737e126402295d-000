@@ -1,0 +1,26 @@
+// 9 October 2026, 00:35 CEST: streamed byte samples must equal the bytes the caller receives.
+import test from 'node:test'
+import assert from 'node:assert/strict'
+import { readTransferBody } from './readTransferBody.mjs'
+
+test('counts each streamed response chunk and returns the same bytes', async () => {
+  const response = new Response(new ReadableStream({
+    start(controller) {
+      controller.enqueue(Uint8Array.from([1, 2]))
+      controller.enqueue(Uint8Array.from([3, 4, 5]))
+      controller.close()
+    },
+  }))
+  const samples = []
+  const result = await readTransferBody(response, (count) => samples.push(count))
+  assert.deepEqual([...result], [1, 2, 3, 4, 5])
+  assert.equal(samples.reduce((sum, count) => sum + count, 0), result.length)
+  assert.ok(samples.length >= 1)
+})
+
+test('counts a non-streaming response body once', async () => {
+  const samples = []
+  const result = await readTransferBody(new Response(Uint8Array.from([8, 9])), (count) => samples.push(count))
+  assert.deepEqual([...result], [8, 9])
+  assert.deepEqual(samples, [2])
+})

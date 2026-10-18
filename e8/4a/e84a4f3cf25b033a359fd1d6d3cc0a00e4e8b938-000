@@ -1,0 +1,4 @@
+const s=`<!--zrm {"name":"credits panel","group":"Panneau","props":[{"key":"heading","type":"text"},{"key":"performers","type":"text"},{"key":"writers","type":"text"},{"key":"producers","type":"text"},{"key":"source","type":"text"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-x="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="37-credits-panel"><span class="sp-heading">{{heading}}</span><span class="sp-performers">{{performers}}</span><span class="sp-writers">{{writers}}</span><span class="sp-producers">{{producers}}</span><span class="sp-source">{{source}}</span></div>
+`;export{s as default};

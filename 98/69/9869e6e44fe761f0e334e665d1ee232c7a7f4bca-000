@@ -1,0 +1,56 @@
+const e=`<!--zrm { "name": "Titre d'écran", "group": "Écrans", "reference": "DS2__GUID__08", "order": 11 } -->
+<style>
+/* TITRE D'ÉCRAN — le plus fréquent du lot : il coiffe 20 des 50 captures.
+   Relevé au balayage de colonnes sur DS2__GUID__08, glyphe par glyphe. Boîte 528 x 67 px.
+
+     C initiale   x  83-117  y 27-73   ->  capitale 47 px
+     A R G O      x 123-245  y 38-72   ->  petite capitale 35 px  (rapport 0,745)
+     filet                   y 79
+     surtitre                y 15-19
+
+   FAMILLE, tranchée au banc de mesure et non au catalogue : rapport largeur/capitale du C,
+   source 0,766 ; Barlow 0,859 ; Barlow Condensed 0,648 ; Barlow SEMI Condensed 0,761.
+
+   LE TEXTE VIENT DE L'ÉDITEUR. C'est ce qui manquait à tous les composants échafaudés : ils
+   portaient un exemple figé, donc \`compile.js\` devait rustiner le <h2> au rendu. Ici le titre
+   est \`{{title}}\` et le surtitre \`{{audience}}\` — le composant est une PIÈCE, pas une capture
+   d'écran habillée en HTML. */
+.zrm-screen-title{ position:relative; container-type:size;
+  width:100%; height:100%; min-height:2.4em;
+  font-family:var(--f-display); color:var(--zrm-ink); }
+
+/* TOUT EST EN \`cqh\`, PAS EN \`cqw\`. Un titre est une LIGNE DE TEXTE : sa taille dépend de la
+   hauteur de sa boîte, pas de sa largeur. Calé en \`cqw\` avec un \`aspect-ratio\` figé, le composant
+   était juste sur la seule capture qui l'avait servi de modèle et faux sur les dix-neuf autres —
+   « Private Locker Management » occupe une boîte de 740 px de large, « Cargo Management » 528 :
+   en \`cqw\`, le premier rendait un titre 40 % trop gros. La largeur ne dit rien de la taille d'une
+   ligne ; la hauteur la dit exactement. 1 cqh = 1 % de la hauteur de la boîte. */
+
+.zrm-screen-title .zrm-st-over{ position:absolute; left:1.5cqh; top:1.5%;
+  display:flex; align-items:center; font-family:var(--f-mono); font-size:9cqh;
+  letter-spacing:.18em; color:var(--zrm-ink-faint); white-space:nowrap; }
+.zrm-screen-title .zrm-st-over::before{ content:''; width:6cqh; height:6cqh;
+  background:currentColor; box-shadow:12cqh 0 0 currentColor; margin-right:23cqh; }
+
+.zrm-screen-title .zrm-st-h{ position:absolute; left:39.6cqh; top:32%; margin:0;
+  font-family:'Barlow Semi Condensed', var(--f-display);
+  font-size:113.3cqh; font-weight:300; font-variant-caps:small-caps;
+  letter-spacing:.009em; line-height:.72; white-space:nowrap;
+  text-shadow:0 0 2.2cqh rgba(200,232,255,.75), 0 0 7.9cqh rgba(127,212,255,.5),
+              0 0 20.5cqh rgba(43,105,156,.4); }
+/* Petites capitales : rapport MESURÉ 0,745 à la source, 0,667 rendu par \`font-variant-caps\`.
+   L'écart est réel et assumé : le corriger demanderait d'envelopper chaque lettre non initiale,
+   donc de figer le texte. La fidélité s'arrête là où l'éditabilité commence. */
+
+.zrm-screen-title .zrm-st-rule{ position:absolute; left:0; right:15cqh; top:97%;
+  height:1px; background:var(--zrm-rule); }
+.zrm-screen-title .zrm-st-rule::before{ content:''; position:absolute; left:9cqh; top:-1.5cqh;
+  width:3cqh; height:3cqh; background:var(--zrm-ink-dim);
+  box-shadow:12cqh 0 0 var(--zrm-ink-dim), 24cqh 0 0 var(--zrm-ink-dim); }
+</style>
+<div class="zrm-screen-title">
+  <div class="zrm-st-over">{{audience}}</div>
+  <h2 class="zrm-st-h">{{title}}</h2>
+  <div class="zrm-st-rule"></div>
+</div>
+`;export{e as default};

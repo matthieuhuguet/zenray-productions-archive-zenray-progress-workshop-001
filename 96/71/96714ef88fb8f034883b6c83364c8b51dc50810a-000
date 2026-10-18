@@ -1,0 +1,62 @@
+const e=`<!--zrm { "name": "Codec et récit", "group": "Récit", "reference": "DS1__IIG__07, __09, __10, DS2__GUID__04, __06", "order": 27 } -->
+<style>
+/* LES SIX FORMES DU RÉCIT. Aucune n'a de fond : le récit se pose sur l'image, jamais dans une
+   boîte. C'est ce qui distingue une cinématique d'un menu.
+   CODEC       nom du canal en capitales espacées, portrait en facettes, statut de connexion.
+   CARTON      un nom seul (acteur, personnage), en capitales très espacées.
+   NARRATION   un paragraphe aligné à gauche, quatre lignes maximum.
+   SOUS-TITRE  locuteur en petit au-dessus, réplique centrée dessous.
+   COMPTEUR    un pourcentage en très gros chiffres ÉVIDÉS, posé dans la scène.
+   SAISIE      un champ dont l'actif est SOULIGNÉ, jamais encadré. */
+.zrm-story{ display:flex; flex-direction:column; gap:calc(var(--u)*1.4);
+  padding:calc(var(--u)*1.2) calc(var(--u)*1.4); font-family:var(--f-meta); font-size:.78em; }
+.zrm-codec{ display:flex; align-items:center; gap:calc(var(--u)*1.2); }
+.zrm-codec-name{ font-family:var(--f-display); font-weight:200; font-size:1.5em;
+  letter-spacing:var(--tr-title); text-transform:uppercase; color:var(--zrm-ink); }
+/* Le portrait en FACETTES : l'effet de transmission dégradée. Un dégradé conique haché donne
+   l'impression de polygones sans qu'il faille dessiner un maillage. */
+.zrm-poly{ width:6em; height:6em; border-radius:50%;
+  background:conic-gradient(from 20deg, #6fd0e8, #f2c9a8 60deg, #7ee0b4 120deg, #d8a8e8 190deg,
+    #9fd8f0 260deg, #f0d0a0 320deg, #6fd0e8);
+  filter:contrast(1.35) saturate(1.2); opacity:.9;
+  mask-image:radial-gradient(circle at 50% 42%, #000 52%, transparent 68%); }
+.zrm-codec-meta{ color:var(--zrm-ink-dim); }
+.zrm-codec-meta b{ display:block; font-weight:400; color:var(--zrm-ink);
+  letter-spacing:var(--tr-label); text-transform:uppercase; }
+.zrm-carton{ font-family:var(--f-display); font-weight:200; font-size:1.3em;
+  letter-spacing:var(--tr-title); text-transform:uppercase; color:var(--zrm-ink);
+  margin-right:calc(var(--tr-title) * -1); }
+.zrm-narration{ max-width:38ch; line-height:1.65; color:var(--zrm-ink);
+  text-shadow:0 0 .6em rgba(6,20,34,.9); }
+.zrm-subtitle{ text-align:center; color:var(--zrm-ink); text-shadow:0 0 .6em rgba(6,20,34,.95); }
+.zrm-subtitle small{ display:block; color:var(--zrm-ink-dim); font-size:.85em; }
+/* Le compteur géant : trace ÉVIDÉ, pas plein. Il est posé dans la scène et doit la laisser
+   passer — un chiffre plein ferait autocollant. */
+.zrm-bigcount{ font-family:var(--f-display); font-weight:200; font-size:4.2em; line-height:1;
+  letter-spacing:.06em; color:transparent; -webkit-text-stroke:1.5px rgba(255,255,255,.92);
+  text-shadow:0 0 .5em rgba(120,190,255,.5); }
+.zrm-bigcount small{ font-size:.42em; -webkit-text-stroke:1px rgba(255,255,255,.9); }
+.zrm-field{ display:flex; gap:calc(var(--u)*1.4); align-items:flex-end; }
+.zrm-field div{ text-align:center; color:var(--zrm-ink-dim); }
+.zrm-field small{ display:block; font-size:.85em; }
+.zrm-field b{ display:block; font-family:var(--f-mono); font-size:2em; font-weight:300;
+  color:var(--zrm-ink); padding:0 .3em; }
+.zrm-field b[data-on]{ border-bottom:2px solid var(--zrm-cyan); }
+.zrm-page{ font-family:var(--f-mono); font-size:.85em; color:var(--zrm-ink-faint); text-align:center; }
+</style>
+<div class="zrm-story">
+  <div class="zrm-codec"><span class="zrm-poly"></span>
+    <div><p class="zrm-codec-name">Codec</p>
+      <div class="zrm-codec-meta"><b>Mama</b><small>Connection stable · Bridges</small></div></div></div>
+  <p class="zrm-carton">Elle Fanning</p>
+  <p class="zrm-narration">We, your friends at Bridges, did everything we could to support your
+    efforts. There was our director, Die-Hardman, a close associate to Bridget.</p>
+  <p class="zrm-page">9 / 17</p>
+  <p class="zrm-subtitle"><small>Fragile</small>See your destination? There's a river you'll need to cross to get there.</p>
+  <p class="zrm-bigcount">100<small>%</small></p>
+  <div class="zrm-field">
+    <div><small>Month</small><b>10</b></div>
+    <div><small>Day</small><b data-on>11</b></div>
+  </div>
+</div>
+`;export{e as default};

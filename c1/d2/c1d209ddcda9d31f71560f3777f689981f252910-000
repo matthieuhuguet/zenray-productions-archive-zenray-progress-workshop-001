@@ -1,0 +1,57 @@
+const e=`<!--zrm { "name": "Éléments de scène", "group": "Scène", "reference": "DS1__IIG__01, __13, __14, DS2__GUID__13, __16, __20", "order": 35 } -->
+<style>
+/* SIX ÉLÉMENTS QUI VIVENT DANS LA SCÈNE, pas sur un panneau.
+   CARTE HOLOGRAPHIQUE  projetée sur une table, en PERSPECTIVE et en vert. Le seul élément vert
+                        du jeu avec les graphes : le vert marque ce qui est projeté ou acquis.
+   ROUE D'ÉQUIPEMENT    un grand cercle fin, objets disposés autour, description au centre.
+   ROUE D'ARMES         la même en plus dense : catégories en périphérie, arme au centre.
+   AVATAR DE JOUEUR     une vignette carrée posée sur la carte — un autre joueur, pas un lieu.
+   PLACEHOLDER 3D       la zone où le moteur pose un rendu de personnage ou de conteneurs.
+   Aucun n'a de fond opaque : tous se posent sur l'image. */
+.zrm-scene{ display:flex; flex-wrap:wrap; gap:calc(var(--u)*1.6);
+  padding:calc(var(--u)*1.2) calc(var(--u)*1.4); font-family:var(--f-meta); font-size:.74em; }
+.zrm-holo{ position:relative; width:18em; height:9em; overflow:hidden;
+  background:radial-gradient(ellipse at 50% 120%, rgba(50,220,140,.35), transparent 70%); }
+.zrm-holo-grid{ position:absolute; inset:-30% -10% 0;
+  background:repeating-linear-gradient(90deg, rgba(80,240,160,.35) 0 1px, transparent 1px 26px),
+             repeating-linear-gradient(0deg, rgba(80,240,160,.25) 0 1px, transparent 1px 20px);
+  transform:perspective(420px) rotateX(64deg); }
+.zrm-holo span{ position:absolute; padding:.05em .3em; font-size:.8em;
+  letter-spacing:var(--tr-label); text-transform:uppercase; color:#bdf5d8;
+  text-shadow:0 0 .5em rgba(60,230,150,.9); }
+.zrm-holo span[data-refused]{ color:#ff9d8a; text-shadow:0 0 .5em rgba(255,90,60,.8); }
+.zrm-ewheel{ position:relative; width:11em; height:11em; display:grid; place-items:center;
+  color:var(--zrm-ink); }
+.zrm-ewheel > svg{ position:absolute; inset:0; width:100%; height:100%;
+  fill:none; stroke:rgba(160,225,255,.6); stroke-width:.6; }
+.zrm-ewheel-mid{ text-align:center; max-width:8em; }
+.zrm-ewheel-mid b{ display:block; font-family:var(--f-mono); font-size:1.6em; font-weight:300; }
+.zrm-ewheel-mid strong{ display:block; font-weight:400; margin:.15em 0; }
+.zrm-ewheel-mid small{ display:block; color:var(--zrm-ink-dim); line-height:1.45; font-size:.85em; }
+.zrm-ewheel-item{ position:absolute; color:var(--zrm-cyan);
+  filter:drop-shadow(0 0 .35em rgba(127,212,255,.7)); }
+.zrm-ewheel-item .zrm-g{ width:1.3em; height:1.3em; }
+.zrm-avatar{ width:2.6em; height:2.6em; border:1px solid rgba(200,224,246,.6);
+  background:linear-gradient(140deg,#3a4a5a,#1a242e); }
+.zrm-3d{ width:9em; height:9em; display:grid; place-items:center; color:var(--zrm-ink-faint);
+  border:1px dashed rgba(255,255,255,.16); letter-spacing:var(--tr-label); text-transform:uppercase;
+  font-size:.75em; text-align:center; }
+</style>
+<div class="zrm-scene">
+  <div class="zrm-holo"><div class="zrm-holo-grid"></div>
+    <span style="left:14%;top:52%">Connect</span>
+    <span style="left:44%;top:36%" data-refused>Connection Refused</span>
+    <span style="left:70%;top:58%">Connect</span></div>
+  <div class="zrm-ewheel">
+    <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46"/><circle cx="50" cy="50" r="34" stroke-width=".4"/></svg>
+    <span class="zrm-ewheel-item" style="left:46%;top:2%"><svg class="zrm-g"><use href="#g-cargo"/></svg></span>
+    <span class="zrm-ewheel-item" style="right:2%;top:46%"><svg class="zrm-g"><use href="#g-waypoint"/></svg></span>
+    <span class="zrm-ewheel-item" style="left:46%;bottom:2%"><svg class="zrm-g"><use href="#g-lock"/></svg></span>
+    <span class="zrm-ewheel-item" style="left:2%;top:46%"><svg class="zrm-g"><use href="#g-play"/></svg></span>
+    <div class="zrm-ewheel-mid"><b>3</b><strong>Climbing Anchor (Lv. 1)</strong>
+      <small>Un piton planté dans le sol créant un point d'ancrage de 30 mètres.</small></div>
+  </div>
+  <div class="zrm-avatar"></div>
+  <div class="zrm-3d">Rendu 3D<br>personnage / conteneurs</div>
+</div>
+`;export{e as default};

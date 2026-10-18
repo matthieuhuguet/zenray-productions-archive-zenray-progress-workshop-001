@@ -1,0 +1,4 @@
+const a=`<!--zrm {"name":"topbar","group":"Chrome","props":[{"key":"query","type":"text"},{"key":"placeholder","type":"text"},{"key":"account","type":"text"},{"key":"showback","type":"bool"},{"key":"bg","type":"color"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-showback="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="01-topbar"><span class="sp-query">{{query}}</span><span class="sp-placeholder">{{placeholder}}</span><span class="sp-account">{{account}}</span><i class="sp-flag" data-showback="{{showback}}"></i><i class="sp-swatch" style="background:{{bg}}"></i></div>
+`;export{a as default};

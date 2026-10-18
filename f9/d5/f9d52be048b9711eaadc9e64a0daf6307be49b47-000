@@ -1,0 +1,4 @@
+const a=`<!--zrm {"name":"tracklist head","group":"Liste","props":[{"key":"columns","type":"text"},{"key":"showalbum","type":"bool"},{"key":"showadded","type":"bool"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-showalbum="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="25-tracklist-head"><span class="sp-columns">{{columns}}</span><i class="sp-flag" data-showalbum="{{showalbum}}"></i><i class="sp-flag" data-showadded="{{showadded}}"></i></div>
+`;export{a as default};

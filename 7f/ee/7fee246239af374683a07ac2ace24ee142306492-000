@@ -1,0 +1,509 @@
+// PROCESSUS PRINCIPAL — barre de menus, fenêtre, IPC, et l'assemblage des trois pièces (surveillance, file,
+// moteur). Rien de métier ne vit ici : le découpage appartient au script d'archive, la détection au watcher.
+import { app, BrowserWindow, dialog, ipcMain, Menu, nativeImage, Notification, shell, Tray } from 'electron'
+import { execFile } from 'node:child_process'
+import { existsSync, mkdirSync, readFileSync, statSync } from 'node:fs'
+import path from 'node:path'
+import { Moteur } from './engine'
+import { envMoteur, resoudreBinaires, type Binaires } from './env'
+import { ecrireConfig, initStore, lireConfig, majDossier, majPrefs, cheminEtat, cheminLogs } from './store'
+import { Surveillance } from './watcher'
+import { defautsDossier, p as par, variablesCss } from './params'
+import type { AppState, FolderRuntime, FolderStatus, WatchedFolder } from './types'
+
+// RACINE DES DOSSIERS SYNCHRONISÉS, à un seul endroit (correction Matthieu, 2026-08-15). Un dossier
+// surveillé n'est pas une archive : une archive est une chose qu'on dépose une fois pour libérer le disque,
+// un dossier surveillé est vivant et suit le Mac. Les deux ne se mélangent donc pas dans « Archives ».
+const RACINE_CLOUD = defautsDossier().racineDrive
+
+const DEV = process.env.ZRC_DEV === '1'
+let fenetre: BrowserWindow | null = null
+let tray: Tray | null = null
+let token = ''
+let tokenOk: boolean | null = null
+let tokenError: string | null = null
+let bin: Binaires = { nodePath: '', ghPath: '', gitPath: '', shellPath: '' }
+let minuterieRattrapage: NodeJS.Timeout | null = null
+let minuterieDemarrage: NodeJS.Timeout | null = null
+let minuterieDiffusion: NodeJS.Timeout | null = null
+
+const moteur = new Moteur(() => bin, () => token, () => lireConfig().prefs.repoRoot)
+const surveillance = new Surveillance(
+  (id) => declencherDepuisWatch(id),
+  () => lireConfig().prefs.debounceSec,
+  () => par<number>('familles.dossierSurveille.reconnexionSurveillanceSec'),
+  (id, message) => { moteur.pousserJournalPublic(id, `── ${message}`); diffuser() },
+)
+
+const cacheFiches = new Map<string, { mtimeMs: number; taille: number; src: string; fiches: any[] }>()
+const erreursIndex = new Map<string, string>()
+
+function fichesDe(f: WatchedFolder): any[] {
+  const index = path.join(cheminEtat(), `index-${f.id}.json`)
+  const precedent = cacheFiches.get(f.id)
+  try {
+    const st = statSync(index)
+    if (precedent && precedent.mtimeMs === st.mtimeMs && precedent.taille === st.size && precedent.src === f.src) {
+      return precedent.fiches
+    }
+    const j = JSON.parse(readFileSync(index, 'utf8'))
+    const fiches = (j.fiches || []).map((x: any) => ({ ...x, local: existsSync(path.join(f.src, x.rel)) }))
+    cacheFiches.set(f.id, { mtimeMs: st.mtimeMs, taille: st.size, src: f.src, fiches })
+    if (erreursIndex.delete(f.id)) moteur.pousserJournalPublic(f.id, '── index local de nouveau lisible')
+    return fiches
+  } catch (error: any) {
+    // Une écriture atomique peut rendre l'index brièvement indisponible entre deux appels. Le dernier catalogue
+    // valide vaut mieux qu'une table vide qui clignote. Après un premier succès, toutefois, une disparition ou
+    // une corruption devient une erreur locale visible jusqu'à la prochaine reconstruction réussie.
+    if (error?.code !== 'ENOENT' || f.lastSyncAt !== null) {
+      const message = `index local illisible : ${error?.message || error}`
+      if (!erreursIndex.has(f.id)) moteur.pousserJournalPublic(f.id, `── ⚠ ${message}`)
+      erreursIndex.set(f.id, message)
+    }
+    return precedent?.fiches || []
+  }
+}
+
+// ── ÉTAT ─────────────────────────────────────────────────────────────────────
+function statutDe(f: WatchedFolder): FolderStatus {
+  if (f.paused) return 'paused'
+  if (moteur.enCours(f.id)) return 'syncing'
+  // L'ERREUR PASSE DEVANT LA FILE D'ATTENTE (2026-08-18). Elle venait après, si bien qu'un dossier remis en
+  // file juste après un échec — ce qui arrive toujours, la reprise étant automatique — affichait une pastille
+  // orange et l'étiquette « en attente ». La carte disait donc « dernier passage en échec » sous un voyant qui
+  // annonçait le contraire. Tant qu'une erreur n'est pas levée par un passage réussi, elle prime : c'est la
+  // seule des deux informations qui demande une décision.
+  if (f.lastError || erreursIndex.has(f.id)) return 'error'
+  if (moteur.enAttente(f.id) || surveillance.enAttente(f.id) || moteur.estSali(f.id)) return 'pending'
+  return 'idle'
+}
+
+function etat(inclureFiches = true): AppState {
+  const { prefs, folders } = lireConfig()
+  // Lire d'abord le catalogue : si cette lecture découvre une corruption, le statut rendu dans CE MÊME état
+  // devient rouge et son journal contient déjà la cause, sans attendre une hypothétique mise à jour suivante.
+  const fiches: Record<string, any[]> = {}
+  if (inclureFiches) for (const f of folders) fiches[f.id] = fichesDe(f)
+  const runtime: Record<string, FolderRuntime> = {}
+  for (const f of folders) {
+    runtime[f.id] = { status: statutDe(f), progress: moteur.progression.get(f.id) || null,
+      log: moteur.journal(f.id), bilan: moteur.bilans.get(f.id) || null, reprises: moteur.reprises.get(f.id) || 0 }
+  }
+  // LE TABLEAU SE LIT SUR DISQUE, JAMAIS SUR LE RÉSEAU. L'index est relu seulement quand sa date ou sa taille
+  // change ; les rafraîchissements de progression gardent le catalogue précédent dans le rendu.
+  return { prefs, folders, runtime, queue: moteur.idsEnAttente, currentId: moteur.idCourant, tokenOk, tokenError, fiches }
+}
+
+let diffusionArmee = false
+let diffusionAvecFiches = false
+function diffuser(inclureFiches = false): void {
+  // Le moteur émet une mise à jour à chaque ligne de progression : on regroupe à ~10 images par seconde pour
+  // ne pas saturer le pont IPC pendant l'archivage d'un dossier de cent mille fichiers. Le catalogue complet,
+  // lui, ne traverse ce pont qu'à l'ouverture et à la fin d'un passage.
+  diffusionAvecFiches ||= inclureFiches
+  if (diffusionArmee) return
+  diffusionArmee = true
+  minuterieDiffusion = setTimeout(() => {
+    minuterieDiffusion = null
+    diffusionArmee = false
+    const avecFiches = diffusionAvecFiches
+    diffusionAvecFiches = false
+    const e = etat(avecFiches)
+    if (fenetre && !fenetre.isDestroyed()) fenetre.webContents.send('zrc:state', e)
+    majTray(e)
+  }, par<number>('familles.panneauVivant.rafraichissementMs'))
+}
+
+// ── DÉCLENCHEMENT ────────────────────────────────────────────────────────────
+function declencherDepuisWatch(id: string): void {
+  const f = lireConfig().folders.find((x) => x.id === id)
+  if (!f || f.paused) return
+  moteur.enfiler(f)
+  diffuser()
+}
+
+function synchroniserTout(): void {
+  for (const f of lireConfig().folders) if (!f.paused) moteur.enfiler(f)
+  diffuser()
+}
+
+// ── BARRE DE MENUS ───────────────────────────────────────────────────────────
+// L'icône est peinte en mémoire, sans fichier d'image : un disque plein de la couleur de l'état, dans le même
+// code couleur que les pastilles du Shelf (bleu en cours, gris au repos, vert à jour, rouge en erreur).
+const COULEURS: Record<FolderStatus | 'ok', [number, number, number]> = {
+  syncing: [47, 111, 237], pending: [230, 160, 60], error: [200, 70, 70],
+  paused: [142, 142, 147], idle: [142, 142, 147], ok: [34, 201, 138],
+}
+function iconeEtat(cle: keyof typeof COULEURS) {
+  const T = 32, R = 11, C = T / 2
+  const [r, g, b] = COULEURS[cle]
+  const px = Buffer.alloc(T * T * 4)
+  for (let y = 0; y < T; y++) {
+    for (let x = 0; x < T; x++) {
+      // Anticrénelage simple : l'opacité décroît sur le dernier pixel du bord du disque.
+      const d = Math.hypot(x + 0.5 - C, y + 0.5 - C)
+      const a = d <= R - 1 ? 255 : d >= R + 1 ? 0 : Math.round(255 * (1 - (d - (R - 1)) / 2))
+      const i = (y * T + x) * 4
+      px[i] = b; px[i + 1] = g; px[i + 2] = r; px[i + 3] = a // Electron attend du BGRA
+    }
+  }
+  const img = nativeImage.createFromBuffer(px, { width: T, height: T, scaleFactor: 2 })
+  return img.resize({ width: 16, height: 16 })
+}
+
+function majTray(e: AppState): void {
+  if (!tray) return
+  const enErreur = e.folders.some((f) => statutDe(f) === 'error')
+  const enCours = !!e.currentId
+  const enAttente = e.queue.length > 0 || e.folders.some((f) => statutDe(f) === 'pending')
+  const cle: keyof typeof COULEURS = enErreur ? 'error' : enCours ? 'syncing' : enAttente ? 'pending' : e.folders.length ? 'ok' : 'idle'
+  tray.setImage(iconeEtat(cle))
+  const courant = e.folders.find((f) => f.id === e.currentId)
+  const p = e.currentId ? e.runtime[e.currentId]?.progress : null
+  tray.setToolTip(courant ? `ZenRayCloud — ${path.basename(courant.src)} (${p ? `${p.seen}/${p.total}` : '…'})` : 'ZenRayCloud')
+  // PASTILLE DU DOCK : uniquement l'échec (correction Matthieu, 2026-08-15 : un pourcentage qui monte sous les
+  // yeux toute la journée est une source d'angoisse, pas une information). Une sauvegarde qui tourne n'a rien à
+  // réclamer ; seule une sauvegarde qui a échoué mérite qu'on lève les yeux.
+  if (process.platform === 'darwin' && app.dock) app.dock.setBadge(enErreur ? '!' : '')
+  tray.setContextMenu(Menu.buildFromTemplate([
+    { label: courant ? `En cours : ${path.basename(courant.src)}` : e.folders.length ? 'À jour' : 'Aucun dossier surveillé', enabled: false },
+    { type: 'separator' },
+    { label: 'Ouvrir ZenRayCloud', click: () => ouvrirFenetre() },
+    { label: 'Tout synchroniser maintenant', click: () => synchroniserTout() },
+    { type: 'separator' },
+    ...e.folders.map((f) => ({
+      label: `${{ syncing: '↑', pending: '·', error: '!', paused: '‖', idle: '✓' }[statutDe(f)]}  ${path.basename(f.src)}`,
+      click: () => { moteur.enfiler(f); diffuser() },
+    })),
+    { type: 'separator' },
+    { label: 'Quitter', click: () => { app.quit() } },
+  ]))
+}
+
+// ── FENÊTRE ──────────────────────────────────────────────────────────────────
+function ouvrirFenetre(): void {
+  if (fenetre && !fenetre.isDestroyed()) { fenetre.show(); fenetre.focus(); return }
+  fenetre = new BrowserWindow({
+    width: par<number>('jetons.fenetre.largeur'), height: par<number>('jetons.fenetre.hauteur'),
+    minWidth: par<number>('jetons.fenetre.largeurMin'), minHeight: par<number>('jetons.fenetre.hauteurMin'),
+    title: 'ZenRayCloud', titleBarStyle: 'hiddenInset', backgroundColor: par<string>('jetons.couleur.fond'),
+    webPreferences: { preload: path.join(__dirname, 'preload.js'), contextIsolation: true, nodeIntegration: false },
+  })
+  if (DEV) fenetre.loadURL('http://localhost:5599')
+  else fenetre.loadFile(path.join(__dirname, '..', 'renderer', 'index.html'))
+  fenetre.on('closed', () => { fenetre = null })
+  fenetre.webContents.on('did-finish-load', () => {
+    fenetre?.webContents.send('zrc:state', etat())
+    // LES JETONS VISUELS VIENNENT DU MÊME `params.json` QUE LE COMPORTEMENT. Sans cela, une couleur existerait
+    // en deux exemplaires, un dans le CSS et un dans le processus principal, et ils divergeraient un jour.
+    fenetre?.webContents.send('zrc:jetons', variablesCss())
+    // CONTRÔLE VISUEL SANS ŒIL HUMAIN : `ZRC_SHOT=/chemin.png` capture la fenêtre puis quitte. Ne photographie
+    // que notre fenêtre, jamais l'écran, et sert à vérifier un rendu depuis un terminal ou une session agent.
+    const cible = process.env.ZRC_SHOT
+    if (cible) setTimeout(async () => {
+      try {
+        const img = await fenetre!.webContents.capturePage()
+        require('node:fs').writeFileSync(cible, img.toPNG())
+      } catch { /* la capture n'est qu'un outil de contrôle, jamais une raison d'échouer */ }
+      app.exit(0)
+    }, 800)
+  })
+}
+
+// ── JETON GITHUB ─────────────────────────────────────────────────────────────
+// Le jeton n'est JAMAIS stocké par l'app : on le demande à `gh`, qui le garde dans le trousseau macOS. Une copie
+// de plus serait un secret de plus à protéger, pour aucun gain.
+function chercherToken(): Promise<void> {
+  return new Promise((resolve) => {
+    // Une tentative neuve invalide d'abord l'ancien secret en mémoire. Garder un jeton précédent après un
+    // échec de `gh auth token` ferait dire « déconnecté » à l'écran tout en continuant à lancer des envois.
+    token = ''
+    if (!bin.ghPath) { tokenOk = false; tokenError = 'gh introuvable (brew install gh)'; return resolve() }
+    execFile(bin.ghPath, ['auth', 'token'], { env: envMoteur(bin, ''), timeout: 15000 }, (err, stdout) => {
+      const t = (stdout || '').trim()
+      if (err || !t) { tokenOk = false; tokenError = 'gh auth token a échoué — lancer `gh auth login`' }
+      else { token = t; tokenOk = true; tokenError = null }
+      resolve()
+    })
+  })
+}
+
+// ── RACINE DU DÉPÔT ──────────────────────────────────────────────────────────
+// Devine la racine de ZenRayProgress : d'abord l'emplacement de l'app en développement, puis les chemins connus.
+function devinerRepoRoot(): string {
+  const candidats = [
+    path.resolve(__dirname, '..', '..', '..'),
+    path.join(app.getPath('home'), 'Create/Build/Productions/GithubProductions/ZenRayProgress'),
+  ]
+  return candidats.find((c) => existsSync(path.join(c, 'scripts', 'archive-folder.mjs'))) || ''
+}
+
+// ── IPC ──────────────────────────────────────────────────────────────────────
+function brancherIpc(): void {
+  ipcMain.handle('zrc:get', () => etat())
+
+  ipcMain.handle('zrc:add', async () => {
+    const r = await dialog.showOpenDialog({ properties: ['openDirectory', 'createDirectory'], message: 'Dossier à surveiller' })
+    if (r.canceled || !r.filePaths[0]) return etat()
+    const src = r.filePaths[0]
+    const cfg = lireConfig()
+    if (cfg.folders.some((f) => f.src === src)) return etat()
+    const nom = path.basename(src)
+    const f: WatchedFolder = {
+      id: `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`,
+      src, dest: `${RACINE_CLOUD}/${nom}`, paused: false,
+      markDeleted: defautsDossier().marquerLesSuppressions, excludes: [...defautsDossier().exclusions],
+      lastSyncAt: null, lastError: null, lastResult: null,
+    }
+    ecrireConfig({ ...cfg, folders: [...cfg.folders, f] })
+    surveillance.suivre(f.id, f.src)
+    diffuser()
+    return etat()
+  })
+
+  ipcMain.handle('zrc:remove', (_e, id: string) => {
+    const cfg = lireConfig()
+    moteur.annuler(id)
+    surveillance.oublier(id)
+    cacheFiches.delete(id)
+    erreursIndex.delete(id)
+    ecrireConfig({ ...cfg, folders: cfg.folders.filter((f) => f.id !== id) })
+    diffuser(true)
+    return etat()
+  })
+
+  ipcMain.handle('zrc:update', (_e, id: string, partiel: Partial<WatchedFolder>) => {
+    // Champs modifiables par l'interface seulement : jamais les résultats, qui appartiennent au moteur.
+    const sur: Partial<WatchedFolder> = {}
+    if (typeof partiel.dest === 'string') sur.dest = partiel.dest.replace(/^\/+|\/+$/g, '')
+    if (typeof partiel.paused === 'boolean') sur.paused = partiel.paused
+    if (typeof partiel.markDeleted === 'boolean') sur.markDeleted = partiel.markDeleted
+    if (Array.isArray(partiel.excludes)) sur.excludes = partiel.excludes.map((x) => String(x).trim().replace(/^\/+|\/+$/g, '')).filter(Boolean)
+    majDossier(id, sur)
+    if (sur.paused === true) { moteur.annuler(id); surveillance.oublier(id) }
+    if (sur.paused === false) {
+      const f = lireConfig().folders.find((x) => x.id === id)
+      if (f) {
+        surveillance.suivre(f.id, f.src)
+        // FSEvents ne raconte pas ce qui arrive pendant la pause. La reprise commence donc par un balayage
+        // complet, sans quoi les fichiers créés ou modifiés dans cet intervalle resteraient inconnus six heures.
+        moteur.enfiler(f)
+      }
+    } else if (sur.paused !== true && ('dest' in sur || 'markDeleted' in sur || 'excludes' in sur)) {
+      const f = lireConfig().folders.find((x) => x.id === id)
+      if (f && !f.paused) moteur.enfiler(f)
+    }
+    diffuser()
+    return etat()
+  })
+
+  ipcMain.handle('zrc:sync', (_e, id: string) => {
+    const f = lireConfig().folders.find((x) => x.id === id)
+    if (f && !f.paused) moteur.enfiler(f)
+    diffuser()
+    return etat()
+  })
+
+  // C2 — RESTAURER UN FICHIER DEPUIS LE DRIVE. Le premier canal qui va du drive VERS le Mac : jusqu'ici
+  // tout ne circulait que dans un sens, et une sauvegarde dont on n'a jamais vérifié qu'elle se restaure
+  // n'est pas une sauvegarde, c'est une croyance. Le script vérifie l'empreinte et REFUSE d'écrire un
+  // fichier qui ne porte pas celle du manifeste.
+  ipcMain.handle('zrc:restaurer', async (_e, id: string, rel: string, version: number | null) => {
+    const f = lireConfig().folders.find((x: WatchedFolder) => x.id === id)
+    if (!f) return { ok: false, message: 'dossier inconnu' }
+    const script = path.join(lireConfig().prefs.repoRoot, 'Cloud', 'scripts', 'restaurer.mjs')
+    // Restauration DANS UN DOSSIER À PART, jamais par-dessus l'original : écraser un fichier local avec sa
+    // version en ligne serait exactement le geste destructeur qu'une sauvegarde doit rendre impossible.
+    const vers = path.join(app.getPath('downloads'), 'ZenRayCloud restauré')
+    const args = [script, f.dest, rel, vers]
+    const fiche = fichesDe(f).find((x: any) => x.rel === rel)
+    if (fiche?.manifeste) args.push(`--manifest=${fiche.manifeste}`)
+    if (version != null) args.push(`--version=${version}`)
+    return await new Promise((resolve) => {
+      execFile(bin.nodePath || 'node', args, { env: envMoteur(bin, token), maxBuffer: 1 << 22 }, (err, out, errOut) => {
+        const journal = `── restauration « ${rel} » : ${err ? 'ÉCHEC ' + String(errOut || err).trim().slice(-160) : 'réussie vers ' + vers}`
+        moteur.pousserJournalPublic(id, journal)
+        diffuser()
+        resolve({ ok: !err, message: err ? String(errOut || err).trim().slice(-200) : vers, sortie: String(out) })
+      })
+    })
+  })
+  ipcMain.handle('zrc:cancel', (_e, id: string) => { moteur.annuler(id); diffuser(); return etat() })
+  ipcMain.handle('zrc:syncAll', () => { synchroniserTout(); return etat() })
+  // C6 — geler ou reprendre un envoi SANS le perdre.
+  ipcMain.handle('zrc:geler', (_e, id: string, geler: boolean) => { moteur.suspendre(id, geler); diffuser(); return etat() })
+  // C7 et C9 — CE QUE LE DRIVE SAIT ET QUE LE MAC IGNORE. Le script SIGNALE et n'agit jamais : un canal
+  // descendant qui écraserait ou supprimerait en local transformerait la sauvegarde en miroir, c'est-à-dire
+  // en machine à perdre les données des deux côtés d'un seul geste.
+  ipcMain.handle('zrc:etatDrive', async (_e, id: string) => {
+    const f = lireConfig().folders.find((x: WatchedFolder) => x.id === id)
+    if (!f) return { ok: false, message: 'dossier inconnu' }
+    const script = path.join(lireConfig().prefs.repoRoot, 'Cloud', 'scripts', 'etat-drive.mjs')
+    const args = [script, f.dest, f.src, `--index=${path.join(cheminEtat(), `index-${id}.json`)}`]
+    return await new Promise((resolve) => {
+      execFile(bin.nodePath || 'node', args, { env: envMoteur(bin, token), maxBuffer: 1 << 24 }, (err, out, errOut) => {
+        const lignes = String(out).split('\n').filter((l) => l && !l.startsWith('{"zr"'))
+        for (const l of lignes) moteur.pousserJournalPublic(id, l)
+        diffuser()
+        resolve({ ok: !err, message: err ? String(errOut || err).trim().slice(-200) : lignes.join(' · ') })
+      })
+    })
+  })
+
+  ipcMain.handle('zrc:prefs', (_e, partiel: any) => {
+    const sur: any = {}
+    if (typeof partiel.debounceSec === 'number') sur.debounceSec = Math.max(5, Math.round(partiel.debounceSec))
+    if (typeof partiel.fullScanHours === 'number') sur.fullScanHours = Math.max(1, Math.round(partiel.fullScanHours))
+    if (typeof partiel.repoRoot === 'string') sur.repoRoot = partiel.repoRoot
+    if (typeof partiel.launchAtLogin === 'boolean') {
+      sur.launchAtLogin = partiel.launchAtLogin
+      app.setLoginItemSettings({ openAtLogin: partiel.launchAtLogin, openAsHidden: true })
+    }
+    majPrefs(sur)
+    if (typeof sur.fullScanHours === 'number') armerRattrapage()
+    diffuser()
+    return etat()
+  })
+
+  // L'atelier est un vrai dossier : on doit pouvoir l'ouvrir et regarder dedans, pas seulement lire son poids.
+  ipcMain.handle('zrc:openAtelier', async (_e, chemin: string) => ouvrirChemin(chemin, 'atelier'))
+  ipcMain.handle('zrc:reveal', (_e, id: string) => revelerChemin(path.join(cheminLogs(), `${id}.log`), 'journal'))
+  ipcMain.handle('zrc:openSrc', async (_e, id: string) => {
+    const f = lireConfig().folders.find((x) => x.id === id)
+    return ouvrirChemin(f?.src || '', 'dossier surveillé')
+  })
+  ipcMain.handle('zrc:openDrive', async (_e, id: string) => {
+    const f = lireConfig().folders.find((x) => x.id === id)
+    if (!f) return false
+    try {
+      await shell.openExternal(`https://zenray-progress.pages.dev/#/create/${encodeURI(f.dest.replace(/^pages\//, ''))}`)
+      return true
+    } catch (error: any) {
+      dialog.showErrorBox('Ouverture impossible', error?.message || String(error))
+      return false
+    }
+  })
+  ipcMain.handle('zrc:retryToken', async () => { bin = await resoudreBinaires(); await chercherToken(); majPrefs(bin); diffuser(); return etat() })
+}
+
+async function ouvrirChemin(chemin: string, nom: string): Promise<boolean> {
+  if (!chemin || !existsSync(chemin)) {
+    dialog.showErrorBox('Ouverture impossible', `Le ${nom} n'existe plus : ${chemin || '(chemin vide)'}`)
+    return false
+  }
+  const erreur = await shell.openPath(chemin)
+  if (!erreur) return true
+  dialog.showErrorBox('Ouverture impossible', erreur)
+  return false
+}
+
+function revelerChemin(chemin: string, nom: string): boolean {
+  if (!chemin || !existsSync(chemin)) {
+    dialog.showErrorBox('Ouverture impossible', `Le ${nom} n'existe plus : ${chemin || '(chemin vide)'}`)
+    return false
+  }
+  shell.showItemInFolder(chemin)
+  return true
+}
+
+// ── CYCLE DE VIE ─────────────────────────────────────────────────────────────
+app.on('window-all-closed', () => { /* app de barre de menus : fermer la fenêtre ne quitte pas */ })
+
+// UNE SEULE INSTANCE, JAMAIS DEUX. Deux fenêtres, ce serait deux moteurs lançant le même script sur le même
+// dossier, poussant sur le même dépôt de morceaux en même temps : au mieux du travail fait deux fois, au pire
+// deux processus git qui se marchent dessus. Le second lancement se contente donc de montrer la fenêtre du premier.
+if (!app.requestSingleInstanceLock()) {
+  app.exit(0)
+} else {
+  app.on('second-instance', () => ouvrirFenetre())
+}
+
+app.whenReady().then(async () => {
+  // DOCK VISIBLE (demande Matthieu, 2026-08-15). L'app vivait uniquement dans la barre du haut, où l'on ne voit
+  // qu'une pastille de huit pixels. Elle a maintenant sa place dans le Dock, avec sa vraie icône et une pastille
+  // de progression : d'un coup d'œil en bas de l'écran, on sait si elle envoie et où elle en est.
+  if (process.platform === 'darwin') {
+    const ico = nativeImage.createFromPath(path.join(__dirname, '..', '..', 'assets', 'icon-512.png'))
+    if (!ico.isEmpty()) app.dock?.setIcon(ico)   // en développement ; l'app empaquetée porte son .icns
+  }
+  try { initStore() }
+  catch (error: any) {
+    dialog.showErrorBox('ZenRayCloud ne démarre pas', error?.message || String(error))
+    app.quit()
+    return
+  }
+  mkdirSync(cheminLogs(), { recursive: true })
+  brancherIpc()
+
+  tray = new Tray(iconeEtat('idle'))
+  tray.on('click', () => ouvrirFenetre())
+
+  bin = await resoudreBinaires()
+  const cfg = lireConfig()
+  majPrefs({ ...bin, repoRoot: cfg.prefs.repoRoot || devinerRepoRoot() })
+  await chercherToken()
+
+  for (const f of lireConfig().folders) if (!f.paused) surveillance.suivre(f.id, f.src)
+
+  moteur.on('maj', () => diffuser())
+  moteur.on('fini', ({ id, annule, resultat, erreur }: any) => {
+    if (annule) return
+    // Un échec ne réécrit pas l'histoire : le dernier succès reste consultable jusqu'à ce qu'un nouveau passage
+    // complet le remplace. Seule l'erreur courante change.
+    // `lastRunAt` marque la fin du passage DANS LES DEUX CAS. `lastSyncAt` ne retient que les succès, et
+    // s'en servir pour afficher « dernière activité » datait la carte du dernier passage réussi, soit la
+    // veille au matin alors qu'un passage venait de finir le soir même.
+    if (erreur) majDossier(id, { lastError: erreur, lastRunAt: Date.now() })
+    else majDossier(id, { lastSyncAt: Date.now(), lastRunAt: Date.now(), lastError: null, lastResult: resultat || null })
+    // ON PRÉVIENT DANS LES DEUX CAS, PAS SEULEMENT À L'ÉCHEC. Une sauvegarde de trois cent vingt-quatre
+    // gigaoctets se termine forcément pendant qu'on fait autre chose : ne notifier que les échecs revient à
+    // ne jamais dire que ça a marché, donc à laisser douter en permanence. Le bilan chiffré part avec.
+    if (Notification.isSupported()) {
+      const f = lireConfig().folders.find((x) => x.id === id)
+      const nom = f ? path.basename(f.src) : id
+      const b = moteur.bilans.get(id)
+      if (erreur) new Notification({ title: 'ZenRayCloud — échec', body: `${nom} : ${erreur}` }).show()
+      else if (b) new Notification({
+        title: `ZenRayCloud — ${nom} sauvegardé`,
+        body: `${b.fichiers} fichier(s) · ${(b.octets / 1e9).toFixed(2)} Go · ${(b.octetsParSeconde / 1e6).toFixed(1)} Mo/s`
+          + (b.sautes.length ? ` · ⚠ ${b.sautes.length} écarté(s), source à conserver` : ''),
+      }).show()
+    }
+    diffuser(true)
+  })
+
+  // RATTRAPAGE AU DÉMARRAGE. Tout ce qui a changé pendant que l'app était fermée est invisible pour FSEvents,
+  // qui ne raconte que le présent. Une sauvegarde qui ne rattrape pas son absence n'est pas une sauvegarde : on
+  // met donc tous les dossiers en file cinq secondes après l'ouverture. Le coût est faible, le moteur comparant
+  // les empreintes et ne renvoyant que ce qui a réellement bougé.
+  minuterieDemarrage = setTimeout(() => {
+    minuterieDemarrage = null
+    synchroniserTout()
+  }, defautsDossier().rattrapageAuDemarrageSec * 1000)
+
+  // Balayage de rattrapage : la minuterie se réarme avec la valeur COURANTE. Un `setInterval` construit au
+  // démarrage ignorait toute modification faite ensuite dans les préférences jusqu'au prochain lancement.
+  armerRattrapage()
+
+  ouvrirFenetre()
+  diffuser()
+})
+
+app.on('before-quit', () => {
+  if (minuterieRattrapage) clearTimeout(minuterieRattrapage)
+  if (minuterieDemarrage) clearTimeout(minuterieDemarrage)
+  if (minuterieDiffusion) clearTimeout(minuterieDiffusion)
+  minuterieRattrapage = minuterieDemarrage = minuterieDiffusion = null
+  diffusionArmee = false
+  surveillance.toutOublier()
+  moteur.arreterTout()
+})
+
+function armerRattrapage(): void {
+  if (minuterieRattrapage) clearTimeout(minuterieRattrapage)
+  const heures = Math.max(1, lireConfig().prefs.fullScanHours)
+  minuterieRattrapage = setTimeout(() => {
+    synchroniserTout()
+    armerRattrapage()
+  }, heures * 3600 * 1000)
+}

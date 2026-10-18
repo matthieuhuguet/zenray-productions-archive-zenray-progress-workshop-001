@@ -1,0 +1,8 @@
+const e=`<!--zrm { "name": "Ligne de métadonnées", "group": "Éditorial", "reference": "LIBE__01__HOME_TOP", "order": 12, "inPage": false } -->
+<style>
+/* Date grise + mention « abonnes » ambre : la seule couleur chaude du systeme. */
+.zrm-meta{ font-family:var(--f-meta); font-size:.66em; color:var(--zrm-meta); margin:0; }
+.zrm-meta em{ color:var(--zrm-sub); font-style:normal; margin-left:.6em; }
+</style>
+<p class="zrm-meta">24 juil. 2026 <em>abonnés</em></p>
+`;export{e as default};

@@ -1,0 +1,637 @@
+// LE MOTEUR — il ne synchronise rien lui-même, il PILOTE `scripts/archive-folder.mjs`.
+//
+// POURQUOI CE CHOIX, ET PAS UNE RÉÉCRITURE. Le découpage 19 / 95 Mo, le seuil raw, la reprise après coupure,
+// l'historique `versions[]` append-only et la vérification HTTP 200 vivent déjà dans ce script, éprouvés sur
+// plus de cent trente gigaoctets d'archives. Les réécrire ici créerait une deuxième implémentation qui
+// divergerait tôt ou tard de `src/config/chunkPolicy.js`, lequel interdit explicitement cette duplication dans
+// son propre en-tête. Une divergence sur ce fichier-là n'abîmerait pas l'affichage, elle abîmerait des archives.
+//
+// LE PROTOCOLE. Le script reçoit `--json` et écrit des lignes NDJSON préfixées `{"zr":1,...}` sur sa sortie
+// standard, EN PLUS de ses logs humains. On ne lit que ces lignes-là et on garde les autres pour le journal
+// affiché : aucun log existant ne peut casser le parseur, et le script reste lisible tel quel dans un terminal.
+//
+// Le nombre de dossiers simultanés reste paramétré et vaut un par défaut. Les voies d'un même dossier possèdent
+// leurs ateliers, tandis que les écritures partagées passent par les verrous du script d'archive.
+import { EventEmitter } from 'node:events'
+import { spawn, type ChildProcess } from 'node:child_process'
+import { appendFileSync, existsSync, readFileSync, statSync as statFs, writeFileSync } from 'node:fs'
+import { readdirSync } from 'node:fs'
+import path from 'node:path'
+import type { Bilan, Progress, SyncResult, WatchedFolder } from './types'
+import { cpus } from 'node:os'
+import { statSync } from 'node:fs'
+import { envMoteur, type Binaires } from './env'
+import { cheminEtat, cheminLogs } from './store'
+import { p as par } from './params'
+import { agregerEvenement, creerAgregation, erreurResultatSync, reportResultatSync, toutesLesVoiesTerminees } from './lane-events'
+import { poserIcones } from './finder-icons'
+import { signalerArbre } from './process-tree'
+import { TamponLignes } from './line-buffer'
+import { validerEvenementMoteur } from './engine-event'
+
+const LOG_MAX = par<number>('familles.panneauVivant.lignesJournal')
+const VIDE = { phase: 'inventaire' as const, seen: 0, total: 0, rel: '', bytes: 0, fichierFait: 0, fichierTotal: 0,
+  envoyes: 0, octetsParSeconde: 0, depot: '', morceau: 0, morceaux: 0, tailleMorceau: 0, atelier: '',
+  atelierOctets: 0, depotOctets: 0, morceauxEnAttente: [], sautes: [], voies: 0, voiesVivantes: 0, debut: 0,
+  fichiersDossier: 0, publies: 0, publiesTotal: 0, verifies: 0 }
+
+/** Les morceaux posés dans l'atelier, du plus récent au plus ancien, bornés à douze. Le dossier reste petit
+ *  puisqu'il se vide à chaque push confirmé ; on ne le parcourt donc jamais longtemps. */
+function morceauxDe(dir: string): { nom: string; octets: number }[] {
+  const out: { nom: string; octets: number }[] = []
+  const descendre = (d: string, reste: number) => {
+    if (out.length > 400) return
+    let entrees: any[] = []
+    try { entrees = readdirSync(d, { withFileTypes: true }) } catch { return }
+    for (const e of entrees) {
+      if (e.name === '.git' || e.name === 'README.md') continue
+      const p = `${d}/${e.name}`
+      if (e.isDirectory()) { if (reste > 0) descendre(p, reste - 1) }
+      else { try { const st = statFs(p); out.push({ nom: e.name, octets: st.size, ...( { t: st.mtimeMs } as any) }) } catch {} }
+    }
+  }
+  descendre(dir, par<number>('familles.panneauVivant.profondeurScanAtelier'))
+  return out.sort((a: any, b: any) => (b.t || 0) - (a.t || 0))
+    .slice(0, par<number>('familles.panneauVivant.morceauxAffiches')).map(({ nom, octets }) => ({ nom, octets }))
+}
+
+/** DEUX POIDS, ET NON UN SEUL — c'est la confusion qui faisait croire à un atelier qui ne se vide jamais.
+ *  Un dossier de travail contient deux choses de nature opposée : les MORCEAUX EN ATTENTE, effacés dès que le
+ *  push est confirmé, et le dépôt git local, qui garde ses objets jusqu'au changement de dépôt et grossit donc
+ *  légitimement jusqu'à quatre gigaoctets et demi. Les additionner donnait un chiffre qui ne redescendait jamais
+ *  et n'expliquait rien. On les compte séparément, et chacun porte son nom à l'écran.
+ *  @param inclureGit false pour ne peser que ce qui attend réellement d'être poussé. */
+function poidsDossier(dir: string, reste = 4, inclureGit = false): number {
+  let n = 0
+  try {
+    for (const e of readdirSync(dir, { withFileTypes: true })) {
+      if (!inclureGit && e.name === '.git') continue
+      const p = `${dir}/${e.name}`
+      if (e.isDirectory()) { if (reste > 0) n += poidsDossier(p, reste - 1, inclureGit) }
+      else { try { n += statFs(p).size } catch {} }
+    }
+  } catch {}
+  return n
+}
+/** Poids du dépôt git local seul : ce qui est DÉJÀ poussé mais que git conserve jusqu'au roulement de shard. */
+function poidsDepotLocal(dir: string): number {
+  try { return poidsDossier(`${dir}/.git`, 4, true) } catch { return 0 }
+}
+
+interface Job { id: string; dossier: WatchedFolder }
+
+export class Moteur extends EventEmitter {
+  private file: Job[] = []
+  /** C8 — PLUSIEURS TRAVAUX, ET NON UN SEUL. La file restait strictement séquentielle « pour ne pas se
+   *  disputer la bande passante », ce qui est vrai de deux gros dossiers et faux de deux petits sur des
+   *  destinations différentes. Le nombre se règle donc dans `params.json` et vaut 1 par défaut : on ouvre
+   *  la possibilité sans changer le comportement éprouvé, exactement ce que la règle des deux occurrences
+   *  demande. Une Map, parce qu'il faut retrouver un travail par son identifiant pour l'arrêter. */
+  private travaux = new Map<string, { job: Job; enfant: ChildProcess; enfants?: ChildProcess[] }>()
+  private courant: { job: Job; enfant: ChildProcess; enfants?: ChildProcess[] } | null = null
+  private annules = new Set<string>()
+  private arretsForces = new Map<string, NodeJS.Timeout>()
+  /** Une reprise annoncée « dans vingt secondes » ne vit pas déjà dans la file : sinon n'importe quel autre
+   *  réveil de l'ordonnanceur la lançait immédiatement. La minuterie devient un état nommé et annulable. */
+  private reprisesDifferees = new Map<string, { dossier: WatchedFolder; minuterie: NodeJS.Timeout }>()
+  /** Dernier point de mesure du débit, par dossier : c'est ce qui donne une vitesse INSTANTANÉE plutôt qu'une
+   *  moyenne depuis le départ, laquelle met dix minutes à réagir et ne dit donc rien de ce qui se passe. */
+  // DEUX COMPTEURS DE NATURE DIFFÉRENTE NE PARTAGENT PAS UN ÉCHANTILLON (régression du 2026-08-16 :
+  // le panneau a affiché « 8975,9 Mo/s envoyés », soit neuf gigaoctets par seconde vers GitHub).
+  // Pendant les empreintes on mesure des octets LUS, qui se comptent en gigaoctets ; pendant l'envoi des
+  // octets POUSSÉS, qui se comptent en mégaoctets. En gardant un seul point de référence, le premier
+  // relevé après un changement de phase soustrayait deux grandeurs sans rapport. La clé porte donc la
+  // nature du compteur, et le débit repart proprement à chaque bascule.
+  private dernierEchantillon = new Map<string, { t: number; o: number }>()
+  progression = new Map<string, Progress | null>()
+  journaux = new Map<string, string[]>()
+  /** Le bilan du dernier passage, par dossier : affiché en clair au lieu d'être noyé dans le journal (A5). */
+  bilans = new Map<string, Bilan>()
+  /** Reprises automatiques enchaînées depuis le dernier succès, par dossier (A4). */
+  reprises = new Map<string, number>()
+
+  constructor(private lireBin: () => Binaires, private lireToken: () => string, private lireRepoRoot: () => string) {
+    super()
+  }
+
+  get idCourant(): string | null { return this.courant ? this.courant.job.id : null }
+  /** Tous les dossiers en cours d'envoi, et non le seul premier : l'interface doit pouvoir les montrer. */
+  get idsEnCours(): string[] { return [...this.travaux.keys()] }
+  get idsEnAttente(): string[] { return [...new Set([...this.file.map((j) => j.id), ...this.reprisesDifferees.keys()])] }
+  enCours(id: string): boolean { return this.travaux.has(id) || this.idCourant === id }
+  enAttente(id: string): boolean { return this.file.some((j) => j.id === id) || this.reprisesDifferees.has(id) }
+
+  journal(id: string): string[] { return this.journaux.get(id) || [] }
+
+  /** Dossiers qui ont bougé PENDANT leur propre envoi : à refaire dès que le passage courant se termine. */
+  private salis = new Map<string, WatchedFolder>()
+
+  enfiler(dossier: WatchedFolder): void {
+    if (dossier.paused) return
+    // LE TROU QUI EXISTAIT ICI. Quand un fichier était ajouté pendant un envoi, cette méthode voyait le dossier
+    // « déjà en cours » et repartait sans rien faire : l'événement était PERDU. Le nouveau fichier n'était donc
+    // repris qu'au balayage de rattrapage, jusqu'à six heures plus tard. On note maintenant que le dossier est
+    // sali, et il est remis en file dès que le passage courant s'achève. Rien ne se perd, et surtout on ne
+    // relance pas un second moteur sur un dossier déjà en train d'être traité, ce qui ferait deux écrivains.
+    if (this.enCours(dossier.id)) { this.salis.set(dossier.id, dossier); this.emit('maj'); return }
+    const differee = this.reprisesDifferees.get(dossier.id)
+    if (differee) { differee.dossier = dossier; this.emit('maj'); return }
+    const position = this.file.findIndex((j) => j.id === dossier.id)
+    if (position >= 0) { this.file[position] = { id: dossier.id, dossier }; this.emit('maj'); return }
+    this.file.push({ id: dossier.id, dossier })
+    this.emit('maj')
+    this.demarrerSiLibre()
+  }
+
+  /** Vrai si le dossier a bougé pendant son envoi et attend d'être repassé. */
+  estSali(id: string): boolean { return this.salis.has(id) }
+
+  /** C6 — PAUSE VRAIE. « Pause » arrêtait le moteur, donc la reprise recommençait le fichier en cours : sur
+   *  un film de sept gigaoctets, une pause de dix secondes coûtait dix minutes. SIGSTOP gèle le processus
+   *  exactement où il est, SIGCONT le reprend à l'instruction suivante, et le fichier en cours n'est pas
+   *  perdu. Le système d'exploitation fait ce travail depuis toujours ; il suffisait de le lui demander. */
+  suspendre(id: string, geler: boolean): boolean {
+    const t = this.travaux.get(id)
+    if (!t) return false
+    for (const e of (t.enfants || [t.enfant])) signalerArbre(e, geler ? 'SIGSTOP' : 'SIGCONT')
+    this.pousserJournal(id, geler ? '── gelé sur place (le fichier en cours n\'est pas perdu)' : '── repris là où il en était')
+    this.emit('maj')
+    return true
+  }
+
+  annuler(id: string): void {
+    this.file = this.file.filter((j) => j.id !== id)
+    const reprise = this.reprisesDifferees.get(id)
+    if (reprise) { clearTimeout(reprise.minuterie); this.reprisesDifferees.delete(id) }
+    const t = this.travaux.get(id)
+    if (t) {
+      this.annules.add(id)
+      // Un processus GELÉ ne peut pas traiter SIGTERM : on le réveille d'abord, sinon l'arrêt reste
+      // sans effet et l'interface attend indéfiniment un travail qui ne répondra jamais.
+      for (const e of (t.enfants || [t.enfant])) signalerArbre(e, 'SIGCONT')
+      // SIGTERM d'abord : le script peut finir son push en cours et laisser le dépôt cohérent. Le travail déjà
+      // poussé n'est jamais perdu, une reprise ultérieure saute ce qui est déjà en ligne (comparaison sha256).
+      for (const e of (t.enfants || [t.enfant])) signalerArbre(e, 'SIGTERM')
+      if (!this.arretsForces.has(id)) {
+        const minuterie = setTimeout(() => {
+          this.arretsForces.delete(id)
+          const encore = this.travaux.get(id)
+          if (!encore) return
+          for (const e of (encore.enfants || [encore.enfant])) {
+            if (e.exitCode === null && e.signalCode === null) signalerArbre(e, 'SIGKILL')
+          }
+          this.pousserJournal(id, '── arrêt forcé du groupe resté vivant après SIGTERM')
+        }, par<number>('familles.arret.delaiForceSec') * 1000)
+        minuterie.unref()
+        this.arretsForces.set(id, minuterie)
+      }
+    }
+    this.emit('maj')
+  }
+
+  /** Ferme tous les moteurs avant la sortie d'Electron. Sans ce geste, les processus Node survivent à leur
+   *  fenêtre, et l'application suivante lance un second passage sur les mêmes dossiers de travail. */
+  arreterTout(): void {
+    this.file = []
+    for (const { minuterie } of this.reprisesDifferees.values()) clearTimeout(minuterie)
+    this.reprisesDifferees.clear()
+    for (const id of [...this.travaux.keys()]) this.annuler(id)
+  }
+
+  /** COMBIEN DE VOIES EN PARALLÈLE. Un seul flux git plafonne à ~8 Mo/s quelle que soit la ligne : c'est la
+   *  fenêtre d'un flux unique vers GitHub qui limite, pas le réseau. Mesuré le 2026-08-16 : trois tranches
+   *  montent à 13 Mo/s sur une ligne à 254 Mbps. Rien n'est figé ici — le nombre se déduit de la machine et du
+   *  volume à envoyer, et un petit dossier reste sur une seule voie, où paralléliser ne rapporterait rien. */
+  private voiesPour(src: string): number {
+    try { if (!statSync(src).isDirectory()) return 1 } catch { return 1 }
+    const memo = this.lireMemo()
+    // LE PLANCHER, ET POURQUOI IL EXISTE (mesuré le 2026-08-16). La règle « sous deux mégaoctets par seconde,
+    // une seule voie » était un PIÈGE ABSORBANT : une fois tombé à une voie, le débit ne dépasse plus jamais ce
+    // seuil, donc rien ne fait jamais remonter. `voies.json` est resté bloqué à `{"n":1, "debit":1.5 Mo/s}`
+    // pendant douze heures, transformant un passage de six heures en un passage de quarante-quatre, c'est-à-dire
+    // plus long que l'intervalle entre deux crashes : le passage ne pouvait donc PLUS JAMAIS aboutir.
+    const min = par<number>('familles.voieEnvoi.voiesMin')
+    if (memo && memo.n >= 1) return Math.max(min, memo.n)
+    return Math.max(min, par<number>('familles.voieEnvoi.voiesPremierEssaiMin'),
+      Math.min(par<number>('familles.voieEnvoi.voiesPremierEssaiMax'),
+        Math.round((cpus().length || 8) / par<number>('familles.voieEnvoi.diviseurCoeurs'))))
+  }
+
+  /** Mémoire d'adaptation : combien de voies au dernier envoi, et quel débit total elles ont donné. */
+  private cheminMemo(): string { return path.join(cheminEtat(), 'voies.json') }
+  private lireMemo(): { n: number; debit: number } | null {
+    try { const m = JSON.parse(readFileSync(this.cheminMemo(), 'utf8')); return (m && m.n) ? m : null } catch { return null }
+  }
+
+  /** LA RÈGLE D'ADAPTATION, en un seul endroit. On ne devine pas la ligne, on mesure ce qu'on a réellement
+   *  obtenu, et on ajuste au run suivant. Monter tant que ça rapporte, redescendre dès que ça coûte, et se
+   *  replier sur une seule voie quand la connexion est si faible que paralléliser n'ajoute que de la latence. */
+  private adapterVoies(voies: number, octets: number, secondes: number): void {
+    if (secondes < par<number>('familles.voieEnvoi.mesureMinimaleSec')
+      || octets < par<number>('familles.voieEnvoi.mesureMinimaleOctets')) return  // trop court pour conclure
+    const debit = octets / secondes
+    const memo = this.lireMemo()
+    let suivant = voies
+    // MESURÉ LE 2026-08-16, ET C'EST CE QUI DICTE LA RÈGLE : un seul push atteint 14 Mo/s, deux pushes
+    // simultanés vers DEUX dépôts différents atteignent 15 Mo/s à eux deux. Le plafond n'est donc ni par
+    // connexion, ni dans notre code, ni dans la ligne (254 Mbps) : il est global, du côté de GitHub, autour de
+    // quinze mégaoctets par seconde. Au-delà, chaque voie supplémentaire n'apporte rien et coûte du disque et
+    // des dépôts. On redescend donc aussi quand une voie de plus ne rapporte QUE dalle, pas seulement quand
+    // elle fait perdre : à plafond atteint, la bonne réponse est le plus petit nombre de voies qui l'atteint.
+    const plancherVoies = par<number>('familles.voieEnvoi.voiesMin')
+    if (debit < par<number>('familles.voieEnvoi.debitPlancherUneVoie')) suivant = plancherVoies
+    else if (!memo || memo.n !== voies) suivant = voies
+    else if (debit > memo.debit * par<number>('familles.voieEnvoi.gainPourMonter'))
+      suivant = Math.min(par<number>('familles.voieEnvoi.voiesPlafond'), voies + 1)
+    else if (debit < memo.debit * par<number>('familles.voieEnvoi.perteRedescendre')) suivant = Math.max(plancherVoies, voies - 1)
+    else if (voies > plancherVoies + 1) suivant = voies - 1   // palier atteint : on allège sans rien perdre
+    try { writeFileSync(this.cheminMemo(), JSON.stringify({ n: suivant, debit, mesureA: voies, le: new Date().toISOString() })) } catch {}
+    this.emit('maj')
+  }
+
+  /** Pose l'icône « sauvegardé » sur les fichiers nouvellement en ligne. Le contenu n'est jamais touché : l'icône
+   *  vit dans les métadonnées, l'empreinte sha256 ne bouge pas, donc l'envoi suivant ne verra aucun changement. */
+  private async marquerIcones(job: Job): Promise<void> {
+    const outil = path.join(this.lireRepoRoot(), 'Cloud', 'finder', 'zrc-icone', 'zrc-icone')
+    if (!existsSync(outil)) return
+    const idx = path.join(cheminEtat(), `index-${job.id}.json`)
+    const vu = path.join(cheminEtat(), `iconees-${job.id}.json`)
+    let rels: string[] = [], deja = new Set<string>()
+    try { rels = JSON.parse(readFileSync(idx, 'utf8')).rels || [] } catch { return }
+    try { deja = new Set(JSON.parse(readFileSync(vu, 'utf8'))) } catch {}
+    const aFaire = rels.filter((r) => !deja.has(r)).slice(0, par<number>('familles.icones.parEnvoiMax'))
+    if (!aFaire.length) return
+    let resultat: { reussis: string[]; echecs: string[] }
+    try {
+      resultat = await poserIcones(outil, aFaire.map((rel) => ({ rel, abs: path.join(job.dossier.src, rel) })),
+        par<number>('familles.icones.parAppel'), par<number>('familles.icones.delaiAppelSec') * 1000)
+    } catch (error: any) {
+      this.pousserJournal(job.id, `── ⚠ icônes Finder non posées : ${error?.message || error}`)
+      return
+    }
+    if (resultat.reussis.length) {
+      try { writeFileSync(vu, JSON.stringify([...deja, ...resultat.reussis])) }
+      catch (error: any) {
+        this.pousserJournal(job.id, `── ⚠ état des icônes non écrit : ${error?.message || error}`)
+        return
+      }
+      this.pousserJournal(job.id, `── ${resultat.reussis.length} icône(s) « sauvegardé » posées dans le Finder`)
+    }
+    if (resultat.echecs.length) this.pousserJournal(job.id, `── ⚠ ${resultat.echecs.length} icône(s) Finder refusée(s), elles seront retentées`)
+  }
+
+  private demarrerSiLibre(): void {
+    if (!this.file.length) return
+    if (this.travaux.size >= par<number>('familles.voieEnvoi.dossiersSimultanes')) return
+    const job = this.file.shift()!
+    const bin = this.lireBin()
+    const token = this.lireToken()
+    const repoRoot = this.lireRepoRoot()
+    if (!bin.nodePath || !token || !repoRoot) {
+      this.terminer(job, { erreur: !token ? 'jeton GitHub introuvable (gh auth login)' : !bin.nodePath ? 'node introuvable' : 'racine du dépôt ZenRayProgress non configurée' })
+      return
+    }
+    const script = path.join(repoRoot, 'scripts', 'archive-folder.mjs')
+    // `--skip-noise` est toujours passé : une sauvegarde continue d'un Mac entier ramasserait sinon des
+    // milliers de .DS_Store et de fichiers temporaires. Le drapeau reste opt-in côté script, donc les archives
+    // lancées à la main gardent leur comportement d'origine.
+    const args = [script, job.dossier.src, job.dossier.dest, '--json', '--skip-noise']
+    if (job.dossier.markDeleted) args.push('--mark-deleted')
+    for (const x of job.dossier.excludes || []) if (x.trim()) args.push(`--exclude=${x.trim()}`)
+    // Index d'état lu par l'extension Finder pour poser l'icône « sauvegardé » sur les fichiers.
+    args.push(`--index=${path.join(cheminEtat(), `index-${job.id}.json`)}`)
+
+    const voies = this.voiesPour(job.dossier.src)
+    // Chaque voie reçoit sa tranche : elle ne voit qu'un sous-ensemble des fichiers, décidé par l'empreinte de
+    // leur chemin, et pousse dans SES propres dépôts. Deux voies ne peuvent donc jamais toucher le même morceau.
+    const enfants = Array.from({ length: voies }, (_, i) => spawn(bin.nodePath,
+      voies > 1 ? [...args, `--part=${i}/${voies}`] : args,
+      { cwd: repoRoot, env: envMoteur(bin, token), stdio: ['ignore', 'pipe', 'pipe'], detached: process.platform !== 'win32' }))
+    const enfant = enfants[0]
+    this.courant = { job, enfant, enfants }
+    this.travaux.set(job.id, { job, enfant, enfants })
+    if (voies > 1) this.pousserJournal(job.id, `── ${voies} voies en parallèle`)
+    this.progression.set(job.id, { ...VIDE, voies, voiesVivantes: voies, debut: Date.now() })
+    this.pousserJournal(job.id, `── ${new Date().toLocaleString('fr-FR')} — démarrage`)
+    this.emit('maj')
+
+    let resultat: SyncResult | null = null
+    let supprimes = 0
+    let derniereErreur = ''
+    let erreursProtocole = 0
+    const debutRun = Date.now()
+    // PREMIER OCTET RÉELLEMENT PARTI. Diviser les octets par la durée TOTALE du passage comptait l'inventaire et
+    // le calcul des empreintes, pendant lesquels rien ne part : sur Downloads cela divisait le débit mesuré par
+    // cinq et déclenchait à tort le repli sur une seule voie. On ne compte donc que le temps d'envoi.
+    let debutEnvoi = 0
+    const aggregation = creerAgregation(enfants.length)
+    const envoyesParVoie = new Array(enfants.length).fill(0)
+
+    const lignes = (flux: NodeJS.ReadableStream, versErreur: boolean, voie = 0) => {
+      const tampon = new TamponLignes((ligne) => {
+        if (ligne.startsWith('{"zr":')) {
+          try {
+            const brut = validerEvenementMoteur(JSON.parse(ligne))
+            if (['chunk', 'transfer'].includes(brut.ev) && typeof brut.envoyes === 'number') {
+              if (!debutEnvoi && brut.envoyes > 0) debutEnvoi = Date.now()
+              envoyesParVoie[voie] = brut.envoyes
+            }
+            const ev = agregerEvenement(aggregation, voie, brut)
+            const suite = this.evenement(job.id, ev)
+            if (suite.resultat) resultat = suite.resultat
+            if (typeof suite.supprimes === 'number') supprimes = suite.supprimes
+          } catch (error: any) {
+            erreursProtocole++
+            derniereErreur = `événement moteur illisible : ${error?.message || error}`
+            this.pousserJournal(job.id, `── ⚠ ${derniereErreur}`)
+          }
+          return
+        }
+        if (!ligne.trim()) return
+        if (versErreur) derniereErreur = ligne.trim()
+        this.pousserJournal(job.id, ligne)
+      })
+      flux.on('data', (buf: Buffer) => tampon.ajouter(buf.toString('utf8')))
+      flux.on('end', () => tampon.terminer())
+    }
+    enfants.forEach((e, i) => { lignes(e.stdout!, false, i); lignes(e.stderr!, true, i) })
+
+    let restants = enfants.length
+    let pireCode = 0
+    for (const e of enfants) e.on('error', (err) => { derniereErreur = err.message })
+    const surFin = async (code: number | null, signal: NodeJS.Signals | null) => {
+      // SIGTERM envoyé par « interrompre » ou par la fermeture de l'app est attendu : le journal ne doit pas
+      // le déguiser en voie morte, puisqu'il s'agit précisément de l'arrêt demandé par l'utilisateur.
+      const echec = !this.annules.has(job.id) && (code !== 0 || signal !== null)
+      if (echec) pireCode = code || 1
+      restants--
+      // UNE VOIE QUI MEURT SE DIT. C'est très exactement la panne du 2026-08-16 : cinq voies sur six
+      // disparues, le passage continuant six fois plus lentement, et aucun écran ne l'annonçant.
+      if (restants > 0) {
+        const p = this.progression.get(job.id)
+        if (echec && p) this.progression.set(job.id, { ...p, voiesVivantes: Math.max(0, p.voiesVivantes - 1) })
+        if (echec) this.pousserJournal(job.id, `── ⚠ une voie s'est arrêtée (${signal || `code ${code}`})`)
+        this.emit('maj')
+        return
+      }
+      let c = pireCode
+      const annule = this.annules.has(job.id)
+      const arretForce = this.arretsForces.get(job.id)
+      if (arretForce) { clearTimeout(arretForce); this.arretsForces.delete(job.id) }
+      this.annules.delete(job.id)
+      // Le code 0 signifie seulement que Node s'est arrêté proprement. La preuve métier est un événement
+      // `done` par voie ; si l'un manque, annoncer « sauvegardé » serait un faux positif.
+      if (!annule && c === 0 && erreursProtocole) {
+        c = 1
+        derniereErreur = `${erreursProtocole} événement(s) moteur illisible(s) : résultat refusé`
+      } else if (!annule && c === 0 && !toutesLesVoiesTerminees(aggregation)) {
+        c = 1
+        derniereErreur = `protocole incomplet : ${aggregation.resultats.filter(Boolean).length}/${enfants.length} voie(s) ont rendu leur bilan final`
+      }
+      if (resultat) resultat.deleted = supprimes
+      const erreurMetier = !annule && c === 0 ? erreurResultatSync(resultat) : null
+      const octets = envoyesParVoie.reduce((a, b) => a + b, 0)
+      const secEnvoi = (Date.now() - (debutEnvoi || debutRun)) / 1000
+      if (!annule && c === 0 && !erreurMetier) {
+        // Un passage rouge ne constitue pas une mesure de débit : une voie morte, un refus Git ou un protocole
+        // incomplet raccourcit artificiellement la durée et fausserait le nombre de voies du prochain essai.
+        this.adapterVoies(voies, octets, secEnvoi)
+        await this.marquerIcones(job)
+      }
+      const bilan: Bilan = {
+        fin: Date.now(), secondes: Math.round((Date.now() - debutRun) / 1000), octets,
+        octetsParSeconde: secEnvoi > 0 ? octets / secEnvoi : 0, voies,
+        fichiers: resultat ? resultat.chunked + resultat.images + resultat.videos + resultat.media : 0,
+        fichiersDossier: this.progression.get(job.id)?.fichiersDossier || 0,
+        reportes: resultat ? (resultat as SyncResult).skipped : [],
+        inchanges: resultat ? (resultat as SyncResult).unchanged : 0,
+        reutilises: resultat ? (resultat as SyncResult).reused : 0,
+        sautes: resultat ? (resultat as SyncResult).skipped : [],
+        ok: !annule && c === 0 && !erreurMetier,
+        message: annule ? 'interrompu' : c !== 0 ? `moteur arrêté (code ${c})` : erreurMetier,
+      }
+      this.bilans.set(job.id, bilan)
+      this.pousserJournal(job.id, `── bilan : ${bilan.fichiers} fichier(s) montés · ${(bilan.octets / 1e9).toFixed(2)} Go`
+        + ` · ${(bilan.octetsParSeconde / 1e6).toFixed(1)} Mo/s sur ${voies} voie(s) · ${bilan.secondes}s`
+        + (bilan.sautes.length ? ` · ${bilan.sautes.length} sauté(s)` : ''))
+      this.terminer(job, {
+        annule,
+        resultat: !annule && c === 0 && !erreurMetier ? resultat : null,
+        erreur: annule ? null : c === 0
+          ? erreurMetier
+          : `moteur arrêté (code ${c}) ${derniereErreur}`.trim(),
+      })
+    }
+    for (const e of enfants) e.on('close', surFin)
+  }
+
+  /** Traduit un événement du script en progression affichable. Retourne ce qui doit survivre à la fin du run. */
+  private evenement(id: string, ev: any): { resultat?: SyncResult; supprimes?: number } {
+    const p = this.progression.get(id) || { ...VIDE }
+    switch (ev.ev) {
+      // LE DÉBIT NE SURVIT PAS À UN CHANGEMENT DE PHASE. Il était conservé par `...p` d'un événement à
+      // l'autre : la vitesse de LECTURE mesurée pendant les empreintes restait donc affichée pendant
+      // l'envoi, et le panneau annonçait « 1785,6 Mo/s envoyés » à côté de « 0 Mo envoyés ». Deux chiffres
+      // qui se contredisent à l'écran détruisent la confiance dans les deux. On repart de zéro à chaque
+      // bascule, et le premier vrai relevé le remplit en une seconde.
+      case 'inventory':
+        // ON REPART DE VIDE POUR LES COMPTEURS, MAIS PAS POUR TOUT. `...VIDE` remettait `voies` à zéro, si
+        // bien que le nombre de voies disparaissait de l'écran à la première ligne d'inventaire — le
+        // correctif d'affichage était juste, et un `...VIDE` posé ailleurs l'effaçait aussitôt. Les deux
+        // seules valeurs qui décrivent le PASSAGE et non le fichier courant sont donc reportées.
+        this.progression.set(id, { ...VIDE, phase: 'empreintes', total: ev.files || 0, bytes: ev.bytes || 0,
+          voies: p.voies, voiesVivantes: p.voiesVivantes, debut: p.debut || Date.now() })
+        break
+      case 'chunk': {
+        // DÉCOUPE quand on fabrique les morceaux, ENVOI quand git les pousse : deux gestes, deux mots.
+        const t = Date.now()
+        const prec = this.dernierEchantillon.get(id + ':envoyes')
+        const dt = (t - (prec?.t || t)) / 1000
+        const d = (ev.envoyes || 0) - (prec?.o || 0)
+        const fenetre = par<number>('familles.panneauVivant.fenetreDebitSec')
+        const vitesse = prec && dt > fenetre && d > 0 ? d / dt : p.octetsParSeconde
+        if (!prec || dt > fenetre) this.dernierEchantillon.set(id + ':envoyes', { t, o: ev.envoyes || 0 })
+        // Première arrivée d'un événement d'envoi après les empreintes : on jette l'échantillon de lecture.
+        if (p.phase === 'empreintes') {
+          p.octetsParSeconde = 0
+          this.dernierEchantillon.delete(id + ':lus')
+          this.dernierEchantillon.delete(id + ':envoyes')
+        }
+        this.progression.set(id, {
+          ...p, phase: ev.poussee ? 'envoi' : 'découpe', seen: ev.seen || p.seen, total: ev.files || p.total,
+          rel: ev.rel || p.rel, fichierFait: ev.done || 0, fichierTotal: ev.total || 0,
+          envoyes: ev.envoyes || p.envoyes, octetsParSeconde: vitesse,
+          depot: ev.depot || p.depot, morceau: ev.morceau || 0, morceaux: ev.morceaux || 0,
+          tailleMorceau: ev.tailleMorceau || p.tailleMorceau,
+          atelier: ev.atelier || p.atelier, atelierOctets: ev.atelier ? poidsDossier(ev.atelier) : p.atelierOctets,
+          depotOctets: ev.atelier ? poidsDepotLocal(ev.atelier) : p.depotOctets,
+          morceauxEnAttente: ev.atelier ? morceauxDe(ev.atelier) : p.morceauxEnAttente,
+        })
+        break
+      }
+      case 'transfer': {
+        const t = Date.now()
+        const prec = this.dernierEchantillon.get(id + ':envoyes')
+        const dt = (t - (prec?.t || t)) / 1000
+        const d = ev.envoyes - (prec?.o || 0)
+        const fenetre = par<number>('familles.panneauVivant.fenetreDebitSec')
+        const vitesse = prec && dt > fenetre && d > 0 ? d / dt : p.octetsParSeconde
+        if (!prec || dt > fenetre) this.dernierEchantillon.set(id + ':envoyes', { t, o: ev.envoyes })
+        this.dernierEchantillon.delete(id + ':lus')
+        this.progression.set(id, { ...p, phase: 'envoi', envoyes: ev.envoyes, octetsParSeconde: vitesse })
+        break
+      }
+      case 'menage':
+        // Le push est confirmé : les morceaux quittent le disque. On vide donc la liste À L'ÉCRAN aussi, c'est
+        // précisément ce moment-là qu'on veut rendre visible.
+        this.progression.set(id, { ...p, phase: 'ménage', depot: ev.depot || p.depot, morceau: 0, morceaux: 0,
+          atelierOctets: ev.atelier ? poidsDossier(ev.atelier) : 0,
+          depotOctets: ev.atelier ? poidsDepotLocal(ev.atelier) : p.depotOctets, morceauxEnAttente: [] })
+        break
+      case 'deleted':
+        return { supprimes: ev.count || 0 }
+      case 'rollover':
+        // Le dépôt a refusé définitivement : la voie s'arrête sans déplacer ses morceaux. La reprise choisit
+        // le dépôt suivant depuis les sources intactes, ce que le journal doit dire exactement.
+        this.pousserJournal(id, `── ${ev.depot} plein ou refusé : arrêt sûr, la reprise choisira le dépôt suivant`)
+        break
+      case 'manifests-differes':
+        this.pousserJournal(id, `── ⚠ ${ev.combien} manifeste(s) différé(s), nouvelle tentative avant la fin du passage`)
+        break
+      case 'instable':
+        this.progression.set(id, { ...p, sautes: [...(p.sautes || []), ev.rel].slice(-50) })
+        break
+      case 'skip':
+        this.progression.set(id, { ...p, sautes: [...(p.sautes || []), ev.rel].slice(-50) })
+        break
+      case 'progress':
+        // Le script émet `progress` DEUX fois dans sa vie : pendant le calcul des empreintes, puis pendant
+        // l'envoi fichier par fichier. Afficher « analyse » dans les deux cas laissait croire à un blocage alors
+        // que les octets partaient. On suit donc ce que le script annonce.
+        // Pendant les empreintes on mesure le débit de LECTURE, avec la même fenêtre glissante que l'envoi :
+        // deux phases, deux natures de débit, un seul chiffre à l'écran, et jamais un tiret pendant dix minutes.
+        if (ev.phase === 'empreintes' && typeof ev.lus === 'number') {
+          const t = Date.now()
+          const prec = this.dernierEchantillon.get(id + ':lus')
+          const dt = (t - (prec?.t || t)) / 1000
+          const fenetre = par<number>('familles.panneauVivant.fenetreDebitSec')
+          if (prec && dt > fenetre && ev.lus >= prec.o) {
+            p.octetsParSeconde = (ev.lus - prec.o) / dt
+            this.dernierEchantillon.set(id + ':lus', { t, o: ev.lus })
+          } else if (!prec) this.dernierEchantillon.set(id + ':lus', { t, o: ev.lus })
+        }
+        if (ev.phase !== 'empreintes' && p.phase === 'empreintes') {
+          p.octetsParSeconde = 0
+          this.dernierEchantillon.delete(id + ':lus')
+        }
+        this.progression.set(id, { ...p, phase: ev.phase === 'empreintes' ? 'empreintes' : 'préparation',
+          seen: ev.seen || 0, total: ev.total || 0, rel: ev.rel || '', bytes: ev.size || 0,
+          // La taille du dossier ne se relève qu'ici, où le chiffre veut dire « fichiers », et elle ne
+          // redescend jamais : les phases suivantes comptent autre chose et n'ont plus le droit d'y toucher.
+          fichiersDossier: Math.max(p.fichiersDossier || 0, ev.total || 0),
+          // Nouveau fichier : les compteurs du précédent n'ont plus de sens et ne doivent pas rester figés à
+          // l'écran, ce qui donnait l'impression d'un blocage sur « morceau 224/224 ».
+          fichierFait: 0, fichierTotal: 0, morceau: 0, morceaux: 0 })
+        break
+      case 'route':
+        // Changer de fichier ne change pas de phase réseau : le dernier débit confirmé reste valable jusqu'au
+        // prochain push. Le remettre à zéro ici faisait clignoter « — Mo/s » entre chaque média, y compris
+        // juste à côté d'un cumul déjà confirmé. Seule la sortie des empreintes doit effacer le débit de lecture.
+        this.progression.set(id, { ...p, phase: ev.pipeline === 'chunk' ? 'découpe' : 'envoi',
+          seen: ev.seen || p.seen, total: ev.files || p.total, rel: ev.rel || p.rel, bytes: ev.size || 0,
+          fichierFait: 0, fichierTotal: 0, morceau: 0, morceaux: 0,
+          octetsParSeconde: p.phase === 'empreintes' ? 0 : p.octetsParSeconde })
+        break
+      case 'shard':
+        this.progression.set(id, { ...p, phase: 'envoi' })
+        break
+      case 'manifests':
+        // ON N'ÉCRASE PLUS `seen` NI `total`. Y verser un compte de manifestes faisait afficher ce nombre
+        // sous les étapes « liste » et « empreintes », qui parlent de fichiers : le panneau annonçait
+        // vingt fichiers pour un dossier qui en contient treize mille.
+        this.progression.set(id, { ...p, phase: 'publication', publies: ev.done || 0, publiesTotal: ev.total || 0 })
+        break
+      case 'verify':
+        // Même faute, aggravée : `seen = total` mettait mécaniquement la progression à cent pour cent.
+        this.progression.set(id, { ...p, phase: 'vérification', verifies: ev.total || 0 })
+        break
+      case 'done':
+        return {
+          resultat: {
+            chunked: ev.chunked || 0, images: ev.images || 0, videos: ev.videos || 0, media: ev.media || 0,
+            unchanged: ev.unchanged || 0, deleted: 0, reused: ev.reused || 0, restored: ev.restored || 0,
+            skipped: ev.skipped || [], verifyKo: ev.verifyKo || 0,
+          },
+        }
+    }
+    this.emit('maj')
+    return {}
+  }
+
+  private terminer(job: Job, issue: { annule?: boolean; resultat?: SyncResult | null; erreur?: string | null }): void {
+    this.travaux.delete(job.id)
+    this.courant = this.travaux.size ? [...this.travaux.values()][0] : null
+    // Le dossier a bougé pendant qu'on l'envoyait : on le repasse tout de suite. Le second passage est bon
+    // marché, il compare les empreintes et ne renvoie que ce qui a réellement changé depuis.
+    const dossierActualise = this.salis.get(job.id)
+    this.salis.delete(job.id)
+    let aRefaire = !!dossierActualise && !issue.annule && !job.dossier.paused
+    const dossierSuivant = dossierActualise || job.dossier
+    this.progression.set(job.id, null)
+    if (issue.annule) this.pousserJournal(job.id, '── interrompu')
+    else if (issue.erreur) this.pousserJournal(job.id, `── ERREUR : ${issue.erreur}`)
+    else this.pousserJournal(job.id, '── terminé')
+    // A4 — REPRISE AUTOMATIQUE. Un passage qui meurt en route laissait l'application à l'arrêt jusqu'à ce qu'un
+    // humain la relance, alors que la reprise est SÛRE par construction : les fichiers déjà en ligne sont sautés
+    // par comparaison d'empreintes, et le cache rend ce contrôle presque gratuit. On borne quand même le nombre
+    // d'essais, parce qu'au-delà ce n'est plus un incident passager mais une cause qui demande un œil, et une
+    // boucle infinie sur un dépôt malade coûterait plus cher que l'arrêt.
+    if (issue.erreur && !issue.annule && !job.dossier.paused) {
+      const n = (this.reprises.get(job.id) || 0) + 1
+      const max = par<number>('familles.reprise.tentativesMax')
+      if (n <= max) {
+        this.reprises.set(job.id, n)
+        aRefaire = true
+        this.pousserJournal(job.id, `── reprise automatique ${n}/${max} dans ${par<number>('familles.reprise.attenteSec')}s`)
+      } else {
+        this.pousserJournal(job.id, `── ${max} reprises sans succès : arrêt, la cause demande un examen`)
+        this.reprises.set(job.id, 0)
+      }
+    } else if (!issue.erreur && !issue.annule) this.reprises.set(job.id, 0)
+    this.emit('fini', { id: job.id, ...issue })
+    if (aRefaire) {
+      if (issue.erreur) {
+        // Une pause avant de réessayer : réattaquer dans la seconde rejouerait la même panne réseau, et
+        // n'apprendrait rien de plus qu'attendre vingt secondes.
+        const minuterie = setTimeout(() => {
+          const reprise = this.reprisesDifferees.get(job.id)
+          if (!reprise) return
+          this.reprisesDifferees.delete(job.id)
+          if (!this.enCours(job.id) && !this.enAttente(job.id)) this.file.push({ id: job.id, dossier: reprise.dossier })
+          this.emit('maj')
+          this.demarrerSiLibre()
+        }, par<number>('familles.reprise.attenteSec') * 1000)
+        this.reprisesDifferees.set(job.id, { dossier: dossierSuivant, minuterie })
+        this.emit('maj')
+        return
+      }
+      this.file.push({ id: job.id, dossier: dossierSuivant })
+      this.pousserJournal(job.id, '── des fichiers ont bougé pendant l\'envoi : nouveau passage')
+    }
+    this.emit('maj')
+    this.demarrerSiLibre()
+  }
+
+  /** Écrire une ligne dans le journal d'un dossier depuis l'extérieur du moteur : la restauration n'est pas
+   *  un envoi, mais elle doit laisser la même trace, au même endroit, sinon elle n'a jamais eu lieu. */
+  pousserJournalPublic(id: string, ligne: string): void { this.pousserJournal(id, ligne) }
+
+  private pousserJournal(id: string, ligne: string): void {
+    const j = this.journaux.get(id) || []
+    j.push(ligne)
+    if (j.length > LOG_MAX) j.splice(0, j.length - LOG_MAX)
+    this.journaux.set(id, j)
+    // Le journal disque survit au redémarrage de l'app : après un échec nocturne, la trace est encore là.
+    try { appendFileSync(path.join(cheminLogs(), `${id}.log`), ligne + '\n') } catch { /* jamais fatal */ }
+  }
+}

@@ -1,0 +1,35 @@
+#!/bin/zsh
+# FABRIQUE L'ICÔNE DE ZenRayCloud, du SVG jusqu'au .icns du Dock.
+#
+# LE GLYPHE SEUL, SANS LETTRE (correction Matthieu, 2026-08-15 : la lettre Z était moche). Deux gris, la tuile
+# presque blanche et le nuage en gris foncé, et rien d'autre. Le SVG est la source ; ce script ne fait que le
+# rasteriser et empaqueter le jeu d'icônes que macOS attend.
+set -e
+cd "$(dirname "$0")/.."
+
+SVG="build/icon.svg"
+TAILLE=1024
+
+mkdir -p build/tmp
+rsvg-convert -w $TAILLE -h $TAILLE "$SVG" -o build/icon-1024.png
+
+# Jeu d'icônes macOS, du 16 au 1024, puis .icns.
+rm -rf build/icon.iconset && mkdir -p build/icon.iconset
+for t in 16 32 64 128 256 512 1024; do
+  sips -z $t $t build/icon-1024.png --out "build/icon.iconset/icon_${t}x${t}.png" >/dev/null
+done
+# Les variantes @2x attendent la taille double sous le nom de la taille simple.
+for t in 16 32 128 256 512; do
+  d=$((t * 2))
+  sips -z $d $d build/icon-1024.png --out "build/icon.iconset/icon_${t}x${t}@2x.png" >/dev/null
+done
+rm -f build/icon.iconset/icon_64x64.png build/icon.iconset/icon_1024x1024.png
+iconutil -c icns build/icon.iconset -o build/icon.icns
+rm -rf build/icon.iconset build/tmp
+
+# Le Dock et la barre de menus lisent des PNG à l'exécution : on les dépose à côté du code compilé.
+mkdir -p assets
+sips -z 512 512 build/icon-1024.png --out assets/icon-512.png >/dev/null
+sips -z 32 32 build/icon-1024.png --out assets/tray.png >/dev/null
+sips -z 64 64 build/icon-1024.png --out assets/tray@2x.png >/dev/null
+echo "icône fabriquée : build/icon.icns + assets/"

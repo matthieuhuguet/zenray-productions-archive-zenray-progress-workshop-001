@@ -1,0 +1,17 @@
+const e=`<!--zrm { "name": "Bandeau de rubrique", "group": "Rubrique", "reference": "LIBE__06__POLITIQUE", "order": 9 } -->
+<style>
+/* Bandeau gris #efeeec, titre de rubrique en rouge brique, 48 px sur capture. */
+.zrm-band{ background:var(--zrm-band); padding:calc(var(--u)*1.2) calc(var(--u)*1.4); }
+.zrm-crumb{ font-family:var(--f-meta); font-size:.62em; color:var(--zrm-meta); margin:0 0 calc(var(--u)*.5); }
+.zrm-rubric{ margin:0; color:var(--zrm-red-deep); font-family:var(--f-display);
+  font-weight:400; font-size:2.35em; line-height:1; letter-spacing:-.004em; }
+.zrm-subtopics{ display:flex; gap:calc(var(--u)*.7); flex-wrap:wrap; margin-top:calc(var(--u)*.7);
+  font-family:var(--f-meta); font-size:.62em; }
+.zrm-subtopics span{ text-decoration:underline; text-underline-offset:.25em; }
+</style>
+<section class="zrm-band">
+  <p class="zrm-crumb">Accueil</p>
+  <h2 class="zrm-rubric">{{formatLabel}}</h2>
+  <div class="zrm-subtopics"><span>Élection présidentielle</span><span>Gouvernement</span><span>Environnement</span><span>Économie</span></div>
+</section>
+`;export{e as default};

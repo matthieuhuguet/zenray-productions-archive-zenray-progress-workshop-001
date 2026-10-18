@@ -1,0 +1,131 @@
+#!/usr/bin/env node
+// CE QUE LE DRIVE SAIT ET QUE LE MAC IGNORE — cartes C7 et C9 du plan ZenRayCloud.
+//
+// C7 ouvre le SEUL sens de circulation qui manquait. Jusqu'ici l'information n'allait que du Mac vers le
+// drive : on savait toujours ce qu'on avait envoyé, jamais ce qui avait changé en ligne. Un fichier
+// supprimé sur le drive était simplement remonté au passage suivant, sans que personne ne l'apprenne.
+//
+// CE SCRIPT SIGNALE, IL N'AGIT JAMAIS. C'est une décision de Matthieu du 2026-08-16, et elle est juste :
+// un canal descendant qui supprimerait ou écraserait des fichiers locaux transformerait la sauvegarde en
+// miroir, c'est-à-dire en machine à perdre les données des deux côtés d'un seul geste. Le rôle du canal
+// est donc de RENDRE VISIBLE, et de laisser la main.
+//
+// C9 tombe du même calcul. Un conflit, c'est un fichier dont l'empreinte locale ne correspond plus à
+// celle du drive : les deux côtés ont vécu leur vie. Le plan dit que le Mac gagne, mais il ne doit pas
+// gagner en silence, et l'ancienne version reste de toute façon dans l'historique du manifeste.
+//
+// Usage :
+//   node Cloud/scripts/etat-drive.mjs <destCreate> <dossierLocal> [--index=<index-<id>.json>]
+
+import { createHash } from 'node:crypto'
+import { readFileSync } from 'node:fs'
+import { createReadStream } from 'node:fs'
+import { stat } from 'node:fs/promises'
+import path from 'node:path'
+import { spawnSync } from 'node:child_process'
+import { compareManifestInventory, manifestPathFromCard } from './lib/drive-state.mjs'
+import { canReuseFingerprint } from '../../scripts/lib/fingerprint-cache.mjs'
+
+const OWNER = 'matthieuhuguet'
+const DATA = 'zenray-data'
+const TOKEN = process.env.GITHUB_TOKEN || (spawnSync('gh', ['auth', 'token'], { encoding: 'utf8', timeout: 15000 }).stdout || '').trim()
+const ARBRE_TIMEOUT_MS = Number(process.env.ZRC_DRIVE_STATE_TIMEOUT_MS) || 60000
+
+const [dest, local] = process.argv.slice(2).filter((a) => !a.startsWith('--'))
+const INDEX = (process.argv.find((a) => a.startsWith('--index=')) || '').slice(8)
+if (!dest || !local) { console.error('usage: etat-drive.mjs <destCreate> <dossierLocal> [--index=…]'); process.exit(1) }
+if (!TOKEN) { console.error('jeton GitHub introuvable'); process.exit(1) }
+
+const entete = { Authorization: `Bearer ${TOKEN}`, 'User-Agent': 'ZenRayCloud' }
+const emit = (o) => console.log(JSON.stringify({ zr: 1, ...o }))
+const CACHE_EMPREINTES = INDEX ? path.join(path.dirname(INDEX), `empreintes-${path.basename(INDEX)}`) : ''
+
+function lireCacheEmpreintes() {
+  if (!CACHE_EMPREINTES) return new Map()
+  try { return new Map(Object.entries(JSON.parse(readFileSync(CACHE_EMPREINTES, 'utf8')))) }
+  catch (error) {
+    if (error?.code !== 'ENOENT') console.error(`⚠ cache d'empreintes illisible, contrôle local complet : ${error.message}`)
+    return new Map()
+  }
+}
+
+/** L'arbre complet du dépôt en UN appel, plutôt qu'un appel par fichier. La règle est écrite dans le
+ *  CLAUDE.md global depuis l'incident du 2026-07-20 : une boucle de lectures REST a épuisé le quota de
+ *  cinq mille par heure et mis le site entier en 403 pendant une heure. Ici, treize mille manifestes
+ *  coûteraient treize mille appels ; l'API des arbres en demande un seul. */
+async function arbreDuDrive() {
+  // ON DEMANDE L'ARBRE DU SOUS-DOSSIER, JAMAIS CELUI DE LA RACINE. Mesuré le 2026-08-16 : `zenray-data`
+  // contient assez de fichiers pour que GitHub renvoie `truncated: true` sur la racine, et un relevé
+  // tronqué est pire qu'absent — il annonce des disparitions qui n'existent pas. La syntaxe `main:<chemin>`
+  // rend l'arbre d'un seul sous-dossier, ce qui suffit largement et tient dans la limite.
+  const ref = `main:${dest.split('/').map(encodeURIComponent).join('/')}`
+  const r = await fetch(`https://api.github.com/repos/${OWNER}/${DATA}/git/trees/${ref}?recursive=1`, {
+    headers: entete, signal: AbortSignal.timeout(ARBRE_TIMEOUT_MS),
+  })
+  if (r.status === 404) return new Set()   // destination jamais écrite : ce n'est pas une erreur
+  if (!r.ok) throw new Error(`arbre indisponible (${r.status})`)
+  const j = await r.json()
+  if (j.truncated) {
+    // On refuse de conclure sur un relevé partiel : annoncer de fausses disparitions ferait paniquer pour rien.
+    throw new Error('arbre encore tronqué pour ' + dest + ' — relevé impossible, aucune conclusion tirée')
+  }
+  const out = new Set()
+  for (const n of j.tree || []) {
+    if (n.type !== 'blob' || !/\.(file|img|media)\.json$/.test(n.path)) continue
+    out.add(n.path)
+  }
+  return out
+}
+
+const sha256 = (p) => new Promise((res, rej) => {
+  const h = createHash('sha256'), s = createReadStream(p)
+  s.on('data', (c) => h.update(c)); s.on('end', () => res(h.digest('hex'))); s.on('error', rej)
+})
+
+async function principal() {
+  const surLeDrive = await arbreDuDrive()
+  let fiches = []
+  try { fiches = JSON.parse(readFileSync(INDEX, 'utf8')).fiches || [] } catch { /* premier passage */ }
+  const connues = new Map(fiches.map((f) => [f.rel, f]))
+  const comparaison = compareManifestInventory(fiches, surLeDrive)
+  const cacheEmpreintes = lireCacheEmpreintes()
+
+  const disparusEnLigne = [], conflits = [], nouveauxEnLigne = []
+
+  // 1. Ce que le Mac croit sauvegardé et qui n'est plus sur le drive. C'est le cas que personne ne voyait.
+  disparusEnLigne.push(...comparaison.missing)
+
+  // 2. Ce qui est sur le drive et que l'index local ignore : sauvegardé depuis une autre machine, ou
+  //    supprimé en local sans que le marquage ait encore eu lieu.
+  nouveauxEnLigne.push(...comparaison.remoteOnly)
+
+  // 3. LES CONFLITS. Un fichier présent des deux côtés dont l'empreinte locale a changé sans qu'un envoi
+  //    l'ait publiée : les deux versions ont divergé. On ne touche à rien, on le nomme.
+  let empreintesReprises = 0, empreintesLues = 0
+  for (const [rel, f] of connues) {
+    if (!surLeDrive.has(manifestPathFromCard(f)) || !f.sha) continue
+    const abs = path.join(local, rel)
+    try {
+      const st = await stat(abs)
+      const fichier = { size: st.size, mtime: st.mtimeMs, ctime: st.ctimeMs }
+      const cachee = cacheEmpreintes.get(rel)
+      let locale
+      if (canReuseFingerprint(fichier, cachee)) { locale = cachee.s; empreintesReprises++ }
+      else { locale = await sha256(abs); empreintesLues++ }
+      if (locale !== f.sha) conflits.push(rel)
+    } catch { /* absent en local : c'est une suppression, pas un conflit */ }
+  }
+
+  emit({ ev: 'etat-drive', surLeDrive: surLeDrive.size, connues: connues.size,
+    disparusEnLigne: disparusEnLigne.slice(0, 200), nouveauxEnLigne: nouveauxEnLigne.slice(0, 200),
+    conflits: conflits.slice(0, 200) })
+
+  console.log(`drive : ${surLeDrive.size} manifeste(s) · index local : ${connues.size} fiche(s)`)
+  console.log(`empreintes locales : ${empreintesReprises} reprise(s) du cache · ${empreintesLues} fichier(s) relu(s)`)
+  if (disparusEnLigne.length) console.log(`⚠ ${disparusEnLigne.length} fichier(s) ONT DISPARU DU DRIVE — le prochain passage les y remettra depuis le Mac`)
+  if (nouveauxEnLigne.length) console.log(`ⓘ ${nouveauxEnLigne.length} fichier(s) sur le drive que l'index local ignore`)
+  if (conflits.length) console.log(`⚠ ${conflits.length} conflit(s) : modifiés en local depuis le dernier envoi — le Mac gagnera, l'ancienne version restera dans l'historique`)
+  if (!disparusEnLigne.length && !nouveauxEnLigne.length && !conflits.length) console.log('✓ les deux côtés disent la même chose')
+}
+
+principal().catch((e) => { console.error('✗ ' + e.message); process.exit(1) })

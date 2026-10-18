@@ -1,0 +1,28 @@
+const e=`<!--zrm { "name": "Écran-titre", "group": "Ouverture", "reference": "DS2__GUID__01", "order": 1 } -->
+<style>
+/* ÉCRAN-TITRE — le geste central du thème, et il tient dans UNE mesure : l'interlettrage vaut
+   0,42em, soit près de la moitié de la hauteur d'un caractère. Aucun titre de presse n'approche
+   ce chiffre — chez Libération il vaut -0,004em, mille fois moins. C'est l'écartement qui produit
+   l'effet, pas la police : composez le même mot en Helvetica avec ce tracking et l'effet tient ;
+   composez-le dans la police du jeu sans tracking et il disparaît.
+   Graisse 200 : le titre est une trame claire posée sur l'image, pas une masse. */
+.zrm-title-screen{ position:relative; min-height:52vh; display:flex; flex-direction:column;
+  justify-content:center; align-items:flex-end; gap:.6em;
+  padding:calc(var(--u)*2.4) calc(var(--u)*2.8); overflow:hidden; }
+.zrm-title-screen h1{ margin:0; max-width:16ch; text-align:right;
+  font-family:var(--f-display); font-weight:200; font-size:var(--s-title);
+  letter-spacing:var(--tr-title); line-height:1.16; text-transform:uppercase;
+  color:var(--zrm-ink); text-shadow:0 0 1.2em rgba(4,12,20,.85); }
+.zrm-title-screen .zrm-sub{ font-family:var(--f-display); font-weight:300; font-size:.72em;
+  letter-spacing:var(--tr-label); text-transform:uppercase; color:var(--zrm-ink-dim); }
+/* L'onde : une lueur horizontale qui traverse le bloc. Elle n'éclaire rien, elle SITUE — sans
+   elle, le titre flotte au milieu de nulle part. */
+.zrm-title-screen::after{ content:''; position:absolute; left:-10%; right:-10%; top:64%;
+  height:2px; background:linear-gradient(90deg, rgba(127,212,255,0), rgba(127,212,255,.7) 45%, rgba(127,212,255,0));
+  box-shadow:0 0 2.4em rgba(43,105,156,.6); }
+</style>
+<header class="zrm-title-screen">
+  <h1>{{title}}</h1>
+  <span class="zrm-sub">{{message}}</span>
+</header>
+`;export{e as default};

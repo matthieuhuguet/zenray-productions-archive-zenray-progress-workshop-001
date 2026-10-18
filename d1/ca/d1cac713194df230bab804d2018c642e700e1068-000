@@ -1,0 +1,25 @@
+const e=`<!--zrm { "name": "Panneau de détails", "group": "Panneau", "reference": "DS1__IIG__04", "order": 14 } -->
+<style>
+/* PANNEAU DE DÉTAILS — la colonne de droite des écrans de gestion (DS1__IIG__04, DS2__GUID__08).
+   Il tient par trois règles : un en-tête en mono très espacé, des paires libellé/valeur alignées
+   sur DEUX colonnes dont la seconde est en chiffres tabulaires, et un filet fin sous chaque paire
+   sauf la dernière. Le filet manquant à la fin est ce qui distingue un panneau d'un tableau. */
+.zrm-detail{ display:flex; flex-direction:column; background:var(--zrm-veil-up);
+  padding:calc(var(--u)*.9) calc(var(--u)*1.1); min-width:16em; }
+.zrm-detail-head{ font-family:var(--f-mono); font-size:.56em; letter-spacing:var(--tr-label);
+  text-transform:uppercase; color:var(--zrm-cyan); margin-bottom:.7em; }
+.zrm-detail-row{ display:flex; justify-content:space-between; align-items:baseline; gap:1.2em;
+  padding:.42em 0; border-bottom:1px solid var(--zrm-rule); }
+.zrm-detail-row:last-child{ border-bottom:0; }
+.zrm-detail-row dt{ font-family:var(--f-body); font-weight:300; font-size:.78em;
+  color:var(--zrm-ink-dim); }
+.zrm-detail-row dd{ margin:0; font-family:var(--f-mono); font-size:.78em;
+  font-variant-numeric:tabular-nums; color:var(--zrm-ink); }
+</style>
+<dl class="zrm-detail">
+  <div class="zrm-detail-head">{{title}}</div>
+  {{#beats}}
+  <div class="zrm-detail-row"><dt>{{roleLabel}}</dt><dd>{{duration}}s</dd></div>
+  {{/beats}}
+</dl>
+`;export{e as default};

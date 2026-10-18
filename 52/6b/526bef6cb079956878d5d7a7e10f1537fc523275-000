@@ -1,0 +1,18 @@
+// 9 October 2026, 00:35 CEST: count response bytes as the restore stream receives them.
+export async function readTransferBody(response, onBytes = () => {}) {
+  if (!response.body) {
+    const bytes = Buffer.from(await response.arrayBuffer())
+    if (bytes.length) onBytes(bytes.length)
+    return bytes
+  }
+  const chunks = []
+  let total = 0
+  for await (const value of response.body) {
+    const chunk = Buffer.from(value)
+    if (!chunk.length) continue
+    total += chunk.length
+    chunks.push(chunk)
+    onBytes(chunk.length)
+  }
+  return Buffer.concat(chunks, total)
+}

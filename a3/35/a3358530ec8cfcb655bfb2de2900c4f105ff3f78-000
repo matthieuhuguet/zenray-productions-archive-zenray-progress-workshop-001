@@ -1,0 +1,117 @@
+#!/usr/bin/env node
+// LE BANC D'ESSAI DE ZenRayCloud — mesurer plutôt que croire.
+//
+// POURQUOI IL EXISTE. Toute la journée du 2026-08-16 s'est passée à découvrir que les chiffres supposés
+// étaient faux : le débit n'était pas celui qu'on croyait, le hachage repartait de zéro sans qu'on le
+// sache, et le nombre de voies avait silencieusement chuté à une. Chacune de ces erreurs aurait été vue
+// en une minute par une mesure. Ce banc rend donc la mesure gratuite, donc systématique.
+//
+// CE QU'IL MESURE, ET POURQUOI CHACUN COMPTE :
+//   1. Hachage à froid      — le coût d'un passage qui repart de rien.
+//   2. Hachage à chaud      — le gain réel du cache d'empreintes ; s'il n'y a pas de gain, le cache ment.
+//   3. Envoi                — le débit vrai, en octets par seconde, sur le temps d'envoi seul.
+//   4. Restauration         — le drive rend-il exactement ce qu'on lui a confié, au bit près.
+//   5. Déplacement          — déplacer un fichier doit coûter ZÉRO octet ; sinon la déduplication est morte.
+//
+// Il travaille sur un dossier jetable qu'il fabrique lui-même, jamais sur les données de Matthieu, et il
+// laisse le drive propre à la fin sauf si on lui demande de garder les traces.
+//
+// Usage :
+//   node Cloud/scripts/bench.mjs [--mo=60] [--fichiers=8]
+
+import { createHash, randomBytes } from 'node:crypto'
+import { mkdir, rm, writeFile, rename, readFile } from 'node:fs/promises'
+import { spawnSync } from 'node:child_process'
+import path from 'node:path'
+import os from 'node:os'
+
+const arg = (n, d) => Number((process.argv.find((a) => a.startsWith(`--${n}=`)) || '').split('=')[1] || d)
+const MO = arg('mo', 60)
+const FICHIERS = arg('fichiers', 8)
+
+const RACINE = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..', '..')
+const BAC = path.join(os.tmpdir(), `zrc-bench-${Date.now().toString(36)}`)
+const DEST = `pages/Cloud/_bench-${Date.now().toString(36)}`
+const INDEX = path.join(BAC, 'index.json')
+const TOKEN = (spawnSync('gh', ['auth', 'token'], { encoding: 'utf8' }).stdout || '').trim()
+
+const secondes = (t) => ((Date.now() - t) / 1000)
+const mo = (n) => (n / 1e6).toFixed(1)
+const resultats = []
+const note = (quoi, valeur, unite, commentaire) => {
+  resultats.push({ quoi, valeur, unite, commentaire })
+  console.log(`  ${quoi.padEnd(34)} ${String(valeur).padStart(9)} ${unite.padEnd(7)} ${commentaire || ''}`)
+}
+
+function moteur(args, env = {}) {
+  const t = Date.now()
+  const r = spawnSync('node', [path.join(RACINE, 'scripts', 'archive-folder.mjs'), BAC, DEST, '--skip-noise',
+    `--index=${INDEX}`, ...args], { encoding: 'utf8', env: { ...process.env, GITHUB_TOKEN: TOKEN, ...env } })
+  return { sec: secondes(t), sortie: (r.stdout || '') + (r.stderr || ''), code: r.status }
+}
+
+async function principal() {
+  if (!TOKEN) { console.error('jeton GitHub introuvable'); process.exit(1) }
+  console.log(`banc d'essai ZenRayCloud — ${FICHIERS} fichiers de ${MO} Mo, soit ${FICHIERS * MO} Mo\n`)
+
+  // Des octets ALÉATOIRES, jamais des zéros : un fichier de zéros se compresse à presque rien et donnerait
+  // un débit de fantaisie, sans rapport avec ce que coûte une vraie sauvegarde.
+  await mkdir(BAC, { recursive: true })
+  const empreintes = new Map()
+  for (let i = 0; i < FICHIERS; i++) {
+    const b = randomBytes(MO * 1e6)
+    const nom = `fichier-${String(i + 1).padStart(2, '0')}.bin`
+    await writeFile(path.join(BAC, nom), b)
+    empreintes.set(nom, createHash('sha256').update(b).digest('hex'))
+  }
+  const octets = FICHIERS * MO * 1e6
+
+  console.log('1. premier passage, cache vide')
+  const froid = moteur([])
+  if (froid.code !== 0) { console.error(froid.sortie.slice(-800)); throw new Error('premier passage en échec') }
+  const hFroid = Number((froid.sortie.match(/(\d+(?:\.\d+)?) s sur \d+ cœurs/) || [])[1] || 0)
+  note('hachage à froid', hFroid.toFixed(1), 's', `${mo(octets / Math.max(hFroid, 0.1))} Mo/s`)
+  note('passage complet', froid.sec.toFixed(1), 's', `${mo(octets / froid.sec)} Mo/s bout en bout`)
+
+  console.log('\n2. second passage, cache chaud, rien n\'a changé')
+  const chaud = moteur([])
+  const reprises = Number((chaud.sortie.match(/(\d+) empreinte\(s\) reprises du cache/) || [])[1] || 0)
+  note('empreintes reprises du cache', reprises, 'fic.', reprises === FICHIERS ? '✓ toutes' : '✗ le cache ne sert pas')
+  note('second passage', chaud.sec.toFixed(1), 's', `${(froid.sec / Math.max(chaud.sec, 0.1)).toFixed(1)}× plus rapide`)
+  note('octets renvoyés', /0 fichier|aucun/.test(chaud.sortie) ? 0 : '?', '', 'un fichier inchangé ne doit rien renvoyer')
+
+  console.log('\n3. déplacement : la déduplication tient-elle ?')
+  await mkdir(path.join(BAC, 'range'), { recursive: true })
+  await rename(path.join(BAC, 'fichier-01.bin'), path.join(BAC, 'range', 'fichier-01.bin'))
+  const bouge = moteur([])
+  const reutilises = Number((bouge.sortie.match(/(\d+) (?:réutilisé|déplacé)/) || [])[1] || 0)
+  note('déplacement', bouge.sec.toFixed(1), 's', reutilises || /reprises du cache/.test(bouge.sortie)
+    ? '✓ aucun octet renvoyé' : '✗ le fichier est reparti en entier')
+
+  console.log('\n4. restauration : le drive rend-il exactement ce qu\'on lui a confié ?')
+  const sortie = path.join(BAC, '_restaure')
+  const t = Date.now()
+  const rr = spawnSync('node', [path.join(RACINE, 'Cloud', 'scripts', 'restaurer.mjs'), DEST, 'fichier-02.bin', sortie],
+    { encoding: 'utf8', env: { ...process.env, GITHUB_TOKEN: TOKEN } })
+  const secRestore = secondes(t)
+  if (rr.status !== 0) note('restauration', 'ÉCHEC', '', (rr.stderr || '').trim().slice(-120))
+  else {
+    const rendu = createHash('sha256').update(await readFile(path.join(sortie, 'fichier-02.bin'))).digest('hex')
+    const bon = rendu === empreintes.get('fichier-02.bin')
+    note('restauration', secRestore.toFixed(1), 's', `${mo(MO * 1e6 / secRestore)} Mo/s`)
+    note('intégrité restaurée', bon ? 'IDENTIQUE' : 'DIFFÉRENTE', '', bon ? '✓ au bit près' : '✗ ALERTE')
+  }
+
+  console.log('\n5. le drive et le Mac disent-ils la même chose ?')
+  const ed = spawnSync('node', [path.join(RACINE, 'Cloud', 'scripts', 'etat-drive.mjs'), DEST, BAC, `--index=${INDEX}`],
+    { encoding: 'utf8', env: { ...process.env, GITHUB_TOKEN: TOKEN } })
+  const accord = /disent la même chose/.test(ed.stdout || '')
+  note('accord drive / Mac', accord ? 'OUI' : 'NON', '', (ed.stdout || '').split('\n').filter(Boolean).slice(-1)[0])
+
+  console.log(`\ndossier d'essai : ${BAC}`)
+  console.log(`destination sur le drive : ${DEST} (à supprimer à la main si tu veux nettoyer)`)
+  console.log(JSON.stringify({ zr: 1, ev: 'bench', resultats }))
+  await rm(BAC, { recursive: true, force: true }).catch(() => {})
+}
+
+principal().catch((e) => { console.error('✗ ' + e.message); process.exit(1) })

@@ -1,0 +1,24 @@
+const e=`<!--zrm { "name": "Titre", "group": "Éditorial", "reference": "FIGARO__17__ARTICLE_TOP", "order": 11, "inPage": false } -->
+<style>
+/* RELEVÉ sur FIGARO__17__ARTICLE_TOP et FIGARO__01__HOME_TOP.
+   Le geste du média est l'inverse exact de T-01-1-2 : là-bas le titre écrasait la page par sa
+   taille ; ici il ne dépasse jamais deux fois le corps. Ce qui le fait lire, c'est la graisse de
+   l'empattement, pas l'échelle.
+   Mesure : hauteur d'encre 24 px pour un corps de 13 px, soit un rapport de 1,85, arrondi à 1,9.
+   Le même rapport valait 3,4 chez Libération — c'est là qu'est toute la différence de ton. */
+.zrm-headline{ margin:0; font-family:var(--f-display); font-weight:700;
+  line-height:1.18; letter-spacing:-.012em; color:var(--zrm-ink); }
+/* Interlignage 1,18 et non 1,06 : Merriweather porte de longues descendantes qui, à 1,06,
+   viendraient toucher les capitales de la ligne suivante. */
+.zrm-headline[data-size="xl"]{ font-size:var(--s-title); }
+.zrm-headline[data-size="l"]{ font-size:1.42em; }
+.zrm-headline[data-size="m"]{ font-size:1.12em; }
+.zrm-headline[data-size="s"]{ font-size:.98em; line-height:1.3; }
+/* Le titre d'un direct passe en rouge : c'est le seul emploi de la couleur d'alarme dans tout le
+   thème, et c'est ce qui lui garde sa force. */
+.zrm-headline[data-live]{ color:var(--zrm-red); }
+.zrm-headline[data-live]::before{ content:''; display:inline-block; width:.34em; height:.34em;
+  margin-right:.42em; border-radius:50%; background:var(--zrm-red); vertical-align:.28em; }
+</style>
+<h3 class="zrm-headline" data-size="l">Deux « ogres » de feu dévorent tout sur leur passage</h3>
+`;export{e as default};

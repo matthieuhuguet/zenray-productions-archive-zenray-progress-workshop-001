@@ -1,0 +1,36 @@
+const e=`<!--zrm { "name": "Jauges", "group": "Panneau", "reference": "DS2__GUID__14", "order": 13 } -->
+<style>
+/* JAUGES VERTICALES — relevées sur DS2__GUID__14, à droite de l'écran de casier.
+   La jauge de poids est LUE DE BAS EN HAUT et son remplissage vire à l'ambre au-delà des trois
+   quarts : le changement de teinte est l'alerte, il n'y a aucun texte d'avertissement. Reproduire
+   la jauge sans ce seuil, c'est reproduire une barre, pas une jauge.
+   Le disque de capacité porte son trait à l'INTÉRIEUR du cercle ; posé dessus, il fait bouton. */
+.zrm-gauges{ display:flex; align-items:flex-end; gap:calc(var(--u)*1.2);
+  padding:calc(var(--u)*1) calc(var(--u)*1.4); }
+.zrm-vgauge{ display:flex; flex-direction:column; align-items:center; gap:.4em; }
+.zrm-vgauge-track{ position:relative; width:.7em; height:7em; background:rgba(4,12,20,.6); }
+.zrm-vgauge-fill{ position:absolute; inset:auto 0 0 0; height:62%;
+  background:linear-gradient(180deg, var(--zrm-amber), rgba(232,163,61,.55));
+  box-shadow:0 0 .8em rgba(232,163,61,.55);
+  -webkit-mask-image:repeating-linear-gradient(0deg,#000 0 5px,transparent 5px 6px);
+  mask-image:repeating-linear-gradient(0deg,#000 0 5px,transparent 5px 6px); }
+.zrm-vgauge-label{ font-family:var(--f-mono); font-size:.54em; letter-spacing:var(--tr-label);
+  text-transform:uppercase; color:var(--zrm-ink-faint); }
+.zrm-donut{ display:block; width:4.4em; height:4.4em; color:var(--zrm-cyan); overflow:visible; }
+.zrm-donut circle{ fill:none; stroke-width:5; }
+.zrm-donut .zrm-donut-bg{ stroke:rgba(4,12,20,.65); }
+.zrm-donut .zrm-donut-arc{ stroke:currentColor; stroke-linecap:butt;
+  stroke-dasharray:170 283; transform:rotate(-90deg); transform-origin:50% 50%;
+  filter:drop-shadow(0 0 3px rgba(127,212,255,.7)); }
+</style>
+<div class="zrm-gauges">
+  <div class="zrm-vgauge">
+    <div class="zrm-vgauge-track"><div class="zrm-vgauge-fill"></div></div>
+    <span class="zrm-vgauge-label">Charge</span>
+  </div>
+  <svg class="zrm-donut" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <circle class="zrm-donut-bg" cx="50" cy="50" r="45"/>
+    <circle class="zrm-donut-arc" cx="50" cy="50" r="45"/>
+  </svg>
+</div>
+`;export{e as default};

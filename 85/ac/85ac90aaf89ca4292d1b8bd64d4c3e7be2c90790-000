@@ -1,0 +1,10 @@
+const e=`<!-- HÉRITÉ de T-01-1-2--une-de-rupture. Structure seulement : les mesures (échelle, filets, couleurs, graisses) sont celles de l'autre média et sont FAUSSES ici tant qu'elles n'ont pas été relevées sur les captures de T-01-1-1--une-nationale-du-matin. -->
+<!--zrm { "name": "Fil d'info", "group": "Modules", "reference": "LIBE__18__FIL_INFO", "order": 18, "inPage": false } -->
+<style>
+.zrm-ticker{ display:flex; align-items:center; gap:calc(var(--u)*.8); background:var(--zrm-night);
+  color:#fff; padding:calc(var(--u)*.5) calc(var(--u)*1.4); font-family:var(--f-meta); font-size:.68em; }
+.zrm-ticker b{ background:var(--zrm-red); padding:.2em .6em; font-weight:700; }
+.zrm-ticker time{ opacity:.7; }
+</style>
+<div class="zrm-ticker"><b>Fil info</b><time>18:42</time><span>La préfecture annonce de nouvelles évacuations près de Bordeaux</span></div>
+`;export{e as default};

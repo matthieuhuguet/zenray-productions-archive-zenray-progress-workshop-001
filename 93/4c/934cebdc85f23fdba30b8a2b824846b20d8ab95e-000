@@ -1,0 +1,4 @@
+const a=`<!--zrm {"name":"play button","group":"Commandes","props":[{"key":"size","type":"number"},{"key":"accent","type":"color"},{"key":"state","type":"choice"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-x="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="22-play-button"><span class="sp-num">{{size}}</span><i class="sp-swatch" style="background:{{accent}}"></i><span class="sp-state">{{state}}</span></div>
+`;export{a as default};

@@ -1,0 +1,136 @@
+// EXTENSION FINDER — l'icône sur le fichier, comme chez Dropbox et Google Drive.
+//
+// POURQUOI DU SWIFT DANS UNE APP ELECTRON. Peindre un badge sur une icône du Finder n'est possible que par une
+// extension FinderSync, mécanisme d'Apple réservé aux bundles natifs. Ni Electron, ni Node, ni un script ne
+// peuvent le faire, et c'est exactement par là que passent Dropbox et Drive. L'extension reste minuscule et ne
+// fait qu'une chose : lire un index et dessiner. Toute l'intelligence demeure côté Electron.
+//
+// ELLE NE PARLE JAMAIS AU RÉSEAU, et c'est une règle de survie : le Finder appelle `requestBadgeIdentifier`
+// pour chaque fichier visible, et la moindre requête bloquante y ferait ramer tout le Finder. On lit donc un
+// fichier JSON écrit par le moteur, gardé en mémoire, rechargé seulement quand sa date de modification bouge.
+import Cocoa
+import FinderSync
+
+final class FinderSync: FIFinderSync {
+
+    /// Un index par dossier surveillé : racine locale, et l'ensemble des chemins relatifs déjà sur le drive.
+    private struct Index {
+        let racine: String
+        var sauvegardes: Set<String>
+    }
+
+    private var index: [Index] = []
+    private var derniereLecture: Date = .distantPast
+    private let support = FileManager.default
+        .homeDirectoryForCurrentUser
+        .appendingPathComponent("Library/Application Support/ZenRayCloud", isDirectory: true)
+
+    override init() {
+        super.init()
+        // Deux états seulement, parce que trois seraient déjà du bruit : le fichier est sur le drive, ou il ne
+        // l'est pas encore. Un fichier absent de l'index ne reçoit aucune icône, ce qui est l'information juste :
+        // le Finder ne ment pas, il se tait.
+        FIFinderSyncController.default().setBadgeImage(
+            NSImage(named: NSImage.Name("nuage")) ?? nuageDessine(),
+            label: "Sauvegardé sur ZenRayCloud",
+            forBadgeIdentifier: "sauvegarde"
+        )
+        recharger()
+        surveillerIndex()
+    }
+
+    // MARK: - Index
+
+    /// Redessine un petit nuage plein si l'image du bundle manque : l'extension ne doit jamais dépendre d'un asset.
+    private func nuageDessine() -> NSImage {
+        let taille = NSSize(width: 16, height: 16)
+        let img = NSImage(size: taille)
+        img.lockFocus()
+        NSColor(calibratedRed: 0.47, green: 0.47, blue: 0.44, alpha: 1).setFill()
+        let c = NSBezierPath()
+        c.appendOval(in: NSRect(x: 1, y: 4, width: 8, height: 8))
+        c.appendOval(in: NSRect(x: 5, y: 6, width: 9, height: 7))
+        c.appendRoundedRect(NSRect(x: 2, y: 4, width: 12, height: 6), xRadius: 3, yRadius: 3)
+        c.fill()
+        img.unlockFocus()
+        return img
+    }
+
+    private func recharger() {
+        var suivant: [Index] = []
+        guard let fichiers = try? FileManager.default.contentsOfDirectory(atPath: support.path) else { return }
+        for nom in fichiers where nom.hasPrefix("index-") && nom.hasSuffix(".json") {
+            let url = support.appendingPathComponent(nom)
+            guard let data = try? Data(contentsOf: url),
+                  let obj = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                  let racine = obj["src"] as? String,
+                  let rels = obj["rels"] as? [String] else { continue }
+            suivant.append(Index(racine: racine, sauvegardes: Set(rels)))
+        }
+        index = suivant
+        derniereLecture = Date()
+        // Le Finder garde ses badges en cache : sans cet appel, un fichier fraîchement sauvegardé garderait son
+        // absence d'icône jusqu'au prochain redémarrage du Finder.
+        FIFinderSyncController.default().directoryURLs = Set(index.map { URL(fileURLWithPath: $0.racine) })
+    }
+
+    /// Relit l'index au plus une fois toutes les cinq secondes. Le Finder appelle très souvent ; l'index, lui,
+    /// ne change qu'à la fin d'un envoi.
+    private func surveillerIndex() {
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in
+            guard let self else { return }
+            let fm = FileManager.default
+            guard let noms = try? fm.contentsOfDirectory(atPath: self.support.path) else { return }
+            var plusRecente = Date.distantPast
+            for nom in noms where nom.hasPrefix("index-") {
+                let chemin = self.support.appendingPathComponent(nom).path
+                if let attrs = try? fm.attributesOfItem(atPath: chemin),
+                   let d = attrs[.modificationDate] as? Date, d > plusRecente { plusRecente = d }
+            }
+            if plusRecente > self.derniereLecture { self.recharger() }
+        }
+    }
+
+    // MARK: - FIFinderSync
+
+    override func requestBadgeIdentifier(for url: URL) {
+        let chemin = url.path
+        for idx in index where chemin.hasPrefix(idx.racine + "/") {
+            let rel = String(chemin.dropFirst(idx.racine.count + 1))
+            if idx.sauvegardes.contains(rel) {
+                FIFinderSyncController.default().setBadgeIdentifier("sauvegarde", for: url)
+                return
+            }
+            // Un DOSSIER porte l'icône dès lors que tout ce qu'il contient est sauvegardé : c'est ce qu'on veut
+            // savoir d'un coup d'œil avant de décharger, et c'est aussi ce que fait Drive.
+            var estDossier: ObjCBool = false
+            if FileManager.default.fileExists(atPath: chemin, isDirectory: &estDossier), estDossier.boolValue {
+                let prefixe = rel.isEmpty ? "" : rel + "/"
+                let dedans = idx.sauvegardes.contains { $0.hasPrefix(prefixe) }
+                if dedans, toutEstSauvegarde(chemin: chemin, idx: idx, prefixe: prefixe) {
+                    FIFinderSyncController.default().setBadgeIdentifier("sauvegarde", for: url)
+                }
+            }
+            return
+        }
+        FIFinderSyncController.default().setBadgeIdentifier("", for: url)
+    }
+
+    /// Vrai si aucun fichier du dossier ne manque à l'index. On s'arrête au premier manquant : inutile de
+    /// parcourir cinquante mille entrées pour savoir que la réponse est non.
+    private func toutEstSauvegarde(chemin: String, idx: Index, prefixe: String) -> Bool {
+        guard let e = FileManager.default.enumerator(atPath: chemin) else { return false }
+        var vus = 0
+        while let sousChemin = e.nextObject() as? String {
+            if sousChemin.hasSuffix(".DS_Store") || sousChemin.hasPrefix("._") { continue }
+            var estDossier: ObjCBool = false
+            let complet = (chemin as NSString).appendingPathComponent(sousChemin)
+            FileManager.default.fileExists(atPath: complet, isDirectory: &estDossier)
+            if estDossier.boolValue { continue }
+            if !idx.sauvegardes.contains(prefixe + sousChemin) { return false }
+            vus += 1
+            if vus > 20_000 { return false }   // garde-fou : on ne fige pas le Finder sur un dossier démesuré
+        }
+        return vus > 0
+    }
+}

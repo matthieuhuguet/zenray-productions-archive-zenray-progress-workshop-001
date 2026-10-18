@@ -1,0 +1,13 @@
+const e=`<!-- HÉRITÉ de T-01-1-2--une-de-rupture. Structure seulement : les mesures (échelle, filets, couleurs, graisses) sont celles de l'autre média et sont FAUSSES ici tant qu'elles n'ont pas été relevées sur les captures de T-01-1-5--tabloid-daccroche. -->
+<!--zrm { "name": "Carte compacte sans image", "group": "Cartes", "reference": "LIBE__01__HOME_TOP", "order": 15, "inPage": false } -->
+<style>
+/* Colonne de droite : pas d'image, le surtitre porte seul la rubrique. */
+.zrm-card-c{ padding:calc(var(--u)*.7) 0; border-bottom:1px solid var(--zrm-rule); }
+.zrm-card-c:last-child{ border-bottom:0; }
+</style>
+<article class="zrm-card-c">
+  <p class="zrm-kicker">L’essentiel</p>
+  <h3 class="zrm-headline" data-size="s">Incendies en Gironde : la préfecture annonce des évacuations</h3>
+  <p class="zrm-meta">25 juil. 2026</p>
+</article>
+`;export{e as default};

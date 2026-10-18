@@ -1,0 +1,69 @@
+const e=`<!--zrm { "name": "Panneaux annexes", "group": "Panneau", "reference": "DS2__GUID__09, __13, __14, __20, DS1__IIG__11, __14, __20", "order": 34 } -->
+<style>
+/* HUIT PANNEAUX ANNEXES. Trois manières de titrer une section, et elles ne sont pas
+   interchangeables :
+   BANDEAU PLEIN    une section de panneau (General, Cargo for Recycling) — barre bleue pleine.
+   TITRE EN CYAN    une section de RÉSULTAT (Additional Likes) — texte cyan et filet fin.
+   TITRE DANS FILET le nom d'un encadré (DETAILS) — le filet s'interrompt pour le laisser passer.
+   La première dit « voici un groupe », la deuxième « voici un supplément », la troisième
+   « voici une boîte ». Les confondre brouille la lecture de tout l'écran. */
+.zrm-panels{ display:flex; flex-direction:column; gap:calc(var(--u)*1.2);
+  padding:calc(var(--u)*1.1) calc(var(--u)*1.4); font-family:var(--f-meta); font-size:.76em; }
+.zrm-band{ padding:.22em .7em; background:rgba(43,105,156,.8); color:var(--zrm-ink); }
+.zrm-band-cyan{ color:var(--zrm-cyan); border-bottom:1px solid rgba(127,212,255,.3);
+  padding-bottom:.15em; }
+.zrm-helppanel{ display:inline-flex; flex-direction:column; gap:.3em; padding:.5em .8em;
+  border:1px solid rgba(200,224,246,.28); background:rgba(8,20,32,.7); color:var(--zrm-ink-dim); }
+.zrm-helppanel span{ display:flex; align-items:center; gap:.45em; }
+.zrm-helppanel .zrm-g{ width:1em; height:1em; color:var(--zrm-cyan); }
+.zrm-filter-row{ display:flex; align-items:center; gap:.6em; padding:.3em 0;
+  border-bottom:1px solid rgba(255,255,255,.06); }
+.zrm-filter-row > div{ flex:1 1 auto; }
+.zrm-filter-row b{ display:block; font-weight:400; color:var(--zrm-ink); }
+.zrm-filter-row small{ display:flex; align-items:center; gap:.3em; color:var(--zrm-ink-faint); }
+.zrm-toggle{ width:1.7em; height:1.7em; display:grid; place-items:center;
+  border:1px solid rgba(255,255,255,.2); color:var(--zrm-ink-dim); }
+.zrm-toggle[data-on]{ background:rgba(43,105,156,.85); border-color:rgba(140,195,240,.6); color:#fff; }
+.zrm-toggle .zrm-g{ width:1em; height:1em; }
+.zrm-stats2{ display:grid; grid-template-columns:1fr 1fr; gap:.2em .9em; }
+.zrm-stats2 span{ color:var(--zrm-ink-dim); font-size:.9em; }
+.zrm-stats2 span u{ display:block; text-decoration:none; height:2px; width:60%; margin-top:.15em;
+  background:var(--zrm-cyan); opacity:.7; }
+.zrm-order{ color:var(--zrm-ink-dim); }
+.zrm-order b{ display:block; font-weight:400; color:var(--zrm-ink); }
+.zrm-order small{ display:flex; align-items:center; gap:.4em; }
+.zrm-order .zrm-check{ width:.9em; height:.9em; border:1px solid rgba(255,255,255,.4); }
+.zrm-goal{ padding:.2em .6em; background:rgba(140,130,50,.55); color:var(--zrm-ink); }
+.zrm-status3 span{ display:flex; justify-content:space-between; color:var(--zrm-ink-dim); }
+.zrm-status3 b{ font-weight:400; color:var(--zrm-ink); font-family:var(--f-mono); }
+</style>
+<div class="zrm-panels">
+  <div><div class="zrm-band">General</div>
+    <div class="zrm-filter-row"><div><b>Master Volume</b></div><b>100</b></div></div>
+  <p class="zrm-band-cyan">Additional Likes</p>
+  <div class="zrm-helppanel">
+    <span><svg class="zrm-g"><use href="#g-stick"/></svg>Zoom Out / Zoom In</span>
+    <span><svg class="zrm-g"><use href="#g-chevron-r"/></svg>Scroll</span>
+    <span><svg class="zrm-g"><use href="#g-waypoint"/></svg>Center on Sam</span>
+    <span><svg class="zrm-g"><use href="#g-square"/></svg>Tilt Map</span></div>
+  <div>
+    <div class="zrm-filter-row"><div><b>Orders</b><small><span class="zrm-check" style="width:.8em;height:.8em;border:1px solid rgba(255,255,255,.4)"></span>Show/Hide</small></div>
+      <span class="zrm-toggle" data-on><svg class="zrm-g"><use href="#g-waypoint"/></svg></span>
+      <span class="zrm-toggle"><svg class="zrm-g"><use href="#g-cargo"/></svg></span>
+      <span class="zrm-toggle"><svg class="zrm-g"><use href="#g-lock"/></svg></span></div>
+    <div class="zrm-filter-row"><div><b>Retrievable Items</b><small>Show/Hide</small></div>
+      <span class="zrm-toggle"><svg class="zrm-g"><use href="#g-cargo"/></svg></span></div></div>
+  <div class="zrm-stats2">
+    <span>Movement Speed<u style="width:70%"></u></span><span>Stamina/Fatigue<u style="width:45%"></u></span>
+    <span>Balance<u style="width:55%"></u></span><span>Carrying Capacity<u style="width:80%"></u></span>
+    <span>Battery Capacity<u style="width:35%"></u></span><span>Balance Recovery<u style="width:60%"></u></span></div>
+  <div class="zrm-order"><b>[Order No. 2] Morphine Delivery: Isolation Ward</b>
+    <small><span class="zrm-check"></span>Deliver morphine to the Bridges isolation ward.</small></div>
+  <div><p class="zrm-goal">Average Contents Damage Target: 5% or less</p>
+    <p class="zrm-goal">Exceptional Quantity Target: 2</p></div>
+  <div class="zrm-status3">
+    <span>Order(s) Available<b>1</b></span>
+    <span>Order(s) In Progress<b>0</b></span>
+    <span>Awaiting Redeployment<b>—</b></span></div>
+</div>
+`;export{e as default};

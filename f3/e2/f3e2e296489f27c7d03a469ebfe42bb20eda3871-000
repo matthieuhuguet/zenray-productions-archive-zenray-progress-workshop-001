@@ -1,0 +1,70 @@
+// LE LECTEUR DE PARAMÈTRES — l'évaluation du HDA, autrement dit le seul endroit qui transforme
+// `params.json` en valeurs utilisables par le code.
+//
+// LA RÈGLE QUI COMPTE : un paramètre absent LÈVE UNE ERREUR QUI LE NOMME. Il ne prend pas de valeur par défaut
+// en silence, il ne rend pas `undefined`, il ne laisse pas l'app fonctionner à moitié. Un défaut silencieux
+// dans une sauvegarde ne se découvre qu'au moment où l'on cherche un fichier qui n'y est pas ; une erreur
+// bruyante au démarrage se répare en dix secondes. C'est le quatrième des cinq échecs critiques de la loi HDA :
+// « un paramètre non résolu qui passe en silence au lieu de lever une erreur qui le nomme ».
+import { readFileSync } from 'node:fs'
+import path from 'node:path'
+
+type Arbre = Record<string, any>
+
+let arbre: Arbre | null = null
+
+/** Cherche `params.json` là où il se trouve en développement ET dans l'app empaquetée. */
+function charger(): Arbre {
+  if (arbre) return arbre
+  const candidats = [
+    path.join(__dirname, '..', '..', 'params.json'),   // dev : dist/electron -> Cloud/params.json
+    path.join(__dirname, '..', 'params.json'),
+    path.join(process.resourcesPath || '', 'app.asar', 'params.json'),
+  ]
+  for (const c of candidats) {
+    try { arbre = JSON.parse(readFileSync(c, 'utf8')); return arbre! } catch { /* on essaie le suivant */ }
+  }
+  throw new Error('params.json introuvable — ZenRayCloud ne démarre pas sans son interface de paramètres')
+}
+
+/**
+ * Lit un paramètre par son chemin pointé, par exemple `familles.dossierSurveille.silenceAvantEnvoiSec`.
+ * @throws si le chemin n'existe pas, avec le nom exact du paramètre manquant.
+ */
+export function p<T = any>(chemin: string): T {
+  const a = charger()
+  let courant: any = a
+  for (const cle of chemin.split('.')) {
+    if (courant == null || !(cle in courant)) {
+      throw new Error(`Paramètre manquant dans params.json : « ${chemin} »`)
+    }
+    courant = courant[cle]
+  }
+  return courant as T
+}
+
+/** Les jetons visuels, rendus au format que le CSS attend : une variable par jeton, un seul endroit à toucher. */
+export function variablesCss(): Record<string, string> {
+  const out: Record<string, string> = {}
+  const couleurs = p<Record<string, string>>('jetons.couleur')
+  for (const [k, v] of Object.entries(couleurs)) out[`--${k}`] = v
+  const polices = p<Record<string, string>>('jetons.police')
+  for (const [k, v] of Object.entries(polices)) out[`--police-${k}`] = v
+  const rayons = p<Record<string, number>>('jetons.rayon')
+  for (const [k, v] of Object.entries(rayons)) out[`--rayon-${k}`] = `${v}px`
+  const tailles = p<Record<string, number>>('jetons.taille')
+  for (const [k, v] of Object.entries(tailles)) out[`--taille-${k}`] = `${v}px`
+  return out
+}
+
+/** Les valeurs par défaut d'un dossier surveillé : la « famille », que chaque instance peut surcharger. */
+export function defautsDossier() {
+  return {
+    racineDrive: p<string>('familles.dossierSurveille.racineDrive'),
+    silenceAvantEnvoiSec: p<number>('familles.dossierSurveille.silenceAvantEnvoiSec'),
+    balayageRattrapageHeures: p<number>('familles.dossierSurveille.balayageRattrapageHeures'),
+    rattrapageAuDemarrageSec: p<number>('familles.dossierSurveille.rattrapageAuDemarrageSec'),
+    marquerLesSuppressions: p<boolean>('familles.dossierSurveille.marquerLesSuppressions'),
+    exclusions: p<string[]>('familles.dossierSurveille.exclusions'),
+  }
+}

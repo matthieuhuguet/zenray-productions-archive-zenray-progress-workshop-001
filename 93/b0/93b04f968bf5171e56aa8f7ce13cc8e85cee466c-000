@@ -1,0 +1,61 @@
+import { describe, expect, it } from 'vitest'
+import { createCipheriv } from 'node:crypto'
+import { buildStreamRestorePlan, decryptGcmPart, githubRawApiUrl, parseHostedUrl, restoreManifestCandidates, WholeGcmDecoder } from './stream-restore.mjs'
+
+const sha = 'a'.repeat(40)
+
+describe('plan de restauration streamable', () => {
+  it('cherche les trois familles de manifeste ou respecte le chemin exact indexé', () => {
+    expect(restoreManifestCandidates('dossier/a.mkv')).toEqual([
+      'dossier/a.mkv.file.json', 'dossier/a.mkv.img.json', 'dossier/a.mkv.media.json',
+    ])
+    expect(restoreManifestCandidates('dossier/a.mkv', 'dossier/a.mkv.media.json'))
+      .toEqual(['dossier/a.mkv.media.json'])
+    expect(() => restoreManifestCandidates('../secret')).toThrow('chemin source invalide')
+    expect(() => restoreManifestCandidates('a', '/absolu')).toThrow('chemin de manifeste invalide')
+  })
+
+  it('résout image, vidéo et média avec leurs dépôts exacts', () => {
+    const image = buildStreamRestorePlan({ name: 'a.jpg', cdnRepo: 'img-1', cdnCommit: sha,
+      cdnChunks: ['aa/0.bin'], iv: 'iv', clearSize: 12, sourceSha256: 'c'.repeat(64) })
+    expect(image).toMatchObject({ mode: 'whole-gcm', size: 12, sha256: 'c'.repeat(64) })
+
+    const videoUrl = `https://raw.githubusercontent.com/matthieuhuguet/zenrayshards-vid-1/${sha}/aa/0.bin`
+    const video = buildStreamRestorePlan({ type: 'video-raw', name: 'a.mov', size: 9,
+      sourceSha256: 'b'.repeat(64), sourceExact: true, private: true,
+      parts: [{ url: videoUrl, iv: 'iv' }] })
+    expect(video).toMatchObject({ sha256: 'b'.repeat(64) })
+    expect(video.refs[0]).toMatchObject({ repo: 'zenrayshards-vid-1', isPrivate: true, iv: 'iv' })
+
+    const media = buildStreamRestorePlan({ type: 'chunked-media', name: 'a.pdf', size: 4, sourceSha256: 'd'.repeat(64),
+      cdnRepo: 'zenray-media-01', cdnCommit: sha, dir: 'media/id', parts: ['000'], ivs: ['iv'] })
+    expect(media.refs[0]).toMatchObject({ path: 'media/id/000.bin', isPrivate: true })
+  })
+
+  it('convertit les URLs hébergées vers l’API brute authentifiée', () => {
+    const parsed = parseHostedUrl(`https://cdn.jsdelivr.net/gh/matthieuhuguet/repo@${sha}/a%20b/0.bin`)
+    expect(parsed).toEqual({ owner: 'matthieuhuguet', repo: 'repo', commit: sha, path: 'a b/0.bin' })
+    expect(githubRawApiUrl(parsed)).toContain(`/contents/a%20b/0.bin?ref=${sha}`)
+  })
+})
+
+describe('déchiffrement borné AES-GCM', () => {
+  const key = Buffer.alloc(32, 3)
+  const iv = Buffer.alloc(12, 4)
+  const original = Buffer.from('un fichier restauré exactement, même si le tag traverse un morceau')
+  const cipher = (() => {
+    const c = createCipheriv('aes-256-gcm', key, iv)
+    return Buffer.concat([c.update(original), c.final(), c.getAuthTag()])
+  })()
+
+  it('déchiffre une partie indépendante', () => {
+    expect(decryptGcmPart(cipher, iv.toString('base64'), key)).toEqual(original)
+  })
+
+  it('déchiffre un flux dont le tag final est coupé entre deux morceaux', () => {
+    const decoder = new WholeGcmDecoder(key, iv.toString('base64'))
+    const clair = [decoder.push(cipher.subarray(0, 7)), decoder.push(cipher.subarray(7, -5)),
+      decoder.push(cipher.subarray(-5)), decoder.finish()]
+    expect(Buffer.concat(clair)).toEqual(original)
+  })
+})

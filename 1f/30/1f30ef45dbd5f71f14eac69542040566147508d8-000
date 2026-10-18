@@ -1,0 +1,13 @@
+const e=`<!--zrm { "name": "Surtitre de rubrique", "group": "Éditorial", "reference": "LM__ARTICLE__TOP__DESKTOP__11", "order": 10, "inPage": false } -->
+<style>
+/* RELEVÉ sur LM__ARTICLE__TOP__DESKTOP__11.
+   « INTERNATIONAL · JUSTICE INTERNATIONALE » : linéale capitale, GRISE, pas colorée. Le Monde
+   ne met aucune couleur de marque dans son texte — c'est la contrainte centrale du thème, et
+   le surtitre est l'endroit où tous les autres quotidiens la violent. */
+.zrm-kicker{ margin:0 0 .55em; color:var(--zrm-meta); font-family:var(--f-meta);
+  font-weight:700; font-size:.7em; line-height:1.2;
+  letter-spacing:.1em; text-transform:uppercase; }
+.zrm-kicker[data-tone="deep"]{ color:var(--zrm-ink); }
+</style>
+<p class="zrm-kicker">Reportage</p>
+`;export{e as default};

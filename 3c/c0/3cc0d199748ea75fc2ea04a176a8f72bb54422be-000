@@ -1,0 +1,11 @@
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// Le rendu part dans dist/renderer et se charge par file:// dans l'app packagée -> base relative obligatoire.
+export default defineConfig({
+  plugins: [react()],
+  base: './',
+  root: '.',
+  build: { outDir: 'dist/renderer', emptyOutDir: true },
+  server: { port: 5599, strictPort: true },
+})

@@ -1,0 +1,20 @@
+import { describe, expect, it } from 'vitest'
+import { poserIcones } from './finder-icons'
+
+describe('icônes Finder', () => {
+  it('ne confirme que les lots réellement acceptés par macOS', async () => {
+    const appels: string[][] = []
+    const resultat = await poserIcones('/outil', [
+      { rel: 'a', abs: '/src/a' }, { rel: 'b', abs: '/src/b' }, { rel: 'c', abs: '/src/c' },
+    ], 2, 1000, async (_outil, args) => {
+      appels.push(args)
+      if (args.includes('/src/c')) throw new Error('refus macOS')
+    })
+    expect(appels).toEqual([['poser', '/src/a', '/src/b'], ['poser', '/src/c']])
+    expect(resultat).toEqual({ reussis: ['a', 'b'], echecs: ['c'] })
+  })
+
+  it('refuse un lot impossible au lieu de boucler', async () => {
+    await expect(poserIcones('/outil', [], 0, 1000)).rejects.toThrow('taille de lot icône invalide')
+  })
+})

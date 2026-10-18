@@ -1,0 +1,13 @@
+const e=`<!-- HÉRITÉ de T-01-1-2--une-de-rupture. Structure seulement : les mesures (échelle, filets, couleurs, graisses) sont celles de l'autre média et sont FAUSSES ici tant qu'elles n'ont pas été relevées sur les captures de T-01-1-4--quotidien-economique-saumon. -->
+<!--zrm { "name": "Citation détachée", "group": "Article", "reference": "LIBE__14__TEMOIGNAGES", "order": 22, "inPage": false } -->
+<style>
+/* Guillemets francais entrants, condense lourd : la citation est traitee comme un titre. */
+.zrm-pull{ margin:calc(var(--u)*1.4) 0; padding-left:calc(var(--u)*.9);
+  border-left:3px solid var(--zrm-red); }
+.zrm-pull q{ font-family:var(--f-display); font-weight:400; font-size:1.35em;
+  line-height:1.14; letter-spacing:-.003em; quotes:'«\\00a0' '\\00a0»'; }
+.zrm-pull cite{ display:block; margin-top:.5em; font-family:var(--f-meta);
+  font-size:.64em; color:var(--zrm-meta); font-style:normal; }
+</style>
+<blockquote class="zrm-pull"><q>C’était effrayant, on ne savait plus où aller</q><cite>Une habitante de Gironde</cite></blockquote>
+`;export{e as default};

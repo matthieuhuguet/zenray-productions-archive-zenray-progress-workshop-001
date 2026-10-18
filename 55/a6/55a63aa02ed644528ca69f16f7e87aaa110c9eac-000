@@ -1,0 +1,16 @@
+const e=`<!-- HÉRITÉ de T-01-1-2--une-de-rupture. Structure seulement : les mesures (échelle, filets, couleurs, graisses) sont celles de l'autre média et sont FAUSSES ici tant qu'elles n'ont pas été relevées sur les captures de T-01-1-4--quotidien-economique-saumon. -->
+<!--zrm { "name": "Drawer — tuiles d'outils", "group": "Navigation", "reference": "LIBE__04__MENU_OPEN", "order": 5, "inPage": false } -->
+<style>
+/* Bandeau noir, trois tuiles a icone ronde blanche. Mesure : hauteur 108 px sur capture. */
+.zrm-tools{ display:flex; gap:calc(var(--u)*1.4); background:var(--zrm-night); color:#fff;
+  padding:calc(var(--u)*.8) calc(var(--u)*1); }
+.zrm-tool{ display:flex; flex-direction:column; align-items:center; gap:.45em;
+  font-family:var(--f-meta); font-size:.62em; }
+.zrm-tool i{ width:2.1em; height:2.1em; border-radius:50%; background:#fff; display:block; }
+</style>
+<div class="zrm-tools">
+  <span class="zrm-tool"><i></i>Le journal</span>
+  <span class="zrm-tool"><i></i>Fil info</span>
+  <span class="zrm-tool"><i></i>Rechercher</span>
+</div>
+`;export{e as default};

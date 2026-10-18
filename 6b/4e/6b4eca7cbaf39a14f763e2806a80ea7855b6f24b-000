@@ -1,0 +1,144 @@
+const e=`<!--zrm { "name": "Planche de signes", "group": "Global", "reference": "DS2__GUID__05, DS2__GUID__12", "order": 0, "inPage": true } -->
+<style>
+/* PLANCHE DE SIGNES — le composant le plus important d'un thème de jeu.
+   Décalquée sur DS2__GUID__05 (roue de dialogue) et DS2__GUID__12 (lignes d'invite).
+
+   POURQUOI C'EST ICI QUE SE JOUE LA RESSEMBLANCE
+   Dans un journal, retirer les icônes laisse un journal. Dans une interface de jeu, retirer les
+   glyphes de manette, les crochets d'angle et les réticules laisse une page web. Les signes ne
+   décorent pas cette interface : ils SONT sa langue.
+
+   Chaque tracé est relevé, pas inventé. Les glyphes PlayStation sont des formes géométriques
+   exactes — croix, cercle, carré, triangle — et leur épaisseur de trait est constante quel que
+   soit le diamètre. Les approximer en CSS (un \`border-radius\` pour le cercle, un caractère × pour
+   la croix) donne trois épaisseurs différentes et un alignement optique faux.
+
+   \`currentColor\` partout : un glyphe hérite de la couleur de sa ligne. L'épaisseur est exprimée
+   en unités de viewBox, donc proportionnelle — un glyphe garde son poids optique de 12 px à
+   120 px, ce qu'une bordure en pixels ne fait jamais. */
+.zrm-signs{ position:absolute; width:0; height:0; overflow:hidden; }
+.zrm-g{ display:inline-block; width:1em; height:1em; vertical-align:-.14em;
+  fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.zrm-g[data-fill]{ fill:currentColor; stroke:none; }
+.zrm-g[data-w="thin"]{ stroke-width:1; }
+.zrm-g[data-w="bold"]{ stroke-width:2.2; }
+/* Le halo. Sur une image, un signe sans halo disparaît dès que la scène s'éclaircit derrière
+   lui. C'est la contrepartie de « rien d'opaque » : ce qui ne s'appuie pas sur un aplat doit
+   s'appuyer sur une lueur. */
+.zrm-g[data-glow]{ filter:drop-shadow(0 0 .28em rgba(127,212,255,.75)); }
+
+.zrm-sheet{ display:flex; flex-wrap:wrap; gap:1.1em; align-items:center;
+  padding:1.2em 1.4em; color:var(--zrm-cyan); font-size:1.5em; }
+.zrm-sheet .zrm-g{ opacity:.92; }
+</style>
+<svg class="zrm-signs" aria-hidden="true" focusable="false"><defs>
+
+  <!-- GLYPHES DE MANETTE. Diamètre du cercle porteur identique pour les quatre, sinon ils
+       « sautent » quand ils se suivent dans une liste d'invites. -->
+  <symbol id="g-cross" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" fill-rule="evenodd" d="M12 2.4A9.6 9.6 0 1 1 12 21.6 9.6 9.6 0 0 1 12 2.4Zm-3.9 5.2 3.9 3.9 3.9-3.9 1.5 1.5-3.9 3.9 3.9 3.9-1.5 1.5-3.9-3.9-3.9 3.9-1.5-1.5 3.9-3.9-3.9-3.9 1.5-1.5Z"/></symbol>
+  <symbol id="g-circle" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" fill-rule="evenodd" d="M12 2.4A9.6 9.6 0 1 1 12 21.6 9.6 9.6 0 0 1 12 2.4Zm0 5.6a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm0 2.1a1.9 1.9 0 1 1 0 3.8 1.9 1.9 0 0 1 0-3.8Z"/></symbol>
+  <symbol id="g-square" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" fill-rule="evenodd" d="M12 2.4A9.6 9.6 0 1 1 12 21.6 9.6 9.6 0 0 1 12 2.4ZM7.9 7.9v8.2h8.2V7.9Zm2.1 2.1h4v4h-4Z"/></symbol>
+  <symbol id="g-triangle" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" fill-rule="evenodd" d="M12 2.4A9.6 9.6 0 1 1 12 21.6 9.6 9.6 0 0 1 12 2.4Zm0 5 4.7 8.1H7.3Zm0 4.2-1.1 1.9h2.2Z"/></symbol>
+  <!-- Croix directionnelle : la pastille au centre de la roue de dialogue. Les quatre branches
+       sont des chevrons, pas des triangles pleins — mesuré sur la capture. -->
+  <!-- PAVÉ DIRECTIONNEL — refait de zéro sur un agrandissement x14 de DS2__GUID__05 (crop
+       938,740,46,46). La première version était une invention : quatre chevrons pleins autour
+       d'un carré, dans un cercle. La capture montre tout autre chose, et c'est le glyphe
+       PlayStation standard :
+         - quatre pastilles PLEINES, blanches, pas des chevrons ;
+         - extrémité extérieure peu arrondie (r 3,5), extrémité INTÉRIEURE très arrondie (r 6),
+           et c'est cet écart de rayon qui creuse les quatre coins diagonaux bleus ;
+         - une encoche bleue au centre de chaque pastille, orientée en travers de son axe ;
+         - aucun cercle autour : le cercle appartient à l'anneau, pas au glyphe.
+       Une seule pastille est décrite, les trois autres sont sa rotation : quatre chemins écrits
+       à la main divergeraient au premier ajustement. -->
+  <symbol id="g-dpad" viewBox="0 0 48 48">
+    <g fill="currentColor" stroke="none">
+      <g id="g-dpad-arm">
+        <!-- CORRECTION après vérification au grossissement x8 du rendu : la première tentative
+             produisait un PLUS PLEIN. Les quatre branches, larges de 12 et longues jusqu'à
+             y=23, se recouvraient au centre et effaçaient les diagonales.
+             Deux nombres seulement les font réapparaître : largeur 10 au lieu de 12, et
+             extrémité intérieure arrêtée à y=20 au lieu de 23. Le centre et les quatre
+             diagonales redeviennent du fond — et c'est ce fond visible qui fait lire quatre
+             pastilles au lieu d'une croix. Vérifier son propre rendu au même grossissement que
+             la source est la seule façon de voir ça : à taille normale, les deux se ressemblent. -->
+        <path d="M22 5h4a3 3 0 0 1 3 3v7a5 5 0 0 1-10 0V8a3 3 0 0 1 3-3Z"/>
+      </g>
+      <use href="#g-dpad-arm" transform="rotate(90 24 24)"/>
+      <use href="#g-dpad-arm" transform="rotate(180 24 24)"/>
+      <use href="#g-dpad-arm" transform="rotate(270 24 24)"/>
+    </g>
+    <!-- Les encoches, évidées : elles laissent voir le fond, donc elles ne sont pas peintes en
+         bleu mais retirées de la pastille. Peindre un bleu fixe casserait sur tout autre fond. -->
+    <g fill="none" stroke="none">
+      <g id="g-dpad-slot"><rect x="21.9" y="9.4" width="4.2" height="2.1" rx="1.05" fill="var(--zrm-blue-deep,#0d476f)"/></g>
+      <use href="#g-dpad-slot" transform="rotate(90 24 24)"/>
+      <use href="#g-dpad-slot" transform="rotate(180 24 24)"/>
+      <use href="#g-dpad-slot" transform="rotate(270 24 24)"/>
+    </g>
+  </symbol>
+  <symbol id="g-stick" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.4"/><path d="M12 2.6v2.6M12 18.8v2.6M2.6 12h2.6M18.8 12h2.6"/></symbol>
+  <symbol id="g-l1" viewBox="0 0 30 24"><rect x="2" y="6" width="26" height="12" rx="6"/><path d="M11 10.4v3.2h3.2" transform="translate(2)"/></symbol>
+  <symbol id="g-r1" viewBox="0 0 30 24"><rect x="2" y="6" width="26" height="12" rx="6"/><path d="M13 13.6v-3.2h2.4a1.6 1.6 0 0 1 0 3.2h-2.4l2.6 3.2" transform="translate(0,-1.6)"/></symbol>
+
+  <!-- CROCHETS D'ANGLE. Le motif qui encadre chaque option de la roue de dialogue. Ils ne
+       ferment jamais le cadre : c'est l'ouverture qui donne l'impression d'un affichage
+       projeté plutôt que d'une boîte. -->
+  <symbol id="g-brackets" viewBox="0 0 100 32" preserveAspectRatio="none">
+    <path d="M0 8V0h10M90 0h10v8M100 24v8H90M10 32H0v-8" vector-effect="non-scaling-stroke"/>
+  </symbol>
+  <symbol id="g-corner" viewBox="0 0 16 16"><path d="M0 6V0h6"/></symbol>
+  <symbol id="g-chevron-r" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+  <symbol id="g-chevron-l" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></symbol>
+  <symbol id="g-check" viewBox="0 0 24 24"><path d="m4 12.5 5.5 5.5L20 7"/></symbol>
+  <symbol id="g-chevron-down" viewBox="0 0 24 24"><path d="m5 9 7 7 7-7"/></symbol>
+  <symbol id="g-chevron-up" viewBox="0 0 24 24"><path d="m5 15 7-7 7 7"/></symbol>
+  <!-- Double chevron : le separateur de zones dans un meme panneau (DS2__GUID__17). -->
+  <symbol id="g-chevrons-down" viewBox="0 0 24 24"><path d="m5 7 7 7 7-7M5 13l7 7 7-7"/></symbol>
+  <symbol id="g-star" viewBox="0 0 24 24"><path d="m12 3 2.7 5.9 6.3.7-4.7 4.3 1.3 6.2L12 17l-5.6 3.1 1.3-6.2L3 9.6l6.3-.7z"/></symbol>
+
+  <!-- BOUT DE BARRE, relevé au pixel sur DS2__GUID__05 (crops agrandis x14).
+       Une unité = un pixel de la capture. Origine au coin haut-gauche de la barre, dont la
+       hauteur mesurée est 49. Trois pièces, toutes différentes :
+         un petit bloc à cheval sur le coin haut,
+         un trait vertical sur le BAS de l'arête (pas le haut : c'est ce décalage qui crée
+           l'alternance quand on tourne la pièce),
+         une languette trapézoïdale pendant sous l'arête basse, côté droit rentrant de 3 px.
+       Le bout droit d'une barre est ce même groupe tourné de 180 degrés. -->
+  <g id="g-bar-end">
+    <rect x="-4" y="1" width="4" height="2"/>
+    <rect class="zrm-edge-dim" x="-1" y="41" width="2" height="8"/>
+    <path d="M3 49 H17 L14 54 H3.5 Z"/>
+  </g>
+
+  <!-- RÉTICULES ET REPÈRES DE SCÈNE. -->
+  <symbol id="g-scan" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.2" fill="currentColor" stroke="none"/><path d="M12 1.6v3.2M12 19.2v3.2M1.6 12h3.2M19.2 12h3.2"/></symbol>
+  <symbol id="g-waypoint" viewBox="0 0 24 24"><path d="M12 2.4l8 15.2H4z"/><circle cx="12" cy="13.4" r="1.5" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="g-cargo" viewBox="0 0 24 24"><path d="M3.4 7.6 12 3.2l8.6 4.4v8.8L12 20.8l-8.6-4.4z"/><path d="M3.4 7.6 12 12l8.6-4.4M12 12v8.8"/></symbol>
+  <symbol id="g-signal" viewBox="0 0 24 24"><path d="M4.6 15.4a10.4 10.4 0 0 1 14.8 0M8 18.4a5.6 5.6 0 0 1 8 0"/><circle cx="12" cy="20.6" r="1.3" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="g-timer" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8.4"/><path d="M12 8.2V13l3.2 2M9 2.4h6"/></symbol>
+  <symbol id="g-weather" viewBox="0 0 24 24"><path d="M7.4 15.6a3.6 3.6 0 1 1 .8-7.1 5 5 0 0 1 9.4 1.5 3.2 3.2 0 0 1-.6 6.4z"/><path d="M9 19.4l-.8 2M13 19.4l-.8 2M17 19.4l-.8 2"/></symbol>
+  <symbol id="g-chapter" viewBox="0 0 24 24"><path d="M4 4.6h7.2A2.8 2.8 0 0 1 14 7.4v12a2.2 2.2 0 0 0-2.2-2.2H4z"/><path d="M20 4.6h-7.2A2.8 2.8 0 0 0 10 7.4v12a2.2 2.2 0 0 1 2.2-2.2H20z"/></symbol>
+  <symbol id="g-play" viewBox="0 0 24 24"><path d="M8.4 5.6 18.4 12l-10 6.4z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="g-lock" viewBox="0 0 24 24"><rect x="5" y="10.6" width="14" height="9.4" rx="1.5"/><path d="M8.4 10.6V7.8a3.6 3.6 0 0 1 7.2 0v2.8"/></symbol>
+</defs></svg>
+<div class="zrm-sheet">
+  <svg class="zrm-g" data-glow><use href="#g-cross"/></svg>
+  <svg class="zrm-g" data-glow><use href="#g-circle"/></svg>
+  <svg class="zrm-g" data-glow><use href="#g-square"/></svg>
+  <svg class="zrm-g" data-glow><use href="#g-triangle"/></svg>
+  <svg class="zrm-g" data-glow><use href="#g-dpad"/></svg>
+  <svg class="zrm-g"><use href="#g-stick"/></svg>
+  <svg class="zrm-g" style="width:1.25em"><use href="#g-l1"/></svg>
+  <svg class="zrm-g" style="width:1.25em"><use href="#g-r1"/></svg>
+  <svg class="zrm-g"><use href="#g-scan"/></svg>
+  <svg class="zrm-g"><use href="#g-waypoint"/></svg>
+  <svg class="zrm-g"><use href="#g-cargo"/></svg>
+  <svg class="zrm-g"><use href="#g-signal"/></svg>
+  <svg class="zrm-g"><use href="#g-timer"/></svg>
+  <svg class="zrm-g"><use href="#g-weather"/></svg>
+  <svg class="zrm-g"><use href="#g-chapter"/></svg>
+  <svg class="zrm-g"><use href="#g-lock"/></svg>
+</div>
+`;export{e as default};

@@ -1,0 +1,37 @@
+import { link, rm } from 'node:fs/promises'
+import path from 'node:path'
+
+export function restorationCandidate(basePath, occurrence) {
+  if (occurrence === 1) return basePath
+  const parsed = path.parse(basePath)
+  return path.join(parsed.dir, `${parsed.name} (${occurrence})${parsed.ext}`)
+}
+
+// 3 October 2026, 09:34 CEST: managed identities reject collisions while standalone downloads retain their existing rename policy.
+export async function publishRestoreWithoutOverwrite(temporaryPath, requestedPath, { onConflict = 'rename' } = {}) {
+  if (!['rename', 'reject'].includes(onConflict)) throw new Error('Unsupported restore collision policy')
+  for (let occurrence = 1; ; occurrence++) {
+    const candidate = restorationCandidate(requestedPath, occurrence)
+    try {
+      // 3 October 2026, 09:39 CEST: the hard link publishes one inode atomically and refuses a concurrent destination.
+      // 3 October 2026, 09:39 CEST: default downloads keep alternate names; exact managed identities reject the collision.
+      await link(temporaryPath, candidate)
+      let temporaryRemoved = true
+      try { await rm(temporaryPath) } catch { temporaryRemoved = false }
+      return { path: candidate, temporaryRemoved }
+    } catch (error) {
+      if (error?.code !== 'EEXIST' || onConflict === 'reject') throw error
+    }
+  }
+}
+
+export function writeBuffer(stream, buffer) {
+  return new Promise((resolve, reject) => stream.write(buffer, (error) => error ? reject(error) : resolve()))
+}
+
+export function closeWritable(stream) {
+  return new Promise((resolve, reject) => {
+    stream.once('error', reject)
+    stream.end(resolve)
+  })
+}

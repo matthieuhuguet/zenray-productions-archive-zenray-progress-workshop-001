@@ -1,0 +1,11 @@
+const a=`<!--zrm { "name": "Carte horizontale", "group": "Cartes", "reference": "LIBE__02__HOME_MID", "order": 14, "inPage": false } -->
+<style>
+.zrm-card-h{ display:grid; grid-template-columns:minmax(0,1fr) 34%; gap:calc(var(--u)*.8);
+  align-items:start; padding:calc(var(--u)*.8) 0; border-bottom:1px solid var(--zrm-rule); }
+.zrm-card-h .zrm-card-media{ aspect-ratio:4/3; }
+</style>
+<article class="zrm-card-h">
+  <div><p class="zrm-kicker">Monnaie</p><h3 class="zrm-headline" data-size="m">Les billets de 5 à 200 euros font peau neuve</h3><p class="zrm-meta">24 juil. 2026</p></div>
+  <div class="zrm-card-media"></div>
+</article>
+`;export{a as default};

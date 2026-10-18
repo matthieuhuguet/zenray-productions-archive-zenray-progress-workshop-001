@@ -1,0 +1,93 @@
+const e=`<!--zrm { "name": "Planche d'édition", "group": "Promotion", "reference": "DS2__OFFICIAL__01, __02, __03", "order": 29 } -->
+<style>
+/* PLANCHE D'ÉDITION — le seul composant du thème qui ne vient pas du JEU mais de sa PROMOTION.
+   Trois captures partagent exactement le même gabarit, avec des contenus différents : c'est la
+   preuve qu'il s'agit d'un modèle réutilisé, et donc qu'il doit l'être ici aussi.
+   Quatre traits le caractérisent :
+   1. le bandeau de plateforme est EN BIAIS dans le coin, il n'est pas horizontal ;
+   2. chaque objet porte sa légende SOUS lui, en petites capitales, jamais à côté ;
+   3. les groupes sont tenus par des CROCHETS ouverts, pas par des cadres ;
+   4. le pavé de classification est en bas à gauche, invariable, et il ne s'aligne sur rien —
+      c'est une obligation légale posée sur la maquette, pas un élément de composition. */
+.zrm-sheet-ed{ position:relative; padding:calc(var(--u)*2) calc(var(--u)*1.6) calc(var(--u)*1.2);
+  overflow:hidden; font-family:var(--f-meta); font-size:.72em;
+  background:linear-gradient(180deg,#2a3a48,#1a2530 60%,#12181f); color:var(--zrm-ink); }
+/* Le bandeau en biais : une bande tournée qui déborde du coin. Un \`clip-path\` triangulaire
+   aurait donné un coin plein, pas une bande. */
+.zrm-platform{ position:absolute; left:-3.4em; top:1.4em; width:12em; padding:.25em 0;
+  text-align:center; background:#0b5fd0; color:#fff; font-weight:600; letter-spacing:.06em;
+  transform:rotate(-45deg); }
+.zrm-ed-head{ text-align:center; margin-bottom:calc(var(--u)*1.2); }
+.zrm-ed-head small{ display:block; font-size:.85em; letter-spacing:var(--tr-label);
+  text-transform:uppercase; color:var(--zrm-ink-dim); }
+.zrm-ed-title{ margin:.2em 0 .1em; font-family:var(--f-display); font-weight:200; font-size:1.9em;
+  letter-spacing:var(--tr-title); text-transform:uppercase; margin-right:calc(var(--tr-title)*-1); }
+.zrm-ed-title sup{ font-size:.35em; vertical-align:super; letter-spacing:0; }
+.zrm-ed-sub{ font-size:.9em; letter-spacing:var(--tr-title); text-transform:uppercase;
+  color:var(--zrm-ink-dim); margin-right:calc(var(--tr-title)*-1); }
+.zrm-ed-edition{ display:inline-block; margin-top:.6em; padding:.15em 1.1em;
+  border:1px solid rgba(255,255,255,.55); letter-spacing:var(--tr-label); text-transform:uppercase; }
+.zrm-ed-body{ display:flex; align-items:flex-start; gap:calc(var(--u)*1.6); }
+.zrm-ed-date b{ display:block; font-family:var(--f-display); font-weight:200; font-size:1.5em;
+  letter-spacing:.12em; }
+.zrm-ed-date small{ display:block; letter-spacing:var(--tr-label); text-transform:uppercase;
+  color:var(--zrm-ink-dim); }
+.zrm-ed-cover{ width:8em; height:11em; background:linear-gradient(160deg,#8b1f2a,#2a1015);
+  border:1px solid rgba(255,255,255,.2); position:relative; }
+.zrm-ed-cover span{ position:absolute; left:0; right:0; top:0; padding:.2em;
+  background:#7a1421; text-align:center; font-size:.75em; letter-spacing:.06em; }
+.zrm-ed-group{ flex:1 1 auto; }
+/* Le crochet de groupe : ouvert en bas, il tient les objets sans les enfermer. */
+.zrm-ed-bracket{ position:relative; text-align:center; padding-top:1.4em; }
+.zrm-ed-bracket > b{ position:absolute; top:0; left:50%; transform:translateX(-50%);
+  font-weight:400; letter-spacing:var(--tr-label); text-transform:uppercase; padding:0 .8em;
+  background:inherit; }
+.zrm-ed-bracket::before{ content:''; position:absolute; top:.55em; left:0; right:0; height:1px;
+  background:rgba(255,255,255,.4);
+  mask-image:linear-gradient(90deg,#000 0 32%,transparent 32% 68%,#000 68%); }
+.zrm-ed-bracket::after{ content:''; position:absolute; top:.55em; left:0; width:1px; height:.7em;
+  background:rgba(255,255,255,.4); box-shadow:calc(100% - 1px) 0 0 rgba(255,255,255,.4); }
+.zrm-ed-items{ display:flex; justify-content:center; gap:calc(var(--u)*1.2); margin-top:.8em; }
+.zrm-ed-item{ width:5.4em; text-align:center; }
+.zrm-ed-item i{ display:block; height:5.4em; background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12); }
+.zrm-ed-item small{ display:block; margin-top:.4em; font-size:.8em; line-height:1.35;
+  letter-spacing:.03em; text-transform:uppercase; color:var(--zrm-ink-dim); }
+.zrm-ed-foot{ display:flex; align-items:flex-end; justify-content:space-between;
+  margin-top:calc(var(--u)*1.4); }
+.zrm-esrb{ display:flex; align-items:stretch; gap:.5em; }
+.zrm-esrb b{ display:grid; place-items:center; width:2.4em; border:1px solid rgba(255,255,255,.6);
+  font-family:var(--f-display); font-size:1.4em; font-weight:300; }
+.zrm-esrb small{ font-size:.78em; line-height:1.35; color:var(--zrm-ink-dim); }
+.zrm-ed-logos{ display:flex; gap:1em; align-items:center; color:var(--zrm-ink-dim);
+  letter-spacing:var(--tr-label); text-transform:uppercase; font-size:.75em; }
+</style>
+<section class="zrm-sheet-ed">
+  <span class="zrm-platform">PS5</span>
+  <div class="zrm-ed-head"><small>A Hideo Kojima Game</small>
+    <p class="zrm-ed-title">Death Stranding<sup>™</sup> 2</p>
+    <p class="zrm-ed-sub">On The Beach</p>
+    <span class="zrm-ed-edition">Collector's Edition</span></div>
+  <div class="zrm-ed-body">
+    <div class="zrm-ed-date"><small>Available from</small><b>June 24<sup>th</sup> 2025</b><small>with early access</small>
+      <div class="zrm-ed-cover" style="margin-top:.8em"><span>Digital Deluxe Edition</span></div>
+      <small style="margin-top:.5em">Full Game · Digital Download</small></div>
+    <div class="zrm-ed-group">
+      <div class="zrm-ed-bracket"><b>In-Game Items</b>
+        <div class="zrm-ed-items">
+          <div class="zrm-ed-item"><i></i><small>Machine Gun (MP Bullets) Lv1 — Early Unlock</small></div>
+          <div class="zrm-ed-item"><i></i><small>Battle Skeleton: Gold (Lv1, Lv2, Lv3)</small></div>
+          <div class="zrm-ed-item"><i></i><small>Patch 70: Quokka</small></div>
+        </div></div>
+      <div class="zrm-ed-bracket" style="margin-top:1.4em"><b>Pre-Order Bonus Content</b>
+        <div class="zrm-ed-items">
+          <div class="zrm-ed-item"><i></i><small>Battle / Boost / Bokka Skeleton: Silver</small></div>
+          <div class="zrm-ed-item"><i></i><small>Custom Hologram: Quokka — Early Unlock</small></div>
+        </div></div></div>
+  </div>
+  <div class="zrm-ed-foot">
+    <div class="zrm-esrb"><b>M</b><small>Violence<br>Blood and Gore<br>Partial Nudity<br>Strong Language</small></div>
+    <div class="zrm-ed-logos"><span>PlayStation Studios</span><span>Kojima Productions</span></div>
+  </div>
+</section>
+`;export{e as default};

@@ -1,0 +1,4 @@
+const e=`<!--zrm {"name":"device panel","group":"Panneau","props":[{"key":"current","type":"text"},{"key":"devices","type":"text"},{"key":"connected","type":"bool"},{"key":"accent","type":"color"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-connected="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="41-device-panel"><span class="sp-current">{{current}}</span><span class="sp-devices">{{devices}}</span><i class="sp-flag" data-connected="{{connected}}"></i><i class="sp-swatch" style="background:{{accent}}"></i></div>
+`;export{e as default};

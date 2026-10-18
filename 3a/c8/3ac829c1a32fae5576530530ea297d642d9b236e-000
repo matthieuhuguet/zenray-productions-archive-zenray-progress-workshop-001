@@ -1,0 +1,23 @@
+import { describe, expect, it } from 'vitest'
+import { validerConfig } from './config-schema'
+import type { Prefs } from './types'
+
+const defauts: Prefs = {
+  repoRoot: '', debounceSec: 120, fullScanHours: 6, launchAtLogin: false,
+  nodePath: '', ghPath: '', gitPath: '', shellPath: '',
+}
+
+describe('configuration ZenRayCloud', () => {
+  it('conserve les dossiers valides et complète les préférences absentes', () => {
+    const folder = { id: 'downloads', src: '/Users/test/Downloads', dest: 'pages/Cloud/Downloads' }
+    expect(validerConfig({ prefs: { debounceSec: 30 }, folders: [folder] }, defauts)).toEqual({
+      prefs: { ...defauts, debounceSec: 30 }, folders: [folder],
+    })
+  })
+
+  it('refuse une forme qui ferait disparaître silencieusement les dossiers', () => {
+    expect(() => validerConfig({ folders: 'perdus' }, defauts)).toThrow('folders doit être un tableau')
+    expect(() => validerConfig({ folders: [{ id: 'x', src: '/tmp' }] }, defauts)).toThrow('folders[0].dest manque')
+    expect(() => validerConfig([], defauts)).toThrow('la racine doit être un objet')
+  })
+})

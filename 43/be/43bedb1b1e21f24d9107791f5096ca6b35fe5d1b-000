@@ -1,0 +1,4 @@
+const a=`<!--zrm {"name":"lyrics panel","group":"Panneau","props":[{"key":"lines","type":"text"},{"key":"activeline","type":"number"},{"key":"accent","type":"color"},{"key":"bg","type":"color"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-x="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="38-lyrics-panel"><span class="sp-lines">{{lines}}</span><span class="sp-num">{{activeline}}</span><i class="sp-swatch" style="background:{{accent}}"></i><i class="sp-swatch" style="background:{{bg}}"></i></div>
+`;export{a as default};

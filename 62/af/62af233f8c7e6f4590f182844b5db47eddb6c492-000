@@ -1,0 +1,62 @@
+import { describe, expect, it } from 'vitest'
+import { Moteur } from './engine'
+import type { Progress } from './types'
+
+const progression = (octetsParSeconde: number, phase: Progress['phase']): Progress => ({
+  phase, seen: 1, total: 2, rel: 'a', bytes: 1, fichierFait: 0, fichierTotal: 0,
+  envoyes: 1_000, octetsParSeconde, depot: '', morceau: 0, morceaux: 0, tailleMorceau: 0,
+  atelier: '', atelierOctets: 0, depotOctets: 0, morceauxEnAttente: [], sautes: [],
+  voies: 2, voiesVivantes: 2, debut: Date.now(),
+  fichiersDossier: 13_933, publies: 0, publiesTotal: 0, verifies: 0,
+})
+
+describe('progression du moteur', () => {
+  it('garde le dernier débit réseau quand le fichier courant change', () => {
+    const moteur = new Moteur(() => ({} as any), () => '', () => '')
+    moteur.progression.set('downloads', progression(12_000_000, 'envoi'))
+    ;(moteur as any).evenement('downloads', {
+      ev: 'route', pipeline: 'video', rel: 'b', size: 2, seen: 2, files: 2,
+    })
+    expect(moteur.progression.get('downloads')?.octetsParSeconde).toBe(12_000_000)
+  })
+
+  it('ne transforme jamais le débit de lecture en débit réseau', () => {
+    const moteur = new Moteur(() => ({} as any), () => '', () => '')
+    moteur.progression.set('downloads', progression(2_000_000_000, 'empreintes'))
+    ;(moteur as any).evenement('downloads', {
+      ev: 'route', pipeline: 'chunk', rel: 'b', size: 2, seen: 2, files: 2,
+    })
+    expect(moteur.progression.get('downloads')?.octetsParSeconde).toBe(0)
+  })
+
+  /* CE QUE CE TEST PROTÈGE, et il est né d'une question de Matthieu du 2026-08-18 : « au moment du push ce
+     n'est pas fichier par fichier, donc l'UI ment ? ». Elle était fondée. Les phases de publication et de
+     vérification écrivaient leur propre compte dans `seen` et `total`, deux champs que le panneau présente
+     comme des FICHIERS. La vérification allait jusqu'à poser `seen = total`, donc un rapport bloqué à cent
+     pour cent, sous lequel la frise affichait « 20 fichiers » pour un dossier qui en contient 13 933. */
+  it('la publication et la vérification ne touchent jamais au compte de fichiers', () => {
+    const moteur = new Moteur(() => ({} as any), () => '', () => '')
+    moteur.progression.set('d', progression(0, 'envoi'))
+    ;(moteur as any).evenement('d', { ev: 'manifests', done: 7, total: 9 })
+    let p = moteur.progression.get('d')!
+    expect(p.publies).toBe(7)
+    expect(p.publiesTotal).toBe(9)
+    expect(p.fichiersDossier).toBe(13_933)   // la taille du dossier reste celle de l'inventaire
+    expect(p.total).toBe(2)                  // et `total` n'a pas été détourné
+
+    ;(moteur as any).evenement('d', { ev: 'verify', total: 20 })
+    p = moteur.progression.get('d')!
+    expect(p.verifies).toBe(20)
+    expect(p.seen).toBe(1)                   // sans quoi seen === total, donc 100 % en permanence
+    expect(p.fichiersDossier).toBe(13_933)
+  })
+
+  it("l'inventaire fixe la taille du dossier et elle ne redescend pas", () => {
+    const moteur = new Moteur(() => ({} as any), () => '', () => '')
+    moteur.progression.set('d', { ...progression(0, 'empreintes'), fichiersDossier: 0 })
+    ;(moteur as any).evenement('d', { ev: 'progress', phase: 'empreintes', seen: 3, total: 13_933, rel: 'x' })
+    expect(moteur.progression.get('d')?.fichiersDossier).toBe(13_933)
+    ;(moteur as any).evenement('d', { ev: 'progress', phase: 'découpe', seen: 4, total: 12, rel: 'y' })
+    expect(moteur.progression.get('d')?.fichiersDossier).toBe(13_933)
+  })
+})

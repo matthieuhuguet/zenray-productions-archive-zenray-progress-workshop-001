@@ -1,0 +1,105 @@
+// LA SURVEILLANCE — `fs.watch` récursif, qui s'appuie sur FSEvents sur macOS, plus un débounce par dossier.
+//
+// POURQUOI UN DÉBOUNCE LONG. Enregistrer dans Blender, exporter depuis Photoshop ou décompresser une archive
+// produit des centaines d'événements en quelques secondes, et souvent des fichiers temporaires qui n'existeront
+// plus une minute plus tard. Déclencher à chaud enverrait des états intermédiaires et multiplierait les commits
+// pour rien. On attend donc le SILENCE : deux minutes sans la moindre écriture, réglable.
+//
+// POURQUOI UN BALAYAGE DE RATTRAPAGE. FSEvents perd des événements quand la machine dort, quand un volume est
+// démonté, ou quand la file du noyau déborde pendant une copie massive. Un balayage complet toutes les six
+// heures rattrape ces trous, et il est bon marché : le moteur compare les sha256 et ne renvoie que ce qui a
+// réellement changé.
+import { watch, type FSWatcher } from 'node:fs'
+
+/** Fichiers à ignorer : bruit du système, écritures partielles, dossiers de contrôle de version. */
+const IGNORES = [
+  /(^|\/)\.DS_Store$/i, /(^|\/)\.git(\/|$)/, /(^|\/)\.Trash(es)?(\/|$)/i, /(^|\/)\.Spotlight-V100(\/|$)/i,
+  /(^|\/)\.fseventsd(\/|$)/i, /(^|\/)\.TemporaryItems(\/|$)/i, /(^|\/)\.zr-archive-work(\/|$)/,
+  /\.(tmp|temp|part|crdownload|download|swp|lock)$/i, /(^|\/)~\$/, /(^|\/)\._/,
+]
+export const estIgnore = (rel: string): boolean => IGNORES.some((r) => r.test(rel))
+
+export class Surveillance {
+  private observateurs = new Map<string, FSWatcher>()
+  private minuteries = new Map<string, NodeJS.Timeout>()
+  private reconnexions = new Map<string, NodeJS.Timeout>()
+  private dossiers = new Map<string, string>()
+  private pannes = new Set<string>()
+
+  constructor(
+    private declencher: (id: string) => void,
+    private delaiSec: () => number,
+    private delaiReconnexionSec: () => number,
+    private signaler: (id: string, message: string) => void,
+    private creerWatch: typeof watch = watch,
+    // 2 October 2026: report changes separately from the stable backup trigger.
+    private onChange: (id: string) => void = () => {},
+  ) {}
+
+  /** Attache la surveillance d'un dossier. Rejouable sans risque : réattacher remplace proprement l'existant. */
+  suivre(id: string, dossier: string): void {
+    this.oublier(id)
+    this.dossiers.set(id, dossier)
+    this.attacher(id)
+  }
+
+  private attacher(id: string): void {
+    const dossier = this.dossiers.get(id)
+    if (!dossier) return
+    const reprise = this.reconnexions.get(id)
+    if (reprise) { clearTimeout(reprise); this.reconnexions.delete(id) }
+    try {
+      const obs = this.creerWatch(dossier, { recursive: true, persistent: true }, (_type, nom) => {
+        const rel = typeof nom === 'string' ? nom : ''
+        if (rel && estIgnore(rel)) return
+        this.onChange(id)
+        this.armer(id)
+      })
+      obs.on('error', (error) => this.perdre(id, error))
+      this.observateurs.set(id, obs)
+      if (this.pannes.delete(id)) this.signaler(id, 'surveillance du dossier rétablie')
+    } catch (error) {
+      this.perdre(id, error)
+    }
+  }
+
+  private perdre(id: string, error: unknown): void {
+    const obs = this.observateurs.get(id)
+    if (obs) { try { obs.close() } catch {} ; this.observateurs.delete(id) }
+    if (!this.dossiers.has(id) || this.reconnexions.has(id)) return
+    if (!this.pannes.has(id)) {
+      this.pannes.add(id)
+      const message = error instanceof Error ? error.message : String(error)
+      this.signaler(id, `surveillance interrompue (${message}) ; nouvelle tentative automatique`)
+    }
+    this.reconnexions.set(id, setTimeout(() => {
+      this.reconnexions.delete(id)
+      this.attacher(id)
+    }, Math.max(1, this.delaiReconnexionSec()) * 1000))
+  }
+
+  oublier(id: string): void {
+    this.dossiers.delete(id)
+    this.pannes.delete(id)
+    const obs = this.observateurs.get(id)
+    if (obs) { try { obs.close() } catch {} ; this.observateurs.delete(id) }
+    const reprise = this.reconnexions.get(id)
+    if (reprise) { clearTimeout(reprise); this.reconnexions.delete(id) }
+    const t = this.minuteries.get(id)
+    if (t) { clearTimeout(t); this.minuteries.delete(id) }
+  }
+
+  /** Vrai si une écriture a été vue et que le compte à rebours n'a pas encore expiré. */
+  enAttente(id: string): boolean { return this.minuteries.has(id) }
+
+  private armer(id: string): void {
+    const t = this.minuteries.get(id)
+    if (t) clearTimeout(t)
+    this.minuteries.set(id, setTimeout(() => {
+      this.minuteries.delete(id)
+      this.declencher(id)
+    }, Math.max(5, this.delaiSec()) * 1000))
+  }
+
+  toutOublier(): void { for (const id of [...this.dossiers.keys()]) this.oublier(id) }
+}

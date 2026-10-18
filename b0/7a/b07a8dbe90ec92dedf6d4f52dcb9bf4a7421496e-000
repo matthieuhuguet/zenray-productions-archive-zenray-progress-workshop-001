@@ -1,0 +1,64 @@
+{
+  "name": "zenraycloud",
+  "productName": "ZenRayCloud",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Surveille des dossiers du Mac et les pousse en continu sur le drive ZenRayProgress.",
+  "author": "Matthieu Huguet",
+  "main": "dist/electron/main.js",
+  "type": "commonjs",
+  "scripts": {
+    "build:main": "tsc -p tsconfig.electron.json",
+    "build:renderer": "vite build",
+    "build": "npm run build:main && npm run build:renderer",
+    "dev": "npm run build:main && concurrently -k \"vite\" \"cross-env ZRC_DEV=1 electron .\"",
+    "start": "npm run build && electron .",
+    "app": "npm run build && electron-builder --mac --dir",
+    "dmg": "npm run build && electron-builder --mac",
+    "bench": "node scripts/bench.mjs",
+    "etat-drive": "node scripts/etat-drive.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.17",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.0",
+    "cross-env": "^7.0.3",
+    "electron": "^33.3.0",
+    "electron-builder": "^25.1.8",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "build": {
+    "appId": "com.zenray.cloud",
+    "productName": "ZenRayCloud",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "assets/**/*",
+      "package.json",
+      "params.json"
+    ],
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ],
+      "category": "public.app-category.utilities",
+      "identity": null,
+      "icon": "build/icon.icns"
+    }
+  }
+}

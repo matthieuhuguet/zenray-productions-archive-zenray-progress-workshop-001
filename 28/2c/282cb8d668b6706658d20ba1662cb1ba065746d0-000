@@ -1,0 +1,666 @@
+// L'INTERFACE — une liste de dossiers, leur état, leur journal. Rien d'autre.
+//
+// Elle ne calcule aucun état : le processus principal envoie l'objet complet à chaque changement et le rendu se
+// contente de l'afficher. Une seule source de vérité, donc jamais deux affichages qui se contredisent.
+import { useEffect, useRef, useState } from 'react'
+import type { AppState, Fiche, FolderStatus, WatchedFolder } from '../electron/types'
+import { fusionnerEtat } from './state-update'
+
+declare global {
+  interface Window {
+    zrc: {
+      get(): Promise<AppState>
+      onState(cb: (e: AppState) => void): () => void
+      onJetons(cb: (j: Record<string, string>) => void): () => void
+      addFolder(): Promise<AppState>
+      removeFolder(id: string): Promise<AppState>
+      updateFolder(id: string, p: Partial<WatchedFolder>): Promise<AppState>
+      sync(id: string): Promise<AppState>
+      cancel(id: string): Promise<AppState>
+      syncAll(): Promise<AppState>
+      setPrefs(p: Record<string, unknown>): Promise<AppState>
+      revealLog(id: string): Promise<boolean>
+      openSrc(id: string): Promise<boolean>
+      openAtelier(chemin: string): Promise<boolean>
+      openDrive(id: string): Promise<boolean>
+      restaurer(id: string, rel: string, version?: number | null): Promise<{ ok: boolean; message: string }>
+      geler(id: string, geler: boolean): Promise<AppState>
+      etatDrive(id: string): Promise<{ ok: boolean; message: string }>
+      retryToken(): Promise<AppState>
+    }
+  }
+}
+
+const COULEUR: Record<FolderStatus, string> = {
+  syncing: 'var(--bleu)', pending: 'var(--orange)', error: 'var(--rouge)',
+  paused: 'var(--gris)', idle: 'var(--vert)',
+}
+const LIBELLE: Record<FolderStatus, string> = {
+  syncing: 'synchronisation', pending: 'en attente', error: 'erreur', paused: 'en pause', idle: 'à jour',
+}
+
+/** Octets en gigaoctets lisibles, ou en mégaoctets sous le gigaoctet. */
+const go = (n: number) => (n >= 1e9 ? `${(n / 1e9).toFixed(2)} Go` : `${Math.round(n / 1e6)} Mo`)
+/** LA POLITIQUE DE DÉCOUPAGE EST EN MÉBI-OCTETS, pas en méga : 95 Mio valent 99,6 millions d'octets, donc
+ *  l'afficher en « Mo » donnait « 100 Mo » et laissait croire que la règle des 95 était violée. On affiche donc
+ *  dans l'unité où la règle est écrite. */
+const mio = (n: number) => `${Math.round(n / 1048576)} Mio`
+
+/** LES DEUX ICÔNES, telles que Matthieu les a fournies (SF Symbols). Nuage = le fichier est sur le drive,
+ *  disque = il est encore sur le Mac. Grisées quand l'état ne s'applique pas : on ne colore que ce qui est vrai. */
+const IconeNuage = ({ actif }: { actif: boolean }) => (
+  <svg viewBox="0 0 37.793 28.0195" width="17" height="13" aria-hidden style={{ flex: '0 0 auto' }}>
+    <path d="M29.4961 25.7695C33.9609 25.7695 37.4414 22.5469 37.4414 18.4922C37.4414 15.3867 35.6836 12.668 32.707 11.4961C32.7891 4.83984 28.0312 0 21.9609 0C17.8477 0 14.9766 2.22656 13.2422 4.91016C9.58594 3.72656 5.55469 6.53906 5.50781 10.7344C2.14453 11.2031 0 14.1445 0 17.7891C0 22.1602 3.79688 25.7578 8.84766 25.7578Z"
+      fill={actif ? 'var(--vert)' : '#d6d5d1'} />
+  </svg>
+)
+const IconeLocal = ({ actif }: { actif: boolean }) => (
+  <svg viewBox="0 0 34.9219 25.0195" width="16" height="12" aria-hidden style={{ flex: '0 0 auto' }}>
+    <path d="M5.90625 25.0195L28.6641 25.0195C32.1094 25.0195 34.5703 22.5703 34.5703 19.1484C34.5703 15.7383 32.1094 13.2773 28.6641 13.2773L5.90625 13.2773C2.46094 13.2773 0 15.7383 0 19.1484C0 22.5703 2.46094 25.0195 5.90625 25.0195ZM5.90625 11.4023L28.6641 11.4023C30.0586 11.4023 31.3242 11.7305 32.4258 12.3047L28.6055 3.36328C27.6914 1.18359 25.8398 0.0234375 23.3672 0.0234375L11.2031 0.0234375C8.73047 0.0234375 6.86719 1.18359 5.96484 3.36328L2.13281 12.3047C3.23438 11.7305 4.51172 11.4023 5.90625 11.4023ZM26.5547 19.1836C26.5547 18.1758 27.4336 17.2969 28.4766 17.2969C29.4844 17.2969 30.3516 18.1758 30.3516 19.1836C30.3516 20.2266 29.4844 21.0703 28.4766 21.0703C27.4336 21.0703 26.5547 20.25 26.5547 19.1836Z"
+      fill={actif ? 'var(--texte)' : '#d6d5d1'} />
+  </svg>
+)
+
+/** Ce que fait l'algorithme, en clair. Chaque phase a son verbe : on ne surveille pas ce qu'on ne sait pas nommer. */
+const PHRASE: Record<string, string> = {
+  inventaire: 'parcourt le dossier',
+  empreintes: 'calcule les empreintes',
+  'préparation': 'compare et route les fichiers',
+  // LE MOT MENTAIT, ET C'EST LUI QUI FAISAIT CROIRE À QUATRE HEURES DE DÉCOUPE (2026-08-16). Le moteur
+  // n'a jamais découpé puis envoyé en deux temps : il pousse tous les vingt à cent cinquante mégaoctets,
+  // donc découpe et envoi ALTERNENT en permanence. Mais l'événement « morceau écrit » arrive bien plus
+  // souvent que l'événement « lot poussé », si bien que l'écran affichait presque toujours « découpe ».
+  // Un libellé qui ne nomme qu'une moitié du travail donne l'impression que l'autre moitié n'a pas lieu.
+  'découpe': 'découpe et envoie en continu',
+  envoi: 'pousse vers le dépôt',
+  'ménage': 'efface les morceaux confirmés',
+  publication: 'publie les manifestes',
+  'vérification': 'vérifie chaque morceau en ligne',
+  'terminé': 'terminé',
+}
+
+/** Une durée en secondes, dite comme on la dit à voix haute. « 158 400 s » n'apprend rien à personne. */
+const duree = (s: number) => {
+  if (!isFinite(s) || s <= 0) return '—'
+  const h = Math.floor(s / 3600), m = Math.round((s % 3600) / 60)
+  return h >= 1 ? `${h} h ${String(m).padStart(2, '0')}` : `${Math.max(1, m)} min`
+}
+
+/** LE TEMPS RESTANT, calculé sur le VOLUME et non sur le nombre de fichiers. Mille photos et un film de six
+ *  gigaoctets ne se ressemblent pas : compter les fichiers donnerait « 99 % » pendant une heure. On ne l'affiche
+ *  qu'une fois le débit établi, parce qu'une estimation fondée sur trois secondes de mesure est un mensonge. */
+const resteEstime = (p: { seen: number; total: number; debut: number }) => {
+  // ON ESTIME SUR LES FICHIERS ET LE TEMPS ÉCOULÉ, PLUS SUR LES OCTETS, et voici pourquoi le premier
+  // calcul donnait « reste 10007 h » le 2026-08-16. Le dénominateur était le volume TOTAL du dossier,
+  // trois cent soixante-huit gigaoctets, alors que la quasi-totalité de ces fichiers est déjà en ligne et
+  // se saute en quelques millisecondes. On divisait donc un volume qui ne sera jamais envoyé par un débit
+  // réseau proche de zéro, et le résultat n'avait aucun sens.
+  //
+  // Le temps écoulé rapporté aux fichiers déjà vus intègre TOUT sans rien supposer : les fichiers sautés
+  // comme les fichiers montés, la lecture comme l'envoi. Il ne dit pas le débit, il dit le rythme, et
+  // c'est le rythme qu'on veut connaître. Il faut un échantillon décent avant d'annoncer quoi que ce soit.
+  if (!p.debut || !p.total || p.seen < 20) return null
+  const ecoule = (Date.now() - p.debut) / 1000
+  if (ecoule < 30) return null
+  const reste = ecoule * (p.total - p.seen) / p.seen
+  return reste <= 0 ? 0 : reste > 259_200 ? null : reste
+}
+
+/** LE TABLEAU DE CE QUI ARRIVE QUAND ON SUPPRIME, question posée par Matthieu le 2026-08-16. Il vit ici et
+ *  s'affiche dans l'application, parce qu'une règle qu'il faut aller lire dans un README n'est pas connue. */
+const SEMANTIQUE: [string, string, string][] = [
+  ['Fichier créé en local', 'découpé, monté, manifeste écrit', 'Mac → drive'],
+  ['Fichier modifié en local', 'nouvelle version ajoutée, les anciennes restent', 'Mac → drive'],
+  ['Fichier renommé ou déplacé', 'manifeste au nouveau chemin, mêmes morceaux, zéro octet envoyé', 'Mac → drive'],
+  ['Fichier supprimé en local', 'marqué supprimé + date, RIEN n\'est effacé en ligne', 'Mac → drive'],
+  ['Fichier supprimé puis revenu', 'le drapeau est retiré, rien n\'est renvoyé', 'Mac → drive'],
+  ['Fichier déchargé (clic droit)', 'vérifié par empreinte, puis mis à la corbeille du Mac', 'Mac seulement'],
+  ['Fichier supprimé sur le drive', 'rien ne redescend : le prochain passage le remonte', 'aucun canal'],
+  ['Modifié des deux côtés', 'le Mac gagne, l\'ancienne version reste dans l\'historique', 'Mac → drive'],
+]
+
+const dateCourte = (ms: number | null) =>
+  ms ? new Date(ms).toLocaleString('fr-FR', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }) : 'jamais'
+
+/** LE TABLEAU DES FICHIERS. Quatre états possibles, dits par deux icônes plutôt que par un mot : sur les deux,
+ *  seulement sur le drive (déchargé du Mac), seulement en local (pas encore monté), sur aucun des deux. La date
+ *  et l'historique se replient : on ne les regarde qu'en cas de doute, ils ne doivent pas encombrer la lecture. */
+function Tableau({ fiches, filtre, dossierId }: { fiches: Fiche[]; filtre: string; dossierId: string }) {
+  const [details, setDetails] = useState(false)
+  /** Un seul message à la fois : la restauration est un geste rare, qu'on regarde quand on le fait. */
+  const [message, setMessage] = useState<string | null>(null)
+  const [enCours, setEnCours] = useState<string | null>(null)
+  const restaurer = async (rel: string) => {
+    setEnCours(rel); setMessage(null)
+    const r = await window.zrc.restaurer(dossierId, rel)
+    setEnCours(null)
+    setMessage(r.ok ? `✓ ${rel} restauré et vérifié dans ${r.message}` : `✗ ${rel} — ${r.message}`)
+  }
+  const [limite, setLimite] = useState(200)
+  const f = filtre.trim().toLowerCase()
+  const lignes = (f ? fiches.filter((x) => x.rel.toLowerCase().includes(f)) : fiches)
+  if (!fiches.length) return <div className="resume">aucun fichier indexé pour l'instant — le tableau se remplit à la fin du premier envoi</div>
+  return (
+    <div className="tableau">
+      <div className="tableau-tete">
+        <span>{lignes.length} fichier(s)</span>
+        <button className="btn discret" onClick={() => setDetails((v) => !v)}>
+          {details ? 'masquer les dates' : 'dates et historique'}
+        </button>
+      </div>
+      {message && <div className={message.startsWith('✓') ? 'resume' : 'sautes'}>{message}</div>}
+      <table>
+        <tbody>
+          {lignes.slice(0, limite).map((x) => (
+            <tr key={x.rel}>
+              <td className="col-etat">
+                <IconeNuage actif={!x.supprime} />
+                <IconeLocal actif={x.local} />
+              </td>
+              <td className="col-nom" title={x.rel}>
+                {x.rel.split('/').pop()}
+                {x.depuis ? <span className="depuis" title={`déplacé depuis ${x.depuis}`}>déplacé</span> : null}
+                {x.versions > 1 ? <span className="versions">{x.versions} versions</span> : null}
+              </td>
+              <td className="col-taille">{go(x.taille)}</td>
+              {details && <td className="col-date">{x.dernier ? new Date(x.dernier).toLocaleString('fr-FR', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—'}</td>}
+              {details && <td className="col-chemin chemin" title={x.depuis || x.rel}>{x.depuis || x.rel}</td>}
+              {/* C2 — RESTAURER. Le fichier revient dans un dossier À PART, jamais par-dessus l'original :
+                  écraser un fichier local avec sa copie en ligne serait le geste destructeur qu'une
+                  sauvegarde doit rendre impossible. L'empreinte est vérifiée avant écriture. */}
+              <td className="col-action">
+                <button className="lien" disabled={enCours === x.rel} onClick={() => restaurer(x.rel)}>
+                  {enCours === x.rel ? 'restauration…' : 'restaurer'}
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {lignes.length > limite && (
+        <button className="btn discret" onClick={() => setLimite((n) => n + 500)}>
+          voir 500 de plus ({lignes.length - limite} restants)
+        </button>
+      )}
+    </div>
+  )
+}
+
+
+/** LA FRISE DES ÉTAPES — montrer le cycle, pas seulement l'instant.
+ *
+ *  Le panneau nommait déjà correctement ce que fait l'algorithme, mais un mot seul ne dit pas OÙ l'on se
+ *  trouve dans un cycle qui en compte six. On voyait « découpe » sans savoir si c'était le début ou la fin,
+ *  ni ce qui viendrait après. Six pastilles suffisent à répondre : les étapes franchies sont pleines et
+ *  grises, l'étape courante est pleine et bleue, celles à venir sont en simple contour. Rien n'est retiré,
+ *  on ajoute la carte du chemin à côté du nom de l'endroit. */
+const ETAPES: { cle: string; court: string }[] = [
+  { cle: 'inventaire', court: 'liste' },
+  { cle: 'empreintes', court: 'empreintes' },
+  { cle: 'découpe', court: 'découpe' },
+  { cle: 'envoi', court: 'envoi' },
+  { cle: 'publication', court: 'manifestes' },
+  { cle: 'vérification', court: 'contrôle' },
+]
+
+function Frise({ phase, p, connus }: { phase: string; p: any; connus: number }) {
+  // Chaque étape porte SON chiffre sous son nom : « liste » sans nombre ne dit pas ce qui a été listé.
+  // CHAQUE ÉTAPE LIT SA PROPRE GRANDEUR, et c'est tout le sujet. Les six cases affichaient auparavant le
+  // même compteur `seen`, dont le sens change en cours de route : pendant la vérification il compte des
+  // MORCEAUX, si bien que « liste » et « empreintes » annonçaient vingt fichiers pour un dossier qui en
+  // contient treize mille. Une étape franchie doit montrer ce qu'ELLE a fait, gelé, pas ce qui se passe
+  // maintenant. Les unités diffèrent d'une case à l'autre parce que le travail lui-même change de nature :
+  // on liste des fichiers, on pousse des octets, on publie des manifestes, on contrôle des morceaux.
+  const fichiers = p.fichiersDossier || p.total || 0
+  const chiffres: Record<string, string> = {
+    inventaire: `${fichiers.toLocaleString('fr-FR')} fichiers`,
+    empreintes: `${fichiers.toLocaleString('fr-FR')} fichiers`,
+    'découpe': p.morceaux ? `morceau ${p.morceau}/${p.morceaux}` : `${(p.seen || 0).toLocaleString('fr-FR')} vus`,
+    envoi: p.envoyes ? `${(p.envoyes / 1e6).toFixed(0)} Mo confirmés` : '—',
+    publication: p.publiesTotal ? `${(p.publies || 0).toLocaleString('fr-FR')}/${p.publiesTotal.toLocaleString('fr-FR')} publiés`
+      : `${connus.toLocaleString('fr-FR')} en ligne`,
+    'vérification': p.verifies ? `${p.verifies.toLocaleString('fr-FR')} morceaux` : 'contrôle en ligne',
+  }
+  // `ménage` n'est pas une étape du cycle mais un temps mort à l'intérieur de l'envoi : le montrer comme
+  // une septième case laisserait croire à un recul, alors que rien n'est défait.
+  const courante = phase === 'ménage' ? 'envoi' : phase
+  const rang = ETAPES.findIndex((e) => e.cle === courante)
+  return (
+    <div className="frise" aria-label={`étape ${rang + 1} sur ${ETAPES.length}`}>
+      {ETAPES.map((e, i) => (
+        <div key={e.cle} className={`frise-pas ${i < rang ? 'fait' : i === rang ? 'ici' : 'avenir'}`}>
+          <span className="frise-point" />
+          <span className="frise-nom">{e.court}</span>
+          <span className="frise-chiffre">{i <= rang ? (chiffres[e.cle] || '') : ''}</span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+/** LE RUBAN DES FICHIERS — voir défiler ce qui passe, plutôt qu'un seul nom qui change trop vite.
+ *
+ *  Un unique chemin remplacé toutes les deux secondes ne se lit pas : l'œil n'a pas le temps de le saisir
+ *  qu'il a déjà changé, et rien ne dit ce qui vient d'être fait. Le ruban garde les derniers noms passés
+ *  et met le courant en tête, ce qui rend le mouvement visible sans rien ajouter au moteur : tout vient de
+ *  la progression déjà émise. */
+/** LE TEMPS QUI PASSE, ET POURQUOI C'EST LA BONNE RÉPONSE À « ON DIRAIT QUE C'EST BLOQUÉ ».
+ *
+ *  Quand un fichier de sept gigaoctets occupe le moteur, tous les compteurs se figent : même nom, même
+ *  numéro de morceau, même dépôt. L'écran devient une photographie, et une photographie ressemble à une
+ *  panne. La tentation est d'ajouter une animation décorative ; elle rassurerait à tort, puisqu'elle
+ *  tournerait aussi bien si le moteur était réellement mort.
+ *
+ *  Un chronomètre, lui, dit quelque chose de VRAI : il compte le temps réellement écoulé depuis le début
+ *  du passage. Il bouge donc en permanence sans jamais mentir, et s'il se fige c'est que l'application
+ *  elle-même est bloquée, ce qui est exactement l'information qu'on veut. */
+function Chrono({ debut }: { debut: number }) {
+  const [, battre] = useState(0)
+  useEffect(() => {
+    const t = setInterval(() => battre((n) => n + 1), 1000)
+    return () => clearInterval(t)
+  }, [])
+  if (!debut) return null
+  const s = Math.floor((Date.now() - debut) / 1000)
+  const mm = String(Math.floor(s / 60)).padStart(2, '0')
+  const ss = String(s % 60).padStart(2, '0')
+  return <span className="chrono"><span className="n">{Math.floor(s / 3600) ? `${Math.floor(s / 3600)}:` : ''}{mm}:{ss}</span></span>
+}
+
+function Ruban({ rel }: { rel: string }) {
+  const [passes, setPasses] = useState<string[]>([])
+  const dernier = useRef('')
+  useEffect(() => {
+    if (!rel || rel === dernier.current) return
+    if (dernier.current) setPasses((xs) => [dernier.current, ...xs].slice(0, 6))
+    dernier.current = rel
+  }, [rel])
+  if (!rel) return null
+  return (
+    <div className="ruban">
+      <span className="ruban-item encours" title={rel}>{rel.split('/').pop()}</span>
+      {passes.map((x, i) => (
+        <span key={`${x}-${i}`} className="ruban-item fini" title={x}>{x.split('/').pop()}</span>
+      ))}
+    </div>
+  )
+}
+
+export default function App() {
+  const [etat, setEtat] = useState<AppState | null>(null)
+  const [ouvert, setOuvert] = useState<string | null>(null)
+  const [tableauOuvert, setTableauOuvert] = useState<string | null>(null)
+  const [recherche, setRecherche] = useState('')
+  const [prefsVisibles, setPrefsVisibles] = useState(false)
+  const [aideVisible, setAideVisible] = useState(false)
+  /** Onglet du tableau : tout, seulement ce qui a disparu du Mac, seulement ce qui a plusieurs versions. */
+  const [vue, setVue] = useState<'tout' | 'corbeille' | 'versions'>('tout')
+  const [gelés, setGelés] = useState<Set<string>>(new Set())
+  const [drive, setDrive] = useState<Record<string, string>>({})
+  const [menuOuvert, setMenuOuvert] = useState<string | null>(null)
+  const [destOuverte, setDestOuverte] = useState<string | null>(null)
+  const [filtreOuvert, setFiltreOuvert] = useState<string | null>(null)
+
+  useEffect(() => {
+    window.zrc.get().then(setEtat)
+    const stop = window.zrc.onState((suivant) => setEtat((precedent) => fusionnerEtat(precedent, suivant)))
+    // LES JETONS VIENNENT DU PROCESSUS PRINCIPAL, qui les lit dans params.json. Le CSS ne fait que consommer
+    // des variables : une couleur ne peut donc pas exister en deux exemplaires qui divergent.
+    const stopJetons = window.zrc.onJetons((j) => {
+      for (const [k, v] of Object.entries(j)) document.documentElement.style.setProperty(k, v)
+    })
+    return () => { stop(); stopJetons() }
+  }, [])
+
+  if (!etat) return <div className="vide">chargement…</div>
+  const { folders, runtime, prefs } = etat
+
+  return (
+    <>
+      <div className="barre-titre" />
+      <div className="page">
+        <header className="entete">
+          <h1>ZenRayCloud</h1>
+          <span className="compte">{folders.length ? `${folders.length} dossier${folders.length > 1 ? 's' : ''} surveillé${folders.length > 1 ? 's' : ''}` : 'aucun dossier'}</span>
+          <div className="actions">
+            <button className="btn discret" onClick={() => setAideVisible((v) => !v)}>Que se passe-t-il si…</button>
+            <button className="btn discret" onClick={() => setPrefsVisibles((v) => !v)}>Réglages</button>
+            <button className="btn" onClick={() => window.zrc.syncAll().then(setEtat)} disabled={!folders.length}>Tout synchroniser</button>
+            <button className="btn primaire" onClick={() => window.zrc.addFolder().then(setEtat)}>Ajouter un dossier</button>
+          </div>
+        </header>
+
+        {etat.tokenOk === false && (
+          <div className="bandeau">
+            <span className="pastille" style={{ background: 'var(--rouge)' }} />
+            <div>
+              <div className="titre">Accès GitHub indisponible</div>
+              <div style={{ color: 'var(--gris)' }}>{etat.tokenError}</div>
+            </div>
+            <button className="btn" style={{ marginLeft: 'auto' }} onClick={() => window.zrc.retryToken().then(setEtat)}>Réessayer</button>
+          </div>
+        )}
+
+        {aideVisible && (
+          <div className="carte">
+            <div className="titre" style={{ marginBottom: 8 }}>Le drive est une sauvegarde, jamais un miroir</div>
+            <div className="resume" style={{ marginBottom: 10 }}>
+              Un miroir perdrait le fichier des deux côtés d'un seul geste. Ici, rien n'est jamais effacé en
+              ligne : au pire un manifeste porte la mention « supprimé » et sa date, et ses morceaux restent.
+            </div>
+            <table className="semantique">
+              <tbody>
+                {SEMANTIQUE.map(([quoi, effet, sens]) => (
+                  <tr key={quoi}>
+                    <td style={{ whiteSpace: 'nowrap' }}><b>{quoi}</b></td>
+                    <td>{effet}</td>
+                    <td className="chemin" style={{ whiteSpace: 'nowrap' }}>{sens}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {!prefs.repoRoot && (
+          <div className="bandeau">
+            <span className="pastille" style={{ background: 'var(--orange)' }} />
+            <div>
+              <div className="titre">Dépôt ZenRayProgress introuvable</div>
+              <div style={{ color: 'var(--gris)' }}>Indiquer sa racine dans les réglages : c'est de là que vient le moteur d'archive.</div>
+            </div>
+          </div>
+        )}
+
+        {prefsVisibles && (
+          <div className="carte">
+            <div className="prefs">
+              <div style={{ gridColumn: '1 / -1' }}>
+                <label>Racine du dépôt ZenRayProgress</label>
+                <input className="champ" defaultValue={prefs.repoRoot}
+                  onBlur={(e) => window.zrc.setPrefs({ repoRoot: e.target.value.trim() }).then(setEtat)} />
+              </div>
+              <div>
+                <label>Silence avant envoi (secondes)</label>
+                <input className="champ" type="number" min={5} defaultValue={prefs.debounceSec}
+                  onBlur={(e) => window.zrc.setPrefs({ debounceSec: Number(e.target.value) }).then(setEtat)} />
+              </div>
+              <div>
+                <label>Balayage de rattrapage (heures)</label>
+                <input className="champ" type="number" min={1} defaultValue={prefs.fullScanHours}
+                  onBlur={(e) => window.zrc.setPrefs({ fullScanHours: Number(e.target.value) }).then(setEtat)} />
+              </div>
+              <div style={{ gridColumn: '1 / -1', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <input id="login" type="checkbox" defaultChecked={prefs.launchAtLogin}
+                  onChange={(e) => window.zrc.setPrefs({ launchAtLogin: e.target.checked }).then(setEtat)} />
+                <label htmlFor="login" style={{ margin: 0 }}>Lancer au démarrage de la session</label>
+              </div>
+              <div style={{ gridColumn: '1 / -1', color: 'var(--gris)', fontSize: 12 }}>
+                node : <code>{prefs.nodePath || 'introuvable'}</code> · gh : <code>{prefs.ghPath || 'introuvable'}</code>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {!folders.length && <div className="vide">Ajoute un dossier : il sera surveillé, puis poussé sur le drive dès qu'il cesse de bouger.</div>}
+
+        {folders.map((f) => {
+          const r = runtime[f.id]
+          const st = r?.status || 'idle'
+          const p = r?.progress
+          const fiches = etat.fiches?.[f.id] || []
+          const connus = fiches.length
+          // TOUT CE QUI EST SAUVEGARDÉ N'EST PLUS FORCÉMENT SUR LE MAC, et compter les deux ensemble
+          // remettait le rapport à cent pour cent : l'index portait 13 991 fiches pour un dossier qui ne
+          // contient plus que 13 942 fichiers, les 49 autres ayant quitté le Mac. Leurs manifestes restent en
+          // ligne — une sauvegarde n'efface rien — mais ils n'appartiennent plus au dossier qu'on mesure.
+          const surLeMac = fiches.filter((x: any) => x.local).length
+          const partis = connus - surLeMac
+          // UN RAPPORT DONT LE DÉNOMINATEUR SUIT LE NUMÉRATEUR AFFICHE TOUJOURS CENT POUR CENT, et c'est
+          // exactement ce qui se produisait : `p.total` recevait, pendant la vérification, le nombre de
+          // morceaux contrôlés, lequel valait `seen`. On prend donc la taille du dossier relevée à
+          // l'inventaire, seul instant où ce chiffre compte bien des fichiers.
+          // Au repos, `p` n'existe plus : sans la mémoire du dernier inventaire, le rapport retombait sur
+          // `connus / connus`, donc cent pour cent, y compris quand le dernier passage avait laissé des
+          // fichiers de côté. Le bilan garde donc la taille du dossier.
+          const totalDossier = Math.max(surLeMac, p?.fichiersDossier || 0, r?.bilan?.fichiersDossier || 0)
+          const pct = totalDossier ? Math.min(100, surLeMac / totalDossier * 100) : 0
+          const R = 26, C = 2 * Math.PI * R
+          const menu = menuOuvert === f.id
+          const rst = p ? resteEstime(p) : null
+          return (
+            <div className="carte" key={f.id}>
+              {/* ── EN-TÊTE : qui, d'où vers où, et les gestes ─────────────────────────────────────
+                  Le chemin de destination reste MODIFIABLE comme depuis le premier jour ; il passe d'un
+                  champ toujours ouvert à un champ qui s'ouvre au clic. Rendre un réglage discret n'est
+                  pas le supprimer, tant qu'un seul clic suffit à le retrouver. */}
+              <div className="tete-carte">
+                <div className="tete-id">
+                  <span className="pastille" style={{ background: COULEUR[st] }} />
+                  <div style={{ minWidth: 0 }}>
+                    <div className="tete-nom">
+                      {f.src.split('/').pop()}
+                      <span className={`badge badge-${st}`}>{LIBELLE[st]}</span>
+                    </div>
+                    <div className="tete-route chemin">
+                      <span title={f.src}>{f.src}</span>
+                      <span className="fleche">→</span>
+                      <button className="lien" onClick={() => setDestOuverte(destOuverte === f.id ? null : f.id)}>{f.dest}</button>
+                    </div>
+                  </div>
+                </div>
+                <div className="tete-actions">
+                  <button className="btn primaire" onClick={() => window.zrc.sync(f.id).then(setEtat)} disabled={f.paused}>Tout synchroniser</button>
+                  {st === 'syncing' && (
+                    <button className="btn" onClick={() => window.zrc.geler(f.id, !gelés.has(f.id)).then((e) => {
+                      setGelés((g) => { const n = new Set(g); n.has(f.id) ? n.delete(f.id) : n.add(f.id); return n }); setEtat(e)
+                    })}>{gelés.has(f.id) ? 'Reprendre' : 'Geler'}</button>
+                  )}
+                  <button className="btn" onClick={() => window.zrc.cancel(f.id).then(setEtat)} disabled={st !== 'syncing'}>Arrêter</button>
+                  <button className={`btn ${menu ? 'actif' : ''}`} onClick={() => setMenuOuvert(menu ? null : f.id)} title="Plus d'actions">···</button>
+                </div>
+              </div>
+
+              {destOuverte === f.id && (
+                <div className="volet">
+                  <label>Destination sur le drive</label>
+                  <input className="champ" defaultValue={f.dest}
+                    onBlur={(e) => window.zrc.updateFolder(f.id, { dest: e.target.value }).then(setEtat)} />
+                  <label className="volet-case">
+                    <input type="checkbox" checked={f.markDeleted}
+                      onChange={(e) => window.zrc.updateFolder(f.id, { markDeleted: e.target.checked }).then(setEtat)} />
+                    marquer les suppressions — rien n'est jamais effacé en ligne, seulement daté
+                  </label>
+                </div>
+              )}
+
+              {/* Le menu range les gestes rares SANS en retirer un seul. */}
+              {menu && (
+                <div className="volet volet-menu">
+                  <button className="btn" onClick={() => { setTableauOuvert(tableauOuvert === f.id ? null : f.id); setMenuOuvert(null) }}>Fichiers</button>
+                  <button className="btn" onClick={() => window.zrc.updateFolder(f.id, { paused: !f.paused }).then(setEtat)}>{f.paused ? 'Reprendre la surveillance' : 'Mettre en pause'}</button>
+                  <button className="btn" onClick={async () => {
+                    setDrive((x) => ({ ...x, [f.id]: 'lecture du drive…' }))
+                    const res = await window.zrc.etatDrive(f.id)
+                    setDrive((x) => ({ ...x, [f.id]: res.message }))
+                  }}>Vérifier le drive</button>
+                  <button className="btn" onClick={() => { setOuvert(ouvert === f.id ? null : f.id); setMenuOuvert(null) }}>Journal</button>
+                  <button className="btn" onClick={() => window.zrc.openSrc(f.id)}>Ouvrir le dossier</button>
+                  <button className="btn" onClick={() => window.zrc.openDrive(f.id)}>Voir sur le drive</button>
+                  <button className="btn" onClick={() => window.zrc.revealLog(f.id)}>Journal complet</button>
+                  <button className="btn danger" onClick={() => { if (confirm(`Ne plus surveiller ${f.src} ?\n\nRien n'est supprimé, ni en local ni sur le drive.`)) window.zrc.removeFolder(f.id).then(setEtat) }}>Retirer</button>
+                </div>
+              )}
+
+              {/* ── QUATRE TUILES : où en est-on, quel état, quelles voies, quels filtres ──────────── */}
+              <div className="tuiles">
+                <div className="tuile">
+                  <div className="tuile-titre">Progression globale</div>
+                  <div className="tuile-corps">
+                    <div className="anneau" title={`${pct.toFixed(1)} % du dossier sauvegardé`}>
+                      <svg viewBox="0 0 64 64" width="62" height="62" role="img">
+                        <circle cx="32" cy="32" r={R} className="anneau-fond" />
+                        <circle cx="32" cy="32" r={R} className="anneau-arc"
+                          strokeDasharray={`${C * pct / 100} ${C}`} transform="rotate(-90 32 32)" />
+                        {/* LE CHIFFRE VIT DANS LE SVG. Superposé en HTML, il se décalait dès qu'il passait à
+                            trois chiffres, et le « % » tombait sous lui : une grille traite le texte et son
+                            unité comme deux cellules. Dans le SVG, `text-anchor` et `dominant-baseline` le
+                            centrent sur le centre géométrique du cercle, quel que soit le nombre de chiffres. */}
+                        <text x="32" y="32" className="anneau-valeur" textAnchor="middle" dominantBaseline="central">
+                          {pct >= 99.95 ? 100 : pct.toFixed(0)}<tspan className="anneau-unite">%</tspan>
+                        </text>
+                      </svg>
+                    </div>
+                    <div style={{ minWidth: 0 }}>
+                      <div className="grand"><b className="n">{p && p.octetsParSeconde > 0 ? (p.octetsParSeconde / 1e6).toFixed(1) : '—'}</b> <span className="grand-unite">Mo/s</span></div>
+                      {/* Le libellé suit la phase : pendant les empreintes le chiffre mesure une LECTURE
+                          disque, et le confondre avec un envoi ferait croire à deux gigaoctets par seconde. */}
+                      <div className="petit">{p?.phase === 'empreintes' ? 'lecture disque' : 'vitesse actuelle'}</div>
+                      <div className="tuile-fait">
+                        <span className="n">{surLeMac.toLocaleString('fr-FR')}</span> / <span className="n">{totalDossier.toLocaleString('fr-FR')}</span> fichiers sauvegardés
+                      </div>
+                      {/* DEUX COMPTEURS, DEUX SENS, ET LES CONFONDRE FAISAIT MENTIR LE PANNEAU. Au-dessus,
+                          les fichiers dont le manifeste est EN LIGNE, seule preuve d'une sauvegarde. Ici, ceux
+                          que le passage a traversés : découpés, peut-être déjà dans l'atelier, pas encore
+                          publiés. L'envoi se fait par lots de morceaux, jamais fichier par fichier, si bien que
+                          le second devance toujours le premier d'un lot. */}
+                      {partis > 0 && <div className="petit" title="Leurs manifestes restent en ligne : une sauvegarde n'efface jamais rien.">
+                        <span className="n">{partis.toLocaleString('fr-FR')}</span> encore en ligne, source retirée du Mac</div>}
+                      {p && p.seen > 0 && <div className="petit"><span className="n">{p.seen.toLocaleString('fr-FR')}</span> vus dans ce passage</div>}
+                      {p && p.envoyes > 0 && <div className="petit"><span className="n">{go(p.envoyes)}</span> confirmés en ligne</div>}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="tuile">
+                  <div className="tuile-titre">Statut</div>
+                  <div className="statut-ligne">
+                    {/* UNE COCHE VERTE À CÔTÉ DE « DERNIER PASSAGE EN ÉCHEC », c'est ce que la carte affichait :
+                        `st` décrit la FILE (au repos, en cours, en attente) et non le VERDICT, si bien qu'un
+                        dossier revenu au repos après un échec retrouvait sa coche verte. Le verdict prime. */}
+                    <span className={`coche ${st === 'error' || (!p && f.lastError) ? 'ko' : st === 'syncing' || p ? 'encours' : 'ok'}`}>
+                      {st === 'error' || (!p && f.lastError) ? '!' : '✓'}</span>
+                    <b>{p ? (PHRASE[p.phase] || p.phase) : f.lastError ? 'Dernier passage en échec' : f.lastResult ? 'Synchronisation terminée' : 'Jamais synchronisé'}</b>
+                  </div>
+                  <div className="petit">
+                    {p ? (rst === null ? 'estimation en cours' : rst < 5 ? 'dernier fichier de cette phase' : <>reste <span className="n">{duree(rst)}</span></>)
+                      : r?.bilan ? <>Vérification en ligne : {r.bilan.sautes.length ? `${r.bilan.sautes.length} écarté(s)` : 'terminée'}</> : '—'}
+                  </div>
+                  {/* POURQUOI ÇA POUSSE ENCORE ALORS QUE LE COMPTEUR DIT 100 % (question de Matthieu,
+                      2026-08-18) : le compteur ci-dessus dit « au moins une version déjà sauvegardée », pas
+                      « la version d'aujourd'hui est en ligne ». Un fichier énorme qui a changé (un
+                      téléchargement qui avance) reste donc à 100 % pendant qu'une NOUVELLE version de LUI SEUL
+                      se pousse en arrière-plan. Nommer sa taille rend ce fait lisible d'un coup d'œil. */}
+                  {p && (p.phase === 'découpe' || p.phase === 'envoi') && p.bytes >= 2e8 && (
+                    <div className="petit" title={p.rel}>nouvelle version de « {p.rel.split('/').pop()} », <span className="n">{go(p.bytes)}</span></div>
+                  )}
+                  <div className="petit">Dernière activité : {dateCourte(f.lastRunAt ?? f.lastSyncAt)}</div>
+                  {f.lastRunAt && f.lastSyncAt && f.lastRunAt !== f.lastSyncAt
+                    && <div className="petit">Dernier succès complet : {dateCourte(f.lastSyncAt)}</div>}
+                  {!p && f.lastError && <div className="petit ko-texte">{f.lastError}</div>}
+                  {r?.reprises ? <div className="petit ko-texte">reprise automatique <span className="n">{r.reprises}</span></div> : null}
+                  {/* « NON SAUVEGARDÉ » ALARMAIT À TORT. Ces fichiers-là bougeaient pendant leur lecture, très
+                      souvent un téléchargement en cours : le moteur refuse de publier un contenu instable, la
+                      source reste entière sur le Mac, et le passage suivant les reprend. C'est un report. */}
+                  {(p?.sautes?.length || r?.bilan?.reportes?.length) ? (
+                    <div className="petit" title={(p?.sautes || r?.bilan?.reportes || []).join('\n')}>
+                      <span className="n">{p?.sautes?.length || r?.bilan?.reportes?.length}</span> fichier(s) reporté(s) au prochain passage
+                    </div>
+                  ) : null}
+                </div>
+
+                <div className="tuile">
+                  <div className="tuile-titre">Voies</div>
+                  <div className="grand n">{p ? `${p.voiesVivantes} / ${p.voies}` : r?.bilan ? `${r.bilan.voies}` : '—'}</div>
+                  {!p && r?.bilan && <div className="petit">au dernier passage</div>}
+                  {p && p.voiesVivantes < p.voies && <div className="petit ko-texte">une voie s'est arrêtée</div>}
+                  <div className="tuile-titre" style={{ marginTop: 10 }}>Durée écoulée</div>
+                  <div className="grand">{p ? <Chrono debut={p.debut} />
+                    : r?.bilan ? <span className="n">{duree(r.bilan.secondes)}</span> : <span className="n">—</span>}</div>
+                </div>
+
+                <div className="tuile">
+                  <div className="tuile-titre">Filtres</div>
+                  <div className="filtres">
+                    <span className="petit">Exclure</span>
+                    {(f.excludes || []).filter((x) => x.trim()).map((x) => <span className="jeton" key={x}>{x.trim()}</span>)}
+                    {!(f.excludes || []).filter((x) => x.trim()).length && <span className="petit">aucun</span>}
+                  </div>
+                  <button className="btn" style={{ marginTop: 10 }}
+                    onClick={() => setFiltreOuvert(filtreOuvert === f.id ? null : f.id)}>Modifier</button>
+                  {filtreOuvert === f.id && (
+                    <input className="champ" style={{ marginTop: 8 }} placeholder="sous-dossiers à ignorer, séparés par des virgules"
+                      defaultValue={(f.excludes || []).join(', ')}
+                      onBlur={(e) => window.zrc.updateFolder(f.id, { excludes: e.target.value.split(',') }).then(setEtat)} />
+                  )}
+                </div>
+              </div>
+
+              {p && <Frise phase={p.phase} p={p} connus={connus} />}
+              {p && <Ruban rel={p.rel} />}
+              {drive[f.id] && <div className="resume drive-etat">🛰 {drive[f.id]}</div>}
+
+              {/* ── LE PIED : dépôt, atelier, compte du passage, accès au dossier de travail ───────── */}
+              {p && (
+                <div className="pied">
+                  <span className="pied-item">Dépôt : <b className="chemin">{p.depot || '—'}</b></span>
+                  <span className="pied-item">Espace en attente : <b className="n">{go(p.atelierOctets)}</b></span>
+                  <span className="pied-item">Dépôt local : <b className="n">{go(p.depotOctets)}</b></span>
+                  <span className="pied-item"><span className="n">{p.seen.toLocaleString('fr-FR')}</span>/<span className="n">{p.total.toLocaleString('fr-FR')}</span> dans ce passage</span>
+                  {p.morceaux ? <span className="pied-item">morceau <span className="n">{p.morceau}/{p.morceaux}</span> de <span className="n">{mio(p.tailleMorceau)}</span></span> : null}
+                  {p.atelier && <button className="lien pied-lien" onClick={() => window.zrc.openAtelier(p.atelier)}>Ouvrir dans le Finder</button>}
+                </div>
+              )}
+              {p?.morceauxEnAttente?.length ? (
+                <div className="morceaux">
+                  {p.morceauxEnAttente.map((m) => (
+                    <span className="morceau" key={m.nom} title={m.nom}>{m.nom.slice(-11)} <b className="n">{mio(m.octets)}</b></span>
+                  ))}
+                </div>
+              ) : null}
+
+              {!p && r?.bilan && (
+                <div className={`bilan ${r.bilan.ok ? '' : 'ko'}`}>
+                  <b>{r.bilan.ok ? 'Passage terminé' : 'Passage interrompu'}</b>
+                  {' · '}<span className="n">{r.bilan.fichiers}</span> fichier(s) montés
+                  {' · '}<span className="n">{go(r.bilan.octets)}</span>
+                  {r.bilan.octetsParSeconde > 0 ? <> · <span className="n">{(r.bilan.octetsParSeconde / 1e6).toFixed(1)}</span> Mo/s</> : ''}
+                  {' · '}<span className="n">{r.bilan.voies}</span> voie(s)
+                  {' · '}<span className="n">{duree(r.bilan.secondes)}</span>
+                  {r.bilan.reutilises ? <> · <span className="n">{r.bilan.reutilises}</span> déplacé(s) sans transfert</> : ''}
+                  {r.bilan.sautes.length ? <span title={r.bilan.sautes.join('\n')}> · <span className="n">{r.bilan.sautes.length}</span> reporté(s) au prochain passage</span> : null}
+                  {r.bilan.message ? <span className="ko-texte"> · {r.bilan.message}</span> : null}
+                </div>
+              )}
+
+              {tableauOuvert === f.id && (
+                <>
+                  <div className="onglets">
+                    {(['tout', 'corbeille', 'versions'] as const).map((v) => (
+                      <button key={v} className={`btn ${vue === v ? 'actif' : ''}`} onClick={() => setVue(v)}>
+                        {v === 'tout' ? 'Tous les fichiers'
+                          : v === 'corbeille' ? `Corbeille (${(etat.fiches?.[f.id] || []).filter((x) => x.supprime).length})`
+                          : `Versions (${(etat.fiches?.[f.id] || []).filter((x) => x.versions > 1).length})`}
+                      </button>
+                    ))}
+                  </div>
+                  {vue === 'corbeille' && (
+                    <div className="resume">Ces fichiers ont disparu du Mac et vivent toujours sur le drive. Rien n'a été effacé en ligne.</div>
+                  )}
+                  <input className="champ" style={{ marginTop: 10 }} placeholder="filtrer par nom…"
+                    value={recherche} onChange={(e) => setRecherche(e.target.value)} />
+                  <Tableau
+                    fiches={(etat.fiches?.[f.id] || []).filter((x) =>
+                      vue === 'corbeille' ? x.supprime : vue === 'versions' ? x.versions > 1 : true)}
+                    filtre={recherche} dossierId={f.id} />
+                </>
+              )}
+
+              {ouvert === f.id && <div className="journal">{(r?.log || []).join('\n') || 'aucune ligne pour le moment'}</div>}
+            </div>
+          )
+        })}
+      </div>
+    </>
+  )
+}

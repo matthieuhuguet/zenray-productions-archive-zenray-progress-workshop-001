@@ -1,0 +1,4 @@
+const a=`<!--zrm {"name":"track row playing","group":"Liste","props":[{"key":"title","type":"text"},{"key":"artist","type":"text"},{"key":"duration","type":"text"},{"key":"accent","type":"color"},{"key":"animate","type":"bool"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-animate="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="27-track-row-playing"><span class="sp-title">{{title}}</span><span class="sp-artist">{{artist}}</span><span class="sp-duration">{{duration}}</span><i class="sp-swatch" style="background:{{accent}}"></i><i class="sp-flag" data-animate="{{animate}}"></i></div>
+`;export{a as default};

@@ -1,0 +1,205 @@
+# ZenRayCloud
+
+Une application macOS qui surveille des dossiers du Mac et les pousse en continu sur le drive
+ZenRayProgress, à la manière de Dropbox, en réutilisant tel quel le moteur d'archive déjà éprouvé du projet.
+
+Décidée et validée le 15 août 2026. Contrainte d'architecture posée par Matthieu le même jour : Electron,
+React et TypeScript, et non Swift.
+
+## L'app est un HDA : le recensement des familles
+
+Toute valeur qui gouverne un comportement ou une apparence vit dans **`params.json`**, et nulle part ailleurs.
+Le code demande un paramètre par son nom ; un paramètre absent **lève une erreur qui le nomme** au lieu de
+prendre une valeur par défaut en silence. Un défaut silencieux dans une sauvegarde ne se découvre qu'au moment
+où l'on cherche un fichier qui n'y est pas ; une erreur bruyante au démarrage se répare en dix secondes.
+
+| Famille | Rôle | Paramètres exposés | Instances |
+|---|---|---|---|
+| `jetons` | ce qui vaut pour toute l'app | couleurs, polices, rayons, tailles, fenêtre | chaque élément d'interface |
+| `dossierSurveille` | un dossier du Mac suivi en continu | racine du drive, silence avant envoi, balayage de rattrapage, marquage des suppressions, exclusions | une carte par dossier, surcharges dans `config.json` |
+| `voieEnvoi` | un processus d'envoi et ses dépôts | nombre de voies au premier essai, plafond, seuils de montée et de descente, débit plancher | une voie par tranche de fichiers |
+| `panneauVivant` | l'affichage en direct | morceaux affichés, profondeur de scan, fenêtre de débit, cadence, lignes de journal | un panneau par dossier en cours |
+| `tableauFichiers` | la liste des fichiers connus | lignes par page, lignes suivantes | un tableau par dossier |
+| `icones` | les icônes posées dans le Finder | fichiers par envoi, fichiers par appel | une icône par fichier sauvegardé |
+
+Les trois étages ne se mélangent jamais : les **jetons** valent partout, les **familles** valent pour toutes les
+instances d'un type, et les **surcharges d'instance** (destination, exclusions, pause) vivent dans le
+`config.json` écrit par l'app. La cascade va de l'instance vers la famille vers les jetons, comme en CSS.
+
+Les jetons visuels ne sont pas recopiés dans le CSS : le processus principal les envoie au rendu au premier
+affichage, qui les pose sur `:root`. Une couleur ne peut donc pas exister en deux exemplaires qui divergent.
+
+## Ce que c'est, en une phrase
+
+L'app ne synchronise rien elle-même. Elle regarde, elle attend le silence, puis elle lance
+`scripts/archive-folder.mjs` sur le dossier qui a bougé et vous montre ce qui se passe.
+
+## Pourquoi le moteur n'est pas réécrit ici
+
+Le découpage en morceaux de 19 Mo, le seuil de 95 Mo qui bascule vers `raw.githubusercontent`, la reprise
+après coupure réseau, l'historique `versions[]` en ajout seul et la vérification HTTP 200 de chaque morceau
+vivent déjà dans `scripts/archive-folder.mjs`, éprouvés sur plus de cent trente gigaoctets. Les réécrire en
+TypeScript créerait une deuxième implémentation de la règle 19 / 95, alors que
+`src/config/chunkPolicy.js` interdit explicitement cette duplication dans son propre en-tête. Une
+divergence là-dessus n'abîmerait pas un affichage, elle abîmerait des archives.
+
+L'app est donc un chef d'orchestre, pas un second moteur.
+
+## Le protocole entre les deux
+
+Le script reçoit `--json` et écrit, **en plus** de ses logs habituels, des lignes NDJSON préfixées
+`{"zr":1,…}` sur sa sortie standard. L'app ne lit que ces lignes-là et affiche les autres dans le journal.
+Conséquence utile : ajouter ou modifier un `console.log` dans le script ne peut pas casser l'app, et le
+script reste parfaitement lisible dans un terminal quand on l'utilise à la main.
+
+| Événement | Émis quand | Sert à |
+|---|---|---|
+| `inventory` | l'inventaire du dossier est fait | connaître le nombre de fichiers et le volume |
+| `deleted` | les manifestes orphelins ont été marqués | compter les suppressions |
+| `progress` | au fil des fichiers, cinq fois par seconde au plus | montrer quel fichier occupe le moteur |
+| `route` | l'empreinte est comparée et le rail est choisi | distinguer préparation, découpe et envoi média |
+| `chunk` | un morceau binaire est écrit ou poussé | montrer l'avancée dans le fichier et les octets envoyés |
+| `menage` | un lot confirmé quitte l'atelier | montrer que le disque de travail se vide réellement |
+| `shard` | un dépôt de morceaux vient d'être poussé | passer en phase d'envoi |
+| `manifests` | par lots de six cents | montrer l'avancée des manifestes |
+| `verify` | la vérification HTTP est finie | signaler un morceau non vérifié |
+| `done` | fin de run | résumé : envoyés, inchangés, ignorés |
+
+Les événements fréquents ne renvoient que cet état vivant. Le catalogue de fichiers, qui peut peser plusieurs
+mégaoctets, reste en cache dans le rendu et ne retraverse Electron qu'à l'ouverture ou à la fin d'un passage.
+
+## Les suppressions, et pourquoi elles ne suppriment rien
+
+Le drapeau `--mark-deleted`, activable par dossier depuis l'interface, ajoute `deleted: true` et une date
+au manifeste dont le fichier source a disparu. Aucun morceau n'est effacé, aucune version n'est retirée. Le
+drive est une **sauvegarde**, pas un miroir : un fichier effacé par erreur en local doit rester
+récupérable, sans quoi un seul geste malheureux le perdrait des deux côtés à la fois.
+
+Les trois familles `.file.json`, `.img.json` et `.media.json` sont examinées. Un média récent porte
+`sourceRel` ; pour un ancien média au suffixe aléatoire, son dossier et son champ `name` reconstruisent le
+chemin source sans deviner. Chaque voie ne juge que sa propre tranche, et un chemin explicitement exclu reste
+entièrement ignoré : il n'est ni envoyé ni marqué supprimé.
+
+## Le rythme
+
+Deux minutes de silence après la dernière écriture avant de déclencher, réglable. Enregistrer dans Blender
+ou décompresser une archive produit des centaines d'événements en quelques secondes ; envoyer à chaud
+pousserait des états intermédiaires et des fichiers temporaires déjà disparus.
+
+Un balayage complet toutes les six heures rattrape ce que FSEvents laisse tomber pendant les veilles et les
+grosses copies. Il est bon marché : le moteur compare les empreintes sha256 et ne renvoie que ce qui a
+réellement changé.
+
+Si FSEvents perd le dossier, par exemple pendant le démontage d'un volume, le journal le dit une fois puis la
+surveillance tente de se rattacher chaque minute. Son retour est lui aussi consigné ; le balayage reste le filet.
+
+Le nombre de dossiers traités ensemble est paramétré et vaut un par défaut. À l'intérieur d'un gros dossier,
+les fichiers se répartissent en tranches disjointes : chaque voie possède son atelier et ses dépôts de morceaux,
+tandis que les rares écritures partagées, manifestes et dépôt média, passent par un verrou qui vérifie son PID.
+
+## Le jeton GitHub
+
+Il n'est jamais stocké par l'app. À chaque lancement, elle demande `gh auth token`, qui va le chercher dans
+le trousseau macOS. Une copie de plus serait un secret de plus à protéger, pour aucun gain.
+
+## Le piège du PATH, réglé une fois
+
+Une application ouverte depuis le Finder n'hérite pas du PATH du terminal : elle reçoit un PATH minimal où
+ni `node` ni `gh` ne figurent. Sans précaution, l'app marche quand on la lance depuis un terminal et échoue
+silencieusement au double-clic, ce qui est le pire des deux mondes. `electron/env.ts` interroge donc une
+fois un shell de login interactif (`zsh -ilc`) pour connaître le vrai PATH et l'emplacement réel des
+binaires, puis mémorise.
+
+## Développer et construire
+
+```bash
+cd Cloud
+npm install
+npm run dev     # rendu Vite en direct + Electron
+npm run app     # ZenRayCloud.app dans release/mac-arm64
+npm run dmg     # image disque distribuable
+```
+
+Le paquet local est construit sans identité Developer ID. Au premier lancement, macOS peut donc demander une
+confirmation, et il faut lui accorder l'accès aux dossiers surveillés.
+
+## Où atterrissent les dossiers
+
+Un dossier surveillé va dans **`pages/Cloud/<nom>`**, jamais dans `Archives`. La distinction n'est pas
+cosmétique : une archive se dépose une fois pour libérer un disque et ne bouge plus, un dossier surveillé
+est vivant et suit le Mac minute après minute. Les mélanger rendrait `Archives` illisible. La racine est
+définie une seule fois, dans `electron/main.ts` (`RACINE_CLOUD`), et la destination reste modifiable dossier
+par dossier depuis l'interface.
+
+## Décharger un fichier du Mac (clic droit)
+
+```bash
+./finder/installer-action-rapide.sh
+```
+
+Ajoute « Décharger vers ZenRayCloud » au menu contextuel du Finder. Sur un fichier ou un dossier entier, l'action
+recalcule l'empreinte sha256 de chaque fichier, va lire son manifeste sur le drive, et ne le met à la corbeille
+que si les deux empreintes coïncident. Manifeste absent, empreinte différente, réseau muet : rien n'est touché et
+la notification le dit. On ne libère de la place que sur preuve, jamais sur une croyance.
+
+Et même vérifié, le fichier va à la **corbeille**, pas au néant : vider la corbeille reste un geste de Matthieu.
+
+La vérification passe par `gh`, déjà authentifié sur la machine, et non par l'API du site : cela évite une copie
+de plus du secret à six chiffres et rend le déchargement indépendant de l'état du site.
+
+## La règle, quand un fichier bouge pendant un envoi
+
+Trois situations, trois réponses, et aucune ne laisse passer une erreur.
+
+**Un fichier est ajouté ou modifié pendant qu'un envoi tourne.** Le dossier est marqué *sali* et remis en file
+dès que le passage courant s'achève. On ne lance jamais un second moteur sur un dossier déjà en cours : deux
+écrivains sur les mêmes dépôts, c'est la seule façon sûre de corrompre une archive. Le second passage est bon
+marché, il compare les empreintes et ne renvoie que ce qui a réellement changé.
+
+**Un fichier change pendant sa propre lecture.** Taille et date de modification sont relevées AVANT le
+découpage et recomparées après. Si elles ont bougé, les octets envoyés ne correspondent plus à l'empreinte
+calculée : le manifeste n'est pas publié, le fichier est signalé, et le passage suivant le refera proprement.
+Les morceaux déjà poussés restent en ligne sans être référencés — de la place perdue, jamais une archive fausse.
+
+**Un fichier disparaît en cours de route.** Il est listé dans les ignorés, jamais en silence, et la source est
+donc à conserver.
+
+Le rattrapage complet toutes les six heures reste le filet de sécurité pour ce que FSEvents laisse tomber
+pendant les veilles, mais il n'est plus le seul recours : un ajout pendant un envoi est repris en quelques
+secondes, pas en six heures.
+
+## Fichiers
+
+| Fichier | Rôle |
+|---|---|
+| `electron/main.ts` | barre de menus, fenêtre, IPC, assemblage |
+| `electron/engine.ts` | file d'attente et pilotage du script d'archive |
+| `electron/lane-events.ts` | agrégation pure des compteurs produits par les voies |
+| `electron/watcher.ts` | `fs.watch` récursif, débounce, filtres de bruit |
+| `electron/env.ts` | résolution de `node`, `gh`, `git` et du PATH réel |
+| `electron/store.ts` | configuration persistée, écriture atomique |
+| `electron/types.ts` | contrat partagé entre le processus principal et le rendu |
+| `src/App.tsx` | l'interface, qui n'invente aucun état |
+
+## Mesurer plutôt que croire
+
+```bash
+cd Cloud && npm run bench            # banc d'essai complet, sur un dossier jetable
+cd Cloud && npm run bench -- --mo=200 --fichiers=10   # plus gros, pour mesurer un vrai débit
+```
+
+Il mesure le hachage à froid et à chaud, l'envoi, le déplacement, la restauration et l'accord entre le
+drive et le Mac. Les octets sont **aléatoires** et non des zéros : un fichier de zéros se compresse à
+presque rien et donnerait un débit de fantaisie.
+
+Dès son premier passage, le 2026-08-16, il a trouvé un défaut que l'œil n'aurait jamais vu : le cache
+d'empreintes ne servait jamais, parce que son chemin était deviné par un `replace` qui ne correspondait à
+rien sur certains noms d'index. Le passage réussissait quand même, simplement en repayant tout le hachage.
+
+```bash
+cd Cloud && npm run etat-drive -- pages/Cloud/Downloads ~/Downloads --index=<index>
+```
+
+Dit ce que le drive sait et que le Mac ignore : fichiers disparus en ligne, fichiers que l'index local
+ignore, conflits. Il **signale et n'agit jamais** : un canal descendant qui écraserait ou supprimerait en
+local ferait de la sauvegarde un miroir, c'est-à-dire une machine à perdre les données des deux côtés.

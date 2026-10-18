@@ -1,0 +1,4 @@
+const a=`<!--zrm {"name":"command row","group":"Commandes","props":[{"key":"showshuffle","type":"bool"},{"key":"showadd","type":"bool"},{"key":"showdownload","type":"bool"},{"key":"added","type":"bool"},{"key":"downloaded","type":"bool"},{"key":"accent","type":"color"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-showshuffle="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="21-command-row"><i class="sp-flag" data-showshuffle="{{showshuffle}}"></i><i class="sp-flag" data-showadd="{{showadd}}"></i><i class="sp-flag" data-showdownload="{{showdownload}}"></i><i class="sp-flag" data-added="{{added}}"></i><i class="sp-flag" data-downloaded="{{downloaded}}"></i><i class="sp-swatch" style="background:{{accent}}"></i></div>
+`;export{a as default};

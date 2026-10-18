@@ -1,0 +1,4 @@
+const a=`<!--zrm {"name":"artist row","group":"Liste","props":[{"key":"names","type":"text"},{"key":"role","type":"text"},{"key":"round","type":"bool"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-round="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="32-artist-row"><span class="sp-names">{{names}}</span><span class="sp-role">{{role}}</span><i class="sp-flag" data-round="{{round}}"></i></div>
+`;export{a as default};

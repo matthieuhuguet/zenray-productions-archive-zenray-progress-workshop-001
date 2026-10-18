@@ -1,0 +1,4 @@
+const a=`<!--zrm {"name":"gradient canvas","group":"En-tête","props":[{"key":"topcolor","type":"color"},{"key":"bottomcolor","type":"color"},{"key":"angle","type":"number"},{"key":"bloom","type":"number"},{"key":"grain","type":"number"},{"key":"height","type":"number"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-x="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="16-gradient-canvas"><i class="sp-swatch" style="background:{{topcolor}}"></i><i class="sp-swatch" style="background:{{bottomcolor}}"></i><span class="sp-num">{{angle}}</span><span class="sp-num">{{bloom}}</span><span class="sp-num">{{grain}}</span><span class="sp-num">{{height}}</span></div>
+`;export{a as default};

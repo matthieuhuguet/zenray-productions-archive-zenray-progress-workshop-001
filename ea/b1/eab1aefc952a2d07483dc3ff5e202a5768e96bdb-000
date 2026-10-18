@@ -1,0 +1,185 @@
+// CONTRAT PARTAGÉ entre le processus principal (Node) et le rendu (React). Un seul fichier décrit l'état,
+// importé des deux côtés : impossible que l'interface affiche un champ que le moteur n'envoie pas.
+
+/** Les quatre états d'un dossier surveillé, mêmes couleurs que les pastilles du Shelf. */
+export type FolderStatus = 'idle' | 'pending' | 'syncing' | 'error' | 'paused'
+
+export interface WatchedFolder {
+  id: string
+  /** Chemin absolu du dossier local surveillé. */
+  src: string
+  /** Destination dans Create, par exemple `pages/Cloud/Blender`. */
+  dest: string
+  paused: boolean
+  /** Marquer `deleted:true` les manifestes dont la source a disparu (jamais d'effacement réel). */
+  markDeleted: boolean
+  /** Sous-chemins à ne pas sauvegarder, relatifs au dossier surveillé (« DJI », « TEMP/gros »). */
+  excludes: string[]
+  lastSyncAt: number | null
+  /** Fin du dernier passage, QU'IL AIT RÉUSSI OU NON. `lastSyncAt` ne retient que les succès, si bien que la
+   *  carte annonçait « dernière activité : 17 août » au sortir d'un passage terminé le 18 au soir. */
+  lastRunAt?: number | null
+  lastError: string | null
+  lastResult: SyncResult | null
+}
+
+export interface SyncResult {
+  chunked: number
+  images: number
+  videos: number
+  media: number
+  unchanged: number
+  deleted: number
+  /** Fichiers retrouvés ailleurs par leur empreinte : déplacés, renommés ou copiés, zéro octet envoyé. */
+  reused: number
+  /** Manifestes dont le drapeau « supprimé » a été retiré parce que le fichier est revenu. */
+  restored: number
+  skipped: string[]
+  verifyKo: number
+}
+
+/** LE VOCABULAIRE DE L'ALGORITHME, mot par mot. « analyse » ne voulait rien dire et couvrait quatre étapes
+ *  différentes ; chacune a maintenant son verbe, parce qu'on ne surveille pas ce qu'on ne peut pas nommer. */
+export type Phase =
+  | 'inventaire'      // on parcourt le dossier et on liste les fichiers
+  | 'empreintes'      // on calcule les sha256 en parallèle, rien ne part encore
+  | 'préparation'     // on compare l'empreinte et choisit le rail du fichier
+  | 'découpe'         // on écrit les morceaux du fichier courant sur le disque de travail
+  | 'envoi'           // git pousse un lot de morceaux vers son dépôt
+  | 'ménage'          // les morceaux confirmés sont effacés du disque de travail
+  | 'publication'     // les manifestes partent, les fichiers apparaissent dans Create
+  | 'vérification'    // on redemande chaque morceau en HTTP pour s'assurer qu'il est servi
+  | 'terminé'
+
+export interface Progress {
+  phase: Phase
+  seen: number
+  total: number
+  /** LE NOMBRE DE FICHIERS DU DOSSIER, gelé au moment de l'inventaire et jamais réécrit ensuite.
+   *  Il existe parce que `seen` et `total` CHANGEAIENT DE SENS d'une phase à l'autre : la publication y
+   *  mettait un compte de manifestes, la vérification un compte de morceaux, si bien que le panneau
+   *  affichait « 20 fichiers » sous l'étape « liste » alors que le dossier en contient treize mille, et
+   *  surtout un rapport dont le dénominateur suivait le numérateur, donc cent pour cent en permanence. */
+  fichiersDossier: number
+  /** Manifestes publiés pendant ce passage, avec leur propre total : c'est la SEULE preuve qu'un fichier
+   *  est vraiment sauvegardé, puisque le manifeste n'est écrit qu'après le push qui porte tous ses morceaux. */
+  publies: number
+  publiesTotal: number
+  /** Morceaux contrôlés en ligne à la fin du passage. Un compte de morceaux, jamais de fichiers. */
+  verifies: number
+  rel: string
+  bytes: number
+  /** Avancée DANS le fichier courant : un fichier de six gigaoctets fige sinon l'affichage plusieurs minutes. */
+  fichierFait: number
+  fichierTotal: number
+  /** Octets déjà envoyés depuis le début du run, pour une barre qui avance vraiment. */
+  envoyes: number
+  /** Débit instantané, mesuré sur une fenêtre glissante et non depuis le début : c'est le chiffre qui dit ce
+   *  qui se passe MAINTENANT, alors qu'une moyenne depuis le départ met dix minutes à réagir. */
+  octetsParSeconde: number
+  /** Le dépôt de morceaux qui reçoit en ce moment, et où en est le fichier dans son découpage. */
+  depot: string
+  morceau: number
+  morceaux: number
+  tailleMorceau: number
+  /** Le dossier de travail où les morceaux sont fabriqués avant d'être poussés puis effacés. */
+  atelier: string
+  /** Ce qui attend réellement d'être poussé, `.git` exclu : ce chiffre-là redescend à zéro à chaque push. */
+  atelierOctets: number
+  /** Le dépôt git local, qui garde ses objets jusqu'au roulement de shard : il grossit, et c'est normal. */
+  depotOctets: number
+  /** Les morceaux présents À L'INSTANT dans l'atelier : ils s'accumulent pendant la découpe, puis disparaissent
+   *  d'un coup quand le push est confirmé. C'est le cycle qu'on veut voir plutôt que deviner. */
+  morceauxEnAttente: { nom: string; octets: number }[]
+  /** Fichiers écartés en cours de route, les cinquante derniers : ils ne sont PAS sauvegardés. */
+  sautes: string[]
+  /** Voies lancées pour ce passage, et voies encore vivantes. L'écart entre les deux est la panne que
+   *  personne ne voyait : cinq voies mortes sur six laissaient le passage tourner six fois plus lentement
+   *  sans qu'aucun écran ne le dise. */
+  voies: number
+  voiesVivantes: number
+  /** Début du passage, en millisecondes : c'est le seul dénominateur honnête du temps restant. */
+  debut: number
+}
+
+export interface FolderRuntime {
+  status: FolderStatus
+  progress: Progress | null
+  /** Reprises automatiques enchaînées depuis le dernier succès : remis à zéro dès qu'un passage aboutit. */
+  reprises?: number
+  /** Le bilan du dernier passage, gardé pour être AFFICHÉ et non noyé dans le journal. */
+  bilan?: Bilan | null
+  /** Les 400 dernières lignes du moteur, les plus récentes en dernier. */
+  log: string[]
+}
+
+/** Ce qu'un passage a réellement produit, en une poignée de nombres lisibles d'un coup d'œil. */
+export interface Bilan {
+  /** Horodatage de fin, en millisecondes. */
+  fin: number
+  /** Durée du passage, en secondes. */
+  secondes: number
+  /** Octets réellement montés pendant ce passage. */
+  octets: number
+  /** Débit moyen sur le seul temps d'ENVOI, jamais sur la durée totale : l'inventaire et les empreintes ne
+   *  transportent aucun octet, et les inclure divisait le débit mesuré par cinq, ce qui déclenchait à tort le
+   *  repli sur une seule voie. */
+  octetsParSeconde: number
+  voies: number
+  fichiers: number
+  /** Taille du dossier au dernier inventaire. Elle survit au passage pour que la carte, au repos, garde un
+   *  dénominateur qui veut dire quelque chose : sans elle, le rapport se ramenait au nombre de fiches
+   *  connues, donc à lui-même, et affichait cent pour cent quoi qu'il arrive. */
+  fichiersDossier: number
+  /** Ce que ce passage a laissé pour le suivant, sans que cela vaille échec. */
+  reportes: string[]
+  inchanges: number
+  reutilises: number
+  sautes: string[]
+  ok: boolean
+  message: string | null
+}
+
+export interface Prefs {
+  /** Racine du dépôt ZenRayProgress, d'où sortent les scripts d'archive. */
+  repoRoot: string
+  /** Silence exigé après la dernière écriture avant de déclencher, en secondes. */
+  debounceSec: number
+  /** Balayage complet de rattrapage, en heures (FSEvents peut manquer des événements). */
+  fullScanHours: number
+  launchAtLogin: boolean
+  /** Binaires résolus depuis un shell de login : une app lancée par le Finder n'hérite pas du PATH du terminal. */
+  nodePath: string
+  ghPath: string
+  gitPath: string
+  shellPath: string
+}
+
+/** Une ligne du tableau : ce que le drive sait d'un fichier, plus ce que le disque en dit. */
+export interface Fiche {
+  rel: string
+  taille: number
+  versions: number
+  premier: string | null
+  dernier: string | null
+  /** Marqué supprimé sur le drive : il y est encore, mais il a disparu du Mac. */
+  supprime: boolean
+  /** Chemin précédent quand le fichier a été déplacé ou renommé. */
+  depuis: string | null
+  /** Présent sur le disque en ce moment. */
+  local: boolean
+}
+
+export interface AppState {
+  prefs: Prefs
+  folders: WatchedFolder[]
+  runtime: Record<string, FolderRuntime>
+  /** Fils d'attente : identifiants de dossiers en attente de leur tour. */
+  queue: string[]
+  currentId: string | null
+  /** null tant que le jeton n'a pas été cherché, sinon vrai ou faux. */
+  tokenOk: boolean | null
+  tokenError: string | null
+  /** Le tableau, par dossier surveillé. Vide tant qu'aucun envoi n'a écrit d'index.  */
+  fiches: Record<string, Fiche[]>
+}

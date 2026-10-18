@@ -1,0 +1,95 @@
+{
+  "_lire_avant_de_toucher": [
+    "INTERFACE DE PARAMÈTRES DE ZenRayCloud — l'équivalent des Type Properties d'un HDA.",
+    "Toute valeur qui gouverne un comportement ou une apparence vit ICI, et nulle part ailleurs. Le code ne",
+    "contient plus de littéral : il demande un paramètre par son nom, et l'absence lève une erreur qui le nomme,",
+    "jamais un résultat partiel. Changer une valeur se fait donc à un seul endroit et se propage partout.",
+    "",
+    "TROIS ÉTAGES, jamais mélangés :",
+    "  jetons    — ce qui vaut pour toute l'app (couleurs, polices, rayons, durées)",
+    "  familles  — ce qui vaut pour toutes les instances d'un même type (un dossier surveillé, une voie d'envoi)",
+    "  et les SURCHARGES d'instance vivent dans config.json, écrit par l'app : destination, exclusions, pause.",
+    "La cascade va de l'instance vers la famille vers les jetons, comme en CSS."
+  ],
+  "jetons": {
+    "couleur": {
+      "fond": "#f7f7f5",
+      "carte": "#ffffff",
+      "trait": "#e7e6e2",
+      "texte": "#1b1b19",
+      "gris": "#8a8a85",
+      "accent": "#cc7c5e",
+      "bleu": "#2f6fed",
+      "vert": "#22c98a",
+      "rouge": "#9b5a57",
+      "orange": "#e6a03c"
+    },
+    "police": {},
+    "rayon": {},
+    "taille": {},
+    "fenetre": {
+      "largeur": 940,
+      "hauteur": 660,
+      "largeurMin": 720,
+      "hauteurMin": 480
+    },
+    "_nettoyage_2026_08_16": "Dix-sept jetons ont été retirés ce jour-là : ils étaient DÉCLARÉS et jamais lus, ni par la feuille de style ni par les styles en ligne. Un paramètre que personne ne consomme n'est pas une souplesse en réserve, c'est un mensonge — il laisse croire qu'on peut régler une couleur ou un rayon depuis ce fichier alors que la valeur vit en dur ailleurs. La règle des deux occurrences le dit : on paramètre ce qui varie DÉJÀ, jamais ce qui pourrait varier un jour. Vérification faite sur les deux sources avant suppression, jamais sur une seule."
+  },
+  "familles": {
+    "dossierSurveille": {
+      "_role": "un dossier du Mac suivi en continu ; chaque instance surcharge destination, exclusions, pause",
+      "racineDrive": "pages/Cloud",
+      "silenceAvantEnvoiSec": 120,
+      "balayageRattrapageHeures": 6,
+      "rattrapageAuDemarrageSec": 5,
+      "reconnexionSurveillanceSec": 60,
+      "marquerLesSuppressions": true,
+      "exclusions": []
+    },
+    "voieEnvoi": {
+      "_role": "un processus d'envoi et ses dépôts ; plusieurs voies traitent des tranches disjointes de fichiers",
+      "voiesPremierEssaiMin": 2,
+      "voiesPremierEssaiMax": 4,
+      "voiesPlafond": 8,
+      "diviseurCoeurs": 6,
+      "gainPourMonter": 1.15,
+      "perteRedescendre": 0.9,
+      "debitPlancherUneVoie": 2000000,
+      "mesureMinimaleSec": 20,
+      "mesureMinimaleOctets": 50000000,
+      "voiesMin": 2,
+      "_voiesMin": "plancher : un repli à une seule voie est un PIÈGE ABSORBANT, puisqu'une seule voie ne dépasse jamais le débit qui justifierait d'en remettre plusieurs (mesuré le 2026-08-16, voies.json bloqué à n=1 et 1,5 Mo/s pendant douze heures)",
+      "dossiersSimultanes": 1,
+      "_dossiersSimultanes": "combien de dossiers surveillés peuvent être envoyés EN MÊME TEMPS. À 1, la file est strictement séquentielle, ce qui reste le défaut : deux dossiers se disputeraient la même bande passante montante et le plafond global de GitHub, mesuré autour de 15 Mo/s, ne se partage pas. Le paramètre existe parce que deux petits dossiers sur des destinations différentes n'ont, eux, aucune raison d'attendre."
+    },
+    "panneauVivant": {
+      "_role": "l'affichage en direct d'un envoi",
+      "morceauxAffiches": 12,
+      "profondeurScanAtelier": 3,
+      "fenetreDebitSec": 0.4,
+      "rafraichissementMs": 100,
+      "lignesJournal": 400
+    },
+    "tableauFichiers": {
+      "_role": "la liste des fichiers connus du drive",
+      "lignesParPage": 200,
+      "lignesSuivantes": 500
+    },
+    "icones": {
+      "_role": "les icônes posées sur les fichiers du Finder",
+      "parEnvoiMax": 2000,
+      "parAppel": 200,
+      "delaiAppelSec": 30
+    },
+    "reprise": {
+      "_role": "ce que fait l'application quand le moteur meurt sans avoir fini",
+      "tentativesMax": 5,
+      "attenteSec": 20,
+      "_tentativesMax": "au-delà, ce n'est plus un incident passager : on s'arrête et on le dit, plutôt que de boucler"
+    },
+    "arret": {
+      "_role": "arrêt borné d'une voie et de tous ses processus enfants",
+      "delaiForceSec": 15
+    }
+  }
+}

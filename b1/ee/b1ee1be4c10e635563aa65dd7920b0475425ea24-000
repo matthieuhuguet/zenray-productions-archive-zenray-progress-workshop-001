@@ -1,0 +1,30 @@
+const e=`<!--zrm { "name": "Liste à catégories", "group": "Panneau", "reference": "DS2__GUID__08", "order": 12 } -->
+<style>
+/* LISTE À CATÉGORIES — la pièce de gestion la plus reprise du jeu (DS2__GUID__08, 09, 14, 16).
+   Trois faits mesurés, et chacun change la lecture :
+   1. L'en-tête n'est pas une ligne de la liste : il est en MONO, à 58 % de la taille, et sur un
+      fond plus sombre. Le confondre avec une ligne fait perdre la colonne de droite.
+   2. La ligne SÉLECTIONNÉE n'est pas surlignée : elle porte un liseré gauche et un fond très
+      légèrement plus clair. Un surlignage plein ferait tableur.
+   3. Les filets ne séparent pas toutes les lignes — seulement les groupes. */
+.zrm-cat-list{ display:flex; flex-direction:column; background:var(--zrm-veil-up);
+  padding-bottom:.4em; }
+.zrm-cat-head{ display:grid; grid-template-columns:1fr auto auto; gap:1.4em;
+  padding:.5em 1.1em; background:rgba(4,12,20,.45);
+  font-family:var(--f-mono); font-size:.56em; letter-spacing:var(--tr-label);
+  text-transform:uppercase; color:var(--zrm-ink-faint); }
+.zrm-cat-row{ position:relative; display:grid; grid-template-columns:1fr auto auto; gap:1.4em;
+  padding:.5em 1.1em; font-family:var(--f-body); font-weight:300; font-size:.86em;
+  color:var(--zrm-ink-dim); }
+.zrm-cat-row:first-of-type{ color:var(--zrm-ink); background:rgba(127,212,255,.07); }
+.zrm-cat-row:first-of-type::before{ content:''; position:absolute; left:0; top:0; bottom:0;
+  width:2px; background:var(--zrm-cyan); box-shadow:0 0 .7em rgba(127,212,255,.7); }
+.zrm-cat-row b{ font-weight:400; font-family:var(--f-mono); font-size:.9em; color:var(--zrm-ink-dim); }
+</style>
+<div class="zrm-cat-list">
+  <div class="zrm-cat-head"><span>{{title}}</span><span>Poids</span><span>État</span></div>
+  {{#beats}}
+  <div class="zrm-cat-row"><span>{{text}}</span><b>{{weight}}</b><b>{{tempo}}</b></div>
+  {{/beats}}
+</div>
+`;export{e as default};

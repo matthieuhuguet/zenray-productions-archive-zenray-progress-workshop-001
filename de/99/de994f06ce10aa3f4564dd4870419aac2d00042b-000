@@ -1,0 +1,47 @@
+const s=`<!--zrm { "name": "Invites", "group": "Contrôles", "reference": "DS2__GUID__08, __18, __19, DS1__IIG__12, __13, __18", "order": 20 } -->
+<style>
+/* SEPT DISPOSITIONS D'INVITE, et leur PLACE dit leur portée.
+   PIED         ce que font les boutons sur cet écran, aligné à droite.
+   EN LIGNE     posées DANS la ligne sélectionnée : elles ne valent que pour elle.
+   VERTICALES   empilées au bord gauche, sur un écran de carte ou de scan.
+   AU COIN      deux invites accolées à un objet visé (Equip / Drop).
+   CONTEXTUELLE ancrée près de l'objet dans la scène, glyphe devant, ombre forte.
+   ÉTAT         porte un état et non une action : le libellé dit On/Off.
+   Déplacer le même jeu d'invites du pied vers la ligne change ce qu'il promet. */
+.zrm-prompts{ display:flex; flex-direction:column; gap:calc(var(--u)*.9);
+  padding:calc(var(--u)*1.1) calc(var(--u)*1.4); font-family:var(--f-meta); font-size:.7em; }
+.zrm-pset{ display:flex; align-items:center; gap:1.2em; color:var(--zrm-ink-dim); }
+.zrm-pset[data-align="end"]{ justify-content:flex-end; }
+.zrm-p{ display:inline-flex; align-items:center; gap:.38em; }
+.zrm-p .zrm-g{ width:1.15em; height:1.15em; color:var(--zrm-ink); }
+.zrm-p b{ font-weight:400; color:var(--zrm-ink); }
+.zrm-pcol{ display:flex; flex-direction:column; gap:.5em; align-items:flex-start; }
+.zrm-pinline{ display:flex; align-items:center; gap:1em; padding:.28em .7em;
+  background:rgba(224,118,44,.85); color:#fff; }
+.zrm-pctx{ display:inline-flex; align-items:center; gap:.4em; color:var(--zrm-ink);
+  text-shadow:0 0 .5em rgba(6,20,34,.95); }
+.zrm-pctx .zrm-g{ color:var(--zrm-cyan); filter:drop-shadow(0 0 .3em rgba(127,212,255,.8)); }
+</style>
+<div class="zrm-prompts">
+  <div class="zrm-pset" data-align="end">
+    <span class="zrm-p"><svg class="zrm-g"><use href="#g-cross"/></svg>Sélectionner</span>
+    <span class="zrm-p"><svg class="zrm-g"><use href="#g-circle"/></svg>Retour</span></div>
+  <div class="zrm-pset" data-align="end">
+    <span class="zrm-p"><svg class="zrm-g"><use href="#g-square"/></svg>Select Multiple</span>
+    <span class="zrm-p"><svg class="zrm-g"><use href="#g-triangle"/></svg>Open/Close</span>
+    <span class="zrm-p"><svg class="zrm-g"><use href="#g-cross"/></svg>Select</span>
+    <span class="zrm-p"><svg class="zrm-g"><use href="#g-circle"/></svg>Back</span></div>
+  <div class="zrm-pinline">
+    <span class="zrm-p"><svg class="zrm-g"><use href="#g-cross"/></svg>Select</span>
+    <span class="zrm-p"><svg class="zrm-g"><use href="#g-square"/></svg>Select Multiple</span></div>
+  <div class="zrm-pcol">
+    <span class="zrm-p"><svg class="zrm-g"><use href="#g-scan"/></svg>Zoom In</span>
+    <span class="zrm-p"><svg class="zrm-g"><use href="#g-square"/></svg>Hide Menu</span>
+    <span class="zrm-p"><svg class="zrm-g"><use href="#g-waypoint"/></svg>Place Marker</span>
+    <span class="zrm-p"><svg class="zrm-g"><use href="#g-chevron-r"/></svg>Jump to Marker</span></div>
+  <span class="zrm-pctx"><svg class="zrm-g"><use href="#g-circle"/></svg>Activate Terminal</span>
+  <div class="zrm-pset" data-align="end">
+    <span class="zrm-p"><svg class="zrm-g"><use href="#g-cross"/></svg>Next</span>
+    <span class="zrm-p"><svg class="zrm-g"><use href="#g-play"/></svg>Auto-Skip <b>On</b></span></div>
+</div>
+`;export{s as default};

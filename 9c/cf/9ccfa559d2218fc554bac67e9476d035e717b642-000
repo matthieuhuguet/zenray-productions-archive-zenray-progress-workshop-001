@@ -1,0 +1,110 @@
+import { createDecipheriv } from 'node:crypto'
+import { sourceHashOfStreamManifest } from '../../../scripts/lib/stream-manifest.mjs'
+
+const cdnUrl = (owner, repo, commit, p) =>
+  `https://cdn.jsdelivr.net/gh/${owner}/${repo}@${commit}/${String(p).split('/').map(encodeURIComponent).join('/')}`
+
+const rawUrl = (owner, repo, commit, p) =>
+  `https://raw.githubusercontent.com/${owner}/${repo}/${commit}/${String(p).split('/').map(encodeURIComponent).join('/')}`
+
+const cheminRelatifSur = (valeur, libelle) => {
+  const p = String(valeur || '')
+  if (!p || p.startsWith('/') || p.includes('\0') || p.split('/').includes('..')) {
+    throw new Error(`${libelle} invalide`)
+  }
+  return p
+}
+
+export function restoreManifestCandidates(rel, explicit = '') {
+  const source = cheminRelatifSur(rel, 'chemin source')
+  if (explicit) return [cheminRelatifSur(explicit, 'chemin de manifeste')]
+  return [`${source}.file.json`, `${source}.img.json`, `${source}.media.json`]
+}
+
+export function parseHostedUrl(url) {
+  let m = /^https:\/\/raw\.githubusercontent\.com\/([^/]+)\/([^/]+)\/([^/]+)\/(.+)$/.exec(String(url || ''))
+  if (m) return { owner: m[1], repo: m[2], commit: m[3], path: m[4].split('/').map(decodeURIComponent).join('/') }
+  m = /^https:\/\/cdn\.jsdelivr\.net\/gh\/([^/]+)\/([^/@]+)@([^/]+)\/(.+)$/.exec(String(url || ''))
+  if (m) return { owner: m[1], repo: m[2], commit: m[3], path: m[4].split('/').map(decodeURIComponent).join('/') }
+  return null
+}
+
+export const githubRawApiUrl = ({ owner, repo, commit, path }) =>
+  `https://api.github.com/repos/${owner}/${repo}/contents/${String(path).split('/').map(encodeURIComponent).join('/')}?ref=${encodeURIComponent(commit)}`
+
+const ref = (owner, repo, commit, p, { iv = null, direct = null, isPrivate = false } = {}) => ({
+  owner, repo, commit, path: p, iv, isPrivate,
+  url: direct || (isPrivate ? rawUrl(owner, repo, commit, p) : cdnUrl(owner, repo, commit, p)),
+})
+
+export function buildStreamRestorePlan(manifest, owner = 'matthieuhuguet') {
+  if (!manifest) return null
+  if (Array.isArray(manifest.cdnChunks) && manifest.cdnChunks.length && manifest.iv) {
+    return {
+      mode: 'whole-gcm', name: manifest.name, size: manifest.clearSize ?? manifest.size,
+      sha256: sourceHashOfStreamManifest(manifest), iv: manifest.iv,
+      refs: manifest.cdnChunks.map((p) => ref(owner, manifest.cdnRepo, manifest.cdnCommit, p)),
+    }
+  }
+  if (manifest.cdnPath && manifest.iv) {
+    return {
+      mode: 'whole-gcm', name: manifest.name, size: manifest.clearSize ?? manifest.size,
+      sha256: sourceHashOfStreamManifest(manifest), iv: manifest.iv,
+      refs: [ref(owner, manifest.cdnRepo, manifest.cdnCommit, manifest.cdnPath)],
+    }
+  }
+  if (manifest.type === 'video-raw' && Array.isArray(manifest.parts) && manifest.parts.length) {
+    return {
+      mode: 'part-gcm', name: manifest.name, size: manifest.size, sha256: sourceHashOfStreamManifest(manifest),
+      refs: manifest.parts.map((part) => {
+        const hosted = parseHostedUrl(part.url)
+        if (!hosted) throw new Error('URL de part vidéo invalide')
+        return ref(hosted.owner, hosted.repo, hosted.commit, hosted.path,
+          { iv: part.iv, direct: part.url, isPrivate: manifest.private === true })
+      }),
+    }
+  }
+  if (manifest.type === 'chunked-media' && Array.isArray(manifest.parts) && manifest.parts.length) {
+    const refs = manifest.parts.map((part, i) => {
+      if (part && typeof part === 'object' && part.url) {
+        const hosted = parseHostedUrl(part.url)
+        if (!hosted) throw new Error('URL de part média invalide')
+        return ref(hosted.owner, hosted.repo, hosted.commit, hosted.path,
+          { iv: part.iv, direct: part.url, isPrivate: manifest.private === true })
+      }
+      const nom = String(part).endsWith('.bin') ? String(part) : `${part}.bin`
+      const isPrivate = manifest.private === true || !String(manifest.cdnRepo || '').startsWith('zenrayshards-img-')
+      return ref(owner, manifest.cdnRepo, manifest.cdnCommit, `${manifest.dir}/${nom}`,
+        { iv: manifest.ivs?.[i], isPrivate })
+    })
+    return { mode: 'part-gcm', name: manifest.name, size: manifest.size, sha256: sourceHashOfStreamManifest(manifest), refs }
+  }
+  return null
+}
+
+export function decryptGcmPart(cipher, ivBase64, key) {
+  if (!ivBase64 || cipher.length < 16) throw new Error('partie chiffrée incomplète')
+  const decipher = createDecipheriv('aes-256-gcm', key, Buffer.from(ivBase64, 'base64'))
+  decipher.setAuthTag(cipher.subarray(cipher.length - 16))
+  return Buffer.concat([decipher.update(cipher.subarray(0, -16)), decipher.final()])
+}
+
+export class WholeGcmDecoder {
+  constructor(key, ivBase64) {
+    this.decipher = createDecipheriv('aes-256-gcm', key, Buffer.from(ivBase64, 'base64'))
+    this.tail = Buffer.alloc(0)
+  }
+
+  push(chunk) {
+    const joined = Buffer.concat([this.tail, chunk])
+    if (joined.length <= 16) { this.tail = joined; return Buffer.alloc(0) }
+    this.tail = joined.subarray(joined.length - 16)
+    return this.decipher.update(joined.subarray(0, joined.length - 16))
+  }
+
+  finish() {
+    if (this.tail.length !== 16) throw new Error('tag GCM final absent')
+    this.decipher.setAuthTag(this.tail)
+    return this.decipher.final()
+  }
+}

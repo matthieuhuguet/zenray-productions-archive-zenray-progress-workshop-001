@@ -1,0 +1,20 @@
+const e=`<!--zrm { "name": "Carte d'objectif", "group": "Scène", "reference": "DS2__GUID__21", "order": 7 } -->
+<style>
+/* CARTE D'OBJECTIF — relevée sur DS2__GUID__21, en haut à gauche, COLLÉE au bord de l'écran :
+   son rectangle commence à x=0. C'est ce contact avec le bord qui la distingue d'une carte
+   d'article — elle appartient à l'écran, pas à la page.
+   Le liseré gauche est la seule couleur saturée de la pièce : il donne l'état, le reste informe. */
+.zrm-objective{ position:relative; display:flex; flex-direction:column; gap:.25em;
+  padding:.65em 1.1em .7em 1.3em; background:var(--zrm-veil-up); max-width:34ch; }
+.zrm-objective::before{ content:''; position:absolute; left:0; top:.35em; bottom:.35em; width:2px;
+  background:var(--zrm-cyan); box-shadow:0 0 .8em rgba(127,212,255,.8); }
+.zrm-objective .zrm-obj-kind{ font-family:var(--f-mono); font-size:.58em;
+  letter-spacing:var(--tr-label); text-transform:uppercase; color:var(--zrm-cyan); }
+.zrm-objective .zrm-obj-title{ font-family:var(--f-display); font-weight:300; font-size:.98em;
+  letter-spacing:.03em; color:var(--zrm-ink); }
+</style>
+<div class="zrm-objective">
+  <span class="zrm-obj-kind">{{intent}}</span>
+  <span class="zrm-obj-title">{{title}}</span>
+</div>
+`;export{e as default};

@@ -1,0 +1,117 @@
+import type { SyncResult } from './types'
+
+type LaneEvent = Record<string, any>
+
+export interface LaneAggregation {
+  inventories: LaneEvent[]
+  progressions: LaneEvent[]
+  routes: LaneEvent[]
+  chunks: LaneEvent[]
+  transfers: LaneEvent[]
+  manifests: LaneEvent[]
+  verifications: LaneEvent[]
+  suppressions: number[]
+  resultats: Array<SyncResult | undefined>
+}
+
+export function creerAgregation(voies: number): LaneAggregation {
+  const cases = <T>() => new Array<T>(voies)
+  return {
+    inventories: cases(), progressions: cases(), routes: cases(), chunks: cases(), transfers: cases(), manifests: cases(),
+    verifications: cases(), suppressions: new Array<number>(voies).fill(0), resultats: cases(),
+  }
+}
+
+/** Un code de sortie nul ne suffit pas à prouver une sauvegarde : chaque voie doit avoir rendu son bilan
+ *  `done`. Sans cette preuve, l'application refuse d'annoncer un succès incomplet. */
+export function toutesLesVoiesTerminees(etat: LaneAggregation): boolean {
+  return etat.resultats.filter(Boolean).length === etat.resultats.length
+}
+
+/** Un processus peut sortir proprement tout en rendant un passage incomplet. Cette décision vit ici afin que
+ *  le bilan, la reprise automatique et les icônes Finder emploient exactement la même définition du succès. */
+export function erreurResultatSync(resultat: SyncResult | null): string | null {
+  if (!resultat) return 'bilan final absent'
+  // UN FICHIER ÉCARTÉ N'EST PLUS UNE ERREUR (2026-08-18). Il l'était, et cela coûtait la sauvegarde entière :
+  // un téléchargement en cours écrivait dans `The Sinking City 2/fg-01.bin` pendant que le moteur le lisait,
+  // le moteur refusait très justement de publier un fichier dont le contenu bougeait, puis ce refus prudent
+  // faisait basculer en échec un passage qui venait de sauvegarder treize mille neuf cent quatre-vingt-neuf
+  // autres fichiers. L'application rejouait alors cinq passages complets, que le téléchargement toujours en
+  // cours condamnait d'avance, avant de s'arrêter.
+  //
+  // Rien n'est pourtant perdu : la source reste sur le Mac, et le passage suivant reprend le fichier une fois
+  // qu'il aura cessé de bouger. C'est un REPORT, et un report se signale sans arrêter la machine.
+  if (resultat.verifyKo) return `${resultat.verifyKo} morceau(x) non vérifié(s) — source à conserver`
+  return null
+}
+
+/** Ce que le passage a laissé pour la fois d'après. Se dit, ne bloque pas, et ne déclenche aucune reprise. */
+export function reportResultatSync(resultat: SyncResult | null): string | null {
+  if (!resultat?.skipped.length) return null
+  return `${resultat.skipped.length} fichier(s) reporté(s) au prochain passage (en cours d'écriture ou illisibles)`
+}
+
+const somme = (xs: LaneEvent[], cle: string): number => xs.reduce((n, x) => n + (Number(x?.[cle]) || 0), 0)
+
+/** Réunit les compteurs que chaque processus ne connaît que pour sa propre tranche. L'événement courant garde
+ *  le nom du fichier et l'atelier de la voie qui parle ; seules les grandeurs additives sont additionnées. */
+export function agregerEvenement(etat: LaneAggregation, voie: number, original: LaneEvent): LaneEvent {
+  const ev = { ...original }
+  switch (ev.ev) {
+    case 'inventory':
+      etat.inventories[voie] = { ...original }
+      ev.files = somme(etat.inventories, 'files')
+      ev.bytes = somme(etat.inventories, 'bytes')
+      break
+    case 'progress':
+      etat.progressions[voie] = { ...original }
+      ev.seen = somme(etat.progressions, 'seen')
+      ev.total = somme(etat.progressions, 'total')
+      if (typeof original.lus === 'number') ev.lus = somme(etat.progressions, 'lus')
+      break
+    case 'route':
+      etat.routes[voie] = { ...original }
+      ev.seen = somme(etat.routes, 'seen')
+      ev.files = somme(etat.inventories, 'files') || somme(etat.routes, 'files')
+      break
+    case 'chunk':
+      etat.chunks[voie] = { ...original }
+      ev.seen = somme(etat.chunks, 'seen')
+      ev.files = somme(etat.inventories, 'files') || somme(etat.chunks, 'files')
+      ev.envoyes = somme(etat.chunks, 'envoyes')
+      break
+    case 'transfer':
+      etat.transfers[voie] = { ...original }
+      ev.envoyes = somme(etat.transfers, 'envoyes')
+      break
+    case 'deleted':
+      etat.suppressions[voie] = Number(ev.count) || 0
+      ev.count = etat.suppressions.reduce((n, x) => n + x, 0)
+      break
+    case 'manifests':
+      etat.manifests[voie] = { ...original }
+      ev.done = somme(etat.manifests, 'done')
+      ev.total = somme(etat.manifests, 'total')
+      break
+    case 'verify':
+      etat.verifications[voie] = { ...original }
+      ev.total = somme(etat.verifications, 'total')
+      ev.ko = somme(etat.verifications, 'ko')
+      break
+    case 'done': {
+      etat.resultats[voie] = {
+        chunked: Number(ev.chunked) || 0, images: Number(ev.images) || 0,
+        videos: Number(ev.videos) || 0, media: Number(ev.media) || 0,
+        unchanged: Number(ev.unchanged) || 0, deleted: 0, reused: Number(ev.reused) || 0,
+        restored: Number(ev.restored) || 0, skipped: ev.skipped || [], verifyKo: Number(ev.verifyKo) || 0,
+      }
+      const rs = etat.resultats.filter((x): x is SyncResult => !!x)
+      for (const cle of ['chunked', 'images', 'videos', 'media', 'unchanged', 'deleted', 'reused', 'restored', 'verifyKo'] as const) {
+        ev[cle] = rs.reduce((n, r) => n + r[cle], 0)
+      }
+      ev.skipped = rs.flatMap((r) => r.skipped)
+      break
+    }
+  }
+  return ev
+}

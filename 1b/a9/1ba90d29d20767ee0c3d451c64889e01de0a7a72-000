@@ -1,0 +1,4 @@
+const e=`<!--zrm {"name":"search field","group":"Chrome","props":[{"key":"query","type":"text"},{"key":"placeholder","type":"text"},{"key":"focused","type":"bool"},{"key":"width","type":"number"}]}-->
+<style>.sp-part{display:flex;align-items:center;gap:.6em;min-width:0}.sp-swatch{width:1cap;height:1cap;border-radius:99px;flex:0 0 auto}.sp-flag[data-focused="false"]{display:none}.sp-num{font-variant-numeric:tabular-nums;opacity:.7}</style>
+<div class="sp-part" data-part="02-search-field"><span class="sp-query">{{query}}</span><span class="sp-placeholder">{{placeholder}}</span><i class="sp-flag" data-focused="{{focused}}"></i><span class="sp-num">{{width}}</span></div>
+`;export{e as default};

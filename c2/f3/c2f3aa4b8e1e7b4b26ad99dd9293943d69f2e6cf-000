@@ -1,0 +1,29 @@
+import { execFile } from 'node:child_process'
+
+interface CibleIcone { rel: string; abs: string }
+type Lancer = (outil: string, args: string[], timeoutMs: number) => Promise<void>
+
+const lancerDefaut: Lancer = (outil, args, timeoutMs) => new Promise((resolve, reject) => {
+  execFile(outil, args, { timeout: timeoutMs }, (error) => error ? reject(error) : resolve())
+})
+
+/** Pose les icônes par lots et rend seulement les chemins réellement confirmés par l'outil macOS. */
+export async function poserIcones(
+  outil: string,
+  cibles: CibleIcone[],
+  parAppel: number,
+  timeoutMs: number,
+  lancer: Lancer = lancerDefaut,
+): Promise<{ reussis: string[]; echecs: string[] }> {
+  if (!Number.isInteger(parAppel) || parAppel < 1) throw new Error('taille de lot icône invalide')
+  const lots: CibleIcone[][] = []
+  for (let i = 0; i < cibles.length; i += parAppel) lots.push(cibles.slice(i, i + parAppel))
+  const resultats = await Promise.all(lots.map(async (lot) => {
+    try { await lancer(outil, ['poser', ...lot.map((x) => x.abs)], timeoutMs); return { lot, ok: true } }
+    catch { return { lot, ok: false } }
+  }))
+  return {
+    reussis: resultats.filter((x) => x.ok).flatMap((x) => x.lot.map((c) => c.rel)),
+    echecs: resultats.filter((x) => !x.ok).flatMap((x) => x.lot.map((c) => c.rel)),
+  }
+}

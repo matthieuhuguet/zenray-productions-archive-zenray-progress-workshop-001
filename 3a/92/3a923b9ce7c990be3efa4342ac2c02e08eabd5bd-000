@@ -1,0 +1,60 @@
+const e=`<!--zrm { "name": "Cartes et cartouches", "group": "Panneau", "reference": "DS2__GUID__13, __14, __20, __22, DS1__IIG__02, __19, __24", "order": 21 } -->
+<style>
+/* HUIT CARTES. Ce qui les sépare n'est pas leur contenu mais leur ANCRAGE :
+   CONTACT une personne · PROFIL soi-même (la note remplace le rôle et l'écrase en taille) ·
+   PROPRIÉTAIRE une structure (étoiles + puce de niveau) · DÉTAIL OBJET une chose (barres de
+   dégât) · TUTORIEL une leçon, ancrée en bas à gauche · DESCRIPTION un objet survolé, bandeau
+   bas · ARME un équipement (carrousel + munitions) · DESTINATAIRE la fin d'une livraison. */
+.zrm-cards{ display:flex; flex-wrap:wrap; gap:calc(var(--u)*1.2);
+  padding:calc(var(--u)*1.1) calc(var(--u)*1.4); font-family:var(--f-meta); font-size:.74em; }
+.zrm-card{ position:relative; width:15em; color:var(--zrm-ink-dim);
+  border-left:2px solid rgba(140,195,240,.6);
+  background:linear-gradient(90deg, rgba(20,50,78,.6), rgba(20,50,78,.1)); padding:.6em .8em; }
+.zrm-card h4{ margin:0 0 .25em; font-weight:400; font-size:1.05em; color:var(--zrm-ink); }
+.zrm-card small{ display:block; font-size:.85em; color:var(--zrm-ink-faint); }
+.zrm-card-row{ display:flex; align-items:flex-start; gap:.6em; }
+.zrm-card-thumb{ flex:0 0 3.4em; height:3.4em; background:rgba(43,105,156,.3);
+  display:grid; place-items:center; color:var(--zrm-cyan); }
+.zrm-card-thumb .zrm-g{ width:1.5em; height:1.5em; }
+.zrm-stars{ display:inline-flex; gap:.1em; color:#e8b93f; }
+.zrm-stars .zrm-g{ width:.85em; height:.85em; fill:currentColor; stroke:none; }
+.zrm-stars .zrm-g[data-off]{ fill:none; stroke:currentColor; stroke-width:1.5; opacity:.5; }
+.zrm-chip{ display:inline-block; padding:.05em .45em; background:rgba(43,105,156,.9); color:#fff; font-size:.82em; }
+.zrm-grade{ font-family:var(--f-mono); font-size:2.3em; font-weight:300; color:var(--zrm-ink);
+  letter-spacing:.05em; line-height:1; }
+.zrm-classified{ display:inline-flex; align-items:center; gap:.3em; color:var(--zrm-amber); }
+.zrm-classified .zrm-g{ width:.95em; height:.95em; }
+.zrm-dmg{ display:flex; align-items:center; gap:.4em; margin-top:.25em; font-size:.9em; }
+.zrm-dmg u{ flex:1 1 auto; height:3px; background:rgba(255,255,255,.14); text-decoration:none; }
+.zrm-dmg u i{ display:block; height:100%; background:var(--zrm-red); }
+.zrm-ammo{ font-family:var(--f-mono); color:var(--zrm-ink); letter-spacing:.08em; }
+.zrm-carousel{ display:flex; align-items:center; gap:.6em; }
+.zrm-carousel .zrm-g{ width:1.2em; height:1.2em; color:var(--zrm-ink-dim); }
+</style>
+<div class="zrm-cards">
+  <div class="zrm-card"><div class="zrm-card-row"><div class="zrm-card-thumb"><svg class="zrm-g"><use href="#g-signal"/></svg></div>
+    <div><h4>Nick Easton</h4><small>Head of Distribution</small><small>Capital Knot City</small>
+      <span class="zrm-stars"><svg class="zrm-g"><use href="#g-star"/></svg><svg class="zrm-g"><use href="#g-star"/></svg><svg class="zrm-g" data-off><use href="#g-star"/></svg></span></div></div></div>
+  <div class="zrm-card"><div class="zrm-card-row"><div class="zrm-card-thumb"><svg class="zrm-g"><use href="#g-cargo"/></svg></div>
+    <div><small>Porter Grade</small><span class="zrm-grade">036</span><small>Skilled Handler</small></div></div></div>
+  <div class="zrm-card"><h4>Norberto Puente</h4><small>Ciudad Nudo del Norte (C1)</small>
+    <p style="margin:.4em 0 0"><span class="zrm-chip">Lv1</span> Postbox</p>
+    <div class="zrm-dmg"><span>Durabilité</span><u><i style="width:98%;background:var(--zrm-cyan)"></i></u><b>98%</b></div></div>
+  <div class="zrm-card"><h4>Chiral Network Gateway</h4><small>Ciudad Nudo del Norte (C1)</small>
+    <p style="margin:.4em 0 0;line-height:1.5">Étend la couverture du réseau chiral au-delà des frontières de l'UCA.</p>
+    <div class="zrm-dmg"><span>Contenant</span><u><i style="width:6%"></i></u><b>6%</b></div>
+    <div class="zrm-dmg"><span>Contenu</span><u><i style="width:0"></i></u><b>0%</b></div></div>
+  <div class="zrm-card"><h4>Making Use of Tall Grass</h4>
+    <p style="margin:.2em 0"><span style="display:inline-flex;gap:.3em;align-items:center"><svg class="zrm-g" style="width:1em;height:1em;color:var(--zrm-cyan)"><use href="#g-circle"/></svg>Crouch</span></p>
+    <small>S'accroupir dans les hautes herbes pour se cacher. Si vous êtes repéré, revenez vous y allonger.</small></div>
+  <div class="zrm-card"><h4>« Ludens Mask » Sunglasses</h4>
+    <small>Lunettes inspirées de Ludens. Verres traités contre la lumière directe et réfléchie.</small></div>
+  <div class="zrm-card"><div class="zrm-carousel"><svg class="zrm-g"><use href="#g-chevron-l"/></svg>
+    <div style="flex:1 1 auto;text-align:center"><small>Main Weapons</small><h4>Assault Rifle [MP] Lv1</h4>
+      <span class="zrm-ammo">01 / 30 / 120</span></div>
+    <svg class="zrm-g"><use href="#g-chevron-r"/></svg></div></div>
+  <div class="zrm-card"><h4>Bridget Strand</h4>
+    <p style="margin:.3em 0"><span class="zrm-classified"><svg class="zrm-g"><use href="#g-lock"/></svg>[TOP SECRET]</span></p>
+    <small>Capital Knot City · Die-Hardman</small></div>
+</div>
+`;export{e as default};

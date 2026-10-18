@@ -1,0 +1,23 @@
+const e=`<!--zrm { "name": "En-tête de terminal", "group": "Écrans", "reference": "DS2__GUID__07", "order": 23 } -->
+<style>
+/* EN-TÊTE DE TERMINAL — relevé sur DS2__GUID__07 et DS2__GUID__18. Trois niveaux empilés en haut
+   à gauche, du plus petit au plus grand puis à nouveau plus petit : lieu, titre, action possible.
+   Cette bosse typographique est la signature de l'écran de carte ; une hiérarchie décroissante
+   régulière donnerait un en-tête de document. */
+.zrm-terminal{ display:flex; flex-direction:column; gap:.22em;
+  padding:calc(var(--u)*.9) calc(var(--u)*1.4); }
+.zrm-terminal .zrm-t-place{ font-family:var(--f-mono); font-size:.56em;
+  letter-spacing:var(--tr-label); text-transform:uppercase; color:var(--zrm-ink-faint); }
+.zrm-terminal h2{ margin:0; font-family:'Barlow Semi Condensed', var(--f-display);
+  font-weight:300; font-size:1.9em; letter-spacing:.02em; text-transform:uppercase;
+  color:var(--zrm-ink); text-shadow:0 0 .5em rgba(200,232,255,.5), 0 0 1.4em rgba(43,105,156,.45); }
+.zrm-terminal .zrm-t-action{ display:flex; align-items:center; gap:.45em;
+  font-family:var(--f-meta); font-weight:300; font-size:.68em; color:var(--zrm-cyan); }
+.zrm-terminal .zrm-g{ width:1em; height:1em; }
+</style>
+<header class="zrm-terminal">
+  <span class="zrm-t-place">{{audience}}</span>
+  <h2>{{title}}</h2>
+  <span class="zrm-t-action"><svg class="zrm-g"><use href="#g-square"/></svg>{{message}}</span>
+</header>
+`;export{e as default};

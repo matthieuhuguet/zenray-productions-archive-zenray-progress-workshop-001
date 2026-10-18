@@ -1,0 +1,12 @@
+{
+  "at": "2026-10-18T22:55:13.250Z",
+  "bundle": "assets/index-DiAVKXAv.js",
+  "planChunk": "PlanBoard-C3nZ-ltk.js",
+  "policyChunk": "index-DiAVKXAv.js",
+  "checks": [
+    "Attachment progress",
+    "Attachment in progress",
+    "Creating download link",
+    "Saving attachment in Plan"
+  ]
+}

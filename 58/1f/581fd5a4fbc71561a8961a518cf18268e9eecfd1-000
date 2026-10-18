@@ -1,0 +1,15 @@
+
+ RUN  v3.2.6 /Users/zenray/Create/Build/Productions/GithubProductions/ZenRayProgress
+
+(node:97792) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ src/zenraymedia/MediaApp.test.jsx (156 tests | 153 skipped) 3468ms
+   ✓ Famille Photoshop 5 — groupes > ⌘G groupe la sélection ; le dossier masque réellement ses deux membres à la fois  907ms
+   ✓ Famille Photoshop 5 — groupes > dissoudre un groupe rend ses calques directement sélectionnables comme avant  1097ms
+   ✓ InDesign D1 — pages parentes > cliquer l’objet hérité ouvre son panneau dédié ; changer sa position le remplace LOCALEMENT  1462ms
+
+ Test Files  1 passed (1)
+      Tests  3 passed | 153 skipped (156)
+   Start at  00:53:56
+   Duration  4.45s (transform 380ms, setup 48ms, collect 536ms, tests 3.47s, environment 173ms, prepare 44ms)
+

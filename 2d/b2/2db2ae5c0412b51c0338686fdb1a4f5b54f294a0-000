@@ -1,0 +1,13 @@
+// Verify the exact download handler in workerd, with no real secrets. (19 October 2026, 00:39 Paris)
+import {createCipheriv} from 'node:crypto'
+import {attachmentDownload} from '/Users/zenray/Create/Build/Productions/GithubProductions/ZenRayProgress/server/attachment-download.js'
+export default {async fetch(request){
+ const key=Buffer.alloc(32,1),iv=Buffer.alloc(12,2),plain=Buffer.alloc(7299017,7)
+ const cipher=createCipheriv('aes-256-gcm',key,iv)
+ const encrypted=Buffer.concat([cipher.update(plain),cipher.final(),cipher.getAuthTag()])
+ const manifest={type:'chunked-media',vis:'public',alg:'AES-GCM',size:plain.length,name:'probe.bin',parts:['000'],dir:'media/test',cdnRepo:'zenray-doc-public-01',cdnCommit:'a'.repeat(40),ivs:[iv.toString('base64')]}
+ return attachmentDownload(request,{
+ resolveShare:async()=>({path:'pages/test.media.json'}),readManifest:async()=>JSON.stringify(manifest),mediaKey:()=>key.toString('base64'),
+ fetchImpl:async(url,options)=>options?.headers?.Range?new Response(encrypted.subarray(-16),{status:206}):new Response(new ReadableStream({start(controller){for(let index=0;index<encrypted.length;index+=65536)controller.enqueue(new Uint8Array(encrypted.subarray(index,index+65536)));controller.close()}}))
+ })
+}}

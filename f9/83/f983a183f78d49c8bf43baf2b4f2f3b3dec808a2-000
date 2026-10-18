@@ -1,0 +1,13 @@
+{
+  "taskId": "attachment-2026-10-19-a1a741bccdcd",
+  "date": "2026-10-19",
+  "sha256": "a1a741bccdcd5e4dbc44e85ab97fc2042ec130d6520ac9fbac640e5f7bdb7473",
+  "attachment": {
+    "name": "manifesto-audio-book-1.m4a",
+    "path": "pages/PlanAttachments/attachment-2026-10-19-a1a741bccdcd/manifesto-audio-book-1.bacgow.media.json",
+    "size": 7299017,
+    "mime": "audio/mp4",
+    "token": "zrs1.WahThYH1eLbMvDOvJQQapdmVnRDOKacJ.DZ1zJe_rOcp3trzArLDYEb95wB8mOLwB-kvfpmlwkIM",
+    "url": "https://zenray-progress.pages.dev/api/attachment-download?share=zrs1.WahThYH1eLbMvDOvJQQapdmVnRDOKacJ.DZ1zJe_rOcp3trzArLDYEb95wB8mOLwB-kvfpmlwkIM"
+  }
+}

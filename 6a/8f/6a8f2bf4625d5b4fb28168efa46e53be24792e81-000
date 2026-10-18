@@ -1,0 +1,40 @@
+
+ RUN  v3.2.6 /Users/zenray/Create/Build/Productions/GithubProductions/ZenRayProgress
+
+(node:58992) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+stderr | src/components/FreelanceView.test.jsx > puts the feedback mail one click away on the refused card, without opening the studio
+Updating a style property during rerender (fontWeight) when a conflicting property is set (font) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.
+Updating a style property during rerender (fontWeight) when a conflicting property is set (font) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.
+
+stderr | src/components/FreelanceView.test.jsx > filters by relevance and shows the closed vacancies on request
+Updating a style property during rerender (fontWeight) when a conflicting property is set (font) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.
+Updating a style property during rerender (fontWeight) when a conflicting property is set (font) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.
+Updating a style property during rerender (fontWeight) when a conflicting property is set (font) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.
+Updating a style property during rerender (fontWeight) when a conflicting property is set (font) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.
+
+stderr | src/components/FreelanceView.test.jsx > opens an application with its letter and logs the exact text as sent only on request
+Updating a style property during rerender (fontWeight) when a conflicting property is set (font) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.
+Updating a style property during rerender (fontWeight) when a conflicting property is set (font) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.
+
+stderr | src/components/FreelanceView.test.jsx > lanes never mix: the other-industries lane hides the games cards and says so
+Updating a style property during rerender (fontWeight) when a conflicting property is set (font) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.
+Updating a style property during rerender (fontWeight) when a conflicting property is set (font) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.
+
+stderr | src/components/FreelanceView.test.jsx > lanes never mix: the other-industries lane hides the games cards and says so
+Updating a style property during rerender (fontWeight) when a conflicting property is set (font) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.
+Updating a style property during rerender (fontWeight) when a conflicting property is set (font) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.
+
+stderr | src/components/FreelanceView.test.jsx > filters offers by active countries with priority order and excludes unrepresented countries
+Updating a style property during rerender (fontWeight) when a conflicting property is set (font) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.
+Updating a style property during rerender (fontWeight) when a conflicting property is set (font) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.
+Updating a style property during rerender (fontWeight) when a conflicting property is set (font) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values.
+
+ ✓ src/components/FreelanceView.test.jsx (13 tests) 5889ms
+   ✓ draws 72 cards of a long group and reveals the rest by pages  4863ms
+
+ Test Files  1 passed (1)
+      Tests  13 passed (13)
+   Start at  00:43:51
+   Duration  6.74s (transform 194ms, setup 52ms, collect 294ms, tests 5.89s, environment 271ms, prepare 43ms)
+

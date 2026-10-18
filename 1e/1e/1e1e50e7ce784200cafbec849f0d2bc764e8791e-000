@@ -1,0 +1,48 @@
+// Run the application's real uploader against production. (19 October 2026, 00:34 Paris)
+import { readFile, writeFile } from 'node:fs/promises'
+import { createHash } from 'node:crypto'
+import path from 'node:path'
+import { captureAttachment } from '/Users/zenray/Create/Build/Productions/GithubProductions/ZenRayProgress/src/capture/universalCapture.js'
+import { issueShareToken } from '/Users/zenray/Create/Build/Productions/GithubProductions/ZenRayProgress/src/lib/shareLinks.js'
+import { attachmentUrl, PLAN_ATTACHMENTS } from '/Users/zenray/Create/Build/Productions/GithubProductions/ZenRayProgress/src/create/planAttachments.js'
+import { saveJsonWithRetry } from '/Users/zenray/Create/Build/Productions/GithubProductions/ZenRayProgress/src/lib/saveJson.js'
+import { DEFAULT_PARAMS } from '/Users/zenray/Create/Build/Productions/GithubProductions/ZenRayProgress/workers/plan-gcal/src/params.js'
+
+const params = {
+  site: process.env.ZR_SITE_URL || DEFAULT_PARAMS.runtime.siteUrl,
+  plan: process.env.ZR_PLAN_PATH || DEFAULT_PARAMS.runtime.planPath,
+  file: process.argv[2], date: process.argv[3] || '2026-10-19',
+  receipt: '/Users/zenray/.claude/tmp/tmp-zenray-progress/PlanAttachmentReceipt.json',
+}
+if (!params.file || !process.env.ZR_API_SECRET) throw new Error('File argument and ZR_API_SECRET are required')
+const nativeFetch = globalThis.fetch
+// Application fetches are relative and receive the same auth header as a logged-in client. (19 October 2026, 00:34 Paris)
+globalThis.fetch = async (input, options = {}) => {
+  const url = new URL(input, params.site)
+  const headers = new Headers(options.headers)
+  if (url.origin === params.site) headers.set('x-zr-auth', process.env.ZR_API_SECRET)
+  const response = await nativeFetch(url, { ...options, headers })
+  if (!response.ok && url.origin === params.site) throw new Error(`${url.pathname}: HTTP ${response.status}`)
+  return response
+}
+const bytes = await readFile(params.file)
+const hash = createHash('sha256').update(bytes).digest('hex')
+const id = 'attachment-' + params.date + '-' + hash.slice(0, 12)
+let receipt
+try { receipt = JSON.parse(await readFile(params.receipt, 'utf8')) } catch {}
+if (receipt?.sha256 !== hash) {
+  const file = new File([bytes], path.basename(params.file), { type: 'audio/mp4' })
+  const result = await captureAttachment(file, { folder: `${PLAN_ATTACHMENTS.folder}/${id}`, onProgress: (ratio) => console.log('upload', Math.round(ratio * 100) + '%') })
+  const issued = await issueShareToken('file', result.nodePath)
+  receipt = { taskId: id, date: params.date, sha256: hash, attachment: { name: file.name, path: result.nodePath, size: file.size, mime: file.type, token: issued.token, url: attachmentUrl(issued.token, params.site) } }
+  await writeFile(params.receipt, JSON.stringify(receipt, null, 2))
+}
+const result = await saveJsonWithRetry(params.plan, (board) => {
+  if (!Array.isArray(board?.tasks) || !board.tasks.length) throw new Error('Refusing an empty or missing Plan')
+  if (board.tasks.some((task) => task.id === id)) return board
+  return { ...board, tasks: [...board.tasks, { id, title: path.basename(params.file, path.extname(params.file)), date: params.date,
+    startTime: null, durationMin: null, status: 'planned', note: 'Manifesto audio book 1', images: [], attachments: [receipt.attachment],
+    overdueSince: null, doneAt: null, createdAt: new Date().toISOString() }] }
+})
+if (!result.ok) throw new Error('Plan save failed: ' + result.error)
+console.log(JSON.stringify({ taskId: id, taskCount: result.data.tasks.length, sha256: hash, attachment: receipt.attachment.name, path: receipt.attachment.path }))

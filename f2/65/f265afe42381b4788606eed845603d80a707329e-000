@@ -1,0 +1,31 @@
+// Verify production bytes, Plan persistence and the real Calendar event. (19 October 2026, 00:40 Paris)
+import { readFile, writeFile } from 'node:fs/promises'
+import { createHash } from 'node:crypto'
+import { execFileSync } from 'node:child_process'
+import { accessToken } from '/Users/zenray/Create/Build/Productions/GithubProductions/ZenRayProgress/workers/plan-gcal/src/google.js'
+import { DEFAULT_PARAMS } from '/Users/zenray/Create/Build/Productions/GithubProductions/ZenRayProgress/workers/plan-gcal/src/params.js'
+const root = '/Users/zenray/.claude/tmp/tmp-zenray-progress'
+const receipt = JSON.parse(await readFile(root + '/PlanAttachmentReceipt.json', 'utf8'))
+const { siteUrl, planPath } = DEFAULT_PARAMS.runtime
+const planResponse = await fetch(`${siteUrl}/api/page?action=read&path=${encodeURIComponent(planPath)}`, { headers: { 'x-zr-auth': process.env.ZR_API_SECRET } })
+if (!planResponse.ok) throw new Error('Plan read: ' + planResponse.status)
+const plan = JSON.parse((await planResponse.json()).markdown)
+const task = plan.tasks.find((task) => task.id === receipt.taskId)
+if (!task?.gcal?.id || task.date !== receipt.date || task.attachments?.[0]?.url !== receipt.attachment.url) throw new Error('Plan attachment or Calendar mapping is missing')
+const k = (service) => execFileSync('security', ['find-generic-password', '-a', 'zenray', '-s', service, '-w'], { encoding: 'utf8' }).trim()
+const token = await accessToken({ GOOGLE_CLIENT_ID: k('zenray-gcal-client-id'), GOOGLE_CLIENT_SECRET: k('zenray-gcal-client-secret'), GOOGLE_REFRESH_TOKEN: k('zenray-gcal-refresh-token') }, fetch)
+const eventResponse = await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events/${task.gcal.id}?fields=id,summary,description,start,htmlLink,status`, { headers: { authorization: 'Bearer ' + token } })
+if (!eventResponse.ok) throw new Error('Calendar read: ' + eventResponse.status)
+const event = await eventResponse.json()
+if (!event.description.includes(receipt.attachment.url) || event.start.date !== receipt.date || event.status !== 'confirmed') throw new Error('Calendar link or date mismatch')
+// Anonymous request: no drive password, token or key in a header. (19 October 2026, 00:40 Paris)
+const download = await fetch(receipt.attachment.url)
+if (!download.ok) throw new Error('Download HTTP ' + download.status)
+const hash = createHash('sha256'); let bytes = 0
+for await (const chunk of download.body) { hash.update(chunk); bytes += chunk.length }
+const digest = hash.digest('hex')
+if (digest !== receipt.sha256 || bytes !== receipt.attachment.size) throw new Error(`Download mismatch: ${bytes} bytes`)
+const proof = { at: new Date().toISOString(), taskId: task.id, taskCount: plan.tasks.length, date: task.date, title: task.title,
+  eventId: event.id, calendarUrl: event.htmlLink, calendarHasDownloadLink: true, bytes, sha256: digest, match: true }
+await writeFile(root + '/PlanAttachmentDownloadProof.json', JSON.stringify(proof, null, 2))
+console.log(JSON.stringify(proof, null, 2))

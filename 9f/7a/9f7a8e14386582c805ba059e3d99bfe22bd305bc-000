@@ -1,0 +1,181 @@
+/* zr-stream-sw.js — Service Worker « range-shim » pour la VIDÉO BRUTE (chunks 95 Mo sur raw.github).
+ *
+ * PROBLÈME : un <video> ne lit qu'UN fichier. Nos vidéos sont stockées en N parts de 95 Mo (le fichier
+ * original découpé par taille, ZÉRO réencodage). Ce SW présente au <video> un fichier virtuel unique et
+ * seekable à l'URL /zr-stream/<id> : il intercepte les requêtes Range du lecteur et sert les octets en allant
+ * chercher la/les bonne(s) part(s) sur raw.github. Le décodage (HEVC) est fait nativement par l'OS -> pas de
+ * limite MSE. Aucune dépendance, aucun build : fichier statique servi à la racine du site.
+ *
+ * Registre : le lecteur enregistre un manifeste via postMessage {type:'zr-reg', id, media:{size,mime,parts}}.
+ * parts[] = [{url, start, end, size, iv?}] (offsets cumulés dans le fichier d'origine). Survit tant que le
+ * SW vit ; re-enregistré à chaque montage du lecteur (idempotent).
+ *
+ * CHIFFREMENT (2026-07-05) : si une part porte un `iv` (repos vidéo chiffrés depuis cette date), les octets
+ * récupérés sur raw.github sont du CIPHERTEXT AES-256-GCM — on les déchiffre ICI avec la clé maître (même clé
+ * que le reste de l'app, servie une fois par /api/media-key, cf. src/media/crypto.js) avant de les mettre en
+ * cache et de les découper. Les parts SANS `iv` (vidéos uploadées avant ce fix) restent lues telles quelles,
+ * en clair — rétrocompatible, aucune migration nécessaire.
+ */
+const REG = new Map()            // id -> { size, mime, parts:[{url,start,end,size,iv?}] }
+const PARTCACHE = new Map()      // url -> ArrayBuffer EN CLAIR (LRU)
+let PARTCACHE_BYTES = 0
+const PARTCACHE_BUDGET = 384 * 1024 * 1024 // enough for audio continuity, still bounded
+
+self.addEventListener('install', (e) => self.skipWaiting())
+self.addEventListener('activate', (e) => e.waitUntil(self.clients.claim()))
+
+// SECRET DU GATE /api/* (2026-07-06, bug prod réel) : le SW n'hérite PAS du wrapper window.fetch de la page
+// (apiAuth.js) -> en prod ses appels /api/media-key et /api/raw-token partaient sans le secret -> 401 ->
+// lecture morte alors que la même page marchait en local (gate désactivé). La page relaie le secret dans le
+// message zr-reg ; on le passe en ?auth= (le gate serveur accepte header OU query, cf. authOk).
+let AUTH = ''
+const authQ = (path) => AUTH ? `${path}?auth=${encodeURIComponent(AUTH)}` : path
+
+self.addEventListener('message', (e) => {
+  const d = e.data || {}
+  if (d.type === 'zr-reg' && d.id && (d.media || d.video)) {
+    const port = e.ports && e.ports[0]
+    const media = d.media || d.video
+    let expectedStart = 0
+    const valid = Number.isSafeInteger(media.size) && media.size > 0 && Array.isArray(media.parts) && media.parts.length > 0 && media.parts.every((p) => {
+      const ok = p && typeof p.url === 'string' && p.url && Number.isSafeInteger(p.start) && Number.isSafeInteger(p.end) && Number.isSafeInteger(p.size) && p.start === expectedStart && p.size > 0 && p.end === p.start + p.size - 1
+      if (ok) expectedStart = p.end + 1
+      return !!ok
+    }) && expectedStart === media.size
+    if (!valid) {
+      if (port) port.postMessage({ type: 'zr-reg-ack', ok: false, id: d.id, error: 'invalid-media' })
+      return
+    }
+    if (typeof d.auth === 'string' && d.auth && d.auth !== AUTH) { AUTH = d.auth; _keyPromise = null; _tokenPromise = null } // secret (nouveau ou corrigé) -> retente les endpoints gated
+    REG.set(d.id, media)
+    if (port) port.postMessage({ type: 'zr-reg-ack', ok: true, id: d.id })
+  } else if (d.type === 'zr-claim') {
+    // 2 October 2026: a page that bypassed the worker (hard reload) asks to be taken under control without a reload.
+    e.waitUntil(self.clients.claim())
+  } else if (d.type === 'zr-prefetch' && Array.isArray(d.media)) {
+    if (typeof d.auth === 'string' && d.auth) AUTH = d.auth
+    e.waitUntil(Promise.all(d.media.slice(0, 24).map((m) => m && m.parts && m.parts[0] ? getPart(m.parts[0], m.private === true).catch(() => null) : null)))
+  }
+})
+
+// Clé média (WebCrypto AES-GCM, importée une fois, mise en cache pour la vie du SW). Fichier statique
+// (pas de build) -> pas d'import ES module, on réutilise juste `fetch` + `crypto.subtle` natifs du SW.
+let _keyPromise = null
+function mediaKey() {
+  if (!_keyPromise) {
+    _keyPromise = (async () => {
+      const r = await fetch(authQ('/api/media-key'), { cache: 'no-store' }).then((x) => x.json()).catch(() => null)
+      if (!r || !r.key) { _keyPromise = null; throw new Error('media-key indisponible') } // pas de cache d'échec : retente au prochain besoin (ex. secret arrivé entre-temps)
+      const raw = Uint8Array.from(atob(r.key), (c) => c.charCodeAt(0))
+      return crypto.subtle.importKey('raw', raw, { name: 'AES-GCM' }, false, ['decrypt'])
+    })()
+  }
+  return _keyPromise
+}
+const bytesFromB64 = (b64) => Uint8Array.from(atob(b64), (c) => c.charCodeAt(0))
+
+// REPOS PRIVÉS (2026-07-05) : les nouveaux uploads vidéo vivent sur des repos GitHub PRIVÉS
+// (zenrayshards-vid-*, convention : seul zenrayshards-img-* est public). raw.githubusercontent.com ne les
+// sert plus sans authentification -> on convertit l'URL raw en appel api.github.com (Accept: raw), avec le
+// token servi par /api/raw-token (même modèle gated que /api/media-key). CORS d'api.github.com vérifié OK
+// avec le header Authorization le 2026-07-05.
+let _tokenPromise = null
+function rawToken() {
+  if (!_tokenPromise) {
+    _tokenPromise = (async () => {
+      const r = await fetch(authQ('/api/raw-token'), { cache: 'no-store' }).then((x) => x.json()).catch(() => null)
+      const t = (r && r.token) || null
+      if (!t) _tokenPromise = null // pas de cache d'échec (401 avant saisie du code -> retente après)
+      return t
+    })()
+  }
+  return _tokenPromise
+}
+// raw.githubusercontent.com/<owner>/<repo>/<sha>/<path> -> https://api.github.com/repos/<owner>/<repo>/contents/<path>?ref=<sha>
+function rawToApiUrl(rawUrl) {
+  const m = /^https:\/\/raw\.githubusercontent\.com\/([^/]+)\/([^/]+)\/([^/]+)\/(.+)$/.exec(rawUrl)
+  if (!m) return null
+  return `https://api.github.com/repos/${m[1]}/${m[2]}/contents/${m[4]}?ref=${m[3]}`
+}
+const isPrivateFamilyUrl = (u) => /raw\.githubusercontent\.com\/[^/]+\/zenrayshards-(?!img-)/.test(u)
+
+// Récupère une part ENTIÈRE (raw.github ne garantit pas le Range), déchiffre si `p.iv` présent, avec cache LRU.
+// video.private (manifeste) OU nom de famille privé dans l'URL -> chemin authentifié d'office ; sinon fetch
+// public avec REPLI authentifié sur 401/403/404 (couvre un repo public basculé privé après coup).
+async function getPart(p, priv) {
+  const url = p.url
+  if (PARTCACHE.has(url)) { const b = PARTCACHE.get(url); PARTCACHE.delete(url); PARTCACHE.set(url, b); return b } // LRU touch
+  let r
+  if (priv || isPrivateFamilyUrl(url)) {
+    const t = await rawToken()
+    const api = rawToApiUrl(url)
+    if (!t || !api) throw new Error('part privée: token/url indisponible')
+    r = await fetch(api, { headers: { Authorization: `Bearer ${t}`, Accept: 'application/vnd.github.raw' } })
+  } else {
+    r = await fetch(url)
+    if (!r.ok && (r.status === 401 || r.status === 403 || r.status === 404)) {
+      const t = await rawToken(); const api = rawToApiUrl(url)
+      if (t && api) r = await fetch(api, { headers: { Authorization: `Bearer ${t}`, Accept: 'application/vnd.github.raw' } })
+    }
+  }
+  if (!r.ok) throw new Error('part ' + r.status)
+  let buf = await r.arrayBuffer()
+  if (p.iv) {
+    const key = await mediaKey()
+    buf = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: bytesFromB64(p.iv) }, key, buf)
+  }
+  PARTCACHE.set(url, buf); PARTCACHE_BYTES += buf.byteLength
+  while (PARTCACHE_BYTES > PARTCACHE_BUDGET && PARTCACHE.size > 1) {
+    const oldest = PARTCACHE.keys().next().value
+    const old = PARTCACHE.get(oldest)
+    PARTCACHE.delete(oldest); PARTCACHE_BYTES -= old ? old.byteLength : 0
+  }
+  return buf
+}
+
+// Sert l'intervalle [start,end] (inclus) en concaténant les tranches CLAIRES des parts couvrant cet intervalle.
+async function readRange(video, start, end) {
+  const out = new Uint8Array(end - start + 1)
+  let o = 0
+  for (const p of video.parts) {
+    if (p.end < start || p.start > end) continue
+    const s = Math.max(start, p.start), e = Math.min(end, p.end)
+    const buf = new Uint8Array(await getPart(p, video.private === true))
+    out.set(buf.subarray(s - p.start, e - p.start + 1), o)
+    o += e - s + 1
+  }
+  return out
+}
+
+self.addEventListener('fetch', (event) => {
+  const url = new URL(event.request.url)
+  if (url.origin !== self.location.origin || !url.pathname.startsWith('/zr-stream/')) return
+  const id = decodeURIComponent(url.pathname.slice('/zr-stream/'.length))
+  event.respondWith((async () => {
+    const video = REG.get(id)
+    if (!video) return new Response('not registered', { status: 404 })
+    const total = video.size
+    const range = event.request.headers.get('range')
+    // RESP_MAX borne chaque réponse -> le lecteur tire la suite au fur et à mesure (vrai streaming, pas tout en RAM)
+    const RESP_MAX = 4 * 1024 * 1024
+    let start = 0, end = total - 1, partial = false
+    if (range) {
+      const m = /bytes=(\d+)-(\d*)/.exec(range)
+      if (m) { start = +m[1]; end = m[2] ? Math.min(+m[2], total - 1) : total - 1; partial = true }
+    }
+    if (end - start + 1 > RESP_MAX) end = start + RESP_MAX - 1     // borne la réponse
+    try {
+      const body = await readRange(video, start, end)
+      const headers = {
+        'Content-Type': video.mime || 'video/mp4',
+        'Content-Length': String(body.byteLength),
+        'Accept-Ranges': 'bytes',
+        'Cache-Control': 'no-store',
+      }
+      if (partial || end < total - 1) headers['Content-Range'] = `bytes ${start}-${end}/${total}`
+      return new Response(body, { status: (partial || end < total - 1) ? 206 : 200, headers })
+    } catch (err) {
+      return new Response('range error: ' + (err && err.message), { status: 502 })
+    }
+  })())
+})

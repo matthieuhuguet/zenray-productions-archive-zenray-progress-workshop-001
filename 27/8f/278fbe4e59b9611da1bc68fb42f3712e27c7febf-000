@@ -1,0 +1,5753 @@
+{
+  "v": 1,
+  "category": "games",
+  "label": "Games",
+  "items": [
+    {
+      "id": "the-witcher-3-395c",
+      "name": "The Witcher 3",
+      "score": 96,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Critics Recommend, Dialogue, Dungeons, Great Game Design, Great Storytelling Lore, Highly Anticipated, IconicCharaDesign, LegendMusic, Long, OneHundredRun, PC, Poland, RPG, Second Run, StunningVisualConceptArts, TimelessArchitecture, WellPacedExperience, must_play_over_90"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-witcher-3-395c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "persona-5-royal-fc5a",
+      "name": "Persona 5 Royal",
+      "score": 85,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Consoles",
+        "criticElements": "BadPacing"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/persona-5-royal-fc5a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "zelda-tears-of-the-kingdom-c145",
+      "name": "Zelda Tears Of The Kingdom",
+      "score": 86,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Consoles",
+        "criticElements": "Chill, Critics Recommend, Dungeons, Great Artistic Direction, Great Game Design, Great Storytelling Lore, Highly Anticipated, IconicCharaDesign, JRPG, Japanese, LegendMusic, LevelDesignMastery, Nintendo, OneHundredRun, Original Gameplay, Sleek UI, StunningVisualConceptArts, Switch, TimelessArchitecture, WellPacedExperience, must_play_over_90"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/zelda-tears-of-the-kingdom-c145.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "13-sentinels-aegis-rim-da3a",
+      "name": "13 Sentinels: Aegis Rim",
+      "score": 68,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "fair_over_70"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/13-sentinels-aegis-rim-da3a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dark-souls-3-e722",
+      "name": "Dark Souls 3",
+      "score": 88,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "LevelDesignMastery, StunningVisualConceptArts, TimelessArchitecture"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dark-souls-3-e722.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "elden-ring-7acd",
+      "name": "Elden Ring",
+      "score": 89,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "year": "2022",
+        "exclusivity": "Mac/PC",
+        "criticElements": "Dungeons, Great Game Design, Great Storytelling Lore, Highly Anticipated, Japanese, LegendMusic, LevelDesignMastery, Long, OneHundredRun, PC, PlayStation, RPG, TimelessArchitecture, WellPacedExperience, must_play_over_90"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/elden-ring-7acd.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "unicorn-overlord-848d",
+      "name": "Unicorn Overlord",
+      "score": 70,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "fair_over_70"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/unicorn-overlord-848d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "fire-emblem-three-houses-33be",
+      "name": "Fire Emblem Three Houses",
+      "score": 88,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Consoles"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/fire-emblem-three-houses-33be.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "inazuma-eleven-a71b",
+      "name": "Inazuma Eleven",
+      "score": 70,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "fair_over_70"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/inazuma-eleven-a71b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "nier-automata-177c",
+      "name": "Nier Automata",
+      "score": 82,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "strong_over_80"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/nier-automata-177c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "nier-replicant-ddfd",
+      "name": "Nier Replicant",
+      "score": 79,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "strong_over_80"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/nier-replicant-ddfd.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "bloodborne-d5ad",
+      "name": "Bloodborne",
+      "score": 82,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/bloodborne-d5ad.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "metal-gear-solid-v-the-phantom-pain-9dde",
+      "name": "Metal Gear Solid V: The Phantom Pain",
+      "score": 72,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "strong_over_80"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/metal-gear-solid-v-the-phantom-pain-9dde.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "triangle-strategy-9787",
+      "name": "Triangle Strategy",
+      "score": 79,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "strong_over_80"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/triangle-strategy-9787.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "final-fantasy-xvi-5c3a",
+      "name": "Final Fantasy XVI",
+      "score": 84,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "year": "2023",
+        "exclusivity": "Consoles"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/final-fantasy-xvi-5c3a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "final-fantasy-vii-remake-8386",
+      "name": "Final Fantasy VII Remake",
+      "score": 87,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Consoles",
+        "criticElements": "WellPacedExperience"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/final-fantasy-vii-remake-8386.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "final-fantasy-vii-rebirth-f948",
+      "name": "Final Fantasy VII Rebirth",
+      "score": 86,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "year": "2024",
+        "exclusivity": "Consoles",
+        "criticElements": "WellPacedExperience"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/final-fantasy-vii-rebirth-f948.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dark-souls-314d",
+      "name": "Dark Souls",
+      "score": 86,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Great Game Design, LevelDesignMastery, StunningVisualConceptArts"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dark-souls-314d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "black-myth-wukong-edac",
+      "name": "Black Myth Wukong",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/black-myth-wukong-edac.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "ghost-of-tsushima-5e9c",
+      "name": "Ghost Of Tsushima",
+      "score": 89,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Critics Recommend, Great Artistic Direction, Great Game Design, Japanese, LegendMusic, PC, PlayStation, Sleek UI, StunningVisualConceptArts, TimelessArchitecture, WellPacedExperience, must_play_over_90"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ghost-of-tsushima-5e9c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-last-of-us-part-ii-453a",
+      "name": "The Last Of Us Part II",
+      "score": 91,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "year": "2020",
+        "exclusivity": "Mac/PC",
+        "criticElements": "American Culture, Great Game Design, Great Storytelling Lore, IconicCharaDesign, LegendMusic, LevelDesignMastery, PlayStation, Sleek UI, TimelessArchitecture, WellPacedExperience, must_play_over_90"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-last-of-us-part-ii-453a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-last-of-us-part-i-aec0",
+      "name": "The Last of Us Part I",
+      "score": 84,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "year": "2013",
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-last-of-us-part-i-aec0.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "cyberpunk-2077-7d98",
+      "name": "Cyberpunk 2077",
+      "score": 46,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Flat Storytelling, weak_under_60"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/cyberpunk-2077-7d98.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dave-the-diver-6da0",
+      "name": "Dave the Diver",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dave-the-diver-6da0.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "tactical-breach-wizards-5724",
+      "name": "Tactical Breach Wizards",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/tactical-breach-wizards-5724.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dead-space-9fee",
+      "name": "Dead Space",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dead-space-9fee.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "cyberpunk-2077-phantom-liberty-0e2b",
+      "name": "Cyberpunk 2077: Phantom Liberty",
+      "score": 49,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Critics Recommend, Flat Storytelling, weak_under_60"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/cyberpunk-2077-phantom-liberty-0e2b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "phantom-blade-zero-303d",
+      "name": "Phantom Blade Zero",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "year": "2026",
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/phantom-blade-zero-303d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "death-stranding-2-on-the-beach-1e65",
+      "name": "Death Stranding 2 On The Beach",
+      "score": 84,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "director": "Hideo Kojima",
+        "studio": "Kojima Production",
+        "year": "2025",
+        "exclusivity": "Mac/PC",
+        "criticElements": "Highly Anticipated, PlayStation, Sleek UI"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/death-stranding-2-on-the-beach-1e65.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "grand-theft-auto-vi-34f1",
+      "name": "Grand Theft Auto VI",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Highly Anticipated, must_play_over_90"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/grand-theft-auto-vi-34f1.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dragon-s-dogma-ii-731b",
+      "name": "Dragon’s Dogma II",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "PC, RPG"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dragon-s-dogma-ii-731b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "astro-bot-803f",
+      "name": "Astro Bot",
+      "score": 79,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Critics Recommend, Japanese, must_play_over_90"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/astro-bot-803f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "witchspring-r-1e40",
+      "name": "WitchSpring R",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/witchspring-r-1e40.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "fate-stay-night-remastered-c7d9",
+      "name": "Fate/Stay Night Remastered",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/fate-stay-night-remastered-c7d9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "warhammer-40-000-space-marine-2-54fc",
+      "name": "Warhammer 40,000: Space Marine 2",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/warhammer-40-000-space-marine-2-54fc.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "kunitsu-gami-path-of-the-goddess-9cd3",
+      "name": "Kunitsu-Gami: Path of the Goddess",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "fair_over_70"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/kunitsu-gami-path-of-the-goddess-9cd3.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "animal-well-5c64",
+      "name": "Animal Well",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/animal-well-5c64.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "hades-2-3155",
+      "name": "Hades 2",
+      "score": 84,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "year": "2025",
+        "exclusivity": "Mac/PC",
+        "criticElements": "must_play_over_90"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/hades-2-3155.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "prince-of-persia-the-lost-crown-3013",
+      "name": "Prince of Persia: The Lost Crown",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/prince-of-persia-the-lost-crown-3013.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "1000xresist-63af",
+      "name": "1000xResist",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/1000xresist-63af.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "atlas-fallen-reign-of-sand-ee92",
+      "name": "Atlas Fallen Reign Of Sand",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "weak_under_60"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/atlas-fallen-reign-of-sand-ee92.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "super-mario-bros-wonder-b46f",
+      "name": "Super Mario Bros. Wonder",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Critics Recommend, Japanese"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/super-mario-bros-wonder-b46f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "pokemon-version-noire-2-blanche-2-a8bb",
+      "name": "Pokémon Version Noire 2 & Blanche 2",
+      "score": 77,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Great Game Design, Japanese"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/pokemon-version-noire-2-blanche-2-a8bb.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "zelda-twilight-princess-9dc5",
+      "name": "Zelda : Twilight Princess",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Critics Recommend, Japanese"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/zelda-twilight-princess-9dc5.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "satisfactory-5dea",
+      "name": "Satisfactory",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Critics Recommend"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/satisfactory-5dea.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "shogun-showdown-90be",
+      "name": "Shogun Showdown",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Critics Recommend"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/shogun-showdown-90be.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "uncharted-4-2f6a",
+      "name": "Uncharted 4",
+      "score": 85,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "year": "2016",
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/uncharted-4-2f6a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "uncharted-2-3ea3",
+      "name": "Uncharted 2",
+      "score": 75,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "strong_over_80"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/uncharted-2-3ea3.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "baldur-s-gate-iii-28aa",
+      "name": "Baldur’s Gate III",
+      "score": 81,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/baldur-s-gate-iii-28aa.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "red-dead-redemption-ii-1aa5",
+      "name": "Red Dead Redemption II",
+      "score": 90,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "year": "2018",
+        "exclusivity": "Mac/PC",
+        "criticElements": "American Culture, Critics Recommend, Great Storytelling Lore, Highly Anticipated, IconicCharaDesign, LegendMusic, LevelDesignMastery, Long, Sleek UI, StunningVisualConceptArts, TimelessArchitecture, WellPacedExperience, must_play_over_90"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/red-dead-redemption-ii-1aa5.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "god-of-war-ec3a",
+      "name": "God Of War",
+      "score": 86,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Consoles",
+        "criticElements": "WellPacedExperience, must_play_over_90"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/god-of-war-ec3a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dead-cells-4bd6",
+      "name": "Dead Cells",
+      "score": 79,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dead-cells-4bd6.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "zelda-breath-of-the-wild-3f1b",
+      "name": "Zelda Breath Of The Wild",
+      "score": 96,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "year": "2017",
+        "exclusivity": "Consoles",
+        "criticElements": "Chill, Dialogue, Dungeons, Great Game Design, Highly Anticipated, IconicCharaDesign, JRPG, Japanese, LegendMusic, LevelDesignMastery, Long, OneHundredRun, Original Gameplay, RPG, Second Run, Sleek UI, StunningVisualConceptArts, Switch, TimelessArchitecture, WellPacedExperience, must_play_over_90"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/zelda-breath-of-the-wild-3f1b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "alan-wake-2-f113",
+      "name": "Alan Wake 2",
+      "score": 75,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/alan-wake-2-f113.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "spiderman-2-f4b8",
+      "name": "Spiderman 2",
+      "score": 70,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/spiderman-2-f4b8.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "hellblade-2-dbf7",
+      "name": "Hellblade 2",
+      "score": 55,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Technical Demo No Gameplay, weak_under_60"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/hellblade-2-dbf7.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "genshin-impact-f7b5",
+      "name": "Genshin Impact",
+      "score": 79,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "strong_over_80"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/genshin-impact-f7b5.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "yakuza-like-a-dragon-846b",
+      "name": "Yakuza : Like a Dragon",
+      "score": 78,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "strong_over_80"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/yakuza-like-a-dragon-846b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-pathless-5a1b",
+      "name": "The Pathless",
+      "score": 62,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-pathless-5a1b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "journey-e40c",
+      "name": "Journey",
+      "score": 60,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/journey-e40c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "ori-and-the-blind-forest-4f45",
+      "name": "Ori and the Blind Forest",
+      "score": 79,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ori-and-the-blind-forest-4f45.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "ori-and-the-will-of-the-wisps-51bf",
+      "name": "Ori and the Will of the Wisps",
+      "score": 82,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ori-and-the-will-of-the-wisps-51bf.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "hearthstone-748d",
+      "name": "Hearthstone",
+      "score": 83,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Great Game Design"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/hearthstone-748d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "demons-souls-c359",
+      "name": "Demons Souls",
+      "score": 87,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Consoles"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/demons-souls-c359.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "minecraft-f141",
+      "name": "Minecraft",
+      "score": 97,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "year": "2008",
+        "exclusivity": "Mac/PC",
+        "criticElements": "must_play_over_90"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/minecraft-f141.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "hollow-knight-2adf",
+      "name": "Hollow Knight",
+      "score": 81,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Chill, Great Game Design, IconicCharaDesign, LegendMusic, LevelDesignMastery, Sleek UI, StunningVisualConceptArts"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/hollow-knight-2adf.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "ni-no-kuni-8047",
+      "name": "Ni No Kuni",
+      "score": 83,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ni-no-kuni-8047.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "ni-no-kuni-ii-2cd4",
+      "name": "Ni No Kuni II",
+      "score": 86,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ni-no-kuni-ii-2cd4.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "god-of-war-ragnarok-b5aa",
+      "name": "God Of War Ragnarok",
+      "score": 87,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Consoles",
+        "criticElements": "WellPacedExperience"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/god-of-war-ragnarok-b5aa.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "disco-elysium-c8df",
+      "name": "Disco Elysium",
+      "score": 83,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "BadPacing"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/disco-elysium-c8df.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "far-lone-sails-b7d6",
+      "name": "Far Lone Sails",
+      "score": 74,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "strong_over_80"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/far-lone-sails-b7d6.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "hades-4a51",
+      "name": "Hades",
+      "score": 75,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "strong_over_80"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/hades-4a51.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "plague-tale-innocence-f1d9",
+      "name": "Plague Tale Innocence",
+      "score": 76,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/plague-tale-innocence-f1d9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "plague-tale-requiem-bf58",
+      "name": "Plague Tale Requiem",
+      "score": 81,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "year": "2022",
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/plague-tale-requiem-bf58.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "there-is-no-game-wrong-dimension-0afa",
+      "name": "There is no Game: Wrong Dimension",
+      "score": 65,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/there-is-no-game-wrong-dimension-0afa.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "kena-bridge-of-spirit-e9de",
+      "name": "Kena Bridge of Spirit",
+      "score": 79,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "strong_over_80"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/kena-bridge-of-spirit-e9de.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "monster-hunter-rise-4358",
+      "name": "Monster Hunter Rise",
+      "score": 75,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/monster-hunter-rise-4358.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "monster-hunter-world-41ac",
+      "name": "Monster Hunter World",
+      "score": 76,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/monster-hunter-world-41ac.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "chrono-trigger-5757",
+      "name": "Chrono Trigger",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/chrono-trigger-5757.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "shadow-of-the-colossus-9d9e",
+      "name": "Shadow of the Colossus",
+      "score": 76,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/shadow-of-the-colossus-9d9e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-last-guardian-ca27",
+      "name": "The Last Guardian",
+      "score": 55,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "BadPacing, CinematicPlateformer3D, Critics Recommend, Japanese, LegendMusic, MotionSicknessCam, PlayStation, Technical Demo No Gameplay, TimelessArchitecture, weak_under_60"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-last-guardian-ca27.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "metro-exodus-232f",
+      "name": "Metro Exodus",
+      "score": 71,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/metro-exodus-232f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "anno-1800-0e94",
+      "name": "Anno 1800",
+      "score": 71,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/anno-1800-0e94.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "loop-hero-60e9",
+      "name": "Loop Hero",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Great Game Design, strong_over_80"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/loop-hero-60e9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-centennial-case-a-shijima-story-c40f",
+      "name": "The Centennial Case: A Shijima Story",
+      "score": 50,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "weak_under_60"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-centennial-case-a-shijima-story-c40f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "yakuza-0-137c",
+      "name": "Yakuza 0",
+      "score": 75,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/yakuza-0-137c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dishonored-1-37c8",
+      "name": "Dishonored 1",
+      "score": 72,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dishonored-1-37c8.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dishonored-2-8268",
+      "name": "Dishonored 2",
+      "score": 79,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dishonored-2-8268.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "bayonetta-1-af34",
+      "name": "Bayonetta 1",
+      "score": 66,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/bayonetta-1-af34.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "bayonetta-2-7eb7",
+      "name": "Bayonetta 2",
+      "score": 65,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/bayonetta-2-7eb7.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "resident-evil-2-remake-cb30",
+      "name": "Resident Evil 2 Remake",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/resident-evil-2-remake-cb30.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "resident-evil-3-remake-b240",
+      "name": "Resident Evil 3 Remake",
+      "score": 66,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/resident-evil-3-remake-b240.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "resident-evil-4-remake-7201",
+      "name": "Resident Evil 4 Remake",
+      "score": 65,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "weak_under_60"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/resident-evil-4-remake-7201.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "control-ea1d",
+      "name": "Control",
+      "score": 78,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/control-ea1d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "what-remains-of-edith-finch-5a1c",
+      "name": "What Remains of Edith Finch",
+      "score": 72,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/what-remains-of-edith-finch-5a1c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "tunic-8d7c",
+      "name": "Tunic",
+      "score": 79,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "strong_over_80"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/tunic-8d7c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "watchdogs-fbf2",
+      "name": "Watchdogs",
+      "score": 60,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Flat Storytelling, Original Gameplay"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/watchdogs-fbf2.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "grand-theft-auto-v-982d",
+      "name": "Grand Theft Auto V",
+      "score": 85,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "year": "2013",
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/grand-theft-auto-v-982d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "assassin-s-creed-odyssey-86ca",
+      "name": "Assassin’s Creed Odyssey",
+      "score": 2,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/assassin-s-creed-odyssey-86ca.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "stray-3263",
+      "name": "Stray",
+      "score": 74,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "strong_over_80"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/stray-3263.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "ghost-wire-tokyo-451d",
+      "name": "Ghost Wire Tokyo",
+      "score": 10,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Flat Storytelling, Original Gameplay, weak_under_60"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ghost-wire-tokyo-451d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "world-of-warcraft-a935",
+      "name": "World of Warcraft",
+      "score": 76,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "strong_over_80"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/world-of-warcraft-a935.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "psychonauts-2-315c",
+      "name": "Psychonauts 2",
+      "score": 3,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "BadPacing, Flat Storytelling, Original Gameplay, weak_under_60"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/psychonauts-2-315c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "pokemon-violet-d9df",
+      "name": "Pokémon Violet",
+      "score": 70,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "fair_over_70"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/pokemon-violet-d9df.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "pokemon-legends-arceus-cd1a",
+      "name": "Pokémon Legends: Arceus",
+      "score": 71,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/pokemon-legends-arceus-cd1a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "celeste-2613",
+      "name": "Celeste",
+      "score": 50,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/celeste-2613.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "it-takes-two-f014",
+      "name": "It Takes Two",
+      "score": 74,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/it-takes-two-f014.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "secret-of-mana-seiken-densetsu-2-6a42",
+      "name": "Secret of Mana Seiken Densetsu 2",
+      "score": 71,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "fair_over_70"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/secret-of-mana-seiken-densetsu-2-6a42.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "star-wars-jedi-survivor-3605",
+      "name": "Star Wars Jedi: Survivor",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Critics Recommend, PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/star-wars-jedi-survivor-3605.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "frostpunk-2-cdd0",
+      "name": "Frostpunk 2",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Critics Recommend"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/frostpunk-2-cdd0.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "zelda-echoes-of-wisdom-bf1c",
+      "name": "Zelda : Echoes of Wisdom",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Critics Recommend, Japanese"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/zelda-echoes-of-wisdom-bf1c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "ghost-of-yotei-7e73",
+      "name": "Ghost of Yotei",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {
+        "year": "2025",
+        "exclusivity": "Consoles",
+        "criticElements": "Highly Anticipated, PlayStation"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ghost-of-yotei-7e73.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "metaphor-refantazio-3b91",
+      "name": "Metaphor Refantazio",
+      "score": 83,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "year": "2024",
+        "exclusivity": "Mac/PC",
+        "criticElements": "BadPacing, Dialogue, Great Game Design, Highly Anticipated, Japanese, LegendMusic, must_play_over_90"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/metaphor-refantazio-3b91.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "monster-hunter-wilds-cdad",
+      "name": "Monster Hunter Wilds",
+      "score": 83,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "director": "Kaname Fujioka, Yuya Tokuda",
+        "exclusivity": "Mac/PC",
+        "criticElements": "BossRush, Dialogue, Great Artistic Direction, Great Game Design, GreatDemo, Highly Anticipated, Japanese, LevelDesignMastery, Original Gameplay, PC, PlayStation"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/monster-hunter-wilds-cdad.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "octopath-traveler-2-665d",
+      "name": "Octopath Traveler 2",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Critics Recommend, Great Game Design, Japanese, LegendMusic"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/octopath-traveler-2-665d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "hogwarts-legacy-c6bd",
+      "name": "Hogwarts Legacy",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "PC, PlayStation"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/hogwarts-legacy-c6bd.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "days-gone-a0e6",
+      "name": "Days Gone",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/days-gone-a0e6.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "silent-hill-2-d35b",
+      "name": "Silent Hill 2",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Critics Recommend, Great Game Design, Japanese, Poland"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/silent-hill-2-d35b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "red-dead-redemption-i-9552",
+      "name": "Red Dead Redemption I",
+      "score": 79,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Critics Recommend, must_play_over_90, strong_over_80"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/red-dead-redemption-i-9552.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-legend-of-zelda-kaze-no-takuto-ec1d",
+      "name": "The Legend of Zelda : Kaze No Takuto",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Critics Recommend, Japanese, must_play_over_90"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-legend-of-zelda-kaze-no-takuto-ec1d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-plucky-squire-a0b8",
+      "name": "The Plucky Squire",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "BadDirectionArt, CinematicPlatformer2D, To Test"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-plucky-squire-a0b8.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dragon-quest-iii-d795",
+      "name": "dragon_quest_iii",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/dragon-quest-iii-d795.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "tales-of-zenzera-d82a",
+      "name": "Tales of Zenzera",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/tales-of-zenzera-d82a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "like-a-dragon-infinite-wealth-2481",
+      "name": "Like a Dragon: Infinite Wealth",
+      "score": 77,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "BadDirectionArt, BadPacing, DEPRECATED Game Design, Flat Storytelling, strong_over_80"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/like-a-dragon-infinite-wealth-2481.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "assassin-s-creed-black-flag-iv-d084",
+      "name": "Assassin’s Creed Black Flag IV",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/assassin-s-creed-black-flag-iv-d084.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "returnal-bb7d",
+      "name": "Returnal",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/returnal-bb7d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "catherine-d692",
+      "name": "catherine",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/catherine-d692.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "judgement-392a",
+      "name": "judgement",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/judgement-392a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "deathloop-e76f",
+      "name": "Deathloop",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/deathloop-e76f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "grand-theft-auto-iv-bb92",
+      "name": "Grand Theft Auto IV",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/grand-theft-auto-iv-bb92.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "black-ops-6-5547",
+      "name": "Black Ops 6",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/black-ops-6-5547.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "stellar-blade-7159",
+      "name": "Stellar Blade",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "PC, PlayStation"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/stellar-blade-7159.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "eiyuden-chronicle-4efb",
+      "name": "eiyuden_chronicle",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/eiyuden-chronicle-4efb.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "rise-of-the-ronin-9cbc",
+      "name": "Rise of the Ronin",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Japanese, PlayStation, To Test"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/rise-of-the-ronin-9cbc.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "indiana-jones-et-le-cercle-ancien-5f29",
+      "name": "Indiana Jones et le Cercle Ancien",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/indiana-jones-et-le-cercle-ancien-5f29.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "slay-the-spire-ii-5e9b",
+      "name": "Slay The Spire II",
+      "score": 66,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/slay-the-spire-ii-5e9b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-witcher-iv-0084",
+      "name": "The Witcher IV",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Poland, must_play_over_90"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-witcher-iv-0084.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "elden-ring-nightreign-9757",
+      "name": "Elden Ring Nightreign",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/elden-ring-nightreign-9757.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "final-fantasy-vii-rebirth-pc-d368",
+      "name": "Final Fantasy VII Rebirth PC",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "PC, PlayStation"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/final-fantasy-vii-rebirth-pc-d368.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "untitledfumitoueda-f96e",
+      "name": "UntitledFumitoUeda",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Consoles"
+      },
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "civilization-vii-0b23",
+      "name": "Civilization VII",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/civilization-vii-0b23.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "split-fiction-c6cd",
+      "name": "Split Fiction",
+      "score": 70,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "director": "Josef Fares",
+        "exclusivity": "Mac/PC",
+        "criticElements": "American Culture, Critics Recommend, Great Storytelling Lore, Highly Anticipated, Original Gameplay, PC, PlayStation, To Test, must_play_over_90"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/split-fiction-c6cd.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "stranger-than-heaven-project-century-f97f",
+      "name": "Stranger Than Heaven - Project Century",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/stranger-than-heaven-project-century-f97f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "onimusha-way-of-the-sword-74d2",
+      "name": "Onimusha Way Of The Sword",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "year": "2026",
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/onimusha-way-of-the-sword-74d2.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "mafiatheoldcountry-c1b5",
+      "name": "MafiaTheOldCountry",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/mafiatheoldcountry-c1b5.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "okami-sequel-2bb3",
+      "name": "Okami Sequel",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/okami-sequel-2bb3.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dispatch-840e",
+      "name": "Dispatch",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dispatch-840e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "intergalactic-the-heretic-prophet-004d",
+      "name": "Intergalactic The Heretic Prophet",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "PlayStation"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/intergalactic-the-heretic-prophet-004d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "wuthering-waves-76f9",
+      "name": "Wuthering Waves",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "To Test"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/wuthering-waves-76f9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "shin-megami-tensei-v-vengeance-b1d5",
+      "name": "Shin Megami Tensei V: Vengeance",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/shin-megami-tensei-v-vengeance-b1d5.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "talos-principle-1d06",
+      "name": "Talos Principle",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/talos-principle-1d06.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-callisto-protocol-474c",
+      "name": "The Callisto Protocol",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-callisto-protocol-474c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "persona-3-ac9a",
+      "name": "Persona 3",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/persona-3-ac9a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "like-a-dragon-ishin-5aaa",
+      "name": "Like A Dragon: Ishin!",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/like-a-dragon-ishin-5aaa.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "like-a-dragon-gaiden-the-man-who-erased-his-name-13a7",
+      "name": "Like a Dragon Gaiden: The Man Who Erased His Name",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/like-a-dragon-gaiden-the-man-who-erased-his-name-13a7.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "final-fantasy-xiv-654b",
+      "name": "Final Fantasy XIV",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/final-fantasy-xiv-654b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "wild-hearts-4b8f",
+      "name": "Wild Hearts",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/wild-hearts-4b8f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "cities-skylines-ii-ed6e",
+      "name": "Cities: Skylines II",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/cities-skylines-ii-ed6e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "ghost-trick-phantom-detective-b9f5",
+      "name": "Ghost Trick: Phantom Detective",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ghost-trick-phantom-detective-b9f5.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "armored-core-vi-fires-of-rubicon-35cd",
+      "name": "Armored Core VI: Fires of Rubicon",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/armored-core-vi-fires-of-rubicon-35cd.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "sea-of-stars-4cce",
+      "name": "Sea of Stars",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/sea-of-stars-4cce.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "starfield-5c7e",
+      "name": "Starfield",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/starfield-5c7e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "lords-of-the-fallen-37ae",
+      "name": "Lords of the Fallen",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/lords-of-the-fallen-37ae.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "honkai-star-rail-c46c",
+      "name": "Honkai: Star Rail",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/honkai-star-rail-c46c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "chant-of-sennaar-843c",
+      "name": "Chant of Sennaar",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/chant-of-sennaar-843c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "wo-long-fallen-dynasty-b1c4",
+      "name": "Wo Long: Fallen Dynasty",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/wo-long-fallen-dynasty-b1c4.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "octopath-traveler-i-cf0e",
+      "name": "Octopath Traveler I",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/octopath-traveler-i-cf0e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "theatrhythm-final-fantasy-58aa",
+      "name": "Theatrhythm Final Fantasy",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/theatrhythm-final-fantasy-58aa.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "planet-of-lana-cdc9",
+      "name": "Planet of Lana",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/planet-of-lana-cdc9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "fire-emblem-engage-d4e2",
+      "name": "Fire Emblem: Engage",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/fire-emblem-engage-d4e2.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "season-a-letter-to-the-future-1ab4",
+      "name": "Season: A Letter to the Future",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/season-a-letter-to-the-future-1ab4.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "atomic-heart-bff3",
+      "name": "Atomic Heart",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/atomic-heart-bff3.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "pentiment-11cd",
+      "name": "Pentiment",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/pentiment-11cd.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "inkulinati-975f",
+      "name": "Inkulinati",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/inkulinati-975f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "forza-horizon-5-f1f9",
+      "name": "Forza Horizon 5",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/forza-horizon-5-f1f9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "exoprimal-55a5",
+      "name": "Exoprimal",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/exoprimal-55a5.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "viewfinder-3d10",
+      "name": "Viewfinder",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/viewfinder-3d10.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "pokemon-version-noire-blanche-49be",
+      "name": "Pokémon Version Noire & Blanche",
+      "score": 76,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/pokemon-version-noire-blanche-49be.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "pokemon-platine-diamant-et-perle-dc2c",
+      "name": "Pokémon Platine Diamant Et Perle",
+      "score": 83,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Consoles",
+        "criticElements": "strong_over_80"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/pokemon-platine-diamant-et-perle-dc2c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "pokemon-emeraude-5bab",
+      "name": "Pokémon Emeraude",
+      "score": 72,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/pokemon-emeraude-5bab.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "pokemon-version-rouge-feu-et-vert-feuille-443a",
+      "name": "Pokémon Version Rouge Feu et Vert Feuille",
+      "score": 75,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/pokemon-version-rouge-feu-et-vert-feuille-443a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "pokemon-donjon-mystere-equipe-de-secours-rouge-et-bleue-ceb4",
+      "name": "Pokémon Donjon Mystère :Équipe de secours Rouge et Bleue",
+      "score": 71,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/pokemon-donjon-mystere-equipe-de-secours-rouge-et-bleue-ceb4.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "pokemon-donjon-mystere-les-portes-de-l-infini-0041",
+      "name": "Pokémon Donjon Mystère : Les portes de l’infini",
+      "score": 50,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/pokemon-donjon-mystere-les-portes-de-l-infini-0041.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "pokemon-x-y-2a38",
+      "name": "Pokémon X & Y",
+      "score": 73,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/pokemon-x-y-2a38.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "pokemon-rubis-omega-et-saphir-alpha-4dcb",
+      "name": "Pokémon Rubis Oméga et Saphir Alpha",
+      "score": 69,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/pokemon-rubis-omega-et-saphir-alpha-4dcb.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "yu-gi-oh-5d-s-tag-force-6-911c",
+      "name": "Yu-Gi-Oh! 5D's Tag Force 6",
+      "score": 61,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "yu-gi-oh-5d-s-world-championship-2011-d85a",
+      "name": "Yu-Gi-Oh! 5D's World Championship 2011",
+      "score": 77,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/yu-gi-oh-5d-s-world-championship-2011-d85a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "max-payne-3-1769",
+      "name": "Max Payne 3",
+      "score": 40,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Flat Storytelling"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/max-payne-3-1769.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "call-of-duty-black-ops-ii-4e1f",
+      "name": "Call of Duty Black Ops II",
+      "score": 3,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Flat Storytelling"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/call-of-duty-black-ops-ii-4e1f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "slitterhead-afcc",
+      "name": "Slitterhead",
+      "score": 54,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/slitterhead-afcc.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "silent-hill-2-d35b-2",
+      "name": "Silent Hill 2",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "PC, PlayStation"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/silent-hill-2-d35b-2.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "turmoil-c097",
+      "name": "Turmoil",
+      "score": 64,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "fair_over_70"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/turmoil-c097.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "outer-wilds-a9a1",
+      "name": "Outer Wilds",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/outer-wilds-a9a1.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "life-is-strange-1169",
+      "name": "Life is Strange",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/life-is-strange-1169.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "life-is-strange-true-colors-e0d9",
+      "name": "Life is Strange True Colors",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/life-is-strange-true-colors-e0d9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "kingdom-come-deliverance-8361",
+      "name": "Kingdom Come Deliverance",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "To Test"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/kingdom-come-deliverance-8361.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "xenoblade-chronicles-3-6f90",
+      "name": "Xenoblade Chronicles 3",
+      "score": 35,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "BadPacing, JRPG, LegendMusic, weak_under_60"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/xenoblade-chronicles-3-6f90.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "divinity-original-sin-ii-1bd6",
+      "name": "Divinity Original Sin II",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/divinity-original-sin-ii-1bd6.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "blasphemous-ii-0cbd",
+      "name": "Blasphemous II",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/blasphemous-ii-0cbd.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "slay-the-spire-722f",
+      "name": "Slay the Spire",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "strong_over_80"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/slay-the-spire-722f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "hi-fi-rush-32e2",
+      "name": "Hi-Fi Rush",
+      "score": 78,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "strong_over_80"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/hi-fi-rush-32e2.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "papers-please-29ce",
+      "name": "Papers, Please",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/papers-please-29ce.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "prey-f159",
+      "name": "Prey",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/prey-f159.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "deus-ex-human-revolution-5f94",
+      "name": "Deus Ex Human Revolution",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/deus-ex-human-revolution-5f94.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "hellblade-senua-s-sacrifice-06ee",
+      "name": "Hellblade: Senua's Sacrifice",
+      "score": 1,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/hellblade-senua-s-sacrifice-06ee.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "furi-17f8",
+      "name": "Furi",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/furi-17f8.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "factorio-4f90",
+      "name": "Factorio",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "To Test"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/factorio-4f90.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "death-stranding-c00b",
+      "name": "Death Stranding",
+      "score": 85,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "BadPacing"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/death-stranding-c00b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "gris-a994",
+      "name": "Gris",
+      "score": 76,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/gris-a994.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-order-1886-b80c",
+      "name": "The Order: 1886",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "PlayStation, To Test"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-order-1886-b80c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "detroit-become-human-86e3",
+      "name": "Detroit: Become Human",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "PlayStation, To Test"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/detroit-become-human-86e3.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "stalker-2-7d11",
+      "name": "Stalker 2",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "To Test"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/stalker-2-7d11.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dynasty-warriors-origins-2d81",
+      "name": "Dynasty Warriors Origins",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Original Gameplay"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dynasty-warriors-origins-2d81.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "crisis-core-final-fantasy-vii-reunion-fc56",
+      "name": "Crisis Core: Final Fantasy VII Reunion",
+      "score": 33,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Flat Storytelling, Original Gameplay, weak_under_60"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/crisis-core-final-fantasy-vii-reunion-fc56.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "doom-eternal-3173",
+      "name": "Doom Eternal",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Great Game Design, WellPacedExperience"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/doom-eternal-3173.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "ninja-gaiden-2-black-0911",
+      "name": "Ninja Gaiden 2 Black",
+      "score": 65,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ninja-gaiden-2-black-0911.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "satisfactory-5dea-2",
+      "name": "Satisfactory",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "To Test"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/satisfactory-5dea-2.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "blade-chimera-561f",
+      "name": "Blade Chimera",
+      "score": 75,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "fair_over_70"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/blade-chimera-561f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "lonely-mountains-snow-riders-eb54",
+      "name": "Lonely Mountains Snow Riders",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "fair_over_70"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/lonely-mountains-snow-riders-eb54.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "ender-magnolia-bloom-in-the-myst-e2f9",
+      "name": "Ender Magnolia bloom in the myst",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "fair_over_70"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ender-magnolia-bloom-in-the-myst-e2f9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "eternal-strands-2e1f",
+      "name": "Eternal Strands",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "weak_under_60"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/eternal-strands-2e1f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dynasty-warriors-origins-de62",
+      "name": "Dynasty Warriors origins",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "fair_over_70"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dynasty-warriors-origins-de62.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "tails-of-iron-ii-whiskers-of-winter-42bf",
+      "name": "Tails of Iron II whiskers of winter",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/tails-of-iron-ii-whiskers-of-winter-42bf.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "kingdom-come-deliverance-2-764c",
+      "name": "Kingdom Come Deliverance 2",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "GreatDemo, Simulation"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/kingdom-come-deliverance-2-764c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "xenoblade-x-1fc7",
+      "name": "Xenoblade X",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/xenoblade-x-1fc7.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "pokemon-heartgold-1b2b",
+      "name": "Pokémon Heartgold",
+      "score": 76,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "director": "Nintendo",
+        "exclusivity": "Mac/PC",
+        "criticElements": "strong_over_80"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/pokemon-heartgold-1b2b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "pikmin-4-6caf",
+      "name": "Pikmin 4",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Nintendo"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/pikmin-4-6caf.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dragon-quest-treasures-27f0",
+      "name": "Dragon Quest Treasures",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "studio": "Square Enix",
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dragon-quest-treasures-27f0.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "sumire-10fb",
+      "name": "Sumire",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "2D, Enigma, Low_Budget"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/sumire-10fb.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "undertale-ddb6",
+      "name": "Undertale",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "director": "Toby Fox",
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/undertale-ddb6.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "sakuna-of-rice-and-ruin-237d",
+      "name": "Sakuna of Rice and Ruin",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/sakuna-of-rice-and-ruin-237d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "assassin-s-creed-shadows-2e1c",
+      "name": "Assassin’s Creed Shadows",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "director": "Ubisoft",
+        "exclusivity": "Mac/PC",
+        "criticElements": "Japanese, Sleek UI, TimelessArchitecture"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/assassin-s-creed-shadows-2e1c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-duskbloods-357b",
+      "name": "The Duskbloods",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Consoles"
+      },
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "final-fantasy-ix-7e6f",
+      "name": "Final Fantasy IX",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "studio": "Square Enix",
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/final-fantasy-ix-7e6f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-first-berserker-khazan-cd57",
+      "name": "The First Berserker: Khazan",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "To Test"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-first-berserker-khazan-cd57.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "blue-prince-2bda",
+      "name": "Blue Prince",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Critics Recommend, To Test"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/blue-prince-2bda.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "south-of-midnight-4eb5",
+      "name": "South of Midnight",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/south-of-midnight-4eb5.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "clair-obscur-expedition-33-16c9",
+      "name": "Clair Obscur Expedition 33",
+      "score": 83,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "year": "2025",
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/clair-obscur-expedition-33-16c9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "doom-the-dark-ages-efc5",
+      "name": "Doom: The Dark Ages",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "director": "id Software",
+        "exclusivity": "Mac/PC",
+        "criticElements": "Flat Storytelling, IconicCharaDesign, LegendMusic, WellPacedExperience, must_play_over_90"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/doom-the-dark-ages-efc5.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "lost-odyssey-af42",
+      "name": "Lost Odyssey",
+      "score": 90,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC",
+        "criticElements": "Great Game Design, must_play_over_90"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/lost-odyssey-af42.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dragon-quest-xi-s-2b9f",
+      "name": "Dragon Quest XI S",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dragon-quest-xi-s-2b9f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "summoners-war-8df4",
+      "name": "Summoners War",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "studio": "Com2uS",
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/summoners-war-8df4.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "infinity-nikki-9beb",
+      "name": "Infinity Nikki",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/infinity-nikki-9beb.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "final-fantasy-x-6a30",
+      "name": "Final Fantasy X",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/final-fantasy-x-6a30.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "final-fantasy-xv-1c36",
+      "name": "Final Fantasy XV",
+      "score": 76,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/final-fantasy-xv-1c36.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "super-meat-boy-8cd3",
+      "name": "Super Meat Boy",
+      "score": 4,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/super-meat-boy-8cd3.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "fez-92e5",
+      "name": "FEZ",
+      "score": 5,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/fez-92e5.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "devil-may-cry-5-5860",
+      "name": "Devil May Cry 5",
+      "score": 75,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/devil-may-cry-5-5860.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "lies-of-p-4e7b",
+      "name": "Lies of P",
+      "score": 84,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/lies-of-p-4e7b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "skul-the-hero-slayer-00b9",
+      "name": "Skul the Hero Slayer",
+      "score": 78,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "studio": "Neowiz_Games",
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/skul-the-hero-slayer-00b9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "lies-of-p-overture-dlc-431d",
+      "name": "Lies Of P Overture DLC",
+      "score": 84,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/lies-of-p-overture-dlc-431d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "fantasy-life-i-the-girl-who-steals-time-ca6e",
+      "name": "fantasy_life_i_the_girl_who_steals_time",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/fantasy-life-i-the-girl-who-steals-time-ca6e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "deltarune-6ae4",
+      "name": "Deltarune",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/deltarune-6ae4.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "resonance-tech-demo-4c3e",
+      "name": "Resonance Tech Demo",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "director": "Arthur Cossevin",
+        "studio": "LISAA",
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/resonance-tech-demo-4c3e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "keep-driving-36c4",
+      "name": "Keep Driving",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/keep-driving-36c4.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "pipistrello-and-the-cursed-yoyo-d1e0",
+      "name": "Pipistrello And The Cursed Yoyo",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/pipistrello-and-the-cursed-yoyo-d1e0.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "starvaders-9d1b",
+      "name": "StarVaders",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/starvaders-9d1b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "wonderstop-0121",
+      "name": "Wonderstop",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/wonderstop-0121.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "mindseye-db69",
+      "name": "MindsEye",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/mindseye-db69.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-witcher-3-blood-and-wine-dlc-04ba",
+      "name": "The Witcher 3 Blood And Wine DLC",
+      "score": 92,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "studio": "cd_projekt_red",
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-witcher-3-blood-and-wine-dlc-04ba.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-witcher-3-hearts-of-stone-dlc-7017",
+      "name": "The Witcher 3 Hearts Of Stone DLC",
+      "score": 95,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "studio": "cd_projekt_red",
+        "exclusivity": "Mac/PC",
+        "criticElements": "must_play_over_90"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-witcher-3-hearts-of-stone-dlc-7017.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "final-fantasy-vii-remake-intergrade-dlc-42eb",
+      "name": "Final Fantasy VII Remake Intergrade DLC",
+      "score": 88,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Consoles"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/final-fantasy-vii-remake-intergrade-dlc-42eb.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "kunitsu-gami-path-of-the-goddess-06c6",
+      "name": "Kunitsu Gami Path of The Goddess",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/kunitsu-gami-path-of-the-goddess-06c6.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "ninja-gaiden-ragebound-4f25",
+      "name": "ninja_gaiden_ragebound",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/ninja-gaiden-ragebound-4f25.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "lords-of-the-fallen-ii-252f",
+      "name": "Lords Of The Fallen II",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/lords-of-the-fallen-ii-252f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "little-nightmare-iii-0d35",
+      "name": "Little Nightmare III",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/little-nightmare-iii-0d35.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "crimson-desert-3961",
+      "name": "Crimson Desert",
+      "score": 9,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/crimson-desert-3961.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "hollow-knight-silksong-5881",
+      "name": "Hollow Knight Silksong",
+      "score": 86,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "director": "Ari Gibson, Jack Vine, William Pellen",
+        "year": "2025",
+        "exclusivity": "Mac/PC",
+        "criticElements": "BossRush, Great Artistic Direction, Great Game Design, Great Storytelling Lore, Highly Anticipated, IconicCharaDesign, Indie, Japanese, LegendMusic, LevelDesignMastery, Long, PC, Sleek UI, StunningVisualConceptArts, Switch, WellPacedExperience, must_play_over_90"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/hollow-knight-silksong-5881.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "where-winds-meet-b3c5",
+      "name": "Where Winds Meet",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/where-winds-meet-b3c5.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "swords-of-legends-2336",
+      "name": "Swords Of Legends",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/swords-of-legends-2336.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "pragmata-5b06",
+      "name": "Pragmata",
+      "score": 84,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "year": "2026",
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/pragmata-5b06.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "project-spectrum-89eb",
+      "name": "Project Spectrum",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/project-spectrum-89eb.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "everwind-02cd",
+      "name": "Everwind",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/everwind-02cd.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "valor-mortis-8e85",
+      "name": "Valor Mortis",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/valor-mortis-8e85.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "zero-parades-4ed6",
+      "name": "Zero Parades",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "silent-hill-f-450f",
+      "name": "Silent Hill F",
+      "score": 45,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/silent-hill-f-450f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "chronos-the-new-dawn-2c5d",
+      "name": "Chronos The New Dawn",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/chronos-the-new-dawn-2c5d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "moonlighter-2-8e02",
+      "name": "Moonlighter 2",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/moonlighter-2-8e02.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "black-myth-zongkui-dab4",
+      "name": "Black Myth Zongkui",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/black-myth-zongkui-dab4.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "american-arcadia-f5ae",
+      "name": "American Arcadia",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/american-arcadia-f5ae.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "signalis-4056",
+      "name": "Signalis",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/signalis-4056.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "card-shark-02ce",
+      "name": "Card Shark",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/card-shark-02ce.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "kingdom-new-lands-15a8",
+      "name": "Kingdom New Lands",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/kingdom-new-lands-15a8.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "pkm-volt-white-2-95a2",
+      "name": "pkm_volt_white_2",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/pkm-volt-white-2-95a2.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "metalgearsoliddeltasnakeeater-d6b6",
+      "name": "MetalGearSolidDeltaSnakeEater",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/metalgearsoliddeltasnakeeater-d6b6.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "shinobiartofvengeance-958c",
+      "name": "ShinobiArtOfVengeance",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/shinobiartofvengeance-958c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "lost-soul-aside-a8af",
+      "name": "Lost Soul Aside",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/lost-soul-aside-a8af.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "borderlands-4-4d1e",
+      "name": "Borderlands 4",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/borderlands-4-4d1e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "hell-is-us-8919",
+      "name": "Hell Is Us",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/hell-is-us-8919.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dark-souls-iii-the-ringed-city-dlc-5b21",
+      "name": "Dark Souls III The Ringed City DLC",
+      "score": 88,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dark-souls-iii-the-ringed-city-dlc-5b21.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "trails-in-the-sky-1st-chapter-ffb6",
+      "name": "Trails In The Sky 1st Chapter",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/trails-in-the-sky-1st-chapter-ffb6.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "final-fantasy-tactics-the-ivalice-chronicles-4612",
+      "name": "Final Fantasy Tactics - The Ivalice Chronicles",
+      "score": 83,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "studio": "Square Enix",
+        "year": "2025",
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/final-fantasy-tactics-the-ivalice-chronicles-4612.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "pokemonlegendsza-97e8",
+      "name": "PokémonLegendsZA",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Consoles"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/pokemonlegendsza-97e8.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "arc-raiders-8135",
+      "name": "Arc Raiders",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/arc-raiders-8135.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "inazuma-eleven-victory-road-5f5f",
+      "name": "Inazuma Eleven Victory Road",
+      "score": 85,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "director": "Akihiro Hino",
+        "studio": "Level 5",
+        "year": "2025",
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/inazuma-eleven-victory-road-5f5f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "donkeykongbananza-073d",
+      "name": "DonkeyKongBananza",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Consoles"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/donkeykongbananza-073d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "absolum-0d69",
+      "name": "Absolum",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/absolum-0d69.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "constance-c83f",
+      "name": "Constance",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/constance-c83f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "death-howl-bd05",
+      "name": "Death Howl",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/death-howl-bd05.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "where-winds-meet-b3c5-2",
+      "name": "Where Winds Meet",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/where-winds-meet-b3c5-2.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "abiotic-factor-b065",
+      "name": "Abiotic Factor",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/abiotic-factor-b065.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "sektori-97db",
+      "name": "Sektori",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/sektori-97db.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dragon-quest-vii-reimagined-demo-d1d4",
+      "name": "Dragon Quest VII Reimagined Demo",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dragon-quest-vii-reimagined-demo-d1d4.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "blueprince-bfeb",
+      "name": "BluePrince",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/blueprince-bfeb.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "doomthedarkages-6ba9",
+      "name": "DoomTheDarkAges",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/doomthedarkages-6ba9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "peak-c83d",
+      "name": "Peak",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/peak-c83d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "swordofthesea-faee",
+      "name": "SwordOfTheSea",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/swordofthesea-faee.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dragonquesti-ii-0687",
+      "name": "DragonQuestI&II",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dragonquesti-ii-0687.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dragonquestiii-3834",
+      "name": "DragonQuestIII",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/dragonquestiii-3834.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "rematch-032d",
+      "name": "Rematch",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/rematch-032d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "routine-4822",
+      "name": "Routine",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/routine-4822.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "nioh-3-eff9",
+      "name": "Nioh 3",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/nioh-3-eff9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dragon-quest-vii-reimagined-2789",
+      "name": "Dragon Quest VII Reimagined",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dragon-quest-vii-reimagined-2789.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-adventures-of-elliot-the-millennium-tales-33ee",
+      "name": "The Adventures of Elliot: The Millennium Tales",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "studio": "Square Enix",
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-adventures-of-elliot-the-millennium-tales-33ee.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "resident-evil-7-37f5",
+      "name": "Resident Evil 7",
+      "score": 79,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/resident-evil-7-37f5.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "resident-evil-9-requiem-5844",
+      "name": "Resident Evil 9 Requiem",
+      "score": 84,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "year": "2026",
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/resident-evil-9-requiem-5844.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "resident-evil-8-village-58a2",
+      "name": "Resident Evil 8 Village",
+      "score": 74,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/resident-evil-8-village-58a2.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "sekiro-shadows-die-twice-4edc",
+      "name": "Sekiro: Shadows Die Twice",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/sekiro-shadows-die-twice-4edc.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "inside-8dee",
+      "name": "Inside",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/inside-8dee.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "ico-92db",
+      "name": "Ico",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Consoles"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ico-92db.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "return-of-the-obra-dinn-8ff1",
+      "name": "Return of the Obra Dinn",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/return-of-the-obra-dinn-8ff1.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-witness-5d2f",
+      "name": "The Witness",
+      "score": 50,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-witness-5d2f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "sifu-8194",
+      "name": "Sifu",
+      "score": 68,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/sifu-8194.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "abzu-54f0",
+      "name": "Abzu",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/abzu-54f0.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "katana-zero-4df9",
+      "name": "Katana ZERO",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/katana-zero-4df9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "hyper-light-drifter-791f",
+      "name": "Hyper Light Drifter",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/hyper-light-drifter-791f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "titanfall-2-0b1b",
+      "name": "Titanfall 2",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/titanfall-2-0b1b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "mass-effect-2-14c8",
+      "name": "Mass Effect 2",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/mass-effect-2-14c8.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "bioshock-bb79",
+      "name": "BioShock",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/bioshock-bb79.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "portal-2-3bf6",
+      "name": "Portal 2",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/portal-2-3bf6.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "super-mario-odyssey-8534",
+      "name": "Super Mario Odyssey",
+      "score": 79,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Consoles"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/super-mario-odyssey-8534.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "horizon-zero-dawn-caec",
+      "name": "Horizon Zero Dawn",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/horizon-zero-dawn-caec.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "half-life-2-783b",
+      "name": "Half-Life 2",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/half-life-2-783b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "okami-aa27",
+      "name": "Okami",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/okami-aa27.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "spider-man-miles-morales-0aae",
+      "name": "Spider-Man: Miles Morales",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/spider-man-miles-morales-0aae.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "subnautica-a59a",
+      "name": "Subnautica",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/subnautica-a59a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "metroid-dread-cb6b",
+      "name": "Metroid Dread",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Consoles"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/metroid-dread-cb6b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "cuphead-89e9",
+      "name": "Cuphead",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/cuphead-89e9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "nioh-2-d108",
+      "name": "Nioh 2",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/nioh-2-d108.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "blue-prince-2bda-2",
+      "name": "Blue Prince",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/blue-prince-2bda-2.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "pokopia-d993",
+      "name": "Pokopia",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "year": "2026",
+        "exclusivity": "Consoles"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/pokopia-d993.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "monster-hunter-stories-3-8f25",
+      "name": "Monster Hunter Stories 3",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/monster-hunter-stories-3-8f25.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-blood-of-dawnwalker-89ab",
+      "name": "The Blood of Dawnwalker",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-blood-of-dawnwalker-89ab.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "saros-c9fb",
+      "name": "Saros",
+      "score": 93,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "studio": "Housemarque",
+        "year": "2026",
+        "exclusivity": "Consoles",
+        "criticElements": "must_play_over_90"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/saros-c9fb.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "order-of-the-sinking-star-883e",
+      "name": "Order of the Sinking Star",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": "Mac/PC"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/order-of-the-sinking-star-883e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "final-fantasy-xvi-5c3a-2",
+      "name": "Final Fantasy XVI",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/final-fantasy-xvi-5c3a-2.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "black-myth-wukong-edac-2",
+      "name": "Black Myth Wukong",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/black-myth-wukong-edac-2.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "clair-obscur-expedition-33-16c9-2",
+      "name": "Clair Obscur Expedition 33",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/clair-obscur-expedition-33-16c9-2.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "resident-evil-veronica-60b5",
+      "name": "Resident Evil Veronica",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/resident-evil-veronica-60b5.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "fable-c839",
+      "name": "Fable",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/fable-c839.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "final-fantasy-vii-rebellion-7c5a",
+      "name": "Final Fantasy VII Rebellion",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/final-fantasy-vii-rebellion-7c5a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "god-of-war-laufey-4b09",
+      "name": "God of War Laufey",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/god-of-war-laufey-4b09.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "control-23ea",
+      "name": "Control",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/control-23ea.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "resonant-5239",
+      "name": "Resonant",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/resonant-5239.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "stellar-blade-blood-rain-d12e",
+      "name": "Stellar Blade Blood Rain",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/stellar-blade-blood-rain-d12e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "persona-6-resonance-47f1",
+      "name": "Persona 6 Resonance",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/persona-6-resonance-47f1.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "a-plague-tale-legacy-c5d9",
+      "name": "A Plague Tale Legacy",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/a-plague-tale-legacy-c5d9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "stranger-than-heaven-a7c2",
+      "name": "Stranger Than Heaven",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/stranger-than-heaven-a7c2.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "persona-4-revival-c7ba",
+      "name": "Persona 4 Revival",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/persona-4-revival-c7ba.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "no-rest-for-the-wicked-4c58",
+      "name": "No Rest for the Wicked",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/no-rest-for-the-wicked-4c58.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "resident-evil-veronica-b897",
+      "name": "Resident Evil Veronica",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/resident-evil-veronica-b897.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "fable-81e2",
+      "name": "Fable",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/fable-81e2.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "final-fantasy-vii-rebellion-4b69",
+      "name": "Final Fantasy VII Rebellion",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/final-fantasy-vii-rebellion-4b69.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "god-of-war-laufey-d92e",
+      "name": "God of War Laufey",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/god-of-war-laufey-d92e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "control-ae9e",
+      "name": "Control",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/control-ae9e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "resonant-bf53",
+      "name": "Resonant",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/resonant-bf53.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "stellar-blade-blood-rain-c7cc",
+      "name": "Stellar Blade Blood Rain",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/stellar-blade-blood-rain-c7cc.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "persona-6-resonance-3ac2",
+      "name": "Persona 6 Resonance",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/persona-6-resonance-3ac2.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "a-plague-tale-legacy-9e00",
+      "name": "A Plague Tale Legacy",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/a-plague-tale-legacy-9e00.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "stranger-than-heaven-1e12",
+      "name": "Stranger Than Heaven",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/stranger-than-heaven-1e12.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "persona-4-revival-88f4",
+      "name": "Persona 4 Revival",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/persona-4-revival-88f4.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "no-rest-for-the-wicked-24c1",
+      "name": "No Rest for the Wicked",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "exclusivity": null,
+        "criticElements": ""
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@74ec5580f422c8d6143ad73964d2a7b66c86a6ee/no-rest-for-the-wicked-24c1.jpg"
+      },
+      "notes": null
+    }
+  ]
+}

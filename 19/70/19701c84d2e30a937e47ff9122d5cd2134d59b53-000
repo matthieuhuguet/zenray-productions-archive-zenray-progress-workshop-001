@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="582" height="471" viewBox="0 0 582 471" fill="none">
+  <defs>
+    <linearGradient id="backGrad" x1="291" y1="7" x2="291" y2="205" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#55BDEA"/>
+      <stop offset="0.46" stop-color="#37A9DC"/>
+      <stop offset="1" stop-color="#258FCB"/>
+    </linearGradient>
+    <linearGradient id="frontGrad" x1="291" y1="87" x2="291" y2="458" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8DDEFB"/>
+      <stop offset="0.12" stop-color="#7FD4F6"/>
+      <stop offset="0.52" stop-color="#5EBFEA"/>
+      <stop offset="1" stop-color="#33A3DB"/>
+    </linearGradient>
+    <linearGradient id="frontTopGlow" x1="291" y1="87" x2="291" y2="205" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.22"/>
+      <stop offset="0.42" stop-color="#FFFFFF" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <g>
+    <path d="M52 7H202C222.5 7 227.2 26.8 236.2 35.3C243.1 42 253.9 47 267 47H538C555.7 47 570 61.3 570 79V418C570 440.1 552.1 458 530 458H52C29.9 458 12 440.1 12 418V47C12 24.9 29.9 7 52 7Z" fill="url(#backGrad)"/>
+    <path d="M50 87H532C553 87 570 104 570 125V419C570 440.5 552.5 458 531 458H51C29.5 458 12 440.5 12 419V125C12 104 29 87 50 87Z" fill="url(#frontGrad)"/>
+    <path d="M50 87H532C553 87 570 104 570 125V419C570 440.5 552.5 458 531 458H51C29.5 458 12 440.5 12 419V125C12 104 29 87 50 87Z" fill="url(#frontTopGlow)"/>
+  </g>
+</svg>

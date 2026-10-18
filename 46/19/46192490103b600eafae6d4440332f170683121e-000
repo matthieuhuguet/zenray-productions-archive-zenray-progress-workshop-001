@@ -1,0 +1,2661 @@
+{
+  "v": 1,
+  "category": "anime-manga",
+  "label": "Anime & Manga",
+  "items": [
+    {
+      "id": "dan-da-dan-s1-ec8a",
+      "name": "Dan Da Dan S1",
+      "score": 87,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dan-da-dan-s1-ec8a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "trigun-2cd6",
+      "name": "Trigun",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/trigun-2cd6.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "zankyou-no-terror-03dc",
+      "name": "Zankyou no Terror",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/zankyou-no-terror-03dc.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "shingeki-no-kyojin-s01-1862",
+      "name": "Shingeki No Kyojin S01",
+      "score": 100,
+      "status": "done",
+      "tags": [
+        "Mighty"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/shingeki-no-kyojin-s01-1862.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "made-in-abyss-6432",
+      "name": "Made in Abyss",
+      "score": 89,
+      "status": "done",
+      "tags": [
+        "Mighty"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/made-in-abyss-6432.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "violet-evergarden-9be4",
+      "name": "Violet Evergarden",
+      "score": 97,
+      "status": "done",
+      "tags": [
+        "Mighty"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/violet-evergarden-9be4.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "blue-giant-99d1",
+      "name": "Blue Giant",
+      "score": 82,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/blue-giant-99d1.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "uzumaki-27a7",
+      "name": "Uzumaki",
+      "score": 70,
+      "status": "done",
+      "tags": [
+        "Strong"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/uzumaki-27a7.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "my-hero-academia-4ad8",
+      "name": "My Hero Academia",
+      "score": 86,
+      "status": "done",
+      "tags": [
+        "Mighty"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/my-hero-academia-4ad8.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "naruto-9d90",
+      "name": "Naruto",
+      "score": 88,
+      "status": "done",
+      "tags": [
+        "Mighty"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/naruto-9d90.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "tokyo-ghoul-5b6b",
+      "name": "Tokyo Ghoul",
+      "score": 79,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/tokyo-ghoul-5b6b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "gantz-ccf6",
+      "name": "Gantz",
+      "score": 72,
+      "status": "done",
+      "tags": [
+        "Fair"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/gantz-ccf6.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "chainsaw-man-manga-b683",
+      "name": "Chainsaw Man Manga",
+      "score": 86,
+      "status": "done",
+      "tags": [
+        "Mighty"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/chainsaw-man-manga-b683.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dungeon-meshi-c38f",
+      "name": "Dungeon Meshi",
+      "score": 80,
+      "status": "done",
+      "tags": [
+        "Fair"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dungeon-meshi-c38f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "monogatari-c03d",
+      "name": "Monogatari",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/monogatari-c03d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "bleach-thousand-year-blood-war-7db0",
+      "name": "Bleach Thousand Year Blood War",
+      "score": 96,
+      "status": "done",
+      "tags": [
+        "Mighty"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/bleach-thousand-year-blood-war-7db0.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "ao-no-exorcist-efd0",
+      "name": "Ao no exorcist",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ao-no-exorcist-efd0.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "kuroshitsuji-0341",
+      "name": "Kuroshitsuji",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/kuroshitsuji-0341.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "noragami-f3c2",
+      "name": "Noragami",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/noragami-f3c2.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "angel-s-egg-e458",
+      "name": "Angel S Egg",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/angel-s-egg-e458.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "jin-roh-the-wolf-brigade-087f",
+      "name": "Jin-Roh: The Wolf Brigade",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/jin-roh-the-wolf-brigade-087f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "look-back-29b3",
+      "name": "Look Back",
+      "score": 87,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/look-back-29b3.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "ranma-1-2-dfc8",
+      "name": "Ranma 1/2",
+      "score": 74,
+      "status": "done",
+      "tags": [
+        "Strong"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ranma-1-2-dfc8.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "hunter-x-hunter-af8e",
+      "name": "Hunter X Hunter",
+      "score": 86,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/hunter-x-hunter-af8e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "ousama-ranking-b531",
+      "name": "Ousama Ranking",
+      "score": 87,
+      "status": "done",
+      "tags": [
+        "Mighty"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ousama-ranking-b531.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "frieren-a72c",
+      "name": "Frieren",
+      "score": 79,
+      "status": "done",
+      "tags": [
+        "Fair"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/frieren-a72c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "full-metal-alchemist-a17d",
+      "name": "Full Metal Alchemist",
+      "score": 89,
+      "status": "done",
+      "tags": [
+        "Mighty"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/full-metal-alchemist-a17d.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "cyberpunk-edgerunners-2bc7",
+      "name": "Cyberpunk: Edgerunners",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/cyberpunk-edgerunners-2bc7.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "inu-oh-5b48",
+      "name": "INU-OH",
+      "score": 82,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/inu-oh-5b48.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "le-vent-se-leve-4831",
+      "name": "Le Vent Se Leve",
+      "score": 99,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/le-vent-se-leve-4831.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "suzume-7cf0",
+      "name": "Suzume",
+      "score": 96,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/suzume-7cf0.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "le-voyage-de-chihiro-1cce",
+      "name": "Le Voyage de chihiro",
+      "score": 89,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/le-voyage-de-chihiro-1cce.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "totoro-6e9c",
+      "name": "Totoro",
+      "score": 96,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/totoro-6e9c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "your-name-f48d",
+      "name": "Your Name",
+      "score": 95,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/your-name-f48d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "les-enfants-loups-ame-yuki-ba7f",
+      "name": "Les Enfants loups, Ame & Yuki",
+      "score": 87,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/les-enfants-loups-ame-yuki-ba7f.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "ponyo-sur-la-falaise-ac09",
+      "name": "Ponyo sur la Falaise",
+      "score": 89,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ponyo-sur-la-falaise-ac09.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "kiki-la-petite-sorciere-aea8",
+      "name": "Kiki la petite sorcière",
+      "score": 85,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/kiki-la-petite-sorciere-aea8.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "perfect-blue-f160",
+      "name": "Perfect Blue",
+      "score": 83,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/perfect-blue-f160.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "ghost-in-the-shell-74eb",
+      "name": "Ghost in the shell",
+      "score": 75,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ghost-in-the-shell-74eb.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "akira-399d",
+      "name": "Akira",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/akira-399d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dr-stone-05c7",
+      "name": "Dr. Stone",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dr-stone-05c7.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "sakamoto-days-0131",
+      "name": "Sakamoto Days",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/sakamoto-days-0131.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "hajime-no-ippo-cb76",
+      "name": "Hajime no Ippo",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/hajime-no-ippo-cb76.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "bakuman-716c",
+      "name": "Bakuman",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/bakuman-716c.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "gurren-lagann-387a",
+      "name": "Gurren Lagann",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/gurren-lagann-387a.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-heike-story-9695",
+      "name": "The Heike Story",
+      "score": 89,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-heike-story-9695.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "blue-eye-samurai-150c",
+      "name": "Blue Eye Samurai",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/blue-eye-samurai-150c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "miyazaki-et-le-heron-ee6d",
+      "name": "Miyazaki et le Heron",
+      "score": 98,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/miyazaki-et-le-heron-ee6d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "10-years-with-hayao-miyazaki-0d03",
+      "name": "10 Years With Hayao Miyazaki",
+      "score": 98,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/10-years-with-hayao-miyazaki-0d03.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "no-game-no-life-0291",
+      "name": "No Game No Life",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/no-game-no-life-0291.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "akame-ga-kill-4ca0",
+      "name": "Akame Ga Kill",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/akame-ga-kill-4ca0.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "rascal-does-not-dream-of-bunny-girl-senpai-4f2f",
+      "name": "Rascal Does Not Dream of Bunny Girl Senpai",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/rascal-does-not-dream-of-bunny-girl-senpai-4f2f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "great-teacher-onizuka-gto-51af",
+      "name": "Great Teacher Onizuka GTO",
+      "score": 87,
+      "status": "done",
+      "tags": [
+        "Mighty"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/great-teacher-onizuka-gto-51af.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "angel-beats-5413",
+      "name": "Angel Beats!",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/angel-beats-5413.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "kill-la-kill-9817",
+      "name": "Kill la Kill",
+      "score": 81,
+      "status": "done",
+      "tags": [
+        "Strong"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/kill-la-kill-9817.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "tokyo-revengers-226c",
+      "name": "Tokyo Revengers",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/tokyo-revengers-226c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "jujutsu-kaisen-0-8b0f",
+      "name": "Jujutsu Kaisen 0",
+      "score": 88,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/jujutsu-kaisen-0-8b0f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-first-slam-dunk-06a2",
+      "name": "The First Slam Dunk",
+      "score": 88,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-first-slam-dunk-06a2.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "detective-conan-black-iron-submarine-5bd5",
+      "name": "Detective Conan: Black Iron Submarine",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/detective-conan-black-iron-submarine-5bd5.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "le-garcon-et-le-heron-3978",
+      "name": "Le Garcon et le Heron",
+      "score": 92,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/le-garcon-et-le-heron-3978.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "keep-your-hands-off-eizouken-5203",
+      "name": "Keep Your Hands Off Eizouken",
+      "score": 94,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/keep-your-hands-off-eizouken-5203.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "showa-genroku-rakugo-shinju-c20e",
+      "name": "Showa Genroku Rakugo Shinju",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/showa-genroku-rakugo-shinju-c20e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "golden-kamuy-1522",
+      "name": "Golden Kamuy",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/golden-kamuy-1522.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "ooku-90bb",
+      "name": "Ooku",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ooku-90bb.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "ansatsu-kyoshitsu-b68d",
+      "name": "Ansatsu kyōshitsu",
+      "score": 82,
+      "status": "done",
+      "tags": [
+        "Strong"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ansatsu-kyoshitsu-b68d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "solo-leveling-7488",
+      "name": "Solo Leveling",
+      "score": 70,
+      "status": "done",
+      "tags": [
+        "Fair"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/solo-leveling-7488.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "lazarus-5e9f",
+      "name": "Lazarus",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/lazarus-5e9f.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "redline-523e",
+      "name": "Redline",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/redline-523e.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "tunnel-to-summer-f069",
+      "name": "Tunnel to Summer",
+      "score": 76,
+      "status": "done",
+      "tags": [
+        "Strong"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/tunnel-to-summer-f069.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "summer-ghost-0c2d",
+      "name": "Summer Ghost",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/summer-ghost-0c2d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "death-note-5785",
+      "name": "Death Note",
+      "score": 94,
+      "status": "done",
+      "tags": [
+        "Mighty"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/death-note-5785.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "platinum-end-1768",
+      "name": "Platinum End",
+      "score": 33,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/platinum-end-1768.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dragon-ball-z-1004",
+      "name": "Dragon Ball Z",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dragon-ball-z-1004.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "vigilante-boku-no-hero-academia-illegals-f837",
+      "name": "Vigilante Boku no Hero Academia Illegals",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/vigilante-boku-no-hero-academia-illegals-f837.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "yaiba-samurai-legend-8127",
+      "name": "Yaiba Samurai Legend",
+      "score": 68,
+      "status": "done",
+      "tags": [
+        "Fair"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/yaiba-samurai-legend-8127.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "kusuriya-no-hitorigoto-658b",
+      "name": "Kusuriya no Hitorigoto",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/kusuriya-no-hitorigoto-658b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "legendofthegalacticheroess01-89c6",
+      "name": "LegendOfTheGalacticHeroesS01",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/legendofthegalacticheroess01-89c6.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "kaiju-8-3bd2",
+      "name": "Kaiju 8",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/kaiju-8-3bd2.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "my-oni-girl-3370",
+      "name": "My Oni Girl",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/my-oni-girl-3370.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "hoshi-wo-ou-kodomo-af44",
+      "name": "Hoshi Wo Ou Kodomo",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/hoshi-wo-ou-kodomo-af44.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "maquia-when-the-promiser-flower-blooms-1a0c",
+      "name": "Maquia When The Promiser Flower Blooms",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "mononoke-phantom-in-the-rain-d014",
+      "name": "Mononoke Phantom In The Rain",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/mononoke-phantom-in-the-rain-d014.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "kaguya-sama-love-is-war-s03-e2f4",
+      "name": "Kaguya Sama : Love is War S03",
+      "score": 88,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/kaguya-sama-love-is-war-s03-e2f4.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "megalo-box-48ac",
+      "name": "Megalo Box",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/megalo-box-48ac.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "miss-kobayashi-s-dragon-maid-c37c",
+      "name": "Miss Kobayashi's Dragon Maid",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/miss-kobayashi-s-dragon-maid-c37c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "mob-psycho-100-s3-c03e",
+      "name": "Mob Psycho 100 S3",
+      "score": 75,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/mob-psycho-100-s3-c03e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "psycho-pass-s01-6007",
+      "name": "Psycho Pass S01",
+      "score": 95,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/psycho-pass-s01-6007.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "odd-taxi-1643",
+      "name": "Odd Taxi",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/odd-taxi-1643.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "oshi-no-ko-d2fa",
+      "name": "Oshi No Ko",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/oshi-no-ko-d2fa.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "belle-1791",
+      "name": "Belle",
+      "score": 91,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/belle-1791.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "jujutsu-kaisen-premature-death-s02-c3bb",
+      "name": "Jujutsu Kaisen Premature Death S02",
+      "score": 96,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/jujutsu-kaisen-premature-death-s02-c3bb.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "summertime-render-cc69",
+      "name": "Summertime Render",
+      "score": 86,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/summertime-render-cc69.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "la-colline-aux-coquelicots-049d",
+      "name": "La Colline aux Coquelicots",
+      "score": 91,
+      "status": "done",
+      "tags": [
+        "Mighty"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/la-colline-aux-coquelicots-049d.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "le-tombeau-des-lucioles-e68b",
+      "name": "Le Tombeau des Lucioles",
+      "score": 89,
+      "status": "done",
+      "tags": [
+        "Mighty"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/le-tombeau-des-lucioles-e68b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "monster-e63d",
+      "name": "Monster",
+      "score": 83,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/monster-e63d.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "steins-gate-b035",
+      "name": "Steins Gate",
+      "score": 84,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/steins-gate-b035.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "fruit-basket-df22",
+      "name": "Fruit Basket",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/fruit-basket-df22.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "sangatsu-no-lion-79ee",
+      "name": "Sangatsu no Lion",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/sangatsu-no-lion-79ee.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "code-geass-hangyaku-no-lelouch-r2-46cf",
+      "name": "Code Geass: Hangyaku no Lelouch R2",
+      "score": 85,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/code-geass-hangyaku-no-lelouch-r2-46cf.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "mob-psycho-100-ii-4744",
+      "name": "Mob Psycho 100 II",
+      "score": 70,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/mob-psycho-100-ii-4744.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "bocchi-the-rock-cb8f",
+      "name": "Bocchi the Rock!",
+      "score": 80,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/bocchi-the-rock-cb8f.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "cowboy-bebop-1ef0",
+      "name": "Cowboy Bebop",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/cowboy-bebop-1ef0.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "kaguya-sama-love-is-war-the-first-kiss-that-never-ends-7985",
+      "name": "Kaguya-Sama : Love is War : The First Kiss That Never Ends",
+      "score": 78,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/kaguya-sama-love-is-war-the-first-kiss-that-never-ends-7985.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "mushishi-s1-fa9d",
+      "name": "Mushishi S1",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/mushishi-s1-fa9d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "free-d321",
+      "name": "Free!",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/free-d321.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "howl-no-ugoku-shiro-1455",
+      "name": "Howl No Ugoku Shiro",
+      "score": 90,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/howl-no-ugoku-shiro-1455.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "mononoke-hime-7e8d",
+      "name": "Mononoke Hime",
+      "score": 94,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/mononoke-hime-7e8d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "jujutsu-kaisen-shibuya-incident-s02-f1c1",
+      "name": "Jujutsu Kaisen Shibuya Incident S02",
+      "score": 95,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/jujutsu-kaisen-shibuya-incident-s02-f1c1.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "jujutsu-kaisen-s01-0942",
+      "name": "Jujutsu Kaisen S01",
+      "score": 86,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/jujutsu-kaisen-s01-0942.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "chainsaw-man-s01-fc6c",
+      "name": "Chainsaw Man S01",
+      "score": 90,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/chainsaw-man-s01-fc6c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "shigatsu-wa-kimi-no-uso-2abe",
+      "name": "Shigatsu wa kimi no uso",
+      "score": 76,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/shigatsu-wa-kimi-no-uso-2abe.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "haikyu-22b5",
+      "name": "Haikyu!!",
+      "score": 70,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/haikyu-22b5.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "ano-hana-09f8",
+      "name": "Ano Hana",
+      "score": 72,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ano-hana-09f8.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "gyoko-no-nikuko-chan-0405",
+      "name": "Gyokō no Nikuko-chan",
+      "score": 85,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/gyoko-no-nikuko-chan-0405.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "penguin-highway-ea8c",
+      "name": "Penguin Highway",
+      "score": 83,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/penguin-highway-ea8c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "samurai-champloo-b2d5",
+      "name": "Samurai Champloo",
+      "score": 94,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/samurai-champloo-b2d5.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "golden-boy-95ac",
+      "name": "Golden Boy",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/golden-boy-95ac.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dan-da-dan-s02-0992",
+      "name": "Dan Da Dan S02",
+      "score": 82,
+      "status": "done",
+      "tags": [
+        "Fair"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dan-da-dan-s02-0992.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "shinsekai-yori-3618",
+      "name": "Shinsekai Yori",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/shinsekai-yori-3618.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "houseki-no-kuni-9423",
+      "name": "Houseki No Kuni",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/houseki-no-kuni-9423.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "takopii-no-genzai-306a",
+      "name": "Takopii No Genzai",
+      "score": 86,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/takopii-no-genzai-306a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "fire-force-45f8",
+      "name": "Fire Force",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/fire-force-45f8.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "black-lagoon-9ba2",
+      "name": "Black Lagoon",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/black-lagoon-9ba2.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "kaiji-2f68",
+      "name": "kaiji",
+      "score": 85,
+      "status": "done",
+      "tags": [
+        "Strong"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/kaiji-2f68.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "another-530c",
+      "name": "Another",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/another-530c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "ghost-in-the-shell-stand-alone-complex-583c",
+      "name": "Ghost In The Shell Stand Alone Complex",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ghost-in-the-shell-stand-alone-complex-583c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "darling-in-the-franxx-add6",
+      "name": "Darling In The Franxx",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/darling-in-the-franxx-add6.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "soul-eater-efed",
+      "name": "Soul Eater",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/soul-eater-efed.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "durarara-8871",
+      "name": "Durarara",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/durarara-8871.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "hyouka-bdd9",
+      "name": "Hyouka",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/hyouka-bdd9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "usagi-drop-1a86",
+      "name": "Usagi Drop",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/usagi-drop-1a86.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "my-dress-up-darling-ab9d",
+      "name": "My Dress Up Darling",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/my-dress-up-darling-ab9d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-disastrous-life-saiki-k-b9e2",
+      "name": "The Disastrous Life Saiki K",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-disastrous-life-saiki-k-b9e2.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "world-s-end-harem-9422",
+      "name": "World S End Harem",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/world-s-end-harem-9422.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dead-dead-demons-dededede-destruction-9037",
+      "name": "Dead Dead Demons Dededede Destruction",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dead-dead-demons-dededede-destruction-9037.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-summer-hikari-died-27cd",
+      "name": "The Summer Hikari Died",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "sekiro-no-defeat-a874",
+      "name": "Sekiro No Defeat",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/sekiro-no-defeat-a874.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "somali-and-the-forest-spirit-d88b",
+      "name": "Somali And The Forest Spirit",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/somali-and-the-forest-spirit-d88b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "yu-gi-oh-5f97",
+      "name": "Yu-Gi-Oh!",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/yu-gi-oh-5f97.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "pokemon-b830",
+      "name": "Pokémon",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/pokemon-b830.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "neon-genesis-evangelion-1cc6",
+      "name": "Neon Genesis Evangelion",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/neon-genesis-evangelion-1cc6.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "ashita-no-joe-0920",
+      "name": "Ashita no Joe",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ashita-no-joe-0920.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "inuyasha-6ec3",
+      "name": "Inuyasha",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/inuyasha-6ec3.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "yu-yu-hakusho-73ea",
+      "name": "Yu Yu Hakusho",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/yu-yu-hakusho-73ea.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "rurouni-kenshin-f08d",
+      "name": "Rurouni Kenshin",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/rurouni-kenshin-f08d.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "tengoku-daimakyou-893b",
+      "name": "Tengoku Daimakyou",
+      "score": 82,
+      "status": "done",
+      "tags": [
+        "Fair"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/tengoku-daimakyou-893b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "shingeki-no-kyojin-s02-2ae4",
+      "name": "Shingeki No Kyojin S02",
+      "score": 94,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/shingeki-no-kyojin-s02-2ae4.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "shingeki-no-kyojin-s03-cf2c",
+      "name": "Shingeki No Kyojin S03",
+      "score": 98,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/shingeki-no-kyojin-s03-cf2c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "shingeki-no-kyojin-s04-a14d",
+      "name": "Shingeki No Kyojin S04",
+      "score": 87,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/shingeki-no-kyojin-s04-a14d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "my-hero-academia-s08-5659",
+      "name": "My Hero Academia S08",
+      "score": 93,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/my-hero-academia-s08-5659.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "spyxfamilys03-6e9f",
+      "name": "SpyXFamilyS03",
+      "score": 85,
+      "status": "done",
+      "tags": [
+        "Strong"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/spyxfamilys03-6e9f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "isekai-ojisan-s01-3531",
+      "name": "Isekai Ojisan S01",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/isekai-ojisan-s01-3531.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "tekkonkinkreet-6a18",
+      "name": "Tekkonkinkreet",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/tekkonkinkreet-6a18.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "mind-game-5460",
+      "name": "Mind Game",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/mind-game-5460.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "colorful-2010-b0df",
+      "name": "Colorful 2010",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/colorful-2010-b0df.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "mai-mai-miracle-0660",
+      "name": "Mai Mai Miracle",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/mai-mai-miracle-0660.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "a-letter-to-momo-0dff",
+      "name": "A Letter to Momo",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/a-letter-to-momo-0dff.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "dans-un-recoin-de-ce-monde-7141",
+      "name": "Dans un recoin de ce monde",
+      "score": 85,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dans-un-recoin-de-ce-monde-7141.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "on-gaku-our-sound-96ab",
+      "name": "On-Gaku: Our Sound",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/on-gaku-our-sound-96ab.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "barakamon-183c",
+      "name": "Barakamon",
+      "score": 87,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/barakamon-183c.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "crusher-joe-12c0",
+      "name": "Crusher Joe",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/crusher-joe-12c0.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "blue-period-9eda",
+      "name": "Blue Period",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/blue-period-9eda.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "real-8e16",
+      "name": "Real",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/real-8e16.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "koko-no-hito-7e0d",
+      "name": "Kokō no Hito",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "frierens02-095e",
+      "name": "FrierenS02",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/frierens02-095e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "orbonthemovementsoftheearths01-6ba8",
+      "name": "OrbOnTheMovementsOfTheEarthS01",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/orbonthemovementsoftheearths01-6ba8.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "promare-e061",
+      "name": "Promare",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/promare-e061.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "aldnoah-zero-083a",
+      "name": "Aldnoah Zero",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/aldnoah-zero-083a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "blue-exorcist-ae21",
+      "name": "Blue Exorcist",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/blue-exorcist-ae21.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "devilman-crybaby-ac16",
+      "name": "Devilman CryBaby",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/devilman-crybaby-ac16.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "erased-b948",
+      "name": "Erased",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/erased-b948.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "levius-1-6ceb",
+      "name": "Levius (1)",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/levius-1-6ceb.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "bug-1-3d93",
+      "name": "Bug (1)",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/bug-1-3d93.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "l-incal-1-1dc3",
+      "name": "L’Incal (1)",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "blue-period-1-b30d",
+      "name": "Blue Period (1)",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/blue-period-1-b30d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "detective-conan-1-8f2e",
+      "name": "Detective Conan (1)",
+      "score": 94,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/detective-conan-1-8f2e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "vagabond-1-e70b",
+      "name": "Vagabond (1)",
+      "score": 89,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/vagabond-1-e70b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "fire-punch-1-02c3",
+      "name": "Fire Punch (1)",
+      "score": 87,
+      "status": "done",
+      "tags": [
+        "Mighty"
+      ],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/fire-punch-1-02c3.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "berserk-1-4540",
+      "name": "Berserk (1)",
+      "score": 86,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/berserk-1-4540.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "vinland-saga-1-9b83",
+      "name": "Vinland Saga (1)",
+      "score": 84,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/vinland-saga-1-9b83.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "one-piece-1-0b5d",
+      "name": "One Piece (1)",
+      "score": 84,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/one-piece-1-0b5d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "kingdom-1-22ec",
+      "name": "Kingdom (1)",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/kingdom-1-22ec.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "slam-dunk-1-d75e",
+      "name": "Slam Dunk (1)",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/slam-dunk-1-d75e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "oyasumi-punpun-1-c320",
+      "name": "Oyasumi Punpun (1)",
+      "score": 75,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "gintama-1-9d24",
+      "name": "Gintama (1)",
+      "score": 75,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/gintama-1-9d24.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "quartier-lointain-1-bd27",
+      "name": "Quartier Lointain (1)",
+      "score": 74,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/quartier-lointain-1-bd27.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "sword-of-the-stranger-94cc",
+      "name": "Sword of the Stranger",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/sword-of-the-stranger-94cc.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "lone-wolf-and-cub-37e4",
+      "name": "Lone Wolf and Cub",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/lone-wolf-and-cub-37e4.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "tatami-galaxy-1e13",
+      "name": "Tatami Galaxy",
+      "score": 96,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/tatami-galaxy-1e13.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "scarlet-et-l-eternite-422c",
+      "name": "Scarlet et l’éternité",
+      "score": 83,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/scarlet-et-l-eternite-422c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "kimetsu-no-yaiba-46c9",
+      "name": "Kimetsu No Yaiba",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/kimetsu-no-yaiba-46c9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "a-new-dawn-35b6",
+      "name": "A New Dawn",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/a-new-dawn-35b6.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "hotarubi-no-mori-e-c917",
+      "name": "Hotarubi no Mori e",
+      "score": 97,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/hotarubi-no-mori-e-c917.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "classroom-elite-05b0",
+      "name": "Classroom Elite",
+      "score": 23,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/classroom-elite-05b0.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "yomi-no-tsugai-92bd",
+      "name": "Yomi no Tsugai",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/yomi-no-tsugai-92bd.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "tongari-boushi-no-atelier-1e52",
+      "name": "Tongari Boushi no Atelier",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/tongari-boushi-no-atelier-1e52.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "natsume-yuujinchou-461a",
+      "name": "Natsume Yuujinchou",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/natsume-yuujinchou-461a.png"
+      },
+      "notes": null
+    },
+    {
+      "id": "akane-banashi-9241",
+      "name": "Akane-Banashi",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/akane-banashi-9241.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "nippon-sangoku-4228",
+      "name": "Nippon Sangoku",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/nippon-sangoku-4228.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "crayon-shin-chan-dcb4",
+      "name": "Crayon Shin-chan",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/crayon-shin-chan-dcb4.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "doraemon-f650",
+      "name": "Doraemon",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/doraemon-f650.jpg"
+      },
+      "notes": null
+    }
+  ]
+}

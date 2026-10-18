@@ -1,0 +1,2441 @@
+{
+  "v": 1,
+  "category": "movies",
+  "label": "Movies, Series & Docs",
+  "items": [
+    {
+      "id": "billionaire-boys-club-7145",
+      "name": "Billionaire Boys Club",
+      "score": 62,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/billionaire-boys-club-7145.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "baby-driver-c356",
+      "name": "Baby Driver",
+      "score": 79,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/baby-driver-c356.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "in-time-e142",
+      "name": "In Time",
+      "score": 61,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/in-time-e142.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-big-short-0f77",
+      "name": "The Big Short",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-big-short-0f77.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-founder-4310",
+      "name": "The Founder",
+      "score": 55,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-founder-4310.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "margin-call-5728",
+      "name": "Margin Call",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/margin-call-5728.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "une-affaire-de-famille-9dbb",
+      "name": "Une affaire de famille",
+      "score": 82,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/une-affaire-de-famille-9dbb.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "hana-bi-e546",
+      "name": "Hana-bi",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/hana-bi-e546.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "l-innocence-monster-500c",
+      "name": "L'Innocence, Monster",
+      "score": 88,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/l-innocence-monster-500c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "la-richesse-pour-tous-planete-finance-le-phenomene-des-mme-w-05d8",
+      "name": "La richesse pour tous | Planète finance Le Phénomène des Mme Watanabe",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "silence-0d18",
+      "name": "Silence",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "realisator": "Martin Scorsese"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/silence-0d18.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "kisoji-highroad-among-mountains-28cf",
+      "name": "Kisoji: Highroad Among Mountains",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "legendary-games-chronicle-final-fantasy-634d",
+      "name": "Legendary Games Chronicle: Final Fantasy",
+      "score": 87,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "rethinking-buddhism-uniting-modern-society-with-compassion-33de",
+      "name": "Rethinking Buddhism: Uniting Modern Society with Compassion",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "wolf-children-kamiichi-toyama-mamoru-hosoda-4d94",
+      "name": "Wolf Children / KAMIICHI, TOYAMA Mamoru Hosoda",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "true-mothers-df75",
+      "name": "True Mothers",
+      "score": 88,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "realisator": "Naomi Kawase"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/true-mothers-df75.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "one-cut-of-the-dead-23bb",
+      "name": "One Cut of the dead",
+      "score": 87,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/one-cut-of-the-dead-23bb.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "netemo-sametemo-asako-i-ii-89fa",
+      "name": "Netemo Sametemo Asako I & II",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/netemo-sametemo-asako-i-ii-89fa.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "aku-wa-sonzai-shinai-9364",
+      "name": "Aku wa Sonzai Shinai",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/aku-wa-sonzai-shinai-9364.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "aru-otoko-a-man-850f",
+      "name": "Aru otoko A Man",
+      "score": 82,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/aru-otoko-a-man-850f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-pursuit-of-happyness-will-smith-a6e7",
+      "name": "The Pursuit of Happyness (Will Smith)",
+      "score": 67,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-pursuit-of-happyness-will-smith-a6e7.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "le-cercle-des-poetes-disparus-838b",
+      "name": "Le Cercle des poètes disparus",
+      "score": 70,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/le-cercle-des-poetes-disparus-838b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "mad-men-0116",
+      "name": "Mad Men",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/mad-men-0116.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "game-of-thrones-b3c6",
+      "name": "Game Of Thrones",
+      "score": 93,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/game-of-thrones-b3c6.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "l-auberge-espagnole-b2f0",
+      "name": "L’Auberge Espagnole",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/l-auberge-espagnole-b2f0.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "we-crashed-c208",
+      "name": "We Crashed",
+      "score": 86,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/we-crashed-c208.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "arcane-5f0a",
+      "name": "Arcane",
+      "score": 79,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/arcane-5f0a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-darjeeling-train-express-f3d9",
+      "name": "The Darjeeling Train Express",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "american-made-barry-seal-ee9b",
+      "name": "American Made (Barry Seal)",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/american-made-barry-seal-ee9b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-horse-whisperer-45dd",
+      "name": "The Horse Whisperer",
+      "score": 86,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-horse-whisperer-45dd.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "la-grande-peur-dans-la-montagne-5b56",
+      "name": "La Grande peur dans la montagne",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/la-grande-peur-dans-la-montagne-5b56.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "better-call-saul-9798",
+      "name": "Better Call Saul",
+      "score": 89,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/better-call-saul-9798.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "breaking-bad-9cd4",
+      "name": "Breaking Bad",
+      "score": 83,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/breaking-bad-9cd4.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "squid-game-s1-e073",
+      "name": "Squid Game S1",
+      "score": 87,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/squid-game-s1-e073.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "fleabag-21a4",
+      "name": "Fleabag",
+      "score": 75,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/fleabag-21a4.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "silicon-valley-b299",
+      "name": "Silicon Valley",
+      "score": 75,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/silicon-valley-b299.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-office-8741",
+      "name": "The Office",
+      "score": 83,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-office-8741.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "narcos-caab",
+      "name": "Narcos",
+      "score": 60,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/narcos-caab.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "black-mirror-9c71",
+      "name": "Black Mirror",
+      "score": 84,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/black-mirror-9c71.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-last-of-us-2b3b",
+      "name": "The Last of Us",
+      "score": 78,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-last-of-us-2b3b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-walking-dead-0bce",
+      "name": "The Walking Dead",
+      "score": 82,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-walking-dead-0bce.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-handmaid-s-tale-la-servante-ecarlate-0bcc",
+      "name": "The Handmaid's Tale : La Servante écarlate",
+      "score": 87,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-handmaid-s-tale-la-servante-ecarlate-0bcc.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "chernobyl-31ff",
+      "name": "Chernobyl",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/chernobyl-31ff.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dans-un-jardin-qu-on-dirait-eternel-every-day-a-good-day-101a",
+      "name": "Dans un jardin qu’on dirait éternel | Every Day A Good Day",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dans-un-jardin-qu-on-dirait-eternel-every-day-a-good-day-101a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "battle-royale-853c",
+      "name": "Battle Royale",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/battle-royale-853c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "love-exposure-a05d",
+      "name": "Love Exposure",
+      "score": 85,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/love-exposure-a05d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "sochite-chichi-ni-naru-9a15",
+      "name": "Sochite Chichi Ni Naru",
+      "score": 84,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "nobody-knows-9588",
+      "name": "Nobody Knows",
+      "score": 87,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "realisator": "Hirokazu Kore-eda (是枝 裕和)"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/nobody-knows-9588.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "drive-my-car-b41c",
+      "name": "Drive My Car",
+      "score": 88,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/drive-my-car-b41c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "les-delices-de-tokyo-403e",
+      "name": "Les Délices de Tokyo",
+      "score": 84,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "realisator": "Naomi Kawase"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/les-delices-de-tokyo-403e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "departures-e356",
+      "name": "Departures",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/departures-e356.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "furyo-02df",
+      "name": "Furyo",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/furyo-02df.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-taste-of-tea-cha-no-aji-5f50",
+      "name": "The Taste of Tea | Cha no Aji",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-taste-of-tea-cha-no-aji-5f50.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "reves-yume-415b",
+      "name": "Rêves | Yume",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/reves-yume-415b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "still-walking-aruitemo-aruitemo-4b42",
+      "name": "Still Walking | Aruitemo aruitemo",
+      "score": 87,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/still-walking-aruitemo-aruitemo-4b42.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "tokyo-sonata-9b3b",
+      "name": "Tokyo Sonata",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/tokyo-sonata-9b3b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "maborosi-e62d",
+      "name": "maborosi",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "realisator": "Hirokazu Kore-eda (是枝 裕和)"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/maborosi-e62d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "shogun-d248",
+      "name": "Shōgun",
+      "score": 89,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/shogun-d248.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "westworld-62c5",
+      "name": "Westworld",
+      "score": 87,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/westworld-62c5.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "hiroshige-blue-3-episodes-de45",
+      "name": "Hiroshige Blue 3 Episodes",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "100-cameras-attack-on-titan-final-episode-3865",
+      "name": "100 Cameras Attack on Titan Final Episode",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "100-cameras-game-developer-capcom-3a82",
+      "name": "100 Cameras Game Developer Capcom",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "jiro-dreams-of-sushi-a10b",
+      "name": "Jiro Dreams of Sushi",
+      "score": 90,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/jiro-dreams-of-sushi-a10b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "midnightdinners-2f4a",
+      "name": "MidnightDinners",
+      "score": 77,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "asura-ac7e",
+      "name": "Asura",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/asura-ac7e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "sominsai-the-end-of-a-1000-year-old-festival-a700",
+      "name": "Sominsai : The End of a 1000-year-old Festival",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/sominsai-the-end-of-a-1000-year-old-festival-a700.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "oei-kurara-eblouissant-the-dazzling-life-of-hokusai-s-daught-882d",
+      "name": "Oei. Kurara (Eblouissant) : The Dazzling Life of Hokusai’s Daughter",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "design-hunting-in-toyama-6f46",
+      "name": "Design Hunting in Toyama",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "i-am-legend-4912",
+      "name": "I Am Legend",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/i-am-legend-4912.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-village-499a",
+      "name": "The Village",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-village-499a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "to-big-to-fail-99e9",
+      "name": "To Big To Fail",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/to-big-to-fail-99e9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "boiler-room-2ada",
+      "name": "Boiler Room",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/boiler-room-2ada.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "tony-robbins-i-m-not-your-guru-06a5",
+      "name": "Tony Robbins, I’m not your guru",
+      "score": 96,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "bref-2-a462",
+      "name": "Bref. 2",
+      "score": 82,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "realisator": "Kyan Khojandi"
+      },
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "flow-86ef",
+      "name": "Flow",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/flow-86ef.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "noma-my-perfect-storm-1ea9",
+      "name": "Noma: My Perfect Storm",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/noma-my-perfect-storm-1ea9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "super-mario-bros-movie-e1e8",
+      "name": "Super Mario Bros. Movie",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/super-mario-bros-movie-e1e8.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "detective-conan-the-million-dollar-pentagram-ea5e",
+      "name": "Detective Conan: The Million-dollar Pentagram",
+      "score": 75,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/detective-conan-the-million-dollar-pentagram-ea5e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "tasogare-seibei-57d1",
+      "name": "Tasogare seibei",
+      "score": 89,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/tasogare-seibei-57d1.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "harakiri-a981",
+      "name": "Harakiri",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/harakiri-a981.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "oshin-6ed0",
+      "name": "Oshin",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/oshin-6ed0.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "taiga-drama-nhk-sur-tous-les-personnages-historiques-japonai-dc81",
+      "name": "Taiga Drama NHK sur tous les personnages historiques japonais.",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "une-part-manquante-90e1",
+      "name": "Une part manquante",
+      "score": 49,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/une-part-manquante-90e1.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "derriere-nos-ecrans-de-fumee-dbdd",
+      "name": "Derrière nos écrans de fumée",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/derriere-nos-ecrans-de-fumee-dbdd.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "portrait-de-la-jeune-fille-en-feu-si-c-etait-plus-divertissa-dfe5",
+      "name": "Portrait de la jeune fille en feu (si c’était plus divertissant ce serait 100%)",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "realisator": "Céline Sciamma"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/portrait-de-la-jeune-fille-en-feu-si-c-etait-plus-divertissa-dfe5.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "petite-maman-2021-26b8",
+      "name": "Petite Maman 2021",
+      "score": 84,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "realisator": "Céline Sciamma"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/petite-maman-2021-26b8.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-last-of-us-season-2-fa90",
+      "name": "The Last Of Us Season 2",
+      "score": 50,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "realisator": "Neil Druckman"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-last-of-us-season-2-fa90.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "minecraft-le-film-5622",
+      "name": "Minecraft le film",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/minecraft-le-film-5622.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "yves-saint-laurent-8168",
+      "name": "Yves Saint Laurent",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/yves-saint-laurent-8168.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "the-tinder-swindler-f099",
+      "name": "The Tinder Swindler",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/the-tinder-swindler-f099.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "bullet-train-explosion-f848",
+      "name": "Bullet Train Explosion",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/bullet-train-explosion-f848.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "fanon-34e6",
+      "name": "Fanon",
+      "score": 45,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/fanon-34e6.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "conclave-bbf9",
+      "name": "Conclave",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/conclave-bbf9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "l-affaire-thomas-crown-79ec",
+      "name": "l'affaire thomas crown",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/l-affaire-thomas-crown-79ec.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "to-be-hero-x-67bd",
+      "name": "To Be Hero X",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/to-be-hero-x-67bd.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "super-pumped-7d59",
+      "name": "Super Pumped",
+      "score": 75,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/super-pumped-7d59.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "indie-game-the-movie-fc0f",
+      "name": "Indie Game The Movie",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/indie-game-the-movie-fc0f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "very-bad-trip-1-d97c",
+      "name": "Very Bad Trip 1",
+      "score": 3,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/very-bad-trip-1-d97c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "ex-machina-fc99",
+      "name": "Ex Machina",
+      "score": 81,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "realisator": "Alex Garland"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ex-machina-fc99.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "civil-war-2024-59ba",
+      "name": "Civil War 2024",
+      "score": 50,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "realisator": "Alex Garland"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/civil-war-2024-59ba.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "steve-jobs-2015-9c3a",
+      "name": "Steve Jobs 2015",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/steve-jobs-2015-9c3a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "le-diner-de-cons-ccee",
+      "name": "Le Dîner de cons",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/le-diner-de-cons-ccee.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "la-verite-si-je-mens-1f22",
+      "name": "La Vérité si je mens !",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/la-verite-si-je-mens-1f22.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "squid-game-s3-03a9",
+      "name": "Squid Game S3",
+      "score": 65,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/squid-game-s3-03a9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "c-est-arrive-pres-de-chez-vous-1a80",
+      "name": "C’est Arrivé Près de chez Vous",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/c-est-arrive-pres-de-chez-vous-1a80.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "delicatessen-2395",
+      "name": "Delicatessen",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/delicatessen-2395.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "la-verite-si-je-mens-2-8764",
+      "name": "La Vérité si je mens ! 2",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/la-verite-si-je-mens-2-8764.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "la-cite-de-la-peur-12ca",
+      "name": "La cité de la peur",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/la-cite-de-la-peur-12ca.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "la-verite-si-je-mens-3-c5da",
+      "name": "La Vérité si je mens ! 3",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/la-verite-si-je-mens-3-c5da.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "la-promesse-de-l-aube-romain-gary-2457",
+      "name": "La promesse de l’aube Romain Gary",
+      "score": 75,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "realisator": "Éric Barbier"
+      },
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "leon-8b00",
+      "name": "Leon",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/leon-8b00.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "i-wish-kiseki-4966",
+      "name": "I Wish (奇跡, Kiseki)",
+      "score": 95,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/i-wish-kiseki-4966.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "la-crise-1992-38a4",
+      "name": "La Crise 1992",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/la-crise-1992-38a4.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "drunk-4a6f",
+      "name": "Drunk",
+      "score": 87,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/drunk-4a6f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "black-mirror-s07-e06-uss-callister-into-infinity-cef5",
+      "name": "black_mirror_s07_e06_uss_callister_into_infinity",
+      "score": 79,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/black-mirror-s07-e06-uss-callister-into-infinity-cef5.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "black-mirror-s07-e01-common-people-b0ab",
+      "name": "black_mirror_s07_e01_common_people",
+      "score": 84,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/black-mirror-s07-e01-common-people-b0ab.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "black-mirror-s07-e02-bete-noire-08a8",
+      "name": "black_mirror_s07_e02_bete_noire",
+      "score": 77,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/black-mirror-s07-e02-bete-noire-08a8.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "black-mirror-s07-e04-plaything-cf7f",
+      "name": "black_mirror_s07_e04_plaything",
+      "score": 71,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/black-mirror-s07-e04-plaything-cf7f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "black-mirror-s07-e03-hotel-reverie-fdd9",
+      "name": "black_mirror_s07_e03_hotel_reverie",
+      "score": 76,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/black-mirror-s07-e03-hotel-reverie-fdd9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "black-mirror-s07-e05-eulogy-4365",
+      "name": "black_mirror_s07_e05_eulogy",
+      "score": 68,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/black-mirror-s07-e05-eulogy-4365.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "black-mirror-s03-e01-nosedive-e40a",
+      "name": "black_mirror_s03_e01_nosedive",
+      "score": 86,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/black-mirror-s03-e01-nosedive-e40a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "black-mirror-s01-e02-fifteen-million-merits-5efc",
+      "name": "black_mirror_s01_e02_fifteen_million_merits",
+      "score": 82,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/black-mirror-s01-e02-fifteen-million-merits-5efc.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "black-mirror-s02-e04-white-christmas-f16a",
+      "name": "black_mirror_s02_e04_white_christmas",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/black-mirror-s02-e04-white-christmas-f16a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "frate-5888",
+      "name": "frate",
+      "score": 34,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/frate-5888.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "now-you-see-me-0a87",
+      "name": "now_you_see_me",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/now-you-see-me-0a87.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "studio-54-a0f1",
+      "name": "Studio 54",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/studio-54-a0f1.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "double-team-6828",
+      "name": "Double Team",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/double-team-6828.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "le-royaume-2024-2ce5",
+      "name": "le_royaume_2024",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/le-royaume-2024-2ce5.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "renoir-2025-ff78",
+      "name": "Renoir 2025",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/renoir-2025-ff78.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "en-boucle-2025-river-1a7f",
+      "name": "En Boucle 2025 (River)",
+      "score": 92,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/en-boucle-2025-river-1a7f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "exit-8-2025-9aa4",
+      "name": "Exit 8 2025",
+      "score": 87,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/exit-8-2025-9aa4.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "kiss-or-die-2e1b",
+      "name": "Kiss Or Die",
+      "score": 81,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/kiss-or-die-2e1b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "ainori-love-wagon-103b",
+      "name": "Ainori: Love Wagon",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/ainori-love-wagon-103b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "old-enough-comme-des-grands-8579",
+      "name": "Old Enough! Comme Des Grands",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "offline-love-e61e",
+      "name": "Offline Love",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/offline-love-e61e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "run-for-the-money-4163",
+      "name": "Run for the Money",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/run-for-the-money-4163.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "begin-japanology-ca81",
+      "name": "Begin Japanology",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/begin-japanology-ca81.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "coco-2009-b392",
+      "name": "Coco 2009",
+      "score": 10,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/coco-2009-b392.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "love-life-4ae0",
+      "name": "Love Life",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/love-life-4ae0.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "my-sunshine-d7eb",
+      "name": "My Sunshine",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/my-sunshine-d7eb.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "comme-un-lundi-0301",
+      "name": "Comme un Lundi",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/comme-un-lundi-0301.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "le-joueur-de-go-e469",
+      "name": "Le Joueur de Go",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/le-joueur-de-go-e469.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "le-jardin-zen-91b8",
+      "name": "Le Jardin Zen",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/le-jardin-zen-91b8.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "la-melancolie-b963",
+      "name": "La Mélancolie",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/la-melancolie-b963.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "hokusai-e964",
+      "name": "Hokusai",
+      "score": 3,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/hokusai-e964.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "la-saveur-des-ramen-3a1f",
+      "name": "La Saveur des Ramen",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/la-saveur-des-ramen-3a1f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "l-ilenue-85cf",
+      "name": "L’îleNue",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/l-ilenue-85cf.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "yoroi-d5d3",
+      "name": "Yoroi",
+      "score": null,
+      "status": "dropped",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/yoroi-d5d3.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "thinkerview-eric-sadin-contre-l-ia-le-desert-de-nous-meme-d132",
+      "name": "Thinkerview Eric Sadin Contre L’IA Le désert de nous même.",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": null,
+      "notes": null
+    },
+    {
+      "id": "die-welle-la-vague-37ca",
+      "name": "Die Welle | La Vague",
+      "score": 87,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/die-welle-la-vague-37ca.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "kokuhaku-5cef",
+      "name": "Kokuhaku",
+      "score": 87,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/kokuhaku-5cef.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "one-battle-after-another-2b70",
+      "name": "One Battle After Another",
+      "score": 82,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/one-battle-after-another-2b70.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "bugonia-1c3b",
+      "name": "Bugonia",
+      "score": 78,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/bugonia-1c3b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "kinds-of-kindness-19bb",
+      "name": "Kinds of Kindness",
+      "score": 75,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/kinds-of-kindness-19bb.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "la-chasse-d5f9",
+      "name": "La Chasse",
+      "score": 85,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/la-chasse-d5f9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "now-you-see-me-3-fa52",
+      "name": "Now You See Me 3",
+      "score": 84,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/now-you-see-me-3-fa52.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "au-boulot-dc6d",
+      "name": "Au Boulot !",
+      "score": 86,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "realisator": "François Ruffin"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/au-boulot-dc6d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "perfect-days-8edc",
+      "name": "Perfect Days",
+      "score": 88,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/perfect-days-8edc.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "plan-75-d68a",
+      "name": "Plan 75",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/plan-75-d68a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "beyond-the-infinite-two-minutes-d22e",
+      "name": "Beyond the Infinite Two Minutes",
+      "score": 87,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/beyond-the-infinite-two-minutes-d22e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "beforetheflood-4618",
+      "name": "BeforeTheFlood",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/beforetheflood-4618.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "mondays-see-you-this-week-4ea4",
+      "name": "Mondays: See You 'This' Week!",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/mondays-see-you-this-week-4ea4.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "le-mal-n-existe-pas-evil-does-not-exist-a12c",
+      "name": "Le Mal n'existe pas (Evil Does Not Exist)",
+      "score": 76,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/le-mal-n-existe-pas-evil-does-not-exist-a12c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "kaizen-e2c7",
+      "name": "Kaizen",
+      "score": 87,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/kaizen-e2c7.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "django-b6c9",
+      "name": "Django",
+      "score": 86,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/django-b6c9.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "l-ete-de-kikujiro-b84e",
+      "name": "L'Été de Kikujiro",
+      "score": 76,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/l-ete-de-kikujiro-b84e.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "callmechihiro-4b81",
+      "name": "CallMeChihiro",
+      "score": 60,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/callmechihiro-4b81.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "gourou-7d49",
+      "name": "Gourou",
+      "score": 78,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/gourou-7d49.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "wood-job-45cd",
+      "name": "Wood Job!",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/wood-job-45cd.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "first-love-af79",
+      "name": "First Love",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/first-love-af79.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "under-the-open-sky-5c6d",
+      "name": "Under the open sky",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/under-the-open-sky-5c6d.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "makanai-dans-la-cuisine-des-maiko-73c7",
+      "name": "Makanai : Dans la cuisine des maiko",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/makanai-dans-la-cuisine-des-maiko-73c7.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "les-gouttes-de-dieu-4404",
+      "name": "Les gouttes de dieu",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/les-gouttes-de-dieu-4404.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "barry-lyndon-3a53",
+      "name": "Barry Lyndon",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/barry-lyndon-3a53.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "hamnet-e54a",
+      "name": "Hamnet",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/hamnet-e54a.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "marty-supreme-e324",
+      "name": "Marty Supreme",
+      "score": 85,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/marty-supreme-e324.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "train-dreams-3b5f",
+      "name": "Train Dreams",
+      "score": 83,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/train-dreams-3b5f.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "cloud-2024-a8db",
+      "name": "Cloud 2024",
+      "score": 70,
+      "status": "done",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/cloud-2024-a8db.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "sham-2025-7233",
+      "name": "SHAM 2025",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@f58b8dab4561fc218173aa9d42bda87bca008142/sham-2025-7233.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "la-fille-du-konbini-5225",
+      "name": "La Fille du Konbini",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/la-fille-du-konbini-5225.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "mon-grand-frere-et-moi-1891",
+      "name": "mon grand frère et moi",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/mon-grand-frere-et-moi-1891.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "love-on-trial-65da",
+      "name": "love on trial",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/love-on-trial-65da.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "jusqu-a-l-aube-3a0b",
+      "name": "jusqu’à l’aube",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/jusqu-a-l-aube-3a0b.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "blackberry-d765",
+      "name": "BlackBerry",
+      "score": 80,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "realisator": "Matt Johnson"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/blackberry-d765.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "air-ddd0",
+      "name": "Air",
+      "score": 75,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "realisator": "Ben Affleck"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/air-ddd0.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "tetris-f369",
+      "name": "Tetris",
+      "score": 78,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "realisator": "Jon S. Baird"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/tetris-f369.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "dumb-money-ff8c",
+      "name": "Dumb Money",
+      "score": 87,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "realisator": "Craig Gillespie"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/dumb-money-ff8c.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "bakebake-2adb",
+      "name": "Bakebake",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/bakebake-2adb.jpg"
+      },
+      "notes": null
+    },
+    {
+      "id": "creed-0ea3",
+      "name": "Creed",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {},
+      "image": {
+        "kind": "url",
+        "ref": "https://cdn.jsdelivr.net/gh/matthieuhuguet/zenray-shelf-img@4de20e1de3464605b77359f121dc3b2decc9b0e9/creed-0ea3.jpg"
+      },
+      "notes": null
+    }
+  ]
+}

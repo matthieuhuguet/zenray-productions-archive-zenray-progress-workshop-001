@@ -1,0 +1,21 @@
+<svg width="248" height="248" viewBox="0 0 248 248" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="pdfRed" x1="62" y1="142" x2="62" y2="192" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F4564E"/>
+      <stop offset="1" stop-color="#C8221C"/>
+    </linearGradient>
+    <linearGradient id="pdfFold" x1="150" y1="38" x2="196" y2="84" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8A8A8A"/>
+      <stop offset="1" stop-color="#5C5C5C"/>
+    </linearGradient>
+    <filter id="pdfSh" x="40" y="34" width="168" height="190" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+  <g filter="url(#pdfSh)">
+    <path d="M64 44a8 8 0 0 1 8-8h78l36 36v98a8 8 0 0 1-8 8H72a8 8 0 0 1-8-8V44z" fill="#FCFCFB" stroke="#E2E0DE" stroke-width="2"/>
+    <path d="M150 36l36 36h-28a8 8 0 0 1-8-8V36z" fill="url(#pdfFold)"/>
+  </g>
+  <rect x="50" y="142" width="148" height="50" rx="13" fill="url(#pdfRed)"/>
+  <text x="124" y="178" text-anchor="middle" font-family="AnthropicSerif, Georgia, 'Times New Roman', serif" font-weight="600" font-size="34" letter-spacing="2" fill="#ffffff">PDF</text>
+</svg>

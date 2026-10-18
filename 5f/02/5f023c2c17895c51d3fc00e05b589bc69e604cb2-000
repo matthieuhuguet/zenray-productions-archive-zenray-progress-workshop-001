@@ -1,0 +1,4112 @@
+{
+  "v": 1,
+  "category": "books",
+  "label": "Books",
+  "items": [
+    {
+      "id": "1984-116e",
+      "name": "1984",
+      "score": 100,
+      "status": "done",
+      "tags": [
+        "Conditioning",
+        "Dystopia",
+        "Litterature",
+        "Novel",
+        "Relationships",
+        "Science-Fiction"
+      ],
+      "extra": {
+        "author": "George Orwell",
+        "year": "1949"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/9267242-L.jpg"
+      },
+      "notes": "État totalitaire omnipotent, novlangue, Big Brother.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "brave-new-world-612b",
+      "name": "Brave New World",
+      "score": 99,
+      "status": "done",
+      "tags": [
+        "Conditioning",
+        "Dystopia",
+        "Litterature",
+        "Novel",
+        "Science-Fiction"
+      ],
+      "extra": {
+        "author": "Aldous Huxley",
+        "year": "1932"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8231823-L.jpg"
+      },
+      "notes": "Société ultra-pacifiée par le conditionnement et le soma.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-art-of-game-design-8e2b",
+      "name": "The Art of Game Design",
+      "score": 99,
+      "status": "done",
+      "tags": [
+        "Art",
+        "Design",
+        "Innovation",
+        "Programming",
+        "Technology"
+      ],
+      "extra": {
+        "author": "Jesse Schell",
+        "year": "2008"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/9317386-L.jpg"
+      },
+      "notes": "Le game design via 100+ lentilles d'analyse multi-disciplinaires.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "mindset-the-new-psychology-of-success-23fa",
+      "name": "Mindset: The New Psychology of Success",
+      "score": 95,
+      "status": "done",
+      "tags": [
+        "Learning",
+        "Mindset",
+        "Productivity",
+        "Task Decomposition Chunking"
+      ],
+      "extra": {
+        "author": "Carol Dweck",
+        "year": "2006"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/746414-L.jpg"
+      },
+      "notes": "Fixed mindset vs growth mindset : l'impact sur la réussite.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "show-your-work-partagez-comme-un-artiste-6396",
+      "name": "Show Your Work - Partagez comme un artiste",
+      "score": 90,
+      "status": "done",
+      "tags": [
+        "Relationships",
+        "Strategy"
+      ],
+      "extra": {
+        "author": "Austin Kleon",
+        "year": "2014"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/7284188-L.jpg"
+      },
+      "notes": "Documenter son processus créatif en public.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "steal-like-an-artist-voler-comme-un-artiste-6b73",
+      "name": "Steal like an Artist - Voler comme un artiste",
+      "score": 90,
+      "status": "done",
+      "tags": [
+        "Art",
+        "Mindset",
+        "Strategy"
+      ],
+      "extra": {
+        "author": "Austin Kleon",
+        "year": "2012"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/7244512-L.jpg"
+      },
+      "notes": "La créativité est recyclage : voler comme un artiste.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "deep-work-f80b",
+      "name": "Deep Work",
+      "score": 87,
+      "status": "done",
+      "tags": [
+        "Mindset",
+        "Productivity",
+        "Task Decomposition Chunking",
+        "Work Specialization"
+      ],
+      "extra": {
+        "author": "Cal Newport",
+        "year": "2016"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/7988607-L.jpg"
+      },
+      "notes": "Le travail profond comme superpower à l'ère des distractions.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "leve-toi-et-code-rabbin-des-bois-6be7",
+      "name": "Lève toi et code - Rabbin des bois",
+      "score": 85,
+      "status": "done",
+      "tags": [
+        "tech",
+        "programmation"
+      ],
+      "extra": {
+        "author": "Rabbin des Bois",
+        "year": "2020"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://products-images.di-static.com/image/rabbin-des-bois-leve-toi-et-code/9782732486352-475x500-1.jpg"
+      },
+      "notes": "Guide motivationnel pour se mettre au code.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "princesse-data-d915",
+      "name": "Princesse Data",
+      "score": 85,
+      "status": "done",
+      "tags": [
+        "Innovation",
+        "Love",
+        "Mindset",
+        "Programming",
+        "Technology"
+      ],
+      "extra": {
+        "author": "Rabin des Bois",
+        "year": "2021"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://products-images.di-static.com/image/rabbin-des-bois-princesse-data/9782732490021-475x500-1.jpg"
+      },
+      "notes": "Roman français autour de la tech et d'une romance data-driven.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "awaken-the-giant-within-fd19",
+      "name": "Awaken the giant within",
+      "score": 84,
+      "status": "done",
+      "tags": [
+        "Business",
+        "Mindset",
+        "Productivity",
+        "Strategy"
+      ],
+      "extra": {
+        "author": "Tony Robbins",
+        "year": "1991"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/4002352-L.jpg"
+      },
+      "notes": "Prendre le contrôle de son destin mental, émotionnel et financier.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "how-to-win-friends-and-influence-people-fa41",
+      "name": "How To Win Friends And Influence People",
+      "score": 80,
+      "status": "done",
+      "tags": [
+        "Agreeableness",
+        "Loneliness",
+        "Relationships"
+      ],
+      "extra": {
+        "author": "Dale Carnegie",
+        "year": "1936"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/13314878-L.jpg"
+      },
+      "notes": "Classique des relations humaines et de la persuasion interpersonnelle.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "atomic-habits-book-review-notes-3e82",
+      "name": "Atomic Habits Book Review & Notes",
+      "score": null,
+      "status": "done",
+      "tags": [
+        "Mindset",
+        "Productivity",
+        "Strategy",
+        "Task Decomposition Chunking"
+      ],
+      "extra": {
+        "author": "James Clear",
+        "year": "2018"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://www.voxghostwriting.com/blog/wp-content/uploads/2025/01/61M6KzUbf7L._AC_UF10001000_QL80_.jpg"
+      },
+      "notes": "Système pour construire de bonnes habitudes via petits gains composés (1%).",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "can-t-hurt-me-61ca",
+      "name": "Can’t Hurt Me",
+      "score": null,
+      "status": "done",
+      "tags": [
+        "Determination",
+        "Steadfastness"
+      ],
+      "extra": {
+        "author": "David Goggins",
+        "year": "2018"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8305903-L.jpg"
+      },
+      "notes": "Ex-Navy SEAL raconte son passage d'obèse à ultra-athlète.\n\n5:30:00 Sur 12:00:00",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "crucial-conversations-d785",
+      "name": "Crucial Conversations",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "author": "Al Switzler, Joseph Grenny, Kerry Patterson, Ron McMillan",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/1711809-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "crushing-it-e616",
+      "name": "Crushing It!",
+      "score": null,
+      "status": "done",
+      "tags": [
+        "Influence",
+        "StoryTelling",
+        "Vente"
+      ],
+      "extra": {
+        "author": "Gary V",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/6297122-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "elon-musk-0263",
+      "name": "Elon Musk",
+      "score": null,
+      "status": "done",
+      "tags": [
+        "Business"
+      ],
+      "extra": {
+        "author": "Walter Isaacson",
+        "year": "2023"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/14420016-L.jpg"
+      },
+      "notes": "Biographie autorisée de Musk : SpaceX, Tesla, X.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "grit-the-power-of-passion-and-perseverance-4745",
+      "name": "Grit: The Power of Passion and Perseverance",
+      "score": null,
+      "status": "done",
+      "tags": [
+        "Anti-Fragilité",
+        "Mindset",
+        "Productivity",
+        "Strategy",
+        "Task Decomposition Chunking"
+      ],
+      "extra": {
+        "author": "Angela Duckwork",
+        "year": "2016"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/7438753-L.jpg"
+      },
+      "notes": "La persévérance bat le talent sur la durée.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "influence-et-manipulation-influence-the-psycholo-45bb",
+      "name": "Influence et Manipulation - Influence: The Psychology of Persuasion",
+      "score": null,
+      "status": "done",
+      "tags": [
+        "Influence",
+        "Sales",
+        "Vente"
+      ],
+      "extra": {
+        "author": "Robert Cialdini",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/431011-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "l-investisseur-intelligent-432d",
+      "name": "L’investisseur intelligent",
+      "score": null,
+      "status": "done",
+      "tags": [
+        "finance"
+      ],
+      "extra": {
+        "author": "Benjamin Graham",
+        "year": "1949"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/36434-L.jpg"
+      },
+      "notes": "Bible du value investing, mentor de Warren Buffett.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "loneliness-human-nature-and-the-need-for-social--0482",
+      "name": "Loneliness: Human Nature and the Need for Social Connection",
+      "score": null,
+      "status": "done",
+      "tags": [
+        "Mindset",
+        "Relationships"
+      ],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/2412707-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "madame-bovary-68d4",
+      "name": "Madame Bovary",
+      "score": null,
+      "status": "done",
+      "tags": [
+        "Art",
+        "Litterature",
+        "Relationships"
+      ],
+      "extra": {
+        "author": "Gustave Flaubert",
+        "year": "1857"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/12993424-L.jpg"
+      },
+      "notes": "Une femme mariée se perd dans des rêves romantiques et la désillusion.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "make-it-stick-the-science-of-successful-learning-2d83",
+      "name": "Make It Stick: The Science of Successful Learning",
+      "score": null,
+      "status": "done",
+      "tags": [
+        "Learning",
+        "Mindset"
+      ],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8188891-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "mathematics-for-3d-game-programming-and-computer-a4e3",
+      "name": "Mathematics for 3D Game Programming and Computer Graphics",
+      "score": null,
+      "status": "done",
+      "tags": [
+        "Mathematics",
+        "Work Specialization"
+      ],
+      "extra": {
+        "author": "Eric Lengyel",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/848287-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "pricing-creativity-8cc8",
+      "name": "Pricing Creativity",
+      "score": null,
+      "status": "done",
+      "tags": [
+        "Business",
+        "Finance"
+      ],
+      "extra": {
+        "author": "Blair Enns",
+        "year": "2018"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/13193259-L.jpg"
+      },
+      "notes": "Vendre son travail créatif au juste prix via la value-based pricing.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "small-talk-468b",
+      "name": "Small Talk",
+      "score": null,
+      "status": "done",
+      "tags": [
+        "Relationships"
+      ],
+      "extra": {
+        "author": "Debra Fine",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/736065-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-art-of-war-85a8",
+      "name": "The Art of War",
+      "score": null,
+      "status": "done",
+      "tags": [
+        "Mindset",
+        "Strategy"
+      ],
+      "extra": {
+        "author": "Sun Tzu",
+        "year": "~5e s. av. J.-C."
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/4849549-L.jpg"
+      },
+      "notes": "Traité de stratégie militaire chinoise, applicable à tout conflit.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-charisma-myth-5818",
+      "name": "The Charisma Myth",
+      "score": null,
+      "status": "done",
+      "tags": [
+        "influence",
+        "social"
+      ],
+      "extra": {
+        "author": "Olivia Fox Cabane",
+        "year": "2012"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/13882953-L.jpg"
+      },
+      "notes": "Le charisme est un skill : présence, pouvoir, chaleur.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-creative-act-a-way-of-being-58ec",
+      "name": "The Creative Act: A Way of Being",
+      "score": null,
+      "status": "done",
+      "tags": [
+        "Art",
+        "Creativity",
+        "Strategy"
+      ],
+      "extra": {
+        "author": "Rick Rubin",
+        "year": "2023"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/13316390-L.jpg"
+      },
+      "notes": "La créativité comme état d'être, par le producteur mythique.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-obstacle-is-the-way-f730",
+      "name": "The Obstacle Is the Way",
+      "score": null,
+      "status": "done",
+      "tags": [
+        "stoïcisme"
+      ],
+      "extra": {
+        "author": "Ryan Holiday",
+        "year": "2014"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/14428233-L.jpg"
+      },
+      "notes": "L'obstacle devient le chemin — stoïcisme moderne.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-one-thing-b1e4",
+      "name": "The One Thing",
+      "score": null,
+      "status": "done",
+      "tags": [
+        "Business",
+        "Recommanded Yomi Denzel"
+      ],
+      "extra": {
+        "author": "Gary Keller",
+        "year": "2013"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/10351762-L.jpg"
+      },
+      "notes": "Identifier la seule chose qui simplifie le reste.\n\n(Se concentrer sur une seule chose) Identifier le truc qui est le plus utile pour vous en ce moment. Choisir un seul truc par jour max. Votre Volonté est limitée. Barre de progression qui diminue tout au long de la journée. Créer des habitudes. 1 Seule tous les mois. En planifier toujours à cours terme. Semaine et Jours.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-power-of-full-engagement-35a3",
+      "name": "The Power of Full Engagement",
+      "score": null,
+      "status": "done",
+      "tags": [],
+      "extra": {
+        "author": "Tony Shwartz",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/472436-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-psychology-of-money-67d4",
+      "name": "The Psychology of Money",
+      "score": null,
+      "status": "done",
+      "tags": [
+        "finance",
+        "comportement"
+      ],
+      "extra": {
+        "author": "Morgan Housel",
+        "year": "2020"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/10389354-L.jpg"
+      },
+      "notes": "20 leçons intemporelles sur l'argent et le comportement humain.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-war-of-art-9bfe",
+      "name": "The War of Art",
+      "score": null,
+      "status": "done",
+      "tags": [
+        "créativité"
+      ],
+      "extra": {
+        "author": "Steven Pressfield",
+        "year": "2002"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/288439-L.jpg"
+      },
+      "notes": "Vaincre la Résistance, ennemi intérieur de tout créateur.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "why-we-sleep-639c",
+      "name": "Why we sleep !",
+      "score": null,
+      "status": "done",
+      "tags": [
+        "santé",
+        "sommeil"
+      ],
+      "extra": {
+        "author": "Matthew Walker",
+        "year": "2017"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8814155-L.jpg"
+      },
+      "notes": "La science du sommeil et les dégâts de sa privation.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "atteindre-l-excellence-mastery-798c",
+      "name": "Atteindre L’excellence - Mastery",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {
+        "author": "Robert Greene",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://m.media-amazon.com/images/I/71mr7LX3LbL._SL1500_.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "decisive-how-to-make-better-choices-in-life-and--e763",
+      "name": "Decisive: How to Make Better Choices in Life and Work",
+      "score": null,
+      "status": "in_progress",
+      "tags": [
+        "Strategy"
+      ],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8537216-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "emotional-intelligence-why-it-can-matter-more-th-da49",
+      "name": "Emotional Intelligence: Why It Can Matter More Than IQ",
+      "score": null,
+      "status": "in_progress",
+      "tags": [
+        "Mindset",
+        "Relationships"
+      ],
+      "extra": {
+        "author": "Daniel Goleman",
+        "year": "1995"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/1359485-L.jpg"
+      },
+      "notes": "L'intelligence émotionnelle prédit le succès mieux que le QI.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "guerre-et-paix-9d57",
+      "name": "Guerre et Paix",
+      "score": null,
+      "status": "in_progress",
+      "tags": [
+        "littérature",
+        "guerre"
+      ],
+      "extra": {
+        "author": "Tolstoï",
+        "year": "1869"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/12621906-L.jpg"
+      },
+      "notes": "Fresque épique des guerres napoléoniennes et de la société russe.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "houdini-foundations-38af",
+      "name": "Houdini Foundations",
+      "score": null,
+      "status": "in_progress",
+      "tags": [
+        "Art",
+        "Design",
+        "Productivity",
+        "Programming",
+        "Technical",
+        "Technology",
+        "Work Specialization"
+      ],
+      "extra": {
+        "author": "SideFX",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/5929873-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "i-will-teach-you-to-be-rich-04c3",
+      "name": "I Will Teach You To Be Rich",
+      "score": null,
+      "status": "in_progress",
+      "tags": [],
+      "extra": {
+        "author": "Ramit Sethi",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/6305971-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "marketing-x-0-philip-kotler-66be",
+      "name": "Marketing X.0 Philip Kotler",
+      "score": null,
+      "status": "in_progress",
+      "tags": [
+        "Finance",
+        "Marketing",
+        "Strategy"
+      ],
+      "extra": {
+        "author": "Philip Kotler",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://d28hgpri8am2if.cloudfront.net/tagged_assets/cvr9781476787909/9781476787909_hr.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-art-of-learning-b8ff",
+      "name": "The Art of Learning",
+      "score": null,
+      "status": "in_progress",
+      "tags": [
+        "Learning",
+        "Mindset",
+        "Productivity",
+        "Strategy",
+        "Task Decomposition Chunking"
+      ],
+      "extra": {
+        "author": "Joshua Waitzkin",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/475008-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-almanack-of-naval-ravikant-1864",
+      "name": "The Almanack Of Naval Ravikant",
+      "score": 94,
+      "status": "backlog",
+      "tags": [
+        "philosophie",
+        "richesse"
+      ],
+      "extra": {
+        "author": "Naval Ravikant",
+        "year": "2020"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/10449931-L.jpg"
+      },
+      "notes": "Wealth, Happiness, Health",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "100moffers-03ee",
+      "name": "100MOffers",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "business",
+        "offre"
+      ],
+      "extra": {
+        "author": "Alex Hormozi",
+        "year": "2021"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/11948182-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "a-pattern-language-towns-buildings-construction-7f8a",
+      "name": "A Pattern Language: Towns, Buildings, Construction",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/120825-L.jpg"
+      },
+      "notes": "Le manuel pratique qui accompagne The Timeless Way of Building, fournissant 253 patterns pour concevoir des espaces.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "a-short-history-of-nearly-everything-4303",
+      "name": "A Short History of Nearly Everything",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Bill Bryson",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/12725620-L.jpg"
+      },
+      "notes": "Synthèse accessible des grandes découvertes scientifiques.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "a-theory-of-fun-for-game-design-552d",
+      "name": "A Theory of Fun for Game Design",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "game design"
+      ],
+      "extra": {
+        "author": "Raph Koster",
+        "year": "2004"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/424898-L.jpg"
+      },
+      "notes": "Le fun comme apprentissage et reconnaissance de schémas.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "about-face-the-essentials-of-interaction-design-b53f",
+      "name": "About Face: The Essentials of Interaction Design",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8443649-L.jpg"
+      },
+      "notes": "Développe la méthode du Goal-Directed Design et l'usage des personas pour concevoir avec empathie.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "advanced-game-design-a-systems-approach-d727",
+      "name": "advanced_game_design_a_systems_approach",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Michael Sellers",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8846267-L.jpg"
+      },
+      "notes": "Application de la pensée systémique à la conception de jeux.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "antifragile-things-that-gain-from-disorder-5340",
+      "name": "Antifragile: Things That Gain from Disorder",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "philosophie",
+        "systèmes"
+      ],
+      "extra": {
+        "author": "Nassim N. Taleb",
+        "year": "2012"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/9180157-L.jpg"
+      },
+      "notes": "Propose de construire des systèmes qui non seulement résistent aux chocs, mais en bénéficient.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "avoir-le-courage-de-ne-pas-etre-aime-966b",
+      "name": "Avoir le courage de ne pas être aimé",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Ichiro Kushimi",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://carolinedoudet.com/wp-content/uploads/2025/01/le-courage-de-ne-pas-etre-aime.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "basic-economics-9628",
+      "name": "Basic Economics",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Thomas Sowell",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/1468594-L.jpg"
+      },
+      "notes": "Principes fondamentaux de l'économie de marché (incitations, rareté, prix).",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "belle-du-seigneur-albert-cohen-739c",
+      "name": "belle du seigneur albert cohen",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/965907-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "blue-ocean-strategy-3ace",
+      "name": "Blue Ocean Strategy",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/15099760-L.jpg"
+      },
+      "notes": "Propose une méthode pour créer de nouveaux marchés (\"océans bleus\") au lieu de concurrencer dans les marchés existants.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "business-adventures-6bbb",
+      "name": "Business Adventures",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8231778-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "business-model-generation-9bf0",
+      "name": "Business Model Generation",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "A. Osterwalder & Y. Pigneur",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/6675500-L.jpg"
+      },
+      "notes": "Le Business Model Canvas, Prototypage de modèles d'affaires.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "c-est-vraiment-moi-qui-decide-07a9",
+      "name": "C'est (vraiment ?) moi qui décide",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Dan Ariely",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8374536-L.jpg"
+      },
+      "notes": "Irrationalité prévisible, Influence des normes sociales et des émotions.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "challenges-for-game-designers-53ed",
+      "name": "Challenges for Game Designers",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Brenda Romero",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/13053064-L.jpg"
+      },
+      "notes": "Exercices pratiques pour développer les compétences de design.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "clean-code-68a9",
+      "name": "Clean Code",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "programmation"
+      ],
+      "extra": {
+        "author": "Robert C. Martin",
+        "year": "2008"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8065615-L.jpg"
+      },
+      "notes": "Établit les principes de l'artisanat logiciel pour un code lisible, maintenable et robuste.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "clean-architecture-cb9f",
+      "name": "clean_architecture",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8605114-L.jpg"
+      },
+      "notes": "Enseigne comment structurer les systèmes logiciels pour qu'ils soient indépendants et durables.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "comment-mettre-un-homme-dans-votre-poche-0582",
+      "name": "Comment Mettre un Homme dans Votre Poche",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Yann Piette",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://static.fnac-static.com/multimedia/Images/FR/NR/36/b3/a0/10531638/1540-1/tsp20181228161154/Comment-mettre-un-homme-dans-votre-poche.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "comment-reussir-une-negociation-961e",
+      "name": "Comment réussir une négociation",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Roger Fisher & William Ury",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/11519712-L.jpg"
+      },
+      "notes": "Négociation raisonnée (basée sur les intérêts), Séparer les gens du problème.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "competitive-strategy-9ef1",
+      "name": "Competitive Strategy",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Michael E. Porter",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/19091-L.jpg"
+      },
+      "notes": "Cinq forces de la concurrence, Stratégies génériques (coût, différenciation, focus).",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "complexity-a-guided-tour-18f6",
+      "name": "Complexity: A Guided Tour",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Melanie Mitchell",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/6378519-L.jpg"
+      },
+      "notes": "Concepts d'émergence, d'auto-organisation et de chaos.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "composer-ses-images-pour-le-cinema-the-visual-st-216f",
+      "name": "Composer ses images pour le cinéma (The Visual Story)",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/146004-L.jpg"
+      },
+      "notes": "Analyse la structure visuelle (couleur, espace, ligne, mouvement) dans la narration cinématographique.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "cosmos-1bad",
+      "name": "Cosmos",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "sciences"
+      ],
+      "extra": {
+        "author": "Carl Sagan",
+        "year": "1980"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8283901-L.jpg"
+      },
+      "notes": "Perspective cosmique, Méthode scientifique, Humilité intellectuelle.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "creativity-inc-680b",
+      "name": "Creativity, Inc.",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "leadership",
+        "créativité"
+      ],
+      "extra": {
+        "author": "Ed Catmull",
+        "year": "2014"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/13124793-L.jpg"
+      },
+      "notes": "Révèle les principes de management qui ont favorisé la créativité et l'innovation chez Pixar.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "crime-et-chatiment-997d",
+      "name": "Crime et Châtiment",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "littérature",
+        "philosophie"
+      ],
+      "extra": {
+        "author": "Fiodor Dostoïevski",
+        "year": "1866"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/9411873-L.jpg"
+      },
+      "notes": "Un étudiant pauvre commet un meurtre et sombre dans la culpabilité.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "de-l-inegalite-parmi-les-societes-7bd0",
+      "name": "De l'inégalité parmi les sociétés",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Jared Diamond",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/7884018-L.jpg"
+      },
+      "notes": "Déterminisme géographique, Influence des facteurs environnementaux.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "de-zero-a-un-6b0e",
+      "name": "De Zéro à Un",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "business",
+        "innovation"
+      ],
+      "extra": {
+        "author": "Peter Thiel",
+        "year": "2014"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://moncoachpro.nsiyo.com/wp-content/uploads/2026/01/61pGJcP2BVL._AC_UF10001000_QL80_.jpg"
+      },
+      "notes": "Concurrence vs Monopole, Création de valeur radicalement nouvelle.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "declin-et-survie-des-grandes-villes-americaines-7505",
+      "name": "Déclin et survie des grandes villes américaines",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/5540237-L.jpg"
+      },
+      "notes": "Une critique fondatrice de l'urbanisme moderniste et une défense de la ville comme un écosystème complexe et organique.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "decouvrir-un-sens-a-sa-vie-1c37",
+      "name": "Découvrir un sens à sa vie",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "philosophie",
+        "psychologie"
+      ],
+      "extra": {
+        "author": "Viktor E. Frankl",
+        "year": "1946"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8516506-L.jpg"
+      },
+      "notes": "Logothérapie, Liberté de choisir son attitude.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "design-patterns-elements-of-reusable-object-orie-befe",
+      "name": "Design Patterns: Elements of Reusable Object-Oriented Software",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/6601119-L.jpg"
+      },
+      "notes": "Fournit le vocabulaire et les solutions standard pour les problèmes de conception logicielle récurrents.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "dette-5000-ans-d-histoire-53dd",
+      "name": "Dette : 5000 ans d'histoire",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "David Graeber",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/6299464-L.jpg"
+      },
+      "notes": "Histoire sociale de la dette, du crédit et de l'argent.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "don-t-make-me-think-revisited-6f1d",
+      "name": "Don't Make Me Think, Revisited",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "design",
+        "UX"
+      ],
+      "extra": {
+        "author": "Steve Krug",
+        "year": "2000"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/10329409-L.jpg"
+      },
+      "notes": "Établit les lois pragmatiques de l'utilisabilité web et de la conception sans friction.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "drive-f11f",
+      "name": "Drive",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "motivation"
+      ],
+      "extra": {
+        "author": "Daniel H. Pink",
+        "year": "2009"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/6404786-L.jpg"
+      },
+      "notes": "Motivation intrinsèque (Autonomie, Maîtrise, Finalité).",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "droit-de-la-propriete-intellectuelle-nicolas-bin-401b",
+      "name": "Droit de la propriété intellectuelle Nicolas Binctin",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/11411386-L.jpg"
+      },
+      "notes": "Manuel de référence sur le droit d'auteur, les brevets, les marques et les dessins et modèles.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "et-si-le-bonheur-vous-tombait-dessus-5522",
+      "name": "Et si le bonheur vous tombait dessus",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Daniel Gilbert",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1456347247l/8145368.jpg"
+      },
+      "notes": "Illusion d'impact, Erreurs de prédiction affective.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "first-break-all-the-rules-32a7",
+      "name": "first_break_all_the_rules",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/427610-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "flow-the-psychology-of-optimal-experience-04f5",
+      "name": "Flow: The Psychology of Optimal Experience",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "psychologie"
+      ],
+      "extra": {
+        "author": "Mihály Csíkszentmihályi",
+        "year": "1990"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/11041932-L.jpg"
+      },
+      "notes": "Définit l'état de \"flow\" et les conditions nécessaires à la création d'expériences optimales.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "flow-vivre-512f",
+      "name": "Flow (Vivre)",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "psychologie"
+      ],
+      "extra": {
+        "author": "Mihaly Csikszentmihalyi",
+        "year": "1990"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/11041932-L.jpg"
+      },
+      "notes": "L'état de flux (Flow State), Psychologie de l'expérience optimale.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "freakonomics-6e0b",
+      "name": "Freakonomics",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "économie"
+      ],
+      "extra": {
+        "author": "S. Levitt & S. Dubner",
+        "year": "2005"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/11172914-L.jpg"
+      },
+      "notes": "Le pouvoir des incitations, Pensée économique appliquée à des sujets non conventionnels.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "game-engine-architecture-b81b",
+      "name": "Game Engine Architecture",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "programmation",
+        "jeux"
+      ],
+      "extra": {
+        "author": "Jason Gregory",
+        "year": "2009"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/6764258-L.jpg"
+      },
+      "notes": "Offre une vue d'ensemble architecturale complète des systèmes qui composent un moteur de jeu moderne.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "game-feel-8e7b",
+      "name": "Game Feel",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "game design"
+      ],
+      "extra": {
+        "author": "Steve Swink",
+        "year": "2008"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8652742-L.jpg"
+      },
+      "notes": "Polissage des interactions, Sensation kinesthésique dans le jeu.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "game-programming-patterns-6525",
+      "name": "Game Programming Patterns",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Robert Nystrom",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8566115-L.jpg"
+      },
+      "notes": "Patrons de conception (Design Patterns) appliqués au développement de jeux.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "game-programming-patterns-robert-nystrom-d855",
+      "name": "Game Programming Patterns - Robert Nystrom",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8566115-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "godel-escher-bach-an-eternal-golden-braid-fcc4",
+      "name": "Gödel, Escher, Bach: An Eternal Golden Braid",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "systèmes",
+        "conscience"
+      ],
+      "extra": {
+        "author": "Douglas Hofstadter",
+        "year": "1979"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/14368453-L.jpg"
+      },
+      "notes": "Une exploration fascinante des systèmes formels, de la conscience et de l'auto-référence à travers les mathématiques, l'art et la musique.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "good-strategy-bad-strategy-4738",
+      "name": "Good Strategy Bad Strategy",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "stratégie"
+      ],
+      "extra": {
+        "author": "Richard P. Rumelt",
+        "year": "2011"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/6954850-L.jpg"
+      },
+      "notes": "Le noyau d'une stratégie (diagnostic, politique directrice, actions cohérentes).",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "good-to-great-ef27",
+      "name": "Good to Great",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "business"
+      ],
+      "extra": {
+        "author": "Jim Collins",
+        "year": "2001"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/7431270-L.jpg"
+      },
+      "notes": "Concept du Hérisson, Volant d'inertie (Flywheel), Culture de la discipline.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "histoire-de-l-art-e-h-gombrich-ce64",
+      "name": "Histoire de l'Art E. H. Gombrich",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/538390-L.jpg"
+      },
+      "notes": "Offre une histoire narrative et accessible de l'art occidental comme une tradition évolutive.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "how-to-be-yourself-rise-above-social-anxiety-2641",
+      "name": "How to be yourself : Rise above social anxiety",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8802301-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "it-4d7f",
+      "name": "It",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Stephen King",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8569284-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "l-art-de-la-couleur-a712",
+      "name": "L'Art de la Couleur",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "art"
+      ],
+      "extra": {
+        "author": "Johannes Itten",
+        "year": "1961"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/4849549-L.jpg"
+      },
+      "notes": "Présente la théorie fondamentale des couleurs et des contrastes, issue du Bauhaus.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "l-art-de-la-fiction-a33e",
+      "name": "L'art de la fiction",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/4849549-L.jpg"
+      },
+      "notes": "Une exploration des techniques narratives à travers l'analyse d'œuvres littéraires.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "l-art-de-la-guerre-4d9b",
+      "name": "L'Art de la guerre",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/4849549-L.jpg"
+      },
+      "notes": "Traité militaire classique dont les principes de stratégie, de positionnement et de psychologie sont universellement applicables.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "l-art-de-la-seduction-8f50",
+      "name": "L'Art de la Séduction",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Robert Greene",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/15115476-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "l-art-de-la-strategie-2bc8",
+      "name": "L'Art de la Stratégie",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Avinash Dixit & Barry Nalebuff",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/4849549-L.jpg"
+      },
+      "notes": "Théorie des jeux, Pensée stratégique séquentielle et simultanée.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "l-art-de-penser-clairement-a6f7",
+      "name": "L'Art de Penser Clairement",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Rolf Dobelli",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://deslivrespoursenrichir.fr/wp-content/uploads/2021/05/art-de-penser-clairement-724x1024.jpg"
+      },
+      "notes": "Catalogue de biais cognitifs et d'erreurs de raisonnement.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "l-avantage-concurrentiel-d31b",
+      "name": "L'Avantage Concurrentiel",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/3085029-L.jpg"
+      },
+      "notes": "Développe les concepts de chaîne de valeur et de stratégies génériques pour obtenir un avantage concurrentiel durable.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "l-enfant-eternel-5d77",
+      "name": "L’enfant éternel",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/2138422-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "l-homme-qui-plantait-des-arbres-2d04",
+      "name": "l’homme qui plantait des arbres",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/969485-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "l-urgence-et-la-patience-e19b",
+      "name": "l’urgence et la patience",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0506/users/605f4e09be011b94e7df4cdc09a138446aca499a/i-img1200x894-1719400069fnysly26.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "l-il-du-photographe-et-l-art-de-la-composition-08ce",
+      "name": "L'œil du photographe et l'art de la composition",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/12020425-L.jpg"
+      },
+      "notes": "Enseigne une compréhension sophistiquée de la composition visuelle pour l'image fixe.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "l-art-invisible-understanding-comics-d703",
+      "name": "l_art_invisible_understanding_comics",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/10679940-L.jpg"
+      },
+      "notes": "Déconstruit la grammaire de la narration séquentielle et de la bande dessinée.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "la-chine-ou-le-reveil-du-guerrier-economique-1fd8",
+      "name": "la chine ou le reveil du guerrier economique",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://products-images.di-static.com/image/ali-laidi-la-chine-ou-le-reveil-du-guerrier-economique/9782330182663-475x500-1.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "la-cinquieme-discipline-2165",
+      "name": "La Cinquième Discipline",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Peter M. Senge",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/992283-L.jpg"
+      },
+      "notes": "L'organisation apprenante, Vision partagée, Modèles mentaux.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "la-distinction-e76e",
+      "name": "La Distinction",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/983819-L.jpg"
+      },
+      "notes": "Fournit un appareil conceptuel (habitus, champ, capital) pour une analyse sociologique de la culture.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "la-force-des-discrets-9e0f",
+      "name": "La Force des discrets",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Susan Cain",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://rezised-images.knhbt.cz/1920x1920/26668631.webp"
+      },
+      "notes": "Valeur de l'introversion, Comprendre les différents styles énergétiques.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "la-grace-de-l-imperfection-the-power-of-vulnerab-adee",
+      "name": "La grâce de l'imperfection / the power of vulnerability + TED Talk",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "Shyness"
+      ],
+      "extra": {
+        "author": "Brené Brown",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/7237826-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "la-horde-du-contrevent-e46d",
+      "name": "La Horde Du Contrevent",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "Science-Fiction"
+      ],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/6670450-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "la-magie-du-rangement-7a55",
+      "name": "La Magie Du Rangement",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "Agreeableness",
+        "Productivity",
+        "Strategy",
+        "Stress Management"
+      ],
+      "extra": {
+        "author": "Marie Kondo",
+        "year": "2011"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/12374508-L.jpg"
+      },
+      "notes": "Méthode KonMari : ne garder que ce qui procure de la joie.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "la-mediterranee-et-le-monde-mediterraneen-3736",
+      "name": "La Méditerranée et le Monde Méditerranéen...",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/325613-L.jpg"
+      },
+      "notes": "Introduit le concept de la \"longue durée\" et une analyse multi-échelle de l'histoire.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "la-petite-philosophie-du-design-5184",
+      "name": "La Petite Philosophie du Design",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/10708272-L.jpg"
+      },
+      "notes": "Une série d'essais provocateurs sur le design comme point de convergence de la science, de l'art et de la politique.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "la-societe-du-spectacle-76ff",
+      "name": "La Société du spectacle",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/1052263-L.jpg"
+      },
+      "notes": "Analyse critique de la société moderne où les relations sociales sont médiatisées par les images.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "la-structure-des-revolutions-scientifiques-fa00",
+      "name": "La Structure des révolutions scientifiques",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/6566386-L.jpg"
+      },
+      "notes": "Introduit le concept de \"changement de paradigme\" pour décrire l'évolution de la science.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "la-vache-pourpre-5b31",
+      "name": "La Vache Pourpre",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Seth Godin",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/11666017-L.jpg"
+      },
+      "notes": "L'importance d'être remarquable pour se démarquer.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "le-cours-de-physique-de-feynman-5caa",
+      "name": "Le Cours de physique de Feynman",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/3084853-L.jpg"
+      },
+      "notes": "Une introduction réputée pour sa clarté et son intuition physique, enseignant comment \"penser comme un physicien\".",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "le-cygne-noir-3352",
+      "name": "Le Cygne Noir",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "risque",
+        "probabilités"
+      ],
+      "extra": {
+        "author": "Nassim Nicholas Taleb",
+        "year": "2007"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/5721840-L.jpg"
+      },
+      "notes": "Le problème de l'induction, Extrêmistan vs Médiocristan, Erreur narrative.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "le-dit-des-heike-heike-monogatari-8167",
+      "name": "Le Dit des Heike : Heike Monogatari",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/7126776-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "le-dit-du-genji-genji-monogatari-3c1d",
+      "name": "Le Dit du Genji : Genji Monogatari",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "littérature",
+        "japon classique"
+      ],
+      "extra": {
+        "author": "Murasaki Shikibu",
+        "year": "~1008"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/6614001-L.jpg"
+      },
+      "notes": "Premier grand roman japonais, vie amoureuse du prince Genji à la cour de Heian.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "le-gene-egoiste-c3a3",
+      "name": "Le Gène égoïste",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/133936-L.jpg"
+      },
+      "notes": "Présente la vision de l'évolution centrée sur le gène, un modèle puissant pour comprendre les systèmes complexes.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "le-hasard-sauvage-46ed",
+      "name": "Le Hasard Sauvage",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "risque"
+      ],
+      "extra": {
+        "author": "Nassim Nicholas Taleb",
+        "year": "2001"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/10144225-L.jpg"
+      },
+      "notes": "Le rôle caché du hasard, Biais de survie.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "le-heros-aux-mille-et-un-visages-c208",
+      "name": "Le Héros aux mille et un visages",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "mythologie"
+      ],
+      "extra": {
+        "author": "Joseph Campbell",
+        "year": "1949"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8377063-L.jpg"
+      },
+      "notes": "Établit le \"monomythe\" comme structure narrative universelle et archétypale.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "le-marketing-selon-kotler-bce3",
+      "name": "Le Marketing selon Kotler",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/3138991-L.jpg"
+      },
+      "notes": "L'introduction fondamentale aux principes, à la stratégie et à la pratique du marketing.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "le-paradoxe-du-choix-26ae",
+      "name": "Le Paradoxe du Choix",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Barry Schwartz",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://products-images.di-static.com/image/barry-schwartz-le-paradoxe-du-choix/9782749905525-475x500-1.jpg"
+      },
+      "notes": "Tyrannie du choix, Maximiseurs vs Satisfacteurs.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "le-point-de-bascule-8ca6",
+      "name": "Le Point de Bascule",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Malcolm Gladwell",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/10873292-L.jpg"
+      },
+      "notes": "Épidémies sociales, Loi du petit nombre, Pouvoir du contexte.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "le-prince-7274",
+      "name": "Le Prince",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "politique",
+        "stratégie"
+      ],
+      "extra": {
+        "author": "Machiavel",
+        "year": "1532"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/11477478-L.jpg"
+      },
+      "notes": "Analyse fondatrice du pouvoir, de la stratégie politique et de la nature humaine dans l'exercice de l'autorité.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "le-tao-te-king-78da",
+      "name": "Le Tao Te King",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "taoïsme"
+      ],
+      "extra": {
+        "author": "Lao Tseu",
+        "year": "~6e s. av. J.-C."
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/662232-L.jpg"
+      },
+      "notes": "Wu Wei (agir sans effort), Paradoxe, Harmonie avec le flux naturel.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "learned-optimism-739e",
+      "name": "learned_optimism",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "martin seligman",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/403894-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "les-guerriers-du-silence-fb55",
+      "name": "Les guerriers du silence",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8775519-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "les-mots-sont-des-fenetres-9225",
+      "name": "Les mots sont des fenêtres",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Marshall Rosenberg",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/940686-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "les-principes-premiers-81e1",
+      "name": "les_principes_premiers",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Herbert Spencer",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/6360326-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "lettres-a-lucilius-7944",
+      "name": "Lettres à Lucilius",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "stoïcisme"
+      ],
+      "extra": {
+        "author": "Sénèque",
+        "year": "~65"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/6074024-L.jpg"
+      },
+      "notes": "Gestion du temps, Préparation à l'adversité (premeditatio malorum).",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "life-3-0-69a2",
+      "name": "life_3_0",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "max_tegmark",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/10239283-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "made-in-america-23bd",
+      "name": "Made In America",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "Business",
+        "Recommanded Yomi Denzel"
+      ],
+      "extra": {
+        "author": "Sam Walton",
+        "year": "1992"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/371974-L.jpg"
+      },
+      "notes": "Autobiographie du fondateur de Walmart.\n\n(Livre pour débloquer la motivation de se dire que c’est possible de faire quelque chose de grand) Exploser le mindset",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "marketing-management-339a",
+      "name": "Marketing Management",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "Finance",
+        "Marketing",
+        "Strategy"
+      ],
+      "extra": {
+        "author": "Philip Kotler",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/13673341-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "measure-what-matters-0090",
+      "name": "Measure What Matters",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "John Doerr",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/10706481-L.jpg"
+      },
+      "notes": "Le système OKR (Objectifs et Résultats Clés) pour l'exécution stratégique.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "meditations-bca1",
+      "name": "Méditations",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "stoïcisme"
+      ],
+      "extra": {
+        "author": "Marc Aurèle",
+        "year": "~170-180"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/211529-L.jpg"
+      },
+      "notes": "Dichotomie du contrôle, Impermanence, Responsabilité interne.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "methodes-de-design-ux-65f6",
+      "name": "Méthodes de design UX",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1450120144i/28195713._UY630_SR1200,630_.jpg"
+      },
+      "notes": "Fournit une boîte à outils complète et pratique des méthodes de recherche et d'évaluation UX.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "mythologies-1350",
+      "name": "Mythologies",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8765912-L.jpg"
+      },
+      "notes": "Une série d'essais déconstruisant les mythes de la culture de masse contemporaine.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "ne-coupez-jamais-la-poire-en-deux-39ee",
+      "name": "Ne coupez jamais la poire en deux",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Chris Voss",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://i.pinimg.com/originals/df/98/cc/df98ccf649ae172ba698b1fed7876af4.jpg"
+      },
+      "notes": "Empathie tactique, Miroir, Étiquetage des émotions.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "neuromania-le-vrai-du-faux-sur-votre-cerveau-1400",
+      "name": "neuromania_le_vrai_du_faux_sur_votre_cerveau",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Albert Moukheiber",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://static.fnac-static.com/multimedia/Images/FR/NR/1d/11/18/18354461/1540-1/tsp20241009220401/Neuromania.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "non-lieux-introduction-a-une-anthropologie-de-la-da63",
+      "name": "Non-Lieux : Introduction à une anthropologie de la surmodernité",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/963540-L.jpg"
+      },
+      "notes": "Introduit le concept de \"non-lieu\" (aéroports, supermarchés) comme espaces de la modernité tardive.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "nonviolent-communication-marshall-b-rosenberg-6a11",
+      "name": "Nonviolent Communication - Marshall B. Rosenberg",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/940686-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "nudge-4af9",
+      "name": "Nudge",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "psychologie",
+        "économie"
+      ],
+      "extra": {
+        "author": "Richard Thaler & Cass Sunstein",
+        "year": "2008"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/6402116-L.jpg"
+      },
+      "notes": "Architecture du choix, Paternalisme libertarien, Coup de pouce comportemental.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "on-grand-strategy-d069",
+      "name": "On Grand Strategy",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "John Lewis Gaddis",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8798095-L.jpg"
+      },
+      "notes": "Alignement des fins et des moyens, Pensée stratégique (le renard et le hérisson).",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "on-writing-a-memoir-of-the-craft-2709",
+      "name": "On Writing: A Memoir of the Craft",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Stephen King",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/9255939-L.jpg"
+      },
+      "notes": "Le processus d'écriture, Discipline et boîte à outils de l'écrivain.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "peak-191f",
+      "name": "peak",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "apprentissage"
+      ],
+      "extra": {
+        "author": "Anders Ericson",
+        "year": "2016"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/1120257-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "penser-avec-clarte-2947",
+      "name": "penser avec clarté",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://editionsarpa.com/cdn/shop/files/Parrish_Shane_Penser_avec_clarte_mockup_45.jpg?v=1743063702&width=3000"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "penser-en-systemes-8648",
+      "name": "Penser en Systèmes",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "systèmes"
+      ],
+      "extra": {
+        "author": "Donella H. Meadows",
+        "year": "2008"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://thekeypoint.org/wp-content/uploads/2020/09/thinking-in-systems-meadows.jpg"
+      },
+      "notes": "Stocks, Flux, Boucles de rétroaction, Points de levier.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "peregrination-vers-l-ouest-d324",
+      "name": "Pérégrination vers l’ouest",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "Litterature"
+      ],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/3074258-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "perennial-seller-1604",
+      "name": "Perennial Seller",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Ryan Holiday",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/12215224-L.jpg"
+      },
+      "notes": "Créer une œuvre qui dure, Marketing centré sur le produit.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "poetique-b567",
+      "name": "Poétique",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/4453260-L.jpg"
+      },
+      "notes": "Le premier traité de théorie littéraire, analysant les composantes de la tragédie et de l'épopée.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "poor-charlie-s-almanack-8bf5",
+      "name": "Poor Charlie's Almanack",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "mental models",
+        "business"
+      ],
+      "extra": {
+        "author": "Peter D. Kaufman (éd.)",
+        "year": "2005"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8337563-L.jpg"
+      },
+      "notes": "Treillis de modèles mentaux, Inversion, Sagesse pratique (Worldly Wisdom).",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "psycho-cybernetics-be3e",
+      "name": "psycho_cybernetics",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/14428293-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "quatre-vingt-treize-b2ab",
+      "name": "Quatre vingt treize",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Victor Hugo",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8245196-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "range-why-generalists-triumph-in-a-specialized-w-5e12",
+      "name": "Range: Why Generalists Triumph in a Specialized World",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8782615-L.jpg"
+      },
+      "notes": "Argumente que la largeur d'expérience est plus cruciale que la profondeur pour l'innovation.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "rework-26fc",
+      "name": "Rework",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "J. Fried & D. H. Hansson",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/6679955-L.jpg"
+      },
+      "notes": "Principes contre-intuitifs pour une entreprise plus simple et plus efficace.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "richesse-et-pauvrete-des-nations-c86c",
+      "name": "Richesse et pauvreté des nations",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "David S. Landes",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/975622-L.jpg"
+      },
+      "notes": "Rôle de la culture et des institutions dans le développement économique.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "rules-of-play-game-design-fundamentals-d985",
+      "name": "Rules of Play Game Design Fundamentals",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/150926-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "sapiens-une-breve-histoire-de-l-humanite-bd4f",
+      "name": "Sapiens : Une brève histoire de l'humanité",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "histoire"
+      ],
+      "extra": {
+        "author": "Yuval Noah Harari",
+        "year": "2011"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8634250-L.jpg"
+      },
+      "notes": "Fournit une macro-histoire de l'humanité, soulignant le rôle des fictions collectives.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "save-the-cat-0eab",
+      "name": "Save the Cat!",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Blake Snyder",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/960754-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "save-the-cat-the-last-book-on-screenwriting-you--7a43",
+      "name": "Save the Cat!: The Last Book on Screenwriting You'll Ever Need",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Blake Snyder",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/960754-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "seeing-like-a-state-02e7",
+      "name": "Seeing Like a State",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "James C. Scott",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/12242192-L.jpg"
+      },
+      "notes": "Échecs des grands projets de planification étatique, Importance de la connaissance locale (Mētis).",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "self-determination-theory-richard-m-ryan-edward--aa76",
+      "name": "Self-Determination Theory Richard M. Ryan & Edward L. Deci",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8821352-L.jpg"
+      },
+      "notes": "Présente la théorie fondamentale des besoins psychologiques (autonomie, compétence, appartenance) pour la motivation intrinsèque.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "sell-is-human-6ea2",
+      "name": "Sell Is Human",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "vente"
+      ],
+      "extra": {
+        "author": "Daniel H Pink",
+        "year": "2012"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/10297418-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "so-good-they-can-t-ignore-you-44ca",
+      "name": "So Good They Can't Ignore You",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "carrière"
+      ],
+      "extra": {
+        "author": "Cal Newport",
+        "year": "2012"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/9215292-L.jpg"
+      },
+      "notes": "Le capital de compétences comme fondement d'une carrière passionnante.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "sprint-jake-knapp-et-al-c399",
+      "name": "Sprint Jake Knapp et al.",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/7431269-L.jpg"
+      },
+      "notes": "Offre un cadre structuré pour l'idéation, le prototypage et la validation rapide d'idées.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "start-with-why-81de",
+      "name": "Start with Why",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "leadership"
+      ],
+      "extra": {
+        "author": "Simon Sinek",
+        "year": "2009"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/6395237-L.jpg"
+      },
+      "notes": "Le Golden Circle : commencer par le Why inspire, le What ne fait qu'informer.\n\nLe Cercle d'Or (Pourquoi, Comment, Quoi), Inspiration vs Manipulation.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "start-with-why-8d86",
+      "name": "start_with_why",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Simon Sinek",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/6395237-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "steve-jobs-ed27",
+      "name": "Steve Jobs",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Walter Isaacson",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/12374726-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "story-5206",
+      "name": "Story",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Robert McKee",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/38437-L.jpg"
+      },
+      "notes": "Principes de structure narrative pour le scénario.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "story-substance-structure-style-and-the-principl-8268",
+      "name": "Story: Substance, Structure, Style, and the Principles of Screenwriting",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/38437-L.jpg"
+      },
+      "notes": "Le guide de référence pour la structure et les principes du scénario cinématographique.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "structures-or-why-things-don-t-fall-down-f7e7",
+      "name": "structures_or_why_things_don_t_fall_down",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "j_e_gordon",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/164385-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "superforecasting-458a",
+      "name": "superforecasting",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Philip Tetlock & Dan Gardner",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8905987-L.jpg"
+      },
+      "notes": "Caractéristiques des \"super-prédicteurs\", Amélioration active des prévisions.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "systeme-1-systeme-2-les-deux-vitesses-de-la-pens-a88d",
+      "name": "Système 1 / Système 2 : Les deux vitesses de la pensée",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "psychologie"
+      ],
+      "extra": {
+        "author": "Daniel Kahneman",
+        "year": "2011"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/13290711-L.jpg"
+      },
+      "notes": "Révèle les deux systèmes de pensée et les biais cognitifs qui régissent la prise de décision humaine.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "techniques-d-animation-the-animator-s-survival-k-e683",
+      "name": "techniques_d_animation_the_animator_s_survival_kit",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/378473-L.jpg"
+      },
+      "notes": "Constitue la \"bible\" des principes fondamentaux de l'animation de personnages.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-100-startup-chris-guillebeau-1f89",
+      "name": "The $100 Startup – Chris Guillebeau",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/7257004-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-art-of-game-design-a-book-of-lenses-e411",
+      "name": "The Art of Game Design: A Book of Lenses",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "game design"
+      ],
+      "extra": {
+        "author": "Jesse Schell",
+        "year": "2008"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/9317386-L.jpg"
+      },
+      "notes": "Propose une approche multidisciplinaire et un ensemble d'outils pour analyser et améliorer une expérience de jeu.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-autobiography-of-benjamin-franklin-09bf",
+      "name": "The Autobiography of Benjamin Franklin",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Benjamin Franklin",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/5647361-L.jpg"
+      },
+      "notes": "Amélioration personnelle systématique, Vertus comme projet.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-challenger-sale-2596",
+      "name": "The Challenger Sale",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "Sales"
+      ],
+      "extra": {
+        "author": "Brent Adamson, Dixon Matthew",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/7970492-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-design-of-everyday-things-2887",
+      "name": "The Design of Everyday Things",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "design",
+        "UX"
+      ],
+      "extra": {
+        "author": "Don Norman",
+        "year": "1988"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/10007224-L.jpg"
+      },
+      "notes": "Introduit les concepts fondateurs d'affordances, de signifiants et de design centré sur l'humain.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-gamer-s-brain-eef0",
+      "name": "The Gamer's Brain",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://thegamersbrain.com/wp-content/uploads/2019/06/TheGamersBrain_Cover.jpg"
+      },
+      "notes": "Applique directement les principes des neurosciences et de la psychologie cognitive à la conception de jeux.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-hard-thing-about-hard-things-0525",
+      "name": "The Hard Thing About Hard Things",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Ben Horowitz",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/7279515-L.jpg"
+      },
+      "notes": "Gestion de crise en startup, Psychologie du CEO.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-innovator-s-dilemma-eaaf",
+      "name": "The Innovator's Dilemma",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/9274687-L.jpg"
+      },
+      "notes": "Explique comment les entreprises établies peuvent être dépassées par des innovations disruptives.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-lean-startup-f966",
+      "name": "The Lean Startup",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "startup"
+      ],
+      "extra": {
+        "author": "Eric Ries",
+        "year": "2011"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/7104760-L.jpg"
+      },
+      "notes": "Cycle \"Construire-Mesurer-Apprendre\", Produit Minimum Viable (MVP).",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-lessons-of-history-263e",
+      "name": "The Lessons of History",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Will & Ariel Durant",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/7240225-L.jpg"
+      },
+      "notes": "Schémas récurrents dans l'histoire des civilisations.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-logic-of-failure-b18d",
+      "name": "The Logic of Failure",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Dietrich Dörner",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/6280875-L.jpg"
+      },
+      "notes": "Erreurs cognitives dans la gestion de systèmes complexes.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-origins-of-political-order-b246",
+      "name": "The Origins of Political Order",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Francis Fukuyama",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/7895385-L.jpg"
+      },
+      "notes": "Développement de l'État, de l'État de droit et de la responsabilité démocratique.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-power-broker-a886",
+      "name": "The Power Broker",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Robert A. Caro",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/253659-L.jpg"
+      },
+      "notes": "Étude du pouvoir, Comment le pouvoir est acquis, utilisé et comment il corrompt.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-power-of-now-620c",
+      "name": "The Power of Now",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "Mindset"
+      ],
+      "extra": {
+        "author": "Eckhart Tolle",
+        "year": "1997"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/551262-L.jpg"
+      },
+      "notes": "Libération de la souffrance par la pleine présence.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-pragmatic-programmer-0da3",
+      "name": "The Pragmatic Programmer",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "programmation"
+      ],
+      "extra": {
+        "author": "Andrew Hunt & David Thomas",
+        "year": "1999"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/10143650-L.jpg"
+      },
+      "notes": "Cultive la philosophie et l'état d'esprit d'un développeur professionnel et efficace.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-righteous-mind-0c9e",
+      "name": "The Righteous Mind",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Jonathan Haidt",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/7256782-L.jpg"
+      },
+      "notes": "Fondations morales (intuition vs raisonnement), Comprendre la polarisation.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-road-less-travelled-e427",
+      "name": "the road less travelled",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/4434829-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-signal-and-the-noise-859f",
+      "name": "The Signal and the Noise",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Nate Silver",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/7256893-L.jpg"
+      },
+      "notes": "Pensée bayésienne, Distinction entre signal (vérité) et bruit (hasard).",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-timeless-way-of-building-fbd6",
+      "name": "The Timeless Way of Building",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/7564994-L.jpg"
+      },
+      "notes": "Présente une philosophie de la conception basée sur des \"patterns\" qui créent des environnements vivants et humains.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-7-habits-of-highly-effective-people-1a8f",
+      "name": "the_7_habits_of_highly_effective_people",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/10079937-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-art-of-possibility-44b9",
+      "name": "the_art_of_possibility",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/6804932-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-big-leap-e190",
+      "name": "the_big_leap",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/6305214-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-dip-005f",
+      "name": "the_dip",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Seth Godin",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/1977228-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-expectation-effect-e38d",
+      "name": "the_expectation_effect",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "david_robson",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/2292364-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-great-mental-models-07d4",
+      "name": "the_great_mental_models",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "farnam_street, shane_parrish",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/9778922-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-innovator-s-dilemma-ce58",
+      "name": "the_innovator_s_dilemma",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Clayton M. Christensen",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/9299154-L.jpg"
+      },
+      "notes": "Innovation de rupture vs Innovation incrémentale.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-magic-of-thinking-big-99dc",
+      "name": "the_magic_of_thinking_big",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/480539-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "the-road-less-travelled-fa18",
+      "name": "the_road_less_travelled",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/4434829-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "thinking-in-bets-8039",
+      "name": "Thinking in Bets",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Annie Duke",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/8792782-L.jpg"
+      },
+      "notes": "Prise de décision probabiliste, Séparer la qualité de la décision du résultat.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "thinking-in-systems-donella-meadows-4b01",
+      "name": "Thinking in Systems - Donella Meadows",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/14420637-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "this-is-marketing-2bf7",
+      "name": "this_is_marketing",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "seth_godin",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/14624926-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "ulimited-power-3b62",
+      "name": "Ulimited Power",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/4166860-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "ultralearning-7f3d",
+      "name": "ultralearning",
+      "score": null,
+      "status": "backlog",
+      "tags": [
+        "apprentissage"
+      ],
+      "extra": {
+        "author": "Scott H. Young",
+        "year": "2019"
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/10156205-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "upstream-8063",
+      "name": "Upstream",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Dan Heath",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/9302230-L.jpg"
+      },
+      "notes": "Résolution de problèmes à la source vs Réaction aux symptômes.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "votre-cerveau-vous-joue-des-tours-d1f3",
+      "name": "votre_cerveau_vous_joue_des_tours",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": "Albert Moukheiber",
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/10466997-L.jpg"
+      },
+      "notes": null,
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    },
+    {
+      "id": "zen-and-the-art-of-motorcycle-maintenance-8756",
+      "name": "Zen and the Art of Motorcycle Maintenance",
+      "score": null,
+      "status": "backlog",
+      "tags": [],
+      "extra": {
+        "author": null,
+        "year": null
+      },
+      "image": {
+        "kind": "url",
+        "ref": "https://covers.openlibrary.org/b/id/10673266-L.jpg"
+      },
+      "notes": "Une exploration philosophique de la notion de \"Qualité\" et de la relation entre l'homme, la technologie et la raison.",
+      "createdAt": "2026-07-08T10:44:18.857Z",
+      "updatedAt": "2026-07-08T10:44:18.857Z"
+    }
+  ]
+}

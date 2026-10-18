@@ -1,0 +1,28 @@
+#!/bin/bash
+# ZenRay Uploader — worker auto-upload vidéo (double-clique ce fichier pour le lancer).
+#
+# Ce qu'il fait : surveille ton dossier ~/Downloads. Dès que tu y déposes une vidéo (mkv/mp4/mov…),
+# il la transcode en HLS chiffré et la pousse AUTOMATIQUEMENT dans ton drive (pages/Videos), puis
+# nettoie les fichiers temporaires. Ton fichier d'origine n'est jamais supprimé. Aucune commande à coller.
+#
+# PRÉREQUIS : Node.js + GitHub CLI (gh) installés et connectés (gh auth login), et le serveur local
+# ZenRay qui tourne (localhost:3100).
+#
+# PREMIÈRE FOIS : si macOS refuse de l'ouvrir (fichier téléchargé), fais clic droit > Ouvrir, ou en Terminal :
+#   chmod +x ~/Downloads/zenray-uploader.command
+#
+# LANCEMENT AU LOGIN (optionnel) : Réglages Système > Général > Ouverture > Ouvrir au login > +,
+# puis choisis ce fichier. Il se relancera à chaque démarrage.
+
+REPO="/Users/zenray/Create/Build/Productions/GithubProductions/ZenRayProgress"
+cd "$REPO" || { echo "Repo introuvable : $REPO"; read -r _; exit 1; }
+
+echo "ZenRay Uploader — surveille ~/Downloads → pages/Videos. Laisse cette fenêtre ouverte."
+echo "Dépose une vidéo dans ~/Downloads, elle s'uploadera toute seule. Ctrl+C pour arrêter."
+echo
+
+GITHUB_TOKEN="$(gh auth token)" node scripts/zenray-uploader.mjs --watch "$HOME/Downloads" --dest "pages/Videos" --api "http://localhost:3100"
+
+echo
+echo "Worker arrêté. Appuie sur Entrée pour fermer."
+read -r _

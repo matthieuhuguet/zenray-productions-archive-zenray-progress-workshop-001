@@ -1,0 +1,215 @@
+// ../../../../../.claude/tmp/tmp-zenray-progress/Scripts/LinkCreateMediaToPlan.mjs
+import { readFile, writeFile } from "node:fs/promises";
+
+// src/lib/shareVia.js
+var viaByCanonical = /* @__PURE__ */ new Map();
+var shareViaParam = (canonicalPath) => {
+  const via = viaByCanonical.get(canonicalPath);
+  return via ? `&via=${encodeURIComponent(via)}` : "";
+};
+
+// src/lib/shareLinks.js
+var SHARE_KIND = Object.freeze({ video: "video", image: "image", folder: "folder", file: "file" });
+var kindPathOk = (kind, path) => {
+  if (typeof path !== "string" || !path.startsWith("pages/") || path.includes("..")) return false;
+  if (kind === SHARE_KIND.file) return path.endsWith(".media.json");
+  if (kind === SHARE_KIND.video) return path.endsWith(".media.json");
+  if (kind === SHARE_KIND.image) return path.endsWith(".img.json");
+  return kind === SHARE_KIND.folder && path !== "pages" && !/\.(?:media|img)\.json$/i.test(path);
+};
+var ShareLinkError = class extends Error {
+  constructor(code, status = 0) {
+    super(code);
+    this.name = "ShareLinkError";
+    this.code = code;
+    this.status = status;
+  }
+};
+async function issueShareToken(kind, path, { expiresInSeconds, permanent = false, signal } = {}) {
+  if (!kindPathOk(kind, path)) throw new ShareLinkError("invalid-target");
+  const body = { action: "issue", kind, path, ...permanent ? { permanent: true } : {} };
+  if (Number.isFinite(expiresInSeconds)) body.expiresInSeconds = Math.round(expiresInSeconds);
+  const response = await fetch("/api/share-token", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+    signal
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok || !payload.token) throw new ShareLinkError(payload.error || "share-issue-failed", response.status);
+  return payload;
+}
+var shareRoute = (kind) => kind === SHARE_KIND.folder ? ["/folder", "d"] : [kind === SHARE_KIND.image ? "/view" : "/watch", "v"];
+async function createShareLink(kind, path, options) {
+  const issued = await issueShareToken(kind, path, options);
+  const [route, key] = shareRoute(kind);
+  const origin = typeof window !== "undefined" ? window.location.origin : "";
+  return { ...issued, url: `${origin}${route}?${key}=${encodeURIComponent(issued.token)}` };
+}
+
+// src/lib/urlLecture.js
+function urlLectureAffichage(path, { share = null, fresh = false } = {}) {
+  let u = `/api/page?action=read&raw=1&path=${encodeURIComponent(path)}`;
+  if (fresh) u += "&fresh=1";
+  if (share) u += `&share=${encodeURIComponent(share)}${shareViaParam(path)}`;
+  return u;
+}
+
+// src/create/planAttachments.js
+var PLAN_ATTACHMENTS = Object.freeze({ folder: "pages/PlanAttachments", heading: "Attachments", pickerMax: 96 });
+function attachmentUrl(token, origin) {
+  return `${origin}/api/attachment-download?share=${encodeURIComponent(token)}`;
+}
+var isCreateMediaPath = (path) => typeof path === "string" && path.startsWith("pages/") && !/[\\?#%]/.test(path) && !path.split("/").some((part) => !part || part === "." || part === "..") && /\.(?:media|img)\.json$/.test(path);
+
+// src/create/linkCreateAttachment.js
+async function linkCreateAttachment(path, { mode = "auto", origin = window.location.origin } = {}) {
+  if (!isCreateMediaPath(path)) throw new Error("Choose a Create media file (.media.json or .img.json).");
+  const response = await fetch(urlLectureAffichage(path));
+  if (!response.ok) throw new Error(`Create file could not be read (${response.status}).`);
+  const data = await response.json();
+  if (data.missing || !data.markdown) throw new Error("Create file not found.");
+  const manifest = JSON.parse(data.markdown);
+  const image = path.endsWith(".img.json");
+  const video = Boolean(manifest.mpd || manifest.master || ["dash", "hls", "fmp4-single"].includes(manifest.type) || String(manifest.mime).startsWith("video/"));
+  const useView = mode !== "download" && (image || video);
+  const name = manifest.name || manifest.title || path.split("/").pop().replace(/\.(media|img)\.json$/, "");
+  if (useView) {
+    const shared2 = await createShareLink(image ? "image" : "video", path, { permanent: true });
+    return { name, path, size: manifest.size || 0, mime: manifest.mime || "", source: "create", mode: "view", token: shared2.token, url: new URL(shared2.url, origin).href };
+  }
+  if (manifest.type !== "chunked-media" || manifest.alg !== "AES-GCM") throw new Error("This media uses a shared viewer. Choose the shared view option.");
+  const shared = await issueShareToken("file", path);
+  return { name, path, size: manifest.size || 0, mime: manifest.mime || "", source: "create", mode: "download", token: shared.token, url: attachmentUrl(shared.token, origin) };
+}
+
+// src/lib/saveJson.js
+async function readJson(path) {
+  const r = await fetch(`/api/page?action=read&path=${encodeURIComponent(path)}`, { cache: "no-store" }).then((x) => x.json()).catch(() => null);
+  if (!r || r.missing || r.markdown == null) return { sha: null, data: null, missing: !!(r && r.missing) };
+  let data = null;
+  try {
+    data = JSON.parse(r.markdown);
+  } catch {
+  }
+  return { sha: r.sha || null, data };
+}
+async function saveJsonWithRetry(path, mutate, opts = {}) {
+  let sha = opts.sha ?? null;
+  let cur = opts.data ?? null;
+  const tries = opts.tries || 5;
+  for (let i = 0; i < tries; i++) {
+    if (cur === null && sha === null && i === 0) {
+      const r0 = await readJson(path);
+      sha = r0.sha;
+      cur = r0.data;
+    }
+    const next = mutate(cur || {});
+    const body = JSON.stringify({ action: "save", path, markdown: JSON.stringify(next), sha });
+    const j = await fetch("/api/page", { method: "POST", headers: { "content-type": "application/json" }, body, keepalive: body.length < 6e4 }).then((r) => r.json()).catch(() => null);
+    if (j && j.ok) return { ok: true, sha: j.sha, data: next };
+    if (j && j.conflict) {
+      sha = j.sha || null;
+      if (j.markdown != null) {
+        try {
+          cur = JSON.parse(j.markdown);
+        } catch {
+        }
+      } else {
+        const r0 = await readJson(path);
+        sha = r0.sha;
+        cur = r0.data;
+      }
+      continue;
+    }
+    return { ok: false, error: j && (j.error || j.detail) || "save-failed" };
+  }
+  return { ok: false, error: "conflict-max-retries" };
+}
+
+// workers/plan-gcal/src/params.js
+var DEFAULT_PARAMS = {
+  mapping: {
+    calendarId: "primary",
+    timeZone: "Europe/Paris",
+    defaultDurationMin: 60,
+    reminderMin: 10,
+    marks: { done: "\u2713", publish: "\u2726" },
+    publishColorId: "4",
+    maxNoteChars: 500
+  },
+  import: {
+    importFrom: "2026-07-11",
+    importPastStatus: "done",
+    skipEventTypes: ["birthday", "focusTime", "outOfOffice", "workingLocation"],
+    readOnlyEventTypes: ["fromGmail"],
+    maxDeletesPerRun: 10
+  },
+  runtime: {
+    siteUrl: "https://zenray-progress.pages.dev",
+    planPath: "pages/Calendar-76ct/Matthieu2026-l8at.plan.json",
+    futureHorizonDays: 730,
+    updatedOverlapSec: 180,
+    // fast path looks at events changed in the last 3 minutes (the tick runs every minute) / chemin rapide : changements des 3 dernieres minutes
+    fullEveryMin: 10,
+    // a full pass at least every 10 minutes, whatever the fast path says / passage complet au moins toutes les 10 minutes
+    maxOpsPerTick: 25,
+    // Google writes per run (free plan: 50 subrequests per run in total) / ecritures Google par passage
+    maxLookups: 8,
+    // single-event lookups per run / lectures unitaires par passage
+    planMaxBytes: 95e4
+    // GitHub reads files over 1 MiB as empty: refuse to write beyond this / GitHub lit vide au-dela de 1 Mio
+  }
+};
+
+// ../../../../../.claude/tmp/tmp-zenray-progress/Scripts/LinkCreateMediaToPlan.mjs
+var params = {
+  site: DEFAULT_PARAMS.runtime.siteUrl,
+  plan: DEFAULT_PARAMS.runtime.planPath,
+  path: process.argv[2],
+  date: process.argv[3],
+  receipt: process.argv[4]
+};
+if (!params.path || !params.date || !params.receipt || !process.env.ZR_API_SECRET) throw new Error("Usage: script <Create path> <date> <receipt>, with ZR_API_SECRET");
+var nativeFetch = globalThis.fetch;
+var calls = [];
+globalThis.fetch = async (input, options = {}) => {
+  const url = new URL(input, params.site), headers = new Headers(options.headers);
+  if (url.origin === params.site) headers.set("x-zr-auth", process.env.ZR_API_SECRET);
+  calls.push({ method: options.method || "GET", path: url.pathname, action: options.body ? JSON.parse(options.body).action : url.searchParams.get("action") });
+  return nativeFetch(url, { ...options, headers });
+};
+var taskId = "create-kamikaze-girls-" + params.date;
+var receipt;
+try {
+  receipt = JSON.parse(await readFile(params.receipt, "utf8"));
+} catch {
+}
+if (!receipt) {
+  const attachment = await linkCreateAttachment(params.path, { origin: params.site });
+  receipt = { taskId, date: params.date, attachment };
+  await writeFile(params.receipt, JSON.stringify(receipt, null, 2));
+}
+var result = await saveJsonWithRetry(params.plan, (board) => {
+  if (!board.tasks?.length) throw new Error("Refusing to replace an empty or unreadable Plan");
+  if (board.tasks.some((task) => task.id === taskId)) return board;
+  return { ...board, tasks: [...board.tasks, {
+    id: taskId,
+    title: "Kamikaze Girls (2004)",
+    date: params.date,
+    startTime: null,
+    durationMin: null,
+    status: "planned",
+    note: "",
+    images: [],
+    attachments: [receipt.attachment],
+    overdueSince: null,
+    doneAt: null,
+    createdAt: (/* @__PURE__ */ new Date()).toISOString()
+  }] };
+});
+if (!result.ok) throw new Error(result.error);
+receipt.calls = calls;
+receipt.taskCount = result.data.tasks.length;
+await writeFile(params.receipt, JSON.stringify(receipt, null, 2));
+console.log(JSON.stringify({ taskId, title: receipt.attachment.name, url: receipt.attachment.url, bytesUploaded: 0, taskCount: receipt.taskCount, calls }, null, 2));

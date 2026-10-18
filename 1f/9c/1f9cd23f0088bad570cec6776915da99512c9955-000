@@ -1,0 +1,28 @@
+// Verify the real Plan, Calendar description and anonymous shared movie routes. (19 October 2026, 01:17 Paris)
+import { readFile, writeFile } from 'node:fs/promises'
+import { execFileSync } from 'node:child_process'
+import { accessToken } from '/Users/zenray/Create/Build/Productions/GithubProductions/ZenRayProgress/workers/plan-gcal/src/google.js'
+import { DEFAULT_PARAMS } from '/Users/zenray/Create/Build/Productions/GithubProductions/ZenRayProgress/workers/plan-gcal/src/params.js'
+const root = '/Users/zenray/.claude/tmp/tmp-zenray-progress'
+const receipt = JSON.parse(await readFile(root + '/PlanCreateMovieReceipt.json', 'utf8'))
+const { siteUrl, planPath } = DEFAULT_PARAMS.runtime
+const get = async (url, options) => { const response = await fetch(url, options); if (!response.ok) throw new Error('HTTP ' + response.status + ': ' + new URL(url).pathname); return response }
+const plan = JSON.parse((await (await get(`${siteUrl}/api/page?action=read&path=${encodeURIComponent(planPath)}`, { headers: { 'x-zr-auth': process.env.ZR_API_SECRET } })).json()).markdown)
+const task = plan.tasks.find((task) => task.id === receipt.taskId)
+if (!task?.gcal?.id || task.attachments?.[0]?.url !== receipt.attachment.url) throw new Error('Plan link or Calendar mapping missing')
+const resolved = await (await get(`${siteUrl}/api/share-token?action=resolve&kind=video&token=${encodeURIComponent(receipt.attachment.token)}`)).json()
+if (resolved.path !== receipt.attachment.path || resolved.expiresAt !== null) throw new Error('Share scope or expiry is wrong')
+const manifest = JSON.parse((await (await get(`${siteUrl}/api/page?action=read&path=${encodeURIComponent(resolved.path)}&share=${encodeURIComponent(receipt.attachment.token)}`)).json()).markdown)
+const viewer = await (await get(receipt.attachment.url)).text()
+if (!viewer.includes('Kamikaze')) throw new Error('Viewer page has the wrong movie')
+const playlist = await (await get(`${siteUrl}/api/hls?path=${encodeURIComponent(manifest.master)}`)).text()
+if (!playlist.includes('#EXTM3U')) throw new Error('Shared movie playlist is unavailable')
+const k = (service) => execFileSync('security', ['find-generic-password', '-a', 'zenray', '-s', service, '-w'], { encoding: 'utf8' }).trim()
+const token = await accessToken({ GOOGLE_CLIENT_ID: k('zenray-gcal-client-id'), GOOGLE_CLIENT_SECRET: k('zenray-gcal-client-secret'), GOOGLE_REFRESH_TOKEN: k('zenray-gcal-refresh-token') }, fetch)
+const event = await (await get(`https://www.googleapis.com/calendar/v3/calendars/primary/events/${task.gcal.id}?fields=id,summary,description,start,htmlLink,status`, { headers: { authorization: 'Bearer ' + token } })).json()
+if (!event.description.includes(receipt.attachment.url) || event.start.date !== receipt.date || event.status !== 'confirmed') throw new Error('Calendar shared link or date mismatch')
+const proof = { at: new Date().toISOString(), taskId: task.id, taskCount: plan.tasks.length, title: task.title, date: task.date, eventId: event.id,
+  calendarUrl: event.htmlLink, viewerUrl: receipt.attachment.url, anonymousViewer: true, anonymousManifest: true, anonymousHlsPlaylist: true,
+  permanent: resolved.expiresAt === null, calendarHasSharedView: true, mediaBytes: manifest.size, bytesUploaded: 0 }
+await writeFile(root + '/PlanCreateMovieProof.json', JSON.stringify(proof, null, 2))
+console.log(JSON.stringify(proof, null, 2))

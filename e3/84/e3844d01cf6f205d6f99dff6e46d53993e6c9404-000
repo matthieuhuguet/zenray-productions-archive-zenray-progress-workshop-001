@@ -1,0 +1,37 @@
+{
+  "taskId": "create-kamikaze-girls-2026-10-19",
+  "date": "2026-10-19",
+  "attachment": {
+    "name": "Kamikaze Girls (2004).mkv",
+    "path": "pages/Anime_Movies_Series_Documentaries/Movies/Kamikaze Girls (2004).mkv.media.json",
+    "size": 9347686567,
+    "mime": "application/dash+xml",
+    "source": "create",
+    "mode": "view",
+    "token": "zrs1.Y1vu9VSNKThoHMn7uJEK8gMbFJm1veKS.Kbcrp0lKtiaWlR2mF477r_bOkNsk8ND_k5oIAryZW7Y",
+    "url": "https://zenray-progress.pages.dev/watch?v=zrs1.Y1vu9VSNKThoHMn7uJEK8gMbFJm1veKS.Kbcrp0lKtiaWlR2mF477r_bOkNsk8ND_k5oIAryZW7Y"
+  },
+  "calls": [
+    {
+      "method": "GET",
+      "path": "/api/page",
+      "action": "read"
+    },
+    {
+      "method": "POST",
+      "path": "/api/share-token",
+      "action": "issue"
+    },
+    {
+      "method": "GET",
+      "path": "/api/page",
+      "action": "read"
+    },
+    {
+      "method": "POST",
+      "path": "/api/page",
+      "action": "save"
+    }
+  ],
+  "taskCount": 245
+}

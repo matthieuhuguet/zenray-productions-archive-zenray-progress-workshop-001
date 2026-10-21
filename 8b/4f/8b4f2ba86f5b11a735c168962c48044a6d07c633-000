@@ -1,0 +1,83 @@
+
+ RUN  v3.2.6 /Users/zenray/Create/Build/Productions/GithubProductions/ZenRayProgress
+
+(node:22923) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ❯ src/components/GalleryView.test.jsx (17 tests | 3 failed) 260ms
+   ✓ aligned center groups in todo3d 44ms
+   ✓ aligned center groups in design 10ms
+   ✓ aligned center groups in characters 12ms
+   ✓ aligned center groups in environments 10ms
+   ✓ aligned center groups in japan 10ms
+   ✓ aligned center groups in zenrayshards 9ms
+   ✓ aligned center groups in artists 10ms
+   ✓ aligned right edge reorders without grouping 10ms
+   ✓ aligned center adds to an existing group 9ms
+   ✓ grid still groups on tile edges 10ms
+   ✓ ToDo-3D persists Done and restores a completed group without losing references 48ms
+   ✓ other galleries keep completed cards visible without a Done section 9ms
+   ✓ separates cloud files from curated references without changing their order 19ms
+   × navigation dans un sous-groupe enfant et fil dariane hierarchique 11ms
+     → Unable to fire a "click" event - please provide a DOM element.
+   × renommer un sous-groupe enfant depuis le fil dariane 7ms
+     → Unable to fire a "click" event - please provide a DOM element.
+   × Artists gallery renders portfolio link and opens expandable and resizable projects popover 7ms
+     → expected 'artstation.com · @forflex ↗' to contain 'ArtStation · @forflex'
+   ✓ the filter hides non-matching references without touching the saved items 23ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/components/GalleryView.test.jsx > navigation dans un sous-groupe enfant et fil dariane hierarchique
+Error: Unable to fire a "click" event - please provide a DOM element.
+ ❯ createEvent node_modules/@testing-library/dom/dist/events.js:27:11
+ ❯ createEvent.<computed> [as click] node_modules/@testing-library/dom/dist/events.js:106:38
+ ❯ fireEvent.<computed> [as click] node_modules/@testing-library/dom/dist/events.js:110:68
+ ❯ fireEvent.<computed> [as click] node_modules/@testing-library/react/dist/fire-event.js:15:52
+ ❯ src/components/GalleryView.test.jsx:116:13
+    114| 
+    115|   // Clic sur la tuile Louisiana Bayou : ouvre le dossier parent
+    116|   fireEvent.click(view.container.querySelector('.zr-ws-rim'))
+       |             ^
+    117|   await waitFor(() => expect(view.getByText('Nouveau groupe')).toBeTru…
+    118| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  src/components/GalleryView.test.jsx > renommer un sous-groupe enfant depuis le fil dariane
+Error: Unable to fire a "click" event - please provide a DOM element.
+ ❯ createEvent node_modules/@testing-library/dom/dist/events.js:27:11
+ ❯ createEvent.<computed> [as click] node_modules/@testing-library/dom/dist/events.js:106:38
+ ❯ fireEvent.<computed> [as click] node_modules/@testing-library/dom/dist/events.js:110:68
+ ❯ fireEvent.<computed> [as click] node_modules/@testing-library/react/dist/fire-event.js:15:52
+ ❯ src/components/GalleryView.test.jsx:158:13
+    156| 
+    157|   // Ouvrir parent puis enfant
+    158|   fireEvent.click(view.container.querySelector('.zr-ws-rim'))
+       |             ^
+    159|   await waitFor(() => expect(view.getByText('Nouveau groupe')).toBeTru…
+    160|   fireEvent.click(view.container.querySelector('.zr-ws-rim'))
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  src/components/GalleryView.test.jsx > Artists gallery renders portfolio link and opens expandable and resizable projects popover
+AssertionError: expected 'artstation.com · @forflex ↗' to contain 'ArtStation · @forflex'
+
+Expected: "ArtStation · @forflex"
+Received: "artstation.com · @forflex ↗"
+
+ ❯ src/components/GalleryView.test.jsx:212:37
+    210|   const portfolioLink = view.container.querySelector('a[href="https://…
+    211|   expect(portfolioLink).toBeTruthy()
+    212|   expect(portfolioLink.textContent).toContain('ArtStation · @forflex')
+       |                                     ^
+    213| 
+    214|   // Clic sur la carte de l artiste : ouvre le pop-up widget depliable
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 14 passed (17)
+   Start at  17:06:42
+   Duration  818ms (transform 83ms, setup 42ms, collect 128ms, tests 260ms, environment 230ms, prepare 35ms)
+

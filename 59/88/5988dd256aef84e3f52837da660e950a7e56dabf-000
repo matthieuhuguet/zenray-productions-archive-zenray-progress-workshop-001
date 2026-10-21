@@ -1,0 +1,17 @@
+{
+  "date": "21 October 2026",
+  "collections": 22,
+  "projects": 146,
+  "references": 24,
+  "completeExampleImages": 14,
+  "embeddedFonts": 2,
+  "config": {
+    "thumbnailSize": 1000,
+    "projectSize": 1600,
+    "quality": 83,
+    "workers": 16,
+    "referenceLimit": 24
+  },
+  "template": "luxe-epure, spatial hierarchy adapted with Medium 500 fonts",
+  "htmlBytes": 11210011
+}

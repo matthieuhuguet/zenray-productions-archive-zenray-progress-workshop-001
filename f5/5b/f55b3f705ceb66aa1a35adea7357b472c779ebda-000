@@ -1,0 +1,68 @@
+from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor
+from PIL import Image
+import base64, io, json, urllib.request, urllib.parse
+
+# 21 October 2026, 00:35 CEST: Build three editable directions from one shared real-content fixture.
+ROOT = Path('/Users/zenray/.claude/tmp/tmp-zenray-progress')
+OUT = ROOT / 'DesignMockups-21-October-2026'
+CONFIG = {'thumbnailSize': 1000, 'projectSize': 1600, 'quality': 83, 'workers': 16, 'referenceLimit': 24}
+projects = json.loads((ROOT / 'ArtstationProjects.json').read_text())
+collections = json.loads((ROOT / 'ArtstationCollections.json').read_text())
+before = json.loads(json.loads((ROOT / 'DesignBefore.json').read_text())['markdown'])
+
+def embed(path, size):
+    with Image.open(path) as image:
+        image.seek(0)
+        image = image.convert('RGB')
+        image.thumbnail((size, size))
+        buffer = io.BytesIO()
+        image.save(buffer, 'WEBP', quality=CONFIG['quality'])
+        return 'data:image/webp;base64,' + base64.b64encode(buffer.getvalue()).decode()
+
+def project_record(project):
+    return {'id': project['url'].split('/')[-1], 'title': project['title'], 'author': project['author'],
+            'url': project['url'], 'image': embed(project['coverImage']['localPath'], CONFIG['thumbnailSize']),
+            'imageCount': len(project['images'])}
+
+with ThreadPoolExecutor(max_workers=CONFIG['workers']) as pool:
+    records = list(pool.map(project_record, projects))
+example = projects[0]
+data = {'projects': records, 'collections': [dict(name=c['name'], count=c['expected'], url=c['url'],
+    projects=[p['url'].split('/')[-1] for p in c['projects']]) for c in collections],
+    'example': {'id': records[0]['id'], 'images': [embed(p['localPath'], CONFIG['projectSize']) for p in example['images']]}}
+
+cache = OUT / 'Sources'
+cache.mkdir(exist_ok=True)
+raw = [item for item in before['items'] if item.get('path', '').startswith('uploads/')][:CONFIG['referenceLimit']]
+def reference_record(item):
+    path = cache / Path(item['path']).name
+    if not path.exists():
+        url = 'https://zenray-progress.pages.dev/api/img?path=' + urllib.parse.quote(item['path'], safe='')
+        request = urllib.request.Request(url, headers={'User-Agent': 'ZenRay-Design-Preview'})
+        path.write_bytes(urllib.request.urlopen(request, timeout=30).read())
+    title = item.get('title') or item.get('name') or 'Référence'
+    title = title.replace('—', ',').replace('–', ',')
+    if title.lower().startswith(('image.', 'screenshot', 'clipboard')):
+        title = 'Référence visuelle'
+    return {'id': item['id'], 'title': title, 'url': item.get('url', ''), 'note': item.get('note', '').replace('—', ',').replace('–', ','),
+            'image': embed(path, CONFIG['thumbnailSize']), 'type': 'reference'}
+with ThreadPoolExecutor(max_workers=CONFIG['workers']) as pool:
+    data['references'] = list(pool.map(reference_record, raw))
+
+fonts = Path('/Users/zenray/Create/Build/Productions/GithubProductions/ZenRayProgress/public/fonts')
+font_css = '\n'.join('@font-face{font-family:%s;src:url(data:font/%s;base64,%s);font-weight:%s;font-display:swap}' %
+    (family, kind, base64.b64encode((fonts / name).read_bytes()).decode(), weight) for family, kind, name, weight in
+    [('InterVariable', 'woff2', 'InterVariable.woff2', '100 900'), ('AnthropicSerif', 'ttf', 'AnthropicSerif-Medium.ttf', '500')])
+html = (OUT / 'Template.html').read_text().replace('__FONT_CSS__', font_css).replace('__FIXTURE__', json.dumps(data, ensure_ascii=False))
+for key in 'ABC':
+    shot = OUT / ('Preview' + key + '.png')
+    value = ''
+    if shot.exists():
+        value = embed(shot, 1400)
+    html = html.replace('__PREVIEW_' + key + '__', value)
+(OUT / 'index.html').write_text(html)
+(OUT / 'FixtureProof.json').write_text(json.dumps({'date': '21 October 2026', 'collections': len(collections), 'projects': len(records),
+    'references': len(data['references']), 'completeExampleImages': len(data['example']['images']), 'embeddedFonts': 2,
+    'config': CONFIG, 'template': 'luxe-epure, spatial hierarchy adapted with Medium 500 fonts', 'htmlBytes': len(html.encode())}, indent=2))
+print((OUT / 'FixtureProof.json').read_text())

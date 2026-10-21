@@ -1,0 +1,134 @@
+{
+  "date": "21 October 2026",
+  "desktop": [
+    {
+      "captionGap": "11px",
+      "cards": 25,
+      "columns": "352px 352px 352px",
+      "gap": "32px",
+      "loaded": 25,
+      "overflow": false,
+      "variant": "A",
+      "view": "design",
+      "width": 1440
+    },
+    {
+      "cards": 22,
+      "images": 21,
+      "loaded": 21,
+      "overflow": false,
+      "variant": "A",
+      "view": "collections"
+    },
+    {
+      "cover": 1,
+      "images": 14,
+      "loaded": 14,
+      "overflow": false,
+      "variant": "A",
+      "view": "project"
+    },
+    {
+      "captionGap": "0px",
+      "cards": 25,
+      "columns": "414.664px 414.664px 414.664px",
+      "gap": "34px",
+      "loaded": 25,
+      "overflow": false,
+      "variant": "B",
+      "view": "design",
+      "width": 1440
+    },
+    {
+      "cards": 22,
+      "images": 21,
+      "loaded": 21,
+      "overflow": false,
+      "variant": "B",
+      "view": "collections"
+    },
+    {
+      "cover": 1,
+      "images": 14,
+      "loaded": 14,
+      "overflow": false,
+      "variant": "B",
+      "view": "project"
+    },
+    {
+      "captionGap": "11px",
+      "cards": 25,
+      "columns": "273.5px 273.5px 273.5px 273.5px",
+      "gap": "28px",
+      "loaded": 25,
+      "overflow": false,
+      "variant": "C",
+      "view": "design",
+      "width": 1440
+    },
+    {
+      "cards": 22,
+      "images": 21,
+      "loaded": 21,
+      "overflow": false,
+      "variant": "C",
+      "view": "collections"
+    },
+    {
+      "cover": 1,
+      "images": 14,
+      "loaded": 14,
+      "overflow": false,
+      "variant": "C",
+      "view": "project"
+    }
+  ],
+  "keyboardCaption": true,
+  "searchEmptyState": true,
+  "sliderChangedAndReset": true,
+  "fullImage14Opened": true,
+  "mobile": [
+    {
+      "cards": 25,
+      "overflow": false,
+      "variant": "A",
+      "view": "design",
+      "width": 390
+    },
+    {
+      "cards": 22,
+      "overflow": false,
+      "variant": "A",
+      "view": "collections",
+      "width": 390
+    },
+    {
+      "cards": 25,
+      "overflow": false,
+      "variant": "B",
+      "view": "design",
+      "width": 390
+    },
+    {
+      "cards": 22,
+      "overflow": false,
+      "variant": "B",
+      "view": "collections",
+      "width": 390
+    },
+    {
+      "cards": 25,
+      "overflow": false,
+      "variant": "C",
+      "view": "design",
+      "width": 390
+    },
+    {
+      "cards": 22,
+      "overflow": false,
+      "variant": "C",
+      "view": "collections",
+      "width": 390
+    }
+  ]
+}

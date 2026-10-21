@@ -1,0 +1,14 @@
+{
+  "date": "21 October 2026",
+  "deployment": "https://d3ee304d.zenray-progress.pages.dev",
+  "bundle": "assets/index-CLinLEm2.js",
+  "bundleMatchesBuild": true,
+  "fontBytes": 99584,
+  "fontSha256": "124c9dfac30709f081de1a23b9a78013d31d09c9642c2a2b8fe0562cd7a82f35",
+  "fontMatchesSource": true,
+  "commit": "1125a554",
+  "fullTests": 2762,
+  "testFiles": 292,
+  "skipped": 1,
+  "latestRegressionTests": 20
+}

@@ -1,0 +1,18 @@
+{
+  "bodyFamily": "AnthropicSerif, \"Hiragino Mincho ProN W3\", Georgia, \"Times New Roman\", serif",
+  "bodyWeight": "400",
+  "collections": 22,
+  "date": "21 October 2026",
+  "fit": true,
+  "projectCards": 15,
+  "projectImageElements": 15,
+  "titleFamily": "\"GT Sectra Display LCG\", \"Hiragino Mincho ProN W3\", serif",
+  "titleStyle": "italic",
+  "mobile": {
+    "width": 390,
+    "pageOverflow": false,
+    "galleryWidth": 328.734375,
+    "gridWidth": 292.734375,
+    "columns": 2
+  }
+}

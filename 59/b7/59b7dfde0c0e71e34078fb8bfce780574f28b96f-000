@@ -1,0 +1,15 @@
+
+ RUN  v3.2.6 /Users/zenray/Create/Build/Productions/GithubProductions/ZenRayProgress
+
+(node:85894) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:85893) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ src/components/LinkedAssetsGallery.test.jsx (2 tests) 114ms
+ ✓ src/components/GalleryView.test.jsx (18 tests) 387ms
+
+ Test Files  2 passed (2)
+      Tests  20 passed (20)
+   Start at  17:16:43
+   Duration  1.06s (transform 179ms, setup 86ms, collect 306ms, tests 501ms, environment 614ms, prepare 69ms)
+

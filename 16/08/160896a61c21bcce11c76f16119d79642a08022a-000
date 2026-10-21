@@ -1,0 +1,16 @@
+
+ ⛅️ wrangler 4.151.3
+────────────────────
+✨ Compiled Worker successfully
+Uploading... (2274/2332)
+Uploading... (2294/2332)
+Uploading... (2313/2332)
+Uploading... (2332/2332)
+✨ Success! Uploaded 58 files (2274 already uploaded) (3.53 sec)
+
+✨ Uploading _headers
+✨ Uploading _redirects
+✨ Uploading Functions bundle
+✨ Uploading _routes.json
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://d3ee304d.zenray-progress.pages.dev

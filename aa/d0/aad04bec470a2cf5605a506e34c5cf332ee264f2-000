@@ -1,0 +1,75 @@
+Context entry: /Users/zenray/.claude/tmp/tmp-zenray-progress/Index.md
+Live context: /Users/zenray/Library/Application Support/ZenRayAssets/contexts/zenray-progress.md
+
+Linked sources: tmp: 1, memory: 1, houdini: 0, unreal: 0
+Linked conversations: claude: 2, codex: 3, gemini: 0
+Zero means no registered association, not proof that no original exists.
+
+# ZenRayProgress (21 October 2026)
+
+Project ID: zenray-progress. (21 October 2026)
+Read canonical feedback first: /Users/zenray/.claude/Memory1/Projects/zenray-progress/FEEDBACK.md. (21 October 2026)
+Skills: zenray-assets, zenray-progress. (21 October 2026)
+Files and archive proofs: pages/ZenRayAssets/zenray-progress/.workspace.json. (21 October 2026)
+
+## Linked conversations (21 October 2026)
+- codex: Conversation codex 01a100e2, session 01a100e2-32f9-7a43-8b5f-ef21c5f96d4d, reader codex:01a100e2-32f9-7a43-8b5f-ef21c5f96d4d. (21 October 2026)
+- claude: 5bd15db6-f2d9-4010-bcb3-0d609a42bc5e, session 5bd15db6-f2d9-4010-bcb3-0d609a42bc5e, reader claude:5bd15db6-f2d9-4010-bcb3-0d609a42bc5e. (21 October 2026)
+- claude: d3327e82-5a7e-46d8-b6f6-bc0447663c2b, session d3327e82-5a7e-46d8-b6f6-bc0447663c2b, reader claude:d3327e82-5a7e-46d8-b6f6-bc0447663c2b. (21 October 2026)
+- codex: 01a1511f-9f4c-7410-a6eb-d2e93353fa70, session 01a1511f-9f4c-7410-a6eb-d2e93353fa70, reader codex:01a1511f-9f4c-7410-a6eb-d2e93353fa70. (21 October 2026)
+- codex: 01a15a23-1157-7ef3-83c9-9ce9461c3247, session 01a15a23-1157-7ef3-83c9-9ce9461c3247, reader codex:01a15a23-1157-7ef3-83c9-9ce9461c3247. (21 October 2026)
+
+Write new project files in this workshop: /Users/zenray/.claude/tmp/tmp-zenray-progress. (21 October 2026)
+
+## tmp (21 October 2026)
+- workshop: /Users/zenray/.claude/tmp/tmp-zenray-progress; cloud: pages/ZenRayAssets/zenray-progress/sources/tmp/workshop; include: null; exclude: []. (21 October 2026)
+
+## memory (21 October 2026)
+- project-notes: /Users/zenray/.claude/Memory1/Projects/zenray-progress; cloud: pages/ZenRayAssets/zenray-progress/sources/memory/project-notes; include: null; exclude: []. (21 October 2026)
+
+## houdini (21 October 2026)
+No source linked. (21 October 2026)
+
+## unreal (21 October 2026)
+No source linked. (21 October 2026)
+
+## Shared dependencies (21 October 2026)
+
+## Memory entry points (21 October 2026)
+- project-notes:ConversationIndex.md: /Users/zenray/.claude/Memory1/Projects/zenray-progress/ConversationIndex.md; status: backed-up. (21 October 2026)
+- project-notes:FEEDBACK.md: /Users/zenray/.claude/Memory1/Projects/zenray-progress/FEEDBACK.md; status: pending. (21 October 2026)
+- project-notes:FileMap.md: /Users/zenray/.claude/Memory1/Projects/zenray-progress/FileMap.md; status: pending. (21 October 2026)
+- project-notes:Project1.md: /Users/zenray/.claude/Memory1/Projects/zenray-progress/Project1.md; status: backed-up. (21 October 2026)
+- project-notes:RESUME.md: /Users/zenray/.claude/Memory1/Projects/zenray-progress/RESUME.md; status: backed-up. (21 October 2026)
+- project-notes:Rules.md: /Users/zenray/.claude/Memory1/Projects/zenray-progress/Rules.md; status: backed-up. (21 October 2026)
+
+## Project documents across all sources (21 October 2026)
+These are pointers to the original documents, not inferred knowledge or conversation summaries. Read the relevant files before making project decisions. (21 October 2026)
+- workshop:AGENTS.md [tmp]: Mac: /Users/zenray/.claude/tmp/tmp-zenray-progress/AGENTS.md; cloud: pages/ZenRayAssets/zenray-progress/sources/tmp/workshop/AGENTS.md.file.json; status: backed-up. (21 October 2026)
+- workshop:ArtstationManifestClone/README.md [tmp]: Mac: /Users/zenray/.claude/tmp/tmp-zenray-progress/ArtstationManifestClone/README.md; cloud: pages/ZenRayAssets/zenray-progress/sources/tmp/workshop/ArtstationManifestClone/README.md.file.json; status: backed-up. (21 October 2026)
+- workshop:CLAUDE.md [tmp]: Mac: /Users/zenray/.claude/tmp/tmp-zenray-progress/CLAUDE.md; cloud: pages/ZenRayAssets/zenray-progress/sources/tmp/workshop/CLAUDE.md.file.json; status: backed-up. (21 October 2026)
+- workshop:DeployCreateCalendar/CLAUDE.md [tmp]: Mac: not available in this context; cloud: pages/ZenRayAssets/zenray-progress/sources/tmp/workshop/DeployCreateCalendar/CLAUDE.md.file.json; status: missing. (21 October 2026)
+- workshop:DeployCreateCalendar/Cloud/README.md [tmp]: Mac: not available in this context; cloud: pages/ZenRayAssets/zenray-progress/sources/tmp/workshop/DeployCreateCalendar/Cloud/README.md.file.json; status: missing. (21 October 2026)
+- workshop:DeployCreateCalendar/docs/zenraymedia/_source-matthieu/README.md [tmp]: Mac: not available in this context; cloud: pages/ZenRayAssets/zenray-progress/sources/tmp/workshop/DeployCreateCalendar/docs/zenraymedia/_source-matthieu/README.md.file.json; status: missing. (21 October 2026)
+- workshop:DeployCreateCalendar/docs/zenraymedia/ateliers/T-01-1-1--LeMonde/reference/README.md [tmp]: Mac: not available in this context; cloud: pages/ZenRayAssets/zenray-progress/sources/tmp/workshop/DeployCreateCalendar/docs/zenraymedia/ateliers/T-01-1-1--LeMonde/reference/README.md.file.json; status: missing. (21 October 2026)
+- workshop:DesignMockups-21-October-2026/README.md [tmp]: Mac: /Users/zenray/.claude/tmp/tmp-zenray-progress/DesignMockups-21-October-2026/README.md; cloud: pages/ZenRayAssets/zenray-progress/sources/tmp/workshop/DesignMockups-21-October-2026/README.md.file.json; status: backed-up. (21 October 2026)
+- project-notes:FEEDBACK.md [memory]: Mac: /Users/zenray/.claude/Memory1/Projects/zenray-progress/FEEDBACK.md; cloud: pages/ZenRayAssets/zenray-progress/sources/memory/project-notes/FEEDBACK.md.file.json; status: pending. (21 October 2026)
+- project-notes:Project1.md [memory]: Mac: /Users/zenray/.claude/Memory1/Projects/zenray-progress/Project1.md; cloud: pages/ZenRayAssets/zenray-progress/sources/memory/project-notes/Project1.md.file.json; status: backed-up. (21 October 2026)
+- workshop:ArtstationIndex.md [tmp]: Mac: /Users/zenray/.claude/tmp/tmp-zenray-progress/ArtstationIndex.md; cloud: pages/ZenRayAssets/zenray-progress/sources/tmp/workshop/ArtstationIndex.md.file.json; status: backed-up. (21 October 2026)
+- workshop:ArtstationManifestClone/pages/References/ArtStation/ArtstationIndex.md [tmp]: Mac: /Users/zenray/.claude/tmp/tmp-zenray-progress/ArtstationManifestClone/pages/References/ArtStation/ArtstationIndex.md; cloud: pages/ZenRayAssets/zenray-progress/sources/tmp/workshop/ArtstationManifestClone/pages/References/ArtStation/ArtstationIndex.md.file.json; status: backed-up. (21 October 2026)
+- workshop:ArtstationManifestClone/pages/References/Eagle Pilote.md [tmp]: Mac: /Users/zenray/.claude/tmp/tmp-zenray-progress/ArtstationManifestClone/pages/References/Eagle Pilote.md; cloud: pages/ZenRayAssets/zenray-progress/sources/tmp/workshop/ArtstationManifestClone/pages/References/Eagle Pilote.md.file.json; status: backed-up. (21 October 2026)
+- project-notes:ConversationIndex.md [memory]: Mac: /Users/zenray/.claude/Memory1/Projects/zenray-progress/ConversationIndex.md; cloud: pages/ZenRayAssets/zenray-progress/sources/memory/project-notes/ConversationIndex.md.file.json; status: backed-up. (21 October 2026)
+- workshop:DeployCreateCalendar/Cloud/PLAN.md [tmp]: Mac: not available in this context; cloud: pages/ZenRayAssets/zenray-progress/sources/tmp/workshop/DeployCreateCalendar/Cloud/PLAN.md.file.json; status: missing. (21 October 2026)
+- workshop:DeployCreateCalendar/docs/accents/RECENSEMENT.md [tmp]: Mac: not available in this context; cloud: pages/ZenRayAssets/zenray-progress/sources/tmp/workshop/DeployCreateCalendar/docs/accents/RECENSEMENT.md.file.json; status: missing. (21 October 2026)
+- workshop:DeployCreateCalendar/docs/ARCHITECTURE-MEDIA.md [tmp]: Mac: not available in this context; cloud: pages/ZenRayAssets/zenray-progress/sources/tmp/workshop/DeployCreateCalendar/docs/ARCHITECTURE-MEDIA.md.file.json; status: missing. (21 October 2026)
+- workshop:DeployCreateCalendar/docs/ARCHITECTURE.md [tmp]: Mac: not available in this context; cloud: pages/ZenRayAssets/zenray-progress/sources/tmp/workshop/DeployCreateCalendar/docs/ARCHITECTURE.md.file.json; status: missing. (21 October 2026)
+- workshop:DeployCreateCalendar/docs/articles/plan.md [tmp]: Mac: not available in this context; cloud: pages/ZenRayAssets/zenray-progress/sources/tmp/workshop/DeployCreateCalendar/docs/articles/plan.md.file.json; status: missing. (21 October 2026)
+- workshop:DeployCreateCalendar/docs/AssetsWorkspace.md [tmp]: Mac: not available in this context; cloud: pages/ZenRayAssets/zenray-progress/sources/tmp/workshop/DeployCreateCalendar/docs/AssetsWorkspace.md.file.json; status: missing. (21 October 2026)
+- workshop:DeployCreateCalendar/docs/audio-widget-implementation.md [tmp]: Mac: not available in this context; cloud: pages/ZenRayAssets/zenray-progress/sources/tmp/workshop/DeployCreateCalendar/docs/audio-widget-implementation.md.file.json; status: missing. (21 October 2026)
+- workshop:DeployCreateCalendar/docs/AUDIT-2026-06-03.md [tmp]: Mac: not available in this context; cloud: pages/ZenRayAssets/zenray-progress/sources/tmp/workshop/DeployCreateCalendar/docs/AUDIT-2026-06-03.md.file.json; status: missing. (21 October 2026)
+- workshop:DeployCreateCalendar/docs/AUDIT-2026-06-06-review-needed.md [tmp]: Mac: not available in this context; cloud: pages/ZenRayAssets/zenray-progress/sources/tmp/workshop/DeployCreateCalendar/docs/AUDIT-2026-06-06-review-needed.md.file.json; status: missing. (21 October 2026)
+- workshop:DeployCreateCalendar/docs/AUDIT-2026-06-06-todo.md [tmp]: Mac: not available in this context; cloud: pages/ZenRayAssets/zenray-progress/sources/tmp/workshop/DeployCreateCalendar/docs/AUDIT-2026-06-06-todo.md.file.json; status: missing. (21 October 2026)
+Showing 24 of 428 documents; the complete list is context.documents in the global project index. (21 October 2026)
+
+Mapped files: 7535; verified archive records: 3533. Local inventory does not prove cloud backup or runnable scene dependencies. (21 October 2026)
+

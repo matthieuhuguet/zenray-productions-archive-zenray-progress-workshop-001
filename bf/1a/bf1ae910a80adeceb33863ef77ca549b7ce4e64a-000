@@ -10,5 +10,8 @@
   "fullTests": 2762,
   "testFiles": 292,
   "skipped": 1,
-  "latestRegressionTests": 20
+  "latestRegressionTests": 20,
+  "finalRecheckDate": "22 October 2026",
+  "finalBundleMatches": true,
+  "secondsSinceDeployment": 70167
 }

@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "projectId": "zenray-progress",
   "name": "ZenRayProgress",
-  "generatedAt": "2026-11-09T16:13:59.928Z",
-  "sourceDigest": "244c671cf32c7141ea638d4e00265e51a9e455e3eda71e4115da0a8b37b4a880",
+  "generatedAt": "2026-11-09T16:20:55.355Z",
+  "sourceDigest": "9ed0f1c7774c0492e95ed4f06d61068da66b039aa88e73d2465fb410b5564c37",
   "indexedFileCount": 3634,
   "indexFilesExcluded": [
     "IndexMapping.json",
@@ -61,5 +61,5 @@
     }
   ],
   "sourceDigestAlgorithm": "SHA-256 over sorted fileId, bytes, and sha256 records",
-  "totalBytes": 1462576782
+  "totalBytes": 1462576783
 }

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "projectId": "zenray-progress",
-  "generatedAt": "2026-11-09T16:13:59.928Z",
-  "sourceDigest": "244c671cf32c7141ea638d4e00265e51a9e455e3eda71e4115da0a8b37b4a880",
+  "generatedAt": "2026-11-09T16:20:55.355Z",
+  "sourceDigest": "9ed0f1c7774c0492e95ed4f06d61068da66b039aa88e73d2465fb410b5564c37",
   "sourceCount": 2,
   "sourceFileCounts": {
     "project-notes": 225,
@@ -20,15 +20,15 @@
       "relativePath": "ConversationIndex.json",
       "localPath": "/Users/zenray/.claude/Memory1/Projects/zenray-progress/ConversationIndex.json",
       "role": "conversation index data",
-      "bytes": 57659,
-      "sha256": "ca73b7a515e96dae27efa8822471732488d66404e6e985a7489c5d71502d58fb",
-      "modifiedAt": "2026-11-09T16:13:20.208Z",
+      "bytes": 57660,
+      "sha256": "c3febf53439426fa36e2f3e170e47029f00d7f5ecc7b137d8ca6571ff627b329",
+      "modifiedAt": "2026-11-09T16:20:19.052Z",
       "availability": {
         "local": true,
         "cloudCopy": false,
-        "cloudSha256": "f62b15f8b9a23c7160e4236b6a31ded757ba145f9faa0d8925b07b2b85109bb8",
-        "cloudBytes": 57187,
-        "backedUpAt": "2026-11-09T16:10:17.203Z"
+        "cloudSha256": "5933c58a7fdbcbac584dce0b9b69f43e8acfff9e16760ac72a2abf222d56a8d3",
+        "cloudBytes": 57660,
+        "backedUpAt": "2026-11-09T16:17:05.464Z"
       }
     },
     {
@@ -38,14 +38,14 @@
       "localPath": "/Users/zenray/.claude/Memory1/Projects/zenray-progress/ConversationIndex.md",
       "role": "conversation index",
       "bytes": 21459,
-      "sha256": "c9cb7518c45d957d486bbd6be35dfbf4290123f5979439a5023876e1f399d505",
-      "modifiedAt": "2026-11-09T16:13:20.208Z",
+      "sha256": "4f2ea7bb6a68e572f73458a7c6b953a3f41b860acbe8228161f1bbfbd52f9faf",
+      "modifiedAt": "2026-11-09T16:20:19.052Z",
       "availability": {
         "local": true,
         "cloudCopy": false,
-        "cloudSha256": "49ed92eeed8e4e162fcc2eb47357a193d13cb6a852cfe040e1889fef02eafe54",
-        "cloudBytes": 21294,
-        "backedUpAt": "2026-11-09T16:10:17.203Z"
+        "cloudSha256": "5a9d4caa2cf39e5cb35d7b42aa253f88d028b18f6f0d02675b146b7444b04551",
+        "cloudBytes": 21459,
+        "backedUpAt": "2026-11-09T16:17:05.464Z"
       }
     },
     {
@@ -3608,14 +3608,14 @@
       "localPath": "/Users/zenray/.claude/Memory1/Projects/zenray-progress/FileMap.md",
       "role": "generated file map",
       "bytes": 80705,
-      "sha256": "6e4513fbff1e0c62dc1bc7efb31ca21da9d730215505f9605b0cbfe3d0943354",
-      "modifiedAt": "2026-11-09T15:55:40.052Z",
+      "sha256": "53c4687e897f762112de979d566226ab2fd1053e6dfe88c6ece1df2401f6bbd2",
+      "modifiedAt": "2026-11-09T16:14:01.475Z",
       "availability": {
         "local": true,
         "cloudCopy": true,
-        "cloudSha256": "6e4513fbff1e0c62dc1bc7efb31ca21da9d730215505f9605b0cbfe3d0943354",
+        "cloudSha256": "53c4687e897f762112de979d566226ab2fd1053e6dfe88c6ece1df2401f6bbd2",
         "cloudBytes": 80705,
-        "backedUpAt": "2026-11-09T15:56:03.583Z"
+        "backedUpAt": "2026-11-09T16:17:05.464Z"
       }
     },
     {
@@ -61794,5 +61794,5 @@
     }
   ],
   "sourceDigestAlgorithm": "SHA-256 over sorted fileId, bytes, and sha256 records",
-  "totalBytes": 1462576782
+  "totalBytes": 1462576783
 }

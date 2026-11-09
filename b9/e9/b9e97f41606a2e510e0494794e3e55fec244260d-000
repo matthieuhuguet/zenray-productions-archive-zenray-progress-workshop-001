@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "projectId": "zenray-progress",
+  "name": "ZenRayProgress",
+  "generatedAt": "2026-11-09T16:19:10+01:00",
+  "sourceDigest": "146138145c95b87f3e3a114afe2b76dee6caf1cc3b653736fbab31165b0ef897",
+  "indexedFileCount": 3634,
+  "indexFilesExcluded": [
+    "IndexMapping.json",
+    "ProjectInfo.json"
+  ],
+  "sources": [
+    {
+      "id": "workshop",
+      "namespace": "tmp",
+      "fileCount": 3409,
+      "bytes": 1413011385
+    },
+    {
+      "id": "project-notes",
+      "namespace": "memory",
+      "fileCount": 225,
+      "bytes": 49562456
+    }
+  ],
+  "revisions": [
+    {
+      "at": "2026-11-09T16:19:10+01:00",
+      "summary": "Le lecteur mobile garde son panneau de réglages utilisable, les sous-titres démarrent à 100 %, et l’audio japonais devient prioritaire dans le lecteur, les manifestes et les playlists HLS. Les épisodes E22 à E24 sont relus depuis le cloud.",
+      "sourceDigest": "146138145c95b87f3e3a114afe2b76dee6caf1cc3b653736fbab31165b0ef897",
+      "evidence": {
+        "appCommit": "ddcf917e74c59c18e3df8ef75ad6518441be5e13",
+        "productionCommit": "9fdfb24c3c817bbacfd2c3433fa785382b9dc74b",
+        "deployment": "https://7185fc05.zenray-progress.pages.dev",
+        "mediaCommit": "47a327bf40",
+        "mediaRemoteHead": "69358a696c353bfb4049402e0b185a2008962245",
+        "targetedTests": "72 passed across 6 files",
+        "productionAssets": "JavaScript and CSS match the local build byte for byte",
+        "mobileProof": "In-app browser simulation at 325 CSS px; no real iPhone/WebKit run"
+      }
+    }
+  ]
+}

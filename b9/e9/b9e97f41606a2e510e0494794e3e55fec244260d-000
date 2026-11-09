@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "projectId": "zenray-progress",
   "name": "ZenRayProgress",
-  "generatedAt": "2026-11-09T16:20:55.355Z",
-  "sourceDigest": "9ed0f1c7774c0492e95ed4f06d61068da66b039aa88e73d2465fb410b5564c37",
+  "generatedAt": "2026-11-09T16:24:41.417Z",
+  "sourceDigest": "aec0718f05e9d19b5532c408eac39bb562bf3fcc33a9fa7a921e8b2ea0a77333",
   "indexedFileCount": 3634,
   "indexFilesExcluded": [
     "IndexMapping.json",
@@ -42,7 +42,7 @@
     {
       "at": "2026-11-09T16:13:59.928Z",
       "summary": "Le panneau tactile du lecteur reste accessible au défilement, les sous-titres démarrent à 100 %, et la piste japonaise est prioritaire. Create se charge sur le site publié ; la fenêtre mobile vérifie les commandes, mais la vidéo de test ne se lit pas et aucun simulateur iOS/WebKit n’est installé.",
-      "sourceDigest": "244c671cf32c7141ea638d4e00265e51a9e455e3eda71e4115da0a8b37b4a880",
+      "sourceDigest": "aec0718f05e9d19b5532c408eac39bb562bf3fcc33a9fa7a921e8b2ea0a77333",
       "evidence": {
         "appCommit": "ddcf917e74c59c18e3df8ef75ad6518441be5e13",
         "productionMainCommit": "494f023fb8815f1ac5182c5d7465c27ba0be005a",

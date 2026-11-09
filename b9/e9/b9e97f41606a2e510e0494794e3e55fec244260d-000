@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "projectId": "zenray-progress",
   "name": "ZenRayProgress",
-  "generatedAt": "2026-11-09T16:19:10+01:00",
-  "sourceDigest": "146138145c95b87f3e3a114afe2b76dee6caf1cc3b653736fbab31165b0ef897",
+  "generatedAt": "2026-11-09T16:13:59.928Z",
+  "sourceDigest": "244c671cf32c7141ea638d4e00265e51a9e455e3eda71e4115da0a8b37b4a880",
   "indexedFileCount": 3634,
   "indexFilesExcluded": [
     "IndexMapping.json",
@@ -20,7 +20,7 @@
       "id": "project-notes",
       "namespace": "memory",
       "fileCount": 225,
-      "bytes": 49562456
+      "bytes": 49565397
     }
   ],
   "revisions": [
@@ -38,6 +38,28 @@
         "productionAssets": "JavaScript and CSS match the local build byte for byte",
         "mobileProof": "In-app browser simulation at 325 CSS px; no real iPhone/WebKit run"
       }
+    },
+    {
+      "at": "2026-11-09T16:13:59.928Z",
+      "summary": "Le panneau tactile du lecteur reste accessible au défilement, les sous-titres démarrent à 100 %, et la piste japonaise est prioritaire. Create se charge sur le site publié ; la fenêtre mobile vérifie les commandes, mais la vidéo de test ne se lit pas et aucun simulateur iOS/WebKit n’est installé.",
+      "sourceDigest": "244c671cf32c7141ea638d4e00265e51a9e455e3eda71e4115da0a8b37b4a880",
+      "evidence": {
+        "appCommit": "ddcf917e74c59c18e3df8ef75ad6518441be5e13",
+        "productionMainCommit": "494f023fb8815f1ac5182c5d7465c27ba0be005a",
+        "productionDeployment": "https://048466fc.zenray-progress.pages.dev",
+        "productionAlias": "https://zenray-progress.pages.dev",
+        "productionBundle": "Clean main build; JavaScript and CSS hashes match the local build byte for byte",
+        "javascriptSha256": "1b06012d8f1a83bf5a21c90ae506b9fa5041eb02b50c98728dd890778e171eb5",
+        "cssSha256": "5cb9b44fb4cee15973340cf410e1e28d5074835f44c66ab4f451cc92baf65853",
+        "dataCommit": "47a327bf40122165d0b8debeee0cc3fe5f5079e9",
+        "dataRemoteHead": "451d19efa2fcb46417b1857b37be0dc2372e3032",
+        "dataEvidence": "E22, E23, E24 streamOnly and HLS/DASH verified; Japanese audio marked default in media metadata and HLS master playlists",
+        "targetedTests": "72 passed across 6 files",
+        "build": "npm run build passed on origin/main commit 494f023",
+        "mobileProof": "In-app Chromium responsive viewport at 325 CSS px; panel scroll, 44 px targets, close control, Japanese track, and 100% subtitle size observed; no real iPhone/WebKit or playable media validation"
+      }
     }
-  ]
+  ],
+  "sourceDigestAlgorithm": "SHA-256 over sorted fileId, bytes, and sha256 records",
+  "totalBytes": 1462576782
 }
